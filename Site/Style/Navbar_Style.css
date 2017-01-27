@@ -1,9 +1,96 @@
-/*
-* @Author: 1425165
-* @Date:   2017-01-27 08:59:45
-* @Last Modified by:   1425165
-* @Last Modified time: 2017-01-27 09:01:12
-*/
-#myNavbar{
-	background-color: red;
+/* navbar */
+.navbar-inverse {
+    background-color: #42d9f4;
+    border-color: #42d9f4;
+}
+/* title */
+.navbar-inverse .navbar-brand {
+    color: #42d9f4;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color:#42F0FF;
+}
+/* link */
+.navbar-inverse .navbar-nav > li > a {
+    color:white;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: white;
+}
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .active > a:hover, 
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: white;
+    background-color:  #42F0FF;
+}
+.navbar-inverse .navbar-nav > .open > a, 
+.navbar-inverse .navbar-nav > .open > a:hover, 
+.navbar-inverse .navbar-nav > .open > a:focus {
+    color: white;
+    background-color: #42F0FF;
+}
+/* caret */
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color:white;
+    border-bottom-color: white;
+}
+.navbar-inverse .navbar-nav > .dropdown > a:hover .caret,
+.navbar-inverse .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+.navbar-inverse .navbar-nav > .open > a .caret, 
+.navbar-inverse .navbar-nav > .open > a:hover .caret, 
+.navbar-inverse .navbar-nav > .open > a:focus .caret {
+    border-top-color: #42d9f4;
+    border-bottom-color: #42d9f4;
+}
+/* mobile version */
+.navbar-inverse .navbar-toggle {
+    border-color: #42d9f4;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #42F0FF;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+        color:  color:  #42F0FF;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+        color:  #42F0FF;;
+    }
+}
+
+.footer{
+
+}
+
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+    margin-bottom: -50px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.footer, .page-wrap:after {
+  /* .push must be the same height as footer */
+    height: 50px; 
+}
+.footer {
+  background: #42d9f4;
 }
