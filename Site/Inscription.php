@@ -59,11 +59,105 @@
   </div>
 </nav>
   
-<div class="container">
-  <h3>Collapsible Navbar</h3>
-  <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
-  <p>Only when the button is clicked, the navigation bar will be displayed.</p>
+<div class="col-lg-2 col-md-1"></div>
+<form class="form-horizontal col-lg-8 col-md-10 col-sm-12">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Inscription</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="username">Nom d'utilisateur*</label>  
+  <div class="col-md-4">
+  <input id="username" name="username" type="text" placeholder="placeholder" class="form-control input-md" required="">
+    
+  </div>
 </div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="pwd">Mot de passe*</label>
+  <div class="col-md-4">
+    <input id="pwd" name="pwd" type="password" placeholder="**********" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="pwd_confirm">Confirmation mot de passe*</label>
+  <div class="col-md-4">
+    <input id="pwd_confirm" name="pwd_confirm" type="password" placeholder="**********" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nom">Nom*</label>  
+  <div class="col-md-4">
+  <input id="nom" name="nom" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="prenom">Prénom*</label>  
+  <div class="col-md-4">
+  <input id="prenom" name="prenom" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="telephone">Téléphone*</label>  
+  <div class="col-md-4">
+  <input id="telephone" name="telephone" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="courriel">Courriel*</label>  
+  <div class="col-md-4">
+  <input id="courriel" name="courriel" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="sexe">Sexe*</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="sexe-0">
+      <input type="radio" name="sexe" id="sexe-0" value="H" checked="checked">
+      Homme
+    </label> 
+    <label class="radio-inline" for="sexe-1">
+      <input type="radio" name="sexe" id="sexe-1" value="F">
+      Femme
+    </label>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="inscription"></label>
+  <div class="col-md-4">
+    <button id="inscription" name="inscription" class="btn btn-success">S'inscrire</button>
+  </div>
+</div>
+
+
+</fieldset>
+</form>
+<div class="col-lg-2 col-md-1"></div>
+
+
 
 </body>
 </html>
