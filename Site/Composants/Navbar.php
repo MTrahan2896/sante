@@ -4,9 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../Style/navbar_style.css">
+  <link rel="stylesheet" href="Style/navbar_style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
   <script>
   window.onload = function () {
   	x = document.createElement("footer");
@@ -36,9 +38,12 @@
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-      <a class="navbar-brand" style="padding-top: 5px;" href="#">
-      <img src="http://www.cegeptr.qc.ca/wp-content/uploads/2013/01/defi-sante-300x251.png" style="width: 40px;height:40px;"/>
-      </a>  
+
+
+		 <a class="navbar-brand" href="#" style="padding-top: 5px">
+            <span> <img src="http://www.cegeptr.qc.ca/wp-content/uploads/2013/01/defi-sante-300x251.png" style="width: 40px;height:40px;"/></span>
+            <span id="brand">Défi Santé</span>
+        </a>
 
         <li class="active"><a href="#">Accueil</a></li>
         <li class="dropdown">
@@ -58,6 +63,7 @@
       </ul>
     </div>
   </div>
+  <script src="scripts/nav_dropdown.js"></script>
 </nav>
   
 <div class="container">
