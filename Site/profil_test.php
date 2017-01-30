@@ -4,22 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="Style/navbar_style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-  <script>
-  window.onload = function () {
-  	x = document.createElement("footer");
-  	x.className="footer";
-  	y = document.getElementsByTagName("body")[0];
-  	y.appendChild(x);
-  	
-  }
-  </script>
 </head>
-
+<style>
+@media only screen 
+  
+  and (max-device-width: 770px)
+ 
+  and (orientation: portrait) {
+    .navbar-brand{
+      display: none;
+    }
+}
 </style>
 <body>
 
@@ -38,12 +35,9 @@
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-
-
-		 <a class="navbar-brand" href="#" style="padding-top: 5px">
-            <span> <img src="http://www.cegeptr.qc.ca/wp-content/uploads/2013/01/defi-sante-300x251.png" style="width: 40px;height:40px;"/></span>
-            <span id="brand">Défi Santé</span>
-        </a>
+      <a class="navbar-brand" style="padding-top: 5px;" href="#">
+      <img src="http://www.cegeptr.qc.ca/wp-content/uploads/2013/01/defi-sante-300x251.png" style="width: 40px;height:40px;"/>
+      </a>  
 
         <li class="active"><a href="#">Accueil</a></li>
         <li class="dropdown">
@@ -63,14 +57,50 @@
       </ul>
     </div>
   </div>
-  <script src="scripts/nav_dropdown.js"></script>
 </nav>
-  
-<div class="container">
-<div class="page-wrap">
+
+<div class="well">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
+      <li><a href="#profile" data-toggle="tab">Password</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="home">
+        <form id="tab">
+            <label>Username</label>
+            <input type="text" value="jsmith" class="input-xlarge">
+            <label>First Name</label>
+            <input type="text" value="John" class="input-xlarge">
+            <label>Last Name</label>
+            <input type="text" value="Smith" class="input-xlarge">
+            <label>Email</label>
+            <input type="text" value="jsmith@yourcompany.com" class="input-xlarge">
+            <label>Address</label>
+            <textarea value="Smith" rows="3" class="input-xlarge">2817 S 49th
+    Apt 314
+    San Jose, CA 95101
+            </textarea>
+            
+          	<div>
+        	    <button class="btn btn-primary">Update</button>
+        	</div>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="profile">
+    	<form id="tab2">
+        	<label>New Password</label>
+        	<input type="password" class="input-xlarge">
+        	<div>
+        	    <button class="btn btn-primary">Update</button>
+        	</div>
+    	</form>
+      </div>
+  </div>
+  </fieldset>
+</form>
+<div class="col-lg-2 col-md-1"></div>
 
 
 
-
-
-
+</body>
+</html>

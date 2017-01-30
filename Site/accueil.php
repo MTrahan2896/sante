@@ -1,71 +1,112 @@
-<html>
-<head>
-  <title>Bootstrap Case</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="../style/navbar_style.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<style>
-@media only screen 
+<?php  include 'Composants/Navbar.php'; ?>
+
+
+
+<h2>Défi Santé - Cegep de Trois-Rivières</h2>
+<div></div>
+
+<br><br>
+<div class="row">
+<div class="col-lg-8">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active">
+        <img src="http://www.tourismetroisrivieres.com/partenaires/1553/images/stade-des-diablos-2013-1.jpg" alt="Chania" width="100%" style="height: 345px; max-height: 345px">
+        <div class="carousel-caption">
+          <h3>Chania</h3>
+          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="https://www.cegeptr.qc.ca/wp-content/uploads/2015/05/Therrien-Maziade-Cassidy.jpg" alt="Chania" width="100%" style="height: 345px; max-height: 345px">
+        <div class="carousel-caption">
+          <h3>Chania</h3>
+          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+        </div>
+      </div>
+    
+      <div class="item">
+        <img src="http://www.cegeptr.qc.ca/wp-content/uploads/2013/04/logo-defi-sante-aff-dyn.png" width="100%" style="max-height: 345px">
+        <div class="carousel-caption">
+          <h3>Flowers</h3>
+          <p>Beatiful flowers in Kolymbari, Crete.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="http://www.decrochezcommejamais.com/fichiersUploadOpt/1178-530-0-482-5305-2571-1005-1433-4a3ef0705cf0023f1b6f23ce3bd39e3aabecf81d4ee684075/20161118113406-montlaurier-047-mathieudupuis.jpg" alt="Flower" width="100%" style="height: 345px; max-height: 345px">
+        <div class="carousel-caption">
+          <h3>Flowers</h3>
+          <p>Beatiful flowers in Kolymbari, Crete.</p>
+        </div>
+      </div>
   
-  and (max-device-width: 770px)
- 
-  and (orientation: portrait) {
-    .navbar-brand{
-      display: none;
-    }
-}
-</style>
-<body>
-
-<nav class="navbar navbar-inverse" style="border-radius: 0px;">
-  <div class="container-fluid" style="padding-left: 0px">
-
-  <!--Menu déroulant lorsque la résolution est petite -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>       
-      </button>
     </div>
 
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-      <a class="navbar-brand" style="padding-top: 5px;" href="#">
-      <img src="http://www.cegeptr.qc.ca/wp-content/uploads/2013/01/defi-sante-300x251.png" style="width: 40px;height:40px;"/>
-      </a>  
+</div>
+<div class="col-lg-4">
 
-        <li class="active"><a href="#">Accueil</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Connexion</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Déconnexion</a></li>
-      </ul>
+<div class="container">
+  <h5>Points accumulés avant la semaine de relâche</h5>
+  <div class="progress" style="width: 270px">
+    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:30%">
+      <span class="sr-only">70% Complete</span>
     </div>
   </div>
-</nav>
-  
+</div>
 <div class="container">
-  <h3>Collapsible Navbar</h3>
-  <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
-  <p>Only when the button is clicked, the navigation bar will be displayed.</p>
+  <h5>Points accumulés après la semaine de relâche</h5>
+  <div class="progress" style="width:270px">
+    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+      <span class="sr-only">70% Complete</span>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h5>Points bonus accumulés</h5>
+  <div class="progress" style="width: 270px">
+    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+      <span class="sr-only">70% Complete</span>
+    </div>
+  </div>
 </div>
 
-</body>
-</html>
+<div class="container">
+  <h5>Points totaux accumulés</h5>
+  <div class="progress" style="width: 270px">
+    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+      <span class="sr-only">70% Complete</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 
+
+
+
+
+
+<?php include 'Composants/Fin_Fichier.php';?>

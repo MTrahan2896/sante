@@ -94,3 +94,15 @@ html, body {
 .footer {
   background: #42d9f4;
 }
+
+
+#brand{
+    color: white;
+    padding-top: 10px;
+}
+
+.progress-bar{
+    
+    background-color: green;
+
+}
