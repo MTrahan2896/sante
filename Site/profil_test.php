@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
 </head>
 <style>
 @media only screen 
@@ -59,46 +60,15 @@
   </div>
 </nav>
 
-<div class="well">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
-      <li><a href="#profile" data-toggle="tab">Password</a></li>
-    </ul>
-    <div id="myTabContent" class="tab-content">
-      <div class="tab-pane active in" id="home">
-        <form id="tab">
-            <label>Username</label>
-            <input type="text" value="jsmith" class="input-xlarge">
-            <label>First Name</label>
-            <input type="text" value="John" class="input-xlarge">
-            <label>Last Name</label>
-            <input type="text" value="Smith" class="input-xlarge">
-            <label>Email</label>
-            <input type="text" value="jsmith@yourcompany.com" class="input-xlarge">
-            <label>Address</label>
-            <textarea value="Smith" rows="3" class="input-xlarge">2817 S 49th
-    Apt 314
-    San Jose, CA 95101
-            </textarea>
-            
-          	<div>
-        	    <button class="btn btn-primary">Update</button>
-        	</div>
-        </form>
-      </div>
-      <div class="tab-pane fade" id="profile">
-    	<form id="tab2">
-        	<label>New Password</label>
-        	<input type="password" class="input-xlarge">
-        	<div>
-        	    <button class="btn btn-primary">Update</button>
-        	</div>
-    	</form>
-      </div>
-  </div>
-  </fieldset>
-</form>
-<div class="col-lg-2 col-md-1"></div>
+
+  <ul id="tabs-swipe-demo" class="tabs">
+    <li class="tab col s3"><a href="#test-swipe-1">Test 1</a></li>
+    <li class="tab col s3"><a class="active" href="#test-swipe-2">Test 2</a></li>
+    <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
+  </ul>
+  <div id="test-swipe-1" class="col s12 blue">Test 1</div>
+  <div id="test-swipe-2" class="col s12 red">Test 2</div>
+  <div id="test-swipe-3" class="col s12 green">Test 3</div>
 
 
 
