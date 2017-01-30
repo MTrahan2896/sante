@@ -1,0 +1,101 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <style type="text/css">
+  
+        @media screen and (min-width: 700px) {
+        .modal { width: 40% !important ; height: 85% !important ; }}
+
+      </style>
+
+    </head>
+
+    <body>
+      <a class='btn' href="#modalIns">Inscription</a>
+      
+      <div class="modal" id="modalIns">
+        <div class="modal-content">
+          <div class="row">
+             <h4 class="col s4">Inscription</h4>
+          </div>
+
+          <div class="row">
+          
+              <div class="input-field col s11">
+                 <i class="material-icons prefix">perm_identity</i>
+                 <input id="user" type="text" class="validate">
+                 <label for="user">nom d'utilisateur</label>
+              </div>
+          </div>
+
+            <div class="row">
+              <div class="col s1">
+                <i class="material-icons prefix">person_pin</i>
+              </div>
+              <div class="input-field col s5">
+                <input id="prenom" type="text" class="validate">
+                <label for="prenom">Prenom</label>
+              </div>
+          
+              <div class="input-field col s5">
+                <input id="nom" type="text" class="validate">
+                <label for="nom">Nom</label>
+              </div>
+            </div>
+            <div class="row">
+             <div class="input-field col s11">
+               <input id="couriel" type="text" class="validate">
+               <label for="couriel">couriel</label>
+             </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s11">
+                <input id="telephone" type="text" class="validate">
+                <label for="telephone">Telephone</label>
+              </div>
+            </div>
+            <div class="row">
+              <span>
+                <input name="sexe" type="radio" id="s1" />
+                <label for="s1">Homme</label>
+              </span>
+              <span>
+                <input name="sexe" type="radio" id="s2" />
+                <label for="s2">Femme</label>
+             </span>
+            </div>
+            <div class="row">
+             <div class="input-field col s11">
+               <input id="pass" type="password" class="validate">
+               <label for="pass">Mot de passe</label>
+             </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s11">
+                <input id="confpass" type="password" class="validate">
+                <label for="confpass">Confirmer le mot de passe</label>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+              <a class="btn green" href=""> accepter</a><a class="btn red" href="#"> cancel</a>
+        </div> 
+      </div>
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="js/js.js"></script>
+      
+    </body>
+  </html>
+</html>
