@@ -2,7 +2,7 @@
 * @Author: 1425165
 * @Date:   2017-01-30 16:07:24
 * @Last Modified by:   1425165
-* @Last Modified time: 2017-01-31 17:07:58
+* @Last Modified time: 2017-01-31 17:31:39
 */
 nav{
 	background-color: #42e2f4;
@@ -51,7 +51,15 @@ button{
     	background-color: white;
     }
 
-    .btn-floating{
 
-    	margin-left: 40px;
-    }
+
+.collapsible-body{
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+
+
+.collapsible-body:odd{
+	
+	background-color: grey;
+}
