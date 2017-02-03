@@ -1,0 +1,65 @@
+/*
+* @Author: 1425165
+* @Date:   2017-01-30 16:07:24
+* @Last Modified by:   1425165
+* @Last Modified time: 2017-01-31 17:31:39
+*/
+nav{
+	background-color: #42e2f4;
+
+}
+
+footer.page-footer{
+	background-color: #42e2f4;
+	color: black;
+}
+
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+      
+   #calendar div div h2{
+text-transform: capitalize;
+   }
+
+button{
+	background-color: grey;
+
+}
+
+ @media screen and (min-width: 700px) {
+    .modal { width: 25% !important ;
+            height: 55% !important ; 
+            top: auto !important;
+            bottom: 35%;}
+     }
+
+    #imgDef {width: 200px; height: 200px;}
+
+    .input-field label {
+    font-size: 12px !important;
+    }
+
+    .modal-content{
+    	background-color: white;
+    }
+
+
+
+.collapsible-body{
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+
+
+.collapsible-body:odd{
+	
+	background-color: grey;
+}
