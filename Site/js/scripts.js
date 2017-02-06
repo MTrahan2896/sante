@@ -57,8 +57,3 @@ $('#calendar').fullCalendar( 'renderEvent', newEvent2 );
 
 
 
-
-
-
-
-

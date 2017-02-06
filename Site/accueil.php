@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!ISSET($_SESSION['uid']))
+{
+  $_SESSION['uid'] = 0;
+}
+
+  
+
+
+?>
 
   <!DOCTYPE html>
   <html>
