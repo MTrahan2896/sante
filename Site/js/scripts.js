@@ -15,17 +15,8 @@ $('.datepicker').pickadate({selectYears: 20});
      
     });
 
- var newEvent = new Object();
 
-newEvent.title = "some text\n";
-newEvent.start = new Date();
-newEvent.allDay = true;
- var newEvent2 = new Object();
 
-newEvent2.title = "some tesx2\n";
-newEvent2.start = new Date();
-newEvent2.allDay = true;
-$('#calendar').fullCalendar( 'renderEvent', newEvent2 );
 
 $("#calendar").fullCalendar({
 
@@ -45,3 +36,40 @@ viewRender: function(view, element){
     
     }
     );
+
+
+
+
+/*
+ var newEvent = new Object();
+
+newEvent.title = "some text\n";
+newEvent.start = new Date();
+newEvent.allDay = true;
+ var newEvent2 = new Object();
+
+newEvent2.title = "some tesx2\n";
+newEvent2.start = new Date();
+newEvent2.allDay = true;
+$('#calendar').fullCalendar( 'renderEvent', newEvent2 );
+ */
+
+
+
+    function creergroupe() {
+        ArrayPts =[];
+ 
+        $.ajax({
+            type: "POST",
+            url: "php_scripts/creerGroupe.php",
+            data: {'nomgroupe': $("#nomgroupe").val(), 'id_prof':  1}, //TODO: CHANGE PROF ID
+            success: function (data) {
+                location.reload();
+            },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+    }
+
+

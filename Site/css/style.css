@@ -1,8 +1,8 @@
 /*
 * @Author: 1425165
 * @Date:   2017-01-30 16:07:24
-* @Last Modified by:   1425165
-* @Last Modified time: 2017-01-31 17:31:39
+* @Last Modified by:   JLafreniere
+* @Last Modified time: 2017-02-05 16:24:17
 */
 nav{
 	background-color: #42e2f4;
@@ -36,7 +36,7 @@ button{
 
  @media screen and (min-width: 700px) {
     .modal { width: 25% !important ;
-            height: 55% !important ; 
+            
             top: auto !important;
             bottom: 35%;}
      }
@@ -62,4 +62,9 @@ button{
 .collapsible-body:odd{
 	
 	background-color: grey;
+}
+
+.collapsibleWithButton{
+
+  padding-bottom: 45px;
 }
