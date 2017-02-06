@@ -18,6 +18,12 @@
   {
   text-align: right;
   }
+
+  .act label
+  {
+    font-size: 12px;
+    color:black;
+  }
   </style>
 </head>
 <body>
@@ -85,10 +91,27 @@
         </div>
       </li>
       <!-- ACTIVITE -->
-      <li class="">
+      <li class="act">
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
         <div class="collapsible-body" style="display: none;">
           
+      <div class="row">
+      <label for="nom_activite" class="col s4">Actitvé</label><label name="nom_activite" class="col s6"> Badminton</label>
+      </div>
+
+      <div class="row">
+      <label for="date_activite" class="col s4">Date de l'activité</label><label name="date_activite" class="col s4"> 2017-02-05</label>
+      </div>
+
+      <div class="row">
+      <label for="heure_deb" class="col s4">Heure de début</label><label name="heure_deb" class="col s2"> 8:10</label>
+
+      <label for="heure_fin" class="col s4">Heure de fin</label><label name="heure_deb" class="col s2"> 8:10</label>
+
+      </div>
+
+      <div class="row">
+      </div>
           
         </div>
       </li>
@@ -98,25 +121,28 @@
         <div class="collapsible-body" style="display: none;">
           <div class="row">
             <form class="col s12">
-              <legend style="font-size:20px;">Personne ressource</legend>
+              <legend style="font-size:20px;">Personne ressource en cas d'urgence</legend>
               <div class="row">
-                <div class="input-field col s3">
-                  <!--  <i class="material-icons prefix">account_circle</i> -->
-                  <input id="icon_prefix" type="text" class="validate">
-                  <label for="icon_prefix">Nom</label>
+                <div class="input-field col s6 l2">
+                  <input id="nom_ressource" type="text" class="validate">
+                  <label for="nom_ressource">Nom</label>
                 </div>
-                <div class="input-field col s3">
-                  <!--  <i class="material-icons prefix">account_circle</i> -->
-                  <input id="icon_prefix" type="text" class="validate">
-                  <label for="icon_prefix">Prénom</label>
+                <div class="input-field col s6 l2">
+                  <input id="prenom_ressource" type="text" class="validate">
+                  <label for="prenom_ressource">Prénom</label>
                 </div>
               </div>
+
               <div class="row">
-                <div class="input-field col s2">
-                  <i class="material-icons prefix">phone</i>
-                  <input id="icon_telephone" type="tel" class="validate">
-                  <label for="icon_telephone">Telephone</label>
-                </div>
+                  <div class="input-field col s6 l2">
+                    <input id="lien_ressource" type="text" class="validate">
+                    <label for="lien_ressource">Lien de parenté</label>
+                  </div>
+
+                  <div class="input-field col s6 l2">
+                    <input id="tel_ressource" type="tel" class="validate">
+                    <label for="tel_ressource">Téléphone</label>
+                  </div>
               </div>
             </form>
           </div>
@@ -163,13 +189,11 @@
               </div>
             </li>
 
-
-
             <!-- PROBLEME DE SANTE -->
-            <li class="">
+    <li class="">
               <div class="collapsible-header">
               <i class="material-icons">local_hospital</i>Problèmes de santé</div>
-              <div class="collapsible-body" style="display: none;">
+        <div class="collapsible-body" style="display: none;">
                 
                 <div class="row">
                   <p><span class="col s5 l2 prob_medic">Anémie</span>
@@ -182,22 +206,22 @@
                     <label for="Anemie_N">Non</label>
                   </div>
                 </p>
-              </div>
+                </div>
 
-              <div class="row">
-                <p><span class="col s5 l2 prob_medic">Asthme </span>
-                
-                      <div class ="col s3 l1">
-                        <input class="with-gap" name="Asthme" type="radio" id="Asthme_O"  />
-                        <label for="Asthme_O">Oui</label>
-                      </div>
-                
-                      <div class ="col s3 l1">
-                        <input class="with-gap" name="Asthme" type="radio" id="Asthme_N"  />
-                        <label for="Asthme_N">Non</label>
-                      </div>
-                    </p>
-              </div>
+                <div class="row">
+                  <p><span class="col s5 l2 prob_medic">Asthme </span>
+                  
+                        <div class ="col s3 l1">
+                          <input class="with-gap" name="Asthme" type="radio" id="Asthme_O"  />
+                          <label for="Asthme_O">Oui</label>
+                        </div>
+                  
+                        <div class ="col s3 l1">
+                          <input class="with-gap" name="Asthme" type="radio" id="Asthme_N"  />
+                          <label for="Asthme_N">Non</label>
+                        </div>
+                      </p>
+                </div>
 
                     <div class="row">
                       <p><span class="col s5 l2 prob_medic">Cardiaque</span>
@@ -266,44 +290,77 @@
                     <input class="with-gap" name="Hyperventilation" type="radio" id="Hyperventilation_N" />
                     <label for="Hyperventilation_N">Non</label>
                   </div>
+                  </p>
+                </div>
+  
+                <div class="row">
+                  <p><span class="col s5 l2 prob_medic">Hypoglycémie</span>
+                  <div class ="col s3 l1 ">
+                    <input class="with-gap" name="Hypoglycemie" type="radio" id="Hypoglycemie_O"  />
+                    <label for="Hypoglycemie_O">Oui</label>
+                  </div>
+                  <div class ="col s3 l1 ">
+                    <input class="with-gap" name="Hypoglycemie" type="radio" id="Hypoglycemie_N" />
+                    <label for="Hypoglycemie_N">Non</label>
+                  </div>
                 </p>
               </div>
-  
+
               <div class="row">
-                <p><span class="col s5 l2 prob_medic">Hypoglycémie</span>
-                <div class ="col s3 l1 ">
-                  <input class="with-gap" name="Hypoglycemie" type="radio" id="Hypoglycemie_O"  />
-                  <label for="Hypoglycemie_O">Oui</label>
+                <div class="col l1 s3"><p style="text-align: right; margin-top: 50%">Autre</p></div>
+                <div class="input-field col s9 l3" ">
+                  <input id="autre_blessure" name="autre_blessure" type="text">
+                  <label for="autre_blessure" >Description du problème de santé</label>
                 </div>
-                <div class ="col s3 l1 ">
-                  <input class="with-gap" name="Hypoglycemie" type="radio" id="Hypoglycemie_N" />
-                  <label for="Hypoglycemie_N">Non</label>
+              </div>
+
+              <div class="row">
+                <div class="col s11 l4">
+                  <p style="vertical-align: bottom; text-align: right;"><a class="btn-floating  waves-effect waves-light green"><i class="material-icons">save</i></a></p>
                 </div>
-              </p>
-            </div>
-
-            <div class="row">
-              <div class="col l1 s3"><p style="text-align: right; margin-top: 50%">Autre</p></div>
-              <div class="input-field col s9 l3" ">
-                <input id="autre_blessure" name="autre_blessure" type="text">
-                <label for="autre_blessure" >Description de la blessure</label>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col s11 l4">
-                <p style="vertical-align: bottom; text-align: right;"><a class="btn-floating  waves-effect waves-light green"><i class="material-icons">save</i></a></p>
-              </div>
-            </div>
-
         </div>
-
     </li>
-<!-- PROFIL -->
+
+      <!-- Medicaments -->
       <li class="">
         <div class="collapsible-header"><i class="material-icons">person</i>Médicaments</div>
         <div class="collapsible-body" style="display: none;">
-          
+         
+         <div class="row">
+                  
+                  <div class="input-field col s5">
+                    <input id="nom_medicament1" name="nom_medicament" type="text" value="Valtrex">
+                    <label for="nom_medicament1">Nom Médicament</label>
+                  </div>
+                  <div class="input-field col s5">
+                    <input type="date" id="medicament_probleme1" name="medicament_probleme" value="Imflammation de la cornée">
+                    <label for="medicament_probleme1">Problème de santé relié</label>
+                  </div>
+                  
+                  <div class="col s2" style="margin-left: -15px; vertical-align: middle;">
+                    <p style="vertical-align: bottom;"><a class="btn-floating  waves-effect waves-light red"><i class="material-icons">clear</i></a></p>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="input-field col s5">
+                    <input name="nom_medicament" type="text">
+                    <label for="nom_medicament">Nom Médicament</label>
+                  </div>
+                  
+                  <div class="input-field col s5">
+                    <input name="medicament_probleme" type="text">
+                    <label for="medicament_probleme">Problème de santé relié</label>
+                  </div>
+                  
+                  <div class="col s2" style="margin-left: -15px; vertical-align: bottom;">
+                    <p style="vertical-align: bottom;"><a class="btn-floating  waves-effect waves-light green"><i class="material-icons">save</i></a></p>
+                  </div>
+                  
+                  
+                </div>
+ 
           
         </div>
       </li>
