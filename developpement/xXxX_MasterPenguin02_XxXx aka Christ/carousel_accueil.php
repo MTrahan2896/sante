@@ -8,48 +8,33 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       
-      <?php include('../../site/composants/navbar.html') ?>
+      
       <style>
       
   
         
         @media screen and (min-width: 700px) {
-         /*.slider .slides {
-             background-color: transparent;
-             margin: 0;
-
-            }
-            .slider .slides li {
-                background-color: #fff;
-
-
-            background-size:100% auto;
-            background-repeat: no-repeat;
-
-        }
-        .slider{
-            height:440px;
-        }*/
+         
         .slider .slides li img {
                 background-color: #fff;
-                height:400px;
 
             background-size:100% auto;
             background-repeat: no-repeat;
 
         }
-        .slider .slides {
+        .slider  .slides  {
              background-color: transparent;
              margin: 0;
-             height:600px;
+
 
             }
-        .slider{
-            height:720px;
-        }
+
+
 
         
         }
+        
+
         @media screen and (max-width: 480px) {
             .slider .slides li img {
                 background-color: #fff;
@@ -78,29 +63,30 @@
     </head>
 
     <body>
-       
+<div class="container">
+   
 <div class="slider">
     <ul class="slides">
       <li>
           <div class="center" >
              <h3>Bienvenue</h3>
              <h5 class="light black-text text-lighten-3">Les Inscriptions pour le grand défi pierre lavoie se termine bientot </h5>
-             <img src="defi_pierre.png" class="imgslider"> 
+             <img src="defi_pierre.png" > 
         </div>
       </li>
       <li>
           <div class="center">
               <h3>Badminton</h3>
-          <h5 class="light black-text text-lighten-3">Inscriver-vous à nos activié de badminton les mardi et jeudi midi</h5>
-        <img src="badminton.jpg" class="imgslider"> 
+          <h5 class="light black-text text-lighten-3">Inscrivez-vous à nos activités de badminton les mardi et jeudi midis</h5>
+        <img src="badminton.jpg" > 
 
         </div>
       </li>
       <li>
           <div class ="center">
               <h3>volleyball</h3>
-          <h5 class="light black-text text-lighten-3">Inscriver vous en grand nombre</h5>
-        <img src="volleyball.jpg" class="imgslider"> 
+          <h5 class="light black-text text-lighten-3">Inscrivez-vous en grand nombre</h5>
+        <img src="volleyball.jpg" > 
 
         </div>
       </li>
@@ -109,6 +95,8 @@
 
               
  </div>
+     
+</div>
 
 
             <!--Import jQuery before materialize.js-->
