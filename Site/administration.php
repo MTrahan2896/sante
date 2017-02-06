@@ -37,6 +37,10 @@
                   <button data-target="modalGenGroupe{{groupe.id_groupe}}" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
                   <div class="row"  style="text-align: center">
                     <button data-target="modalGroupe{{groupe.id_groupe}}" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
+
+                  </div>
+                  <div class="row"  style="text-align: center">
+                    <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
                   </div>
                 </div>
                 
@@ -111,10 +115,11 @@
         </div>
         <div class="contenu-modal">
           <div class="row" id="codesGroupe{{groupe.id_groupe}}">
+
             <div ng-repeat="compte in comptesAvecCodeDansGroupe(groupe.id_groupe)">
               {{compte.code_acces}}
             </div>
-          </div>
+          
           <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)"><i class="material-icons left">print</i>Imprimer</a>
           
         </div>

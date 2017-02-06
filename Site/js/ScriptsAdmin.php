@@ -55,7 +55,9 @@ app.controller("ctrl", function($scope) {
             url: "php_scripts/creerGroupe.php",
             data: {
                 'nomgroupe': $("#nomgroupe").val(),
-                'id_prof': 1
+                'id_prof': 1,
+                'nb_codes': $("#rangeEleves").val()
+
             }, //TODO: CHANGE PROF ID
             success: function(data) {
             		location.reload();
@@ -85,6 +87,27 @@ app.controller("ctrl", function($scope) {
 		WinPrint.print();
 		WinPrint.close();
 	}
+
+		$scope.supprimerGroupe = function(groupe, nomGroupe){
+
+		var nom_Groupe = prompt("Pour confirmer la suppression, veuillez entrer le nom du groupe", "");
+
+if(nom_Groupe == nomGroupe){
+		$.ajax({
+            type: "POST",
+            url: "php_scripts/supprimerGroupe.php",
+            data: {
+                'id_groupe': groupe,
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+            		location.reload();
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+	}
+}
 
 
 
