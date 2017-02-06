@@ -17,7 +17,7 @@
          
         .slider .slides li img {
                 background-color: #fff;
-
+                height: 200px;
             background-size:100% auto;
             background-repeat: no-repeat;
 
@@ -67,6 +67,19 @@
    
 <div class="slider">
     <ul class="slides">
+        <?php 
+         /*mysqli_select_db('localhost','root','','defi_sante');
+        $resultat = mysqli_query("SELECT * FROM photo");
+		
+			
+			while($enregistrement= mysqli_fetch_array($resultat)){
+			
+				}
+				
+				mysqli_close($maconnexion);      */ 
+
+    
+        ?>
       <li>
           <div class="center" >
              <h3>Bienvenue</h3>
