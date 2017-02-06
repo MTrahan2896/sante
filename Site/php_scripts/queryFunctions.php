@@ -21,5 +21,29 @@
 	$result->close();
 	$mysqli->close();
 	}
+
+
+	function phpSelectReturnSingleName($query){
+    $mysqli = new mysqli('localhost','root','','bd_application');
+	$myArray = array();
+	if ($result = $mysqli->query($query)) {
+
+    while($row = $result->fetch_array()) {
+        return $row['nom']; 
+    }
+     
+	}
+
+	$result->close();
+	$mysqli->close();
+	}
+
+	function alert($message){
+		echo "<script>alert('".$message."')</script>";
+	}
+
+
+
+
 }
 ?>

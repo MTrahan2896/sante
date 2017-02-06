@@ -11,14 +11,3 @@
   include 'php_scripts/queryFunctions.php';
 
 ?>
-<script>
-	
-
-
-function addStrings(str1, str2){
-
-	return parseInt(str1) + parseInt(str2);
-
-}
-
-</script>
