@@ -21,7 +21,7 @@
         </div>
         <div class="contenu-modal">
           <div class="row">
-            <form class="col s12">
+            <form class="col s12" action="nav.php" method="POST">
               <div class="row">
                 <div class="input-field col s12" style="margin-top:15px">
                   <i class="material-icons prefix">account_circle</i>
@@ -34,7 +34,7 @@
                   <label for="pwd">Mot de passe</label>
                 </div>
                 <div class="col s12" style="margin-top:15px">
-                  <button id="connexion" class="btn col s12">Connexion</button>
+                  <button class="btn waves-effect waves-light" type="submit" name="connexion">Connexion</button>
                 </div>
                 <div class="col s12" style="margin-top:15px">
                   <a href="#">Inscription</a>
