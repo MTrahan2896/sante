@@ -4,7 +4,7 @@ var app = angular.module("app_angular", []);
 app.controller("ctrl", function($scope) {
 
     
-    $scope.eleves = <?php echo phpSelectQuery('select eleves.id_groupe, eleves.nom, eleves.prenom, eleves.points_bonus, eleves.points_debut_session, eleves.points_fin_session from eleves, groupes, professeurs where professeurs.ID_Prof = 1 and eleves.id_groupe = groupes.id_groupe and groupes.id_prof = professeurs.id_prof')?>;
+    $scope.eleves = <?php echo phpSelectQuery('select eleves.id_groupe, eleves.nom, eleves.prenom, eleves.code_acces, eleves.points_bonus, eleves.points_debut_session, eleves.points_fin_session from eleves, groupes, professeurs where professeurs.ID_Prof = 1 and eleves.id_groupe = groupes.id_groupe and groupes.id_prof = professeurs.id_prof')?>;
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes where ID_Prof = 1')?>;
 
@@ -13,7 +13,41 @@ app.controller("ctrl", function($scope) {
     		
     		return el.id_groupe == groupe;
     	});
-    }
+    	}
+
+        $scope.elevesDansGroupe = function(groupe){
+    	return $scope.eleves.filter(function(el){
+    		
+    		return el.id_groupe == groupe && el.code_acces == "";
+    	});
+    	}
+
+
+        $scope.comptesAvecCodeDansGroupe = function(groupe){
+    	return $scope.eleves.filter(function(el){
+    		
+    		return el.id_groupe == groupe && el.code_acces != "";
+    	});
+    	}
+
+
+    	 $scope.genererCodePourGroupe = function(groupe, nb_codes){
+
+    	 	 $.ajax({
+            type: "POST",
+            url: "php_scripts/generercode.php",
+            data: {'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
+            success: function (data) {
+                location.reload();
+            },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+
+    	 }
+
+
 
     $scope.creergroupe = function() {
         $.ajax({
@@ -21,28 +55,20 @@ app.controller("ctrl", function($scope) {
             url: "php_scripts/creerGroupe.php",
             data: {
                 'nomgroupe': $("#nomgroupe").val(),
-                'id_prof': 1
+                'id_prof': 1,
+                'nb_codes': $("#rangeEleves").val()
+
             }, //TODO: CHANGE PROF ID
             success: function(data) {
-                $.ajax({
-                    type: "POST",
-                    url: "php_scripts/obtenirGroupes.php",
-                    success: function(dt) {
-                        alert("test");
-
-                        $scope.groupes = JSON.parse(dt);                        
-                        $scope.$apply()
-                    },
-                    error: function(req) {
-                        alert("erreur");
-                    }
-                });
+            		location.reload();
             },
             error: function(req) {
                 alert("erreur");
             }
         });
     }
+
+    $scope.su
 
 	setTimeout(function () {
         $scope.$apply(function () {
@@ -51,6 +77,37 @@ app.controller("ctrl", function($scope) {
     }, 2000);
 
 
+
+	$scope.print = function(groupe){
+		var prtContent = document.getElementById('codesGroupe'+groupe);
+		var WinPrint = window.open('', '', 'left=0,top=0,width=1920,height=2000,toolbar=0,scrollbars=0,status=0');
+		WinPrint.document.write("LISTE DES CODES D'ACCÈS <br>" + prtContent.innerHTML);
+		WinPrint.document.close();
+		WinPrint.focus();
+		WinPrint.print();
+		WinPrint.close();
+	}
+
+		$scope.supprimerGroupe = function(groupe, nomGroupe){
+
+		var nom_Groupe = prompt("Pour confirmer la suppression, veuillez entrer le nom du groupe", "");
+
+if(nom_Groupe == nomGroupe){
+		$.ajax({
+            type: "POST",
+            url: "php_scripts/supprimerGroupe.php",
+            data: {
+                'id_groupe': groupe,
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+            		location.reload();
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+	}
+}
 
 
 

@@ -57,22 +57,3 @@ $('#calendar').fullCalendar( 'renderEvent', newEvent2 );
 
 
 
-
-    function creergroupe() {
-        
- 
-        $.ajax({
-            type: "POST",
-            url: "php_scripts/creerGroupe.php",
-            data: {'nomgroupe': $("#nomgroupe").val(), 'id_prof':  1}, //TODO: CHANGE PROF ID
-            success: function (data) {
-                location.reload();
-            },
-            error: function (req) {
-                alert("erreur");
-            }
-        });
-    }
-
-
-
