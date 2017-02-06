@@ -1,30 +1,32 @@
-<html><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
-  <!--Import Google Icon Font-->
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
-  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
-  <link type="text/css" rel="stylesheet" href="css/style.css">
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <style>
-  .collapsible-body
-  {
-  padding-left: 10px;
-  padding-right: 10px;
-  }
-  .prob_medic
-  {
-  text-align: right;
-  }
+<html ng-app= 'app_angular' ng-controller="ctrl">
+<head>
 
-  .act label
-  {
-    font-size: 12px;
-    color:black;
-  }
-  </style>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+    .collapsible-body
+    {
+    padding-left: 10px;
+    padding-right: 10px;
+    }
+    .prob_medic
+    {
+    text-align: right;
+    }
+
+    .act label
+    {
+      font-size: 12px;
+      color:black;
+    }
+    </style>
 </head>
 <body>
   <header>
@@ -80,7 +82,44 @@
   <main>
   
   <div class="container">
+    <?php
+
+  
+    function phpSelectQuery($query){
+    $mysqli = new mysqli('localhost','root','','bd_application');
+  $myArray = array();
+  if ($result = $mysqli->query($query)) {
+
+    while($row = $result->fetch_array()) {
+            $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+  }
+
+  $result->close();
+  $mysqli->close();
+  }
+
+  function phpQuery($query){
+    $mysqli = new mysqli('localhost','root','','bd_application');
+  $myArray = array();
+  if ($result = $mysqli->query($query)) {
+  $result->close();
+  $mysqli->close();
+  }
+}
+
+     echo phpSelectQuery("
+      SELECT utilisateur.id_utilisateur, 
+         utilisateur.nom,
+         blessure.id_blessure,
+         blessure.nom_blessure
+      FROM utilisateur, blessure, blessure_utilisateur
+      where utilisateur.id_utilisateur = blessure_utilisateur.id_utilisateur 
+        and blessure.id_blessure = blessure_utilisateur.id_blessure");
     
+ 
+  ?>
     <ul class="collapsible" data-collapsible="expandable">
       <!-- PROFIL -->
       <li class="">
@@ -148,21 +187,19 @@
           </div>
           
           <ul class="collapsible" data-collapsible="expandable">
+            
+
             <!-- BLESSURE -->
             <li class="">
               <div class="collapsible-header"><i class="material-icons">healing</i>Blessures</div>
               <div class="collapsible-body" style="display: none;">
                 
-                <div class="row">
+                <div class="row" ng-repeat="u in utilisateur">
                   
-                  <div class="input-field col s5">
-                    <input id="desc_blessure1" name="desc_blessure" type="text" value="Fracture du fémur">
-                    <label for="desc_blessure1">Description de la blessure</label>
-                  </div>
-                  <div class="input-field col s5">
-                    <input type="date" id="date_blessure1" name="date_blessure" class="datepicker" value="2017-02-03">
-                    <label for="date_blessure1">Date de la blessure</label>
-                  </div>
+
+
+                  <label class="col s6">Description blessure {{u.nom_blessure}}
+                  </label>
                   
                   <div class="col s2" style="margin-left: -15px; vertical-align: middle;">
                     <p style="vertical-align: bottom;"><a class="btn-floating  waves-effect waves-light red"><i class="material-icons">clear</i></a></p>
@@ -188,6 +225,9 @@
                 </div>
               </div>
             </li>
+
+
+
 
             <!-- PROBLEME DE SANTE -->
     <li class="">
@@ -396,7 +436,8 @@
 </div>
 </div>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/moment.js">moment.locale="fr"</script>
@@ -407,7 +448,9 @@
 <script type="text/javascript" src="js/gcal.js"></script>
 <script type="text/javascript" src="js/sc-date-time.js"></script>
 <script src="js/scripts.js"></script>
+<?php include 'ScriptsBlessures.php';?>
 <script type="text/javascript">
+
 $('.datepicker').pickadate({
 selectMonths: true, // Creates a dropdown to control month
 selectYears: 15 // Creates a dropdown of 15 years to control year
