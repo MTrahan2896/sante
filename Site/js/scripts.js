@@ -57,7 +57,7 @@ $('#calendar').fullCalendar( 'renderEvent', newEvent2 );
 
 
     function creergroupe() {
-        ArrayPts =[];
+        
  
         $.ajax({
             type: "POST",

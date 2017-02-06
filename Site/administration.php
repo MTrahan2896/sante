@@ -2,7 +2,7 @@
   <head>
     <?php include 'components/headContent.php';?>
   </head>
-  <body ng-app="myApp" ng-controller="ctrl">
+  <body>
 
   
 
@@ -78,7 +78,7 @@
         </div>
         <div class="contenu-modal">
           <div class="row">
-            <form class="col s12" action="php_scripts/creergroupe.php">
+            <form class="col s12">
               <div class="row">
                 <div class="input-field col s12" style="margin-top:15px">
                   <i class="material-icons prefix">account_circle</i>
@@ -127,6 +127,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
     <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
     <script type="text/javascript" src="js/gcal.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
     <script type="text/javascript" src="js/sc-date-time.js"></script>
     <script src="js/scripts.js"></script>
     <?php include 'js/ScriptsAdmin.php';?>
