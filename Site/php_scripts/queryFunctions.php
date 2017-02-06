@@ -18,7 +18,7 @@
     $mysqli = new mysqli('localhost','root','','bd_application');
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
-	$result->close();
+	
 	$mysqli->close();
 	}
 }
