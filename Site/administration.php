@@ -30,7 +30,7 @@
               <li ng-repeat="groupe in groupes"> <!-- ANGULAR REPEAT -->
                 <div class="collapsible-header"><i class="material-icons">supervisor_account</i>{{groupe.nom_groupe}}
                 <span class="new badge blue right" data-badge-caption="">{{elevesDansGroupe(groupe.id_groupe).length}} élèves</span></div>
-                <div class="collapsible-body">
+                <div class="collapsible-body collapsibleWithButton">
                 <table>
                 <div class="row"   ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                    
@@ -39,6 +39,10 @@
                       <div class="col s3"> <a class="btn-floating red"><i class="material-icons">delete</i></a></div>
                     </div>
                 </table>
+                <div class="row">
+                <button data-target="modalNouveauGroupe" style="margin-bottom: 15px !important" class="btn right col s10 l5">Générer des codes d'accès</button>
+                <button data-target="modalNouveauGroupe" style="margin-bottom: 15px !important" class="btn right  col s11 l5">Afficher les codes d'accès</button>
+                </div>
                 </div>
               </li>
 
@@ -67,10 +71,6 @@
 
 
 
-
-
-
-
  <div id="modalNouveauGroupe" class="modal">
       <div class="modal-content">
         <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
@@ -92,7 +92,7 @@
                   
                 </div>
                 <div class="col s12" style="margin-top:15px">
-                  <button id="CreerGroupe" class="btn col s12" type="button" onclick="creergroupe()">Créer le groupe</button>
+                  <button id="CreerGroupe" class="btn col s12" type="button" ng-click="creergroupe()">Créer le groupe</button>
                 </div>
                 
               </div>

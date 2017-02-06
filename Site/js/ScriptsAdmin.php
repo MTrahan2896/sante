@@ -15,11 +15,47 @@ app.controller("ctrl", function($scope) {
     	});
     }
 
+    $scope.creergroupe = function() {
+        $.ajax({
+            type: "POST",
+            url: "php_scripts/creerGroupe.php",
+            data: {
+                'nomgroupe': $("#nomgroupe").val(),
+                'id_prof': 1
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                $.ajax({
+                    type: "POST",
+                    url: "php_scripts/obtenirGroupes.php",
+                    success: function(dt) {
+                        alert("test");
+
+                        $scope.groupes = JSON.parse(dt);                        
+                        $scope.$apply()
+                    },
+                    error: function(req) {
+                        alert("erreur");
+                    }
+                });
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+    }
+
+	setTimeout(function () {
+        $scope.$apply(function () {
+           console.log("scope applied");
+        });
+    }, 2000);
 
 
- 
- console.log ($scope.eleves);
- console.log ($scope.groupes);
+
+
 
 });
+
+
+
 </script>

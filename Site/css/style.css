@@ -1,8 +1,8 @@
 /*
 * @Author: 1425165
 * @Date:   2017-01-30 16:07:24
-* @Last Modified by:   JLafreniere
-* @Last Modified time: 2017-02-05 16:24:17
+* @Last Modified by:   1425165
+* @Last Modified time: 2017-02-06 14:25:59
 */
 nav{
 	background-color: #42e2f4;
@@ -67,4 +67,7 @@ button{
 .collapsibleWithButton{
 
   padding-bottom: 45px;
+}
+.margin-right{
+  margin-right: 15px;
 }
