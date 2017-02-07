@@ -4,9 +4,11 @@ var app = angular.module("app_angular", []);
 app.controller("ctrl", function($scope) {
 
     
-    $scope.eleves = <?php echo phpSelectQuery('select eleves.id_groupe, eleves.nom, eleves.prenom, eleves.code_acces, eleves.points_bonus, eleves.points_debut_session, eleves.points_fin_session from eleves, groupes, professeurs where professeurs.ID_Prof = 1 and eleves.id_groupe = groupes.id_groupe and groupes.id_prof = professeurs.id_prof')?>;
+    $scope.eleves = <?php echo phpSelectQuery('select utilisateurs.id_groupe, utilisateurs.nom, utilisateurs.prenom, utilisateurs.code_acces from utilisateurs, groupes, professeurs where professeurs.ID_Prof = 1 and utilisateurs.id_groupe = groupes.id_groupe and groupes.id_prof = professeurs.id_prof')?>;
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes where ID_Prof = 1')?>;
+
+    $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
 
     $scope.elevesDansGroupe = function(groupe){
     	return $scope.eleves.filter(function(el){
@@ -32,12 +34,13 @@ app.controller("ctrl", function($scope) {
 
 
     	 $scope.genererCodePourGroupe = function(groupe, nb_codes){
-
+    	 	console.log($("#codeGroupe"+groupe).val());
     	 	 $.ajax({
             type: "POST",
             url: "php_scripts/generercode.php",
             data: {'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
+                
                 location.reload();
             },
             error: function (req) {
@@ -60,6 +63,7 @@ app.controller("ctrl", function($scope) {
 
             }, //TODO: CHANGE PROF ID
             success: function(data) {
+            		
             		location.reload();
             },
             error: function(req) {
@@ -68,7 +72,7 @@ app.controller("ctrl", function($scope) {
         });
     }
 
-    $scope.su
+    
 
 	setTimeout(function () {
         $scope.$apply(function () {
@@ -92,7 +96,7 @@ app.controller("ctrl", function($scope) {
 
 		var nom_Groupe = prompt("Pour confirmer la suppression, veuillez entrer le nom du groupe", "");
 
-if(nom_Groupe == nomGroupe){
+		if(nom_Groupe == nomGroupe){
 		$.ajax({
             type: "POST",
             url: "php_scripts/supprimerGroupe.php",
@@ -100,14 +104,15 @@ if(nom_Groupe == nomGroupe){
                 'id_groupe': groupe,
             }, //TODO: CHANGE PROF ID
             success: function(data) {
+            		
             		location.reload();
             },
             error: function(req) {
                 alert("erreur");
             }
         });
-	}
-}
+		}
+		}
 
 
 

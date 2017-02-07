@@ -28,7 +28,7 @@
                     <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                       
                       <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                      <td class="">{{eleve.points_bonus}}/15</td>
+                      <td class="">{{}}/15</td>
                       
                     </div>
                     </tr>
@@ -54,9 +54,44 @@
         <li>
           <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
           <div class="collapsible-body">
+
+
             
+
+
+
+
+ <ul class="collapsible" data-collapsible="expandable" >
+              
+              <li ng-repeat="activite in activites"> <!-- ANGULAR REPEAT -->
+              <div class="collapsible-header"><i class="material-icons">supervisor_account</i>{{activite.nom_activite}}
+               
+              </div>
+                <div class="collapsible-body collapsibleWithButton">
+                
+                 
+                </div>
+                
+
+
+              </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
-        </li>
+
         <li>
           <div class="collapsible-header"><i class="material-icons">settings</i>Paramètres</div>
           <div class="collapsible-body">
@@ -114,7 +149,7 @@
         Code d'accès du groupe "{{groupe.nom_groupe}}"
         </div>
         <div class="contenu-modal">
-          <div class="row" id="codesGroupe{{groupe.id_groupe}}">
+          <div class="row" >
 
             <div ng-repeat="compte in comptesAvecCodeDansGroupe(groupe.id_groupe)">
               {{compte.code_acces}}
@@ -125,12 +160,8 @@
         </div>
       </div>
     </div>
-  <script>
-
- 
-
-
-  </script>
+    </div>
+  
     
 
   </div>
