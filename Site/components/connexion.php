@@ -1,3 +1,15 @@
+<?php 
+  include 'inscription.php';
+?>
+<script>
+  function Close_Open_Modal()
+  {
+     $('#modal_ins').modal('open');
+      $('#modal_login').modal('close');
+     
+  }
+</script>
+
 <div id="modal_login" class="modal">
   <div class="modal-content">
     <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
@@ -21,7 +33,7 @@
               <button class="btn waves-effect waves-light" type="" onclick="" name="connexion">Connexion</button>
             </div>
             <div class="col s12" style="margin-top:15px">
-              <a href="#">Inscription</a>
+              <button type="button" onclick="Close_Open_Modal()">Inscription</button>
             </div>
           </div>
         </form>
@@ -31,7 +43,13 @@
   </div>
 </div>
 
+
+
+
+
 <?php
+
+
 function verifier_user_existant($username,$pwd_input)
 {
   $query = "Select * from utilisateur where username = '".$username."'";
