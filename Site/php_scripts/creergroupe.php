@@ -35,7 +35,9 @@ phpQuery("insert into groupes values(null, \"".$_POST['nomgroupe']."\", 1)");
 	}
 	for ($x = 0; $x < $nb_codes; $x++) {
 
- 	echo phpQuery('insert into eleves values(null, null, null,'.$value.', 0, 0, 0, "'.substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5).'", null)');
+	$query = 'insert into utilisateurs values(null, null, null,'.$value.', 0, 0, 0, "'.substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5).'", null)';
+	echo $query;
+ 	echo phpQuery($query);
 }
 
 

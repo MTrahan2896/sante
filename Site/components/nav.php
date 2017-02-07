@@ -8,6 +8,7 @@
         </ul>
         
         <?php
+        if(isset($_SESSION['uid'])){
        
         if ($_SESSION['uid'] == 0)
         {
@@ -29,6 +30,7 @@
             $_SESSION['uid'] = 0;
             header('Location: accueil.php');
           }
+        }
         }
         ?>
 
