@@ -32,12 +32,14 @@ if (!ISSET($_SESSION['uid']))
       <?php 
           include 'components/nav.php';
       ?>  
+
       </header>      
 
 <main>	
-        
-	<div class="container">
+  	<div class="container">
 	<div class="row">
+
+  
 
 
 	<div class="input-field col s12">
