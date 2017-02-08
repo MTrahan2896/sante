@@ -10,12 +10,10 @@ app.controller("ctrl", function($scope) {
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
 
-    $scope.elevesDansGroupe = function(groupe){
-    	return $scope.eleves.filter(function(el){
-    		
-    		return el.id_groupe == groupe;
-    	});
-    	}
+    $scope.eleves_activites = <?php echo phpSelectQuery('select * from eleves_activites')?>;
+
+    
+
 
         $scope.elevesDansGroupe = function(groupe){
     	return $scope.eleves.filter(function(el){

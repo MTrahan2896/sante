@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 07 Février 2017 à 21:51
+-- Généré le :  Mer 08 Février 2017 à 00:27
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -56,6 +56,14 @@ CREATE TABLE `eleves_activites` (
   `ID_Activite` int(11) NOT NULL,
   `Present` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `eleves_activites`
+--
+
+INSERT INTO `eleves_activites` (`ID_Eleve_Activite`, `ID_Eleve`, `ID_Activite`, `Present`) VALUES
+(1, 1, 1, 1),
+(2, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -183,7 +191,7 @@ ALTER TABLE `activites`
 -- AUTO_INCREMENT pour la table `eleves_activites`
 --
 ALTER TABLE `eleves_activites`
-  MODIFY `ID_Eleve_Activite` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Eleve_Activite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `groupes`
 --

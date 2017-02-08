@@ -52,7 +52,8 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
+          <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités <span class="new badge green right" data-badge-caption="">{{activites.length}}</span></div>
+               
           <div class="collapsible-body">
 
 
@@ -61,10 +62,10 @@
 
 
 
- <ul class="collapsible" data-collapsible="expandable" >
+ <ul class="collapsible" data-collapsible="expandable">
               
               <li ng-repeat="activite in activites"> <!-- ANGULAR REPEAT -->
-              <div class="collapsible-header"><i class="material-icons">supervisor_account</i>{{activite.nom_activite}}
+              <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{activite.Nom_Activite}} <span class="new badge green right" data-badge-caption="">{{}}10/25</span>
                
               </div>
                 <div class="collapsible-body collapsibleWithButton">
