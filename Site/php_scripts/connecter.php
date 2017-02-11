@@ -1,4 +1,8 @@
 <?php
+$x = $_POST['nom_user'];
+$y = $_POST['password'];
+echo $x;
+echo $y;
 function verifier_user_existant($username,$pwd_input)
 {
   $query = "Select * from utilisateur where username = '".$username."'";
