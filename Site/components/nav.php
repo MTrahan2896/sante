@@ -8,8 +8,12 @@
         </ul>
         
         <?php
-        if(isset($_SESSION['uid'])){
-       
+        
+
+
+        if(!isset($_SESSION['uid'])){
+         $_SESSION['uid'] = 0;
+        }
         if ($_SESSION['uid'] == 0)
         {
         echo '
@@ -31,7 +35,7 @@
             header('Location: accueil.php');
           }
         }
-        }
+        
         ?>
 
       </div>

@@ -6,7 +6,6 @@
 */
 nav{
 	background-color: #42e2f4;
-
 }
 
 footer.page-footer{
@@ -35,13 +34,33 @@ button{
 }
 
  @media screen and (min-width: 700px) {
-    .modal { width: 25% !important ;
-            
-            top: auto !important;
-            bottom: 35%;}
-     }
+    .modal 
+    { 
+      width: 25% !important;
+      bottom: 35%;
+    }
 
-    #imgDef {width: 200px; height: 200px;}
+    #modal_ins
+    {
+      height: 100%;
+
+    }
+
+    #modal_code
+    {
+      height: 40%;
+    }
+
+    #modal_code .modal-content
+    {
+        padding-bottom: 0px;
+    }
+
+  }
+    #imgDef 
+    {
+      width: 200px; height: 200px;
+    }
 
     .input-field label {
     font-size: 12px !important;
