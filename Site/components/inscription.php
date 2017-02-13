@@ -69,7 +69,7 @@
             </div>
             <div class="row">
               <div class="col s6">
-              <a class="btn green" href=""> accepter</a>
+              <a class="btn green" href=""> Accepter</a>
               </div>
               <div class="col s6">
               <a class="btn red" href=""> Annuler</a>

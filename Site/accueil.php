@@ -41,6 +41,10 @@ if (!ISSET($_SESSION['uid']))
       </header>      
 
 <main>	
+<script src="js/jscolor.js"></script>
+<script src="js/jscolor.min.js"></script>
+
+
   	<div class="container">
 	<div class="row">
 
@@ -69,10 +73,98 @@ if (!ISSET($_SESSION['uid']))
 </div>
 
 
+<a class="waves-effect waves-light btn" href="#modal_new_activite">Créer une activité</a>
+
+<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
+
+<a class="waves-effect waves-light btn" href="#modal_planif">Planifier une activité</a>
 
 
+  <!-- Modal Structure -->
+<div id="modal_new_activite" class="modal">
+  <div class="modal-content">
+    <div class="row" style="text-align: center;">
+        <h4 class="">Créer une activité</h4>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input id="nom_activite" type="text" class="validate">
+        <label for="nom_activite">Nom de l'activité</label>
+      </div>
+   
+      <div class="input-field col s12 l4">
+        <label  for="point">Nombre de points</label>
+        <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point"/>
+      </div>
+    </div>
+
+    <div class="row">
+    Color: <input class="jscolor" value="ab2567">
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 l12">
+          <textarea id="description" class="materialize-textarea"></textarea>
+          <label for="description">Description</label>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col s6">
+          <a class="btn green" href=""> Accepter</a>
+        </div>
+        <div class="col s6">
+          <a class="btn red" href=""> Annuler</a>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+  <!-- Modal Structure -->
+  <div id="modal_planif" class="modal">
+    <div class="modal-content">
+      <div class="row" style="text-align:center">
+          <h4>Planifier une activité</h4>
+      </div>
+
+        <div class="input-field col s12">
+          <select>
+            <option value="" disabled selected>Nom de l'activité</option>
+            <option value="1">Badminton</option>
+            <option value="2">Randonnée pédestre</option>
+            <option value="3">Rugby</option>
+          </select>
+          <label>Nom de l'activité</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input id="date_act" type="date" class="datepicker">
+          <label for="date_act">Date de l'activité</label>
+        </div>
+
+
+  </div>
+  <div class="modal-footer">
+ <div class="row">
+        <div class="col s6 l6">
+          <a class="btn green" href=""> Accepter</a>
+        </div>
+        <div class="col s6 l6">
+          <a class="btn red" href=""> Annuler</a>
+        </div>
+    </div>    </div>
+  </div>
+
+    Color: <input class="jscolor" value="ab2567">
 
 </main>
+
+
 
         <footer class="page-footer" class="col l12" style="width: 100%!important">
           <div class="container">
