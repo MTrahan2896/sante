@@ -39,7 +39,7 @@ app.controller("ctrl", function($scope) {
             data: {'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
                 
-                location.reload();
+                console.log(data);
             },
             error: function (req) {
                 alert("erreur");

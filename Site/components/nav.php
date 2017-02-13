@@ -3,7 +3,7 @@
         <a href="#" class="brand-logo center">Défi Santé</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li><a href="accueil.php">Accueil</a></li>
-          <li><a href="sass.html">Administration</a></li>
+          <li><a href="administration.php">Administration</a></li>
           <li><a href="collapsible.html"></a></li>
         </ul>
         

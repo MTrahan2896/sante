@@ -101,7 +101,7 @@
       </ul>
       
     </div>
-    <div id="modalNouveauGroupe" class="modal">
+    <div id="modalNouveauGroupe" class="modal" style="height: 300px !important">
       <div class="modal-content">
         <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
           Ajouter un groupe
@@ -144,9 +144,9 @@
 
 
   <div ng-repeat="groupe in groupes">
-    <div id="modalGroupe{{groupe.id_groupe}}" class="modal">
-      <div class="modal-content">
-        <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
+    <div id="modalGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px !important">
+      <div class="modal-content" style="height: 100%; ">
+        <div class="entete-modal" style="margin-bottom: 15px; text-align:center;">
         Code d'accès du groupe "{{groupe.nom_groupe}}"
         </div>
         <div class="contenu-modal">
@@ -155,9 +155,9 @@
             <div ng-repeat="compte in comptesAvecCodeDansGroupe(groupe.id_groupe)">
               {{compte.code_acces}}
             </div>
-          
-          <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)"><i class="material-icons left">print</i>Imprimer</a>
-          
+          <div style="text-align:center;">
+          <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
+          </div>
         </div>
       </div>
     </div>
@@ -169,7 +169,7 @@
 
   
   <div ng-repeat="groupe in groupes">
-    <div id="modalGenGroupe{{groupe.id_groupe}}" class="modal">
+    <div id="modalGenGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px">
       <div class="modal-content" style="text-align: center">
         <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
         Générer des codes d'accès pour le groupe "{{groupe.nom_groupe}}"
