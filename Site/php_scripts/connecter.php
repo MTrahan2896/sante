@@ -1,11 +1,14 @@
 <?php
 $x = $_POST['nom_user'];
 $y = $_POST['password'];
-echo $x;
-echo $y;
+
+
+
+
 function verifier_user_existant($username,$pwd_input)
 {
-  $query = "Select * from utilisateur where username = '".$username."'";
+  $query = "select * from utilisateurs where username = '".$username."'";
+  
   $mysqli = new mysqli('localhost','root','','bd_application');
   $myArray = array();
   if ($result = $mysqli->query($query)) {
@@ -13,11 +16,12 @@ function verifier_user_existant($username,$pwd_input)
     if ( mysqli_num_rows($result) == 1) 
     {
     $row = $result->fetch_array();
+    
     verifier_password($row['id_utilisateur'],$username, $pwd_input, $row['password']);
     }
     else
     {
-    echo "<script>alert('User invalid');</script>";
+    
     }
     
   
@@ -30,15 +34,18 @@ function verifier_password($id,$username,$pwd_input,$pwd)
 { 
   if (password_verify($pwd_input,$pwd))
   {
-    echo "<script>alert('Login completed');</script>";
+    
     $_SESSION['uid'] = $id;
-    header('Location: accueil.php');
+      
+    echo $_SESSION['uid'];
   }
   else
   {
-    echo "<script>alert('Login failed');</script>";
+    
   }
 
 }
+
+verifier_user_existant($_POST['nom_user'], $_POST['password']);
 
 ?>
