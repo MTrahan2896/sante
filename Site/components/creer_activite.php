@@ -23,9 +23,9 @@ if (!ISSET($_SESSION['uid']))
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
-  	<link type="text/css" rel="stylesheet" href="css/sc-date-time.css">
-  	<link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
+    <link type="text/css" rel="stylesheet" href="css/sc-date-time.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,19 +40,19 @@ if (!ISSET($_SESSION['uid']))
 
       </header>      
 
-<main>	
-  	<div class="container">
-	<div class="row">
+<main>  
+    <div class="container">
+  <div class="row">
 
   
 
 
-	<div class="input-field col s12">
-	<input type="date" class="datepicker">
-	<label>Date de l'évènement</label>
+  <div class="input-field col s12">
+  <input type="date" class="datepicker">
+  <label>Date de l'évènement</label>
 
 <div class="row">
-	<div class="input-field col s12">
+  <div class="input-field col s12">
     <select>
       <option value="" disabled selected>Choose your option</option>
       <option value="1">Option 1</option>
@@ -60,16 +60,38 @@ if (!ISSET($_SESSION['uid']))
       <option value="3">Option 3</option>
     </select>
     <label>Materialize Select</label>
- 	</div>
-	<div id="calendar">
-		
-	</div>
+  </div>
+  <div id="calendar">
+    
+  </div>
 
-	</form>
+  </form>
 </div>
 
 
+<a class="waves-effect waves-light btn" href="#modal_new_activite">Créer une activité</a>
 
+<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
+
+  <!-- Modal Structure -->
+  <div id="modal_new_activite" class="modal">
+    <div class="modal-content">
+    <div class="row">
+        <div class="input-field col s10 l8">
+          <input placeholder="Placeholder" id="nom_activite" type="text" class="validate">
+          <label for="nom_activite">Nom de l'activité</label>
+        </div>
+    </div>
+
+      <div class="row">
+          <div class="input-field col s10 l8">
+         <label  for="point">Nombre de points</label>
+          <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point"/>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 
 </main>
@@ -103,19 +125,19 @@ if (!ISSET($_SESSION['uid']))
 
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
       <script src="js/moment.js">moment.locale="fr"</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>
      
       <script type="text/javascript" src="js/materialize.min.js"></script>
-		
+    
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
          <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
-		<script type="text/javascript" src="js/gcal.js"></script>
-		<script type="text/javascript" src="js/sc-date-time.js"></script>
+    <script type="text/javascript" src="js/gcal.js"></script>
+    <script type="text/javascript" src="js/sc-date-time.js"></script>
 
 
       <script src="js/scripts.js"></script>

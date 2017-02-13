@@ -1,7 +1,7 @@
     <div class="modal" id="modal_ins">
         <div class="modal-content ">
-          <div class="row">
-             <h4 class="col s4 offset-s2">Inscription</h4>
+          <div class="row" style="text-align: center;">
+             <h4 class="">Inscription</h4>
           </div>
 
           <div class="row">
