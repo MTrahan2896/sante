@@ -2,7 +2,7 @@
 $x = $_POST['nom_user'];
 $y = $_POST['password'];
 
-
+session_start();
 
 
 function verifier_user_existant($username,$pwd_input)
@@ -34,10 +34,15 @@ function verifier_password($id,$username,$pwd_input,$pwd)
 { 
   if (password_verify($pwd_input,$pwd))
   {
+    $mysqli = new mysqli('localhost','root','','bd_application');
+    $getAdmin =  $mysqli->query("SELECT administrateur FROM utilisateurs WHERE id_utilisateur =".$id)->fetch_object()->administrateur; 
     
+    
+    $_SESSION['admin'] = $getAdmin;
     $_SESSION['uid'] = $id;
-      
-    echo $_SESSION['uid'];
+    $_SESSION['username'] = $username;
+
+    echo true;
   }
   else
   {
@@ -49,3 +54,4 @@ function verifier_password($id,$username,$pwd_input,$pwd)
 verifier_user_existant($_POST['nom_user'], $_POST['password']);
 
 ?>
+

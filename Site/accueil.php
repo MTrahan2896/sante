@@ -103,6 +103,7 @@ if (!ISSET($_SESSION['uid']))
 
 
 
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -119,7 +120,9 @@ if (!ISSET($_SESSION['uid']))
 
 
       <script src="js/scripts.js"></script>
-      
+
+
+
     </body>
   </html>
 </html>
