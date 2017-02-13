@@ -4,13 +4,13 @@ var app = angular.module("app_angular", []);
 app.controller("ctrl", function($scope) {
 
     
-    $scope.eleves = <?php echo phpSelectQuery('select utilisateurs.id_groupe, utilisateurs.nom, utilisateurs.prenom, utilisateurs.code_acces from utilisateurs, groupes, professeurs where professeurs.ID_Prof = 1 and utilisateurs.id_groupe = groupes.id_groupe and groupes.id_prof = professeurs.id_prof')?>;
+    $scope.eleves = <?php echo phpSelectQuery('select utilisateurs.id_groupe, utilisateurs.nom, utilisateurs.prenom, utilisateurs.code_acces from utilisateurs')?>;
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes where ID_Prof = 1')?>;
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
 
-    $scope.eleves_activites = <?php echo phpSelectQuery('select * from eleves_activites')?>;
+    $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
     
 
@@ -21,6 +21,21 @@ app.controller("ctrl", function($scope) {
     		return el.id_groupe == groupe && el.code_acces == "";
     	});
     	}
+
+        $scope.elevesDansActivite = function(activite){
+
+/*
+        let x = $scope.eleves_activites.filter(function(el_ac){ //returns id only
+                return el_ac.id_activite == activite;
+        });  
+
+        return $scope.eleves.filter(function(el){
+
+            return x.includes(el.id_utilisateur)
+
+        })
+*/
+        }
 
 
         $scope.comptesAvecCodeDansGroupe = function(groupe){
@@ -51,6 +66,9 @@ app.controller("ctrl", function($scope) {
 
 
     $scope.creergroupe = function() {
+        
+        console.log($("#rangeEleves").val());
+
         $.ajax({
             type: "POST",
             url: "php_scripts/creerGroupe.php",
@@ -62,7 +80,8 @@ app.controller("ctrl", function($scope) {
             }, //TODO: CHANGE PROF ID
             success: function(data) {
             		
-            		location.reload();
+                    location.reload();
+            		
             },
             error: function(req) {
                 alert("erreur");

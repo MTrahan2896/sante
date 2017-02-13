@@ -35,11 +35,11 @@ $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$
 
 
 if($valide){
-	$mysqli->query("SET NAMES utf8");
+
 	echo "LE KEK IS PASSED";
 	$pass=$_POST['password'];
 	$pass=password_hash($pass, PASSWORD_DEFAULT);
-	$query = "update utilisateurs set nom=".guillemeter($_POST['nom']).", prenom=".guillemeter($_POST['username']).", username=".guillemeter($_POST['username']).", actif=1, courriel=".guillemeter($_POST['courriel']).", telephone=".guillemeter($_POST['telephone']).", sexe=".guillemeter($_POST['sexe']).", password=".guillemeter($pass).", code_acces='' where code_acces=".guillemeter($_POST['code']);
+	$query = "update utilisateurs set nom=".guillemeter($_POST['nom']).", prenom=".guillemeter($_POST['prenom']).", username=".guillemeter($_POST['username']).", actif=1, courriel=".guillemeter($_POST['courriel']).", telephone=".guillemeter($_POST['telephone']).", sexe=".guillemeter($_POST['sexe']).", password=".guillemeter($pass).", code_acces='' where code_acces=".guillemeter($_POST['code']);
 		ECHO $query;
 
 		$mysqli = new mysqli('localhost','root','','bd_application');

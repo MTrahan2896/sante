@@ -188,6 +188,14 @@
 
 
 
+<?php 
+
+echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminTabs").remove()}}</script>';
+//INVERSE
+?>
+
+
+
 
 
 
@@ -229,4 +237,12 @@
           
 </script>
 
-  <div class="hiddendiv common"></div></body></html>
+  <div class="hiddendiv common"></div>
+
+
+
+
+
+
+
+  </body></html>

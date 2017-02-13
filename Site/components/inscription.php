@@ -23,7 +23,7 @@
               </div>
           
               <div class="input-field col s5">
-                <input name="nom" id="nom" type="text" class="validate">
+                <input name="nom" id="nom_t" type="text" class="validate">
                 <label for="nom">Nom</label>
               </div>
             </div>
@@ -92,15 +92,16 @@
             data: {
             'username': $("#user").val(), 
             'prenom': $("#prenom").val(), 
-            'nom': $("#nom").val(), 
+            'nom': $("#nom_t").val(), 
             'courriel': $("#courriel").val(), 
             'telephone': $("#telephone").val(), 
             'sexe': $("input[type='radio'][name='sexe']:checked").val(),
             'password': $("#pass").val(),
             'code' : $("#code_acces").val()}, 
             success: function (data) {
+                alert('Inscription Réussie!')
+                location.reload();
                 
-                console.log(data);
             },
             error: function (req) {
                 

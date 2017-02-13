@@ -116,6 +116,7 @@ include 'components/modal_planifier_activite.php';
         </footer>
       
 
+
 	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/moment.js">moment.locale="fr"</script>
@@ -123,6 +124,7 @@ include 'components/modal_planifier_activite.php';
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
     <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
+
 		<script type="text/javascript" src="js/gcal.js"></script>
 		<script type="text/javascript" src="js/sc-date-time.js"></script>
 
