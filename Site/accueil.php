@@ -80,87 +80,10 @@ if (!ISSET($_SESSION['uid']))
 <a class="waves-effect waves-light btn" href="#modal_planif">Planifier une activité</a>
 
 
-  <!-- Modal Structure -->
-<div id="modal_new_activite" class="modal">
-  <div class="modal-content">
-    <div class="row" style="text-align: center;">
-        <h4 class="">Créer une activité</h4>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s12 l8">
-        <input id="nom_activite" type="text" class="validate">
-        <label for="nom_activite">Nom de l'activité</label>
-      </div>
-   
-      <div class="input-field col s12 l4">
-        <label  for="point">Nombre de points</label>
-        <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point"/>
-      </div>
-    </div>
-
-    <div class="row">
-    Color: <input class="jscolor" value="ab2567">
-    </div>
-
-    <div class="row">
-      <div class="input-field col s12 l12">
-          <textarea id="description" class="materialize-textarea"></textarea>
-          <label for="description">Description</label>
-      </div>
-    </div>
-
-    <div class="row">
-        <div class="col s6">
-          <a class="btn green" href=""> Accepter</a>
-        </div>
-        <div class="col s6">
-          <a class="btn red" href=""> Annuler</a>
-        </div>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-  <!-- Modal Structure -->
-  <div id="modal_planif" class="modal">
-    <div class="modal-content">
-      <div class="row" style="text-align:center">
-          <h4>Planifier une activité</h4>
-      </div>
-
-        <div class="input-field col s12">
-          <select>
-            <option value="" disabled selected>Nom de l'activité</option>
-            <option value="1">Badminton</option>
-            <option value="2">Randonnée pédestre</option>
-            <option value="3">Rugby</option>
-          </select>
-          <label>Nom de l'activité</label>
-        </div>
-
-        <div class="input-field col s12">
-          <input id="date_act" type="date" class="datepicker">
-          <label for="date_act">Date de l'activité</label>
-        </div>
-
-
-  </div>
-  <div class="modal-footer">
- <div class="row">
-        <div class="col s6 l6">
-          <a class="btn green" href=""> Accepter</a>
-        </div>
-        <div class="col s6 l6">
-          <a class="btn red" href=""> Annuler</a>
-        </div>
-    </div>    </div>
-  </div>
-
-    Color: <input class="jscolor" value="ab2567">
+<?php 
+include 'components/modal_creer_activite.php';
+include 'components/modal_planifier_activite.php';
+?>
 
 </main>
 
@@ -191,27 +114,22 @@ if (!ISSET($_SESSION['uid']))
             </div>
           </div>
         </footer>
+      
 
-
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-      <script src="js/moment.js">moment.locale="fr"</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>
-     
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-		
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
-         <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/moment.js">moment.locale="fr"</script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>  
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
 		<script type="text/javascript" src="js/gcal.js"></script>
 		<script type="text/javascript" src="js/sc-date-time.js"></script>
 
 
       <script src="js/scripts.js"></script>
-      
+
+
     </body>
   </html>
 </html>
