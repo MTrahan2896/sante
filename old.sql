@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 14 Février 2017 à 22:32
+-- Généré le :  Lun 13 Février 2017 à 22:14
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -25,6 +25,12 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `activites`
 --
+DROP DATABASE bd_application;
+CREATE DATABASE bd_application
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+  
+  USE bd_application;
 
 CREATE TABLE `activites` (
   `ID_Activite` int(11) NOT NULL,
@@ -46,27 +52,16 @@ INSERT INTO `activites` (`ID_Activite`, `Nom_Activite`, `Duree`, `Commentaire`, 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `activites_prevues`
+-- Structure de la table `activite_prevue`
 --
 
-CREATE TABLE `activites_prevues` (
+CREATE TABLE `activite_prevue` (
   `ID_activite_prevue` int(11) NOT NULL,
   `Date_Activite` datetime NOT NULL,
   `Participants_Max` int(11) NOT NULL,
   `Frais` double NOT NULL,
-  `Endroit` varchar(200) NOT NULL,
-  `ID_Activite` int(11) NOT NULL
+  `Endroit` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `activites_prevues`
---
-
-INSERT INTO `activites_prevues` (`ID_activite_prevue`, `Date_Activite`, `Participants_Max`, `Frais`, `Endroit`, `ID_Activite`) VALUES
-(1, '2017-02-15 14:00:00', 20, 12, 'Parc Bellevue', 1),
-(2, '2017-02-15 00:00:00', 20, 12, 'Parc Mont-Tremblant', 1),
-(3, '2017-02-22 12:00:00', 5, 15, 'Parc Saint-Laurent', 2),
-(4, '2017-02-24 00:00:00', 3, 5, 'Cour Municipale', 2);
 
 -- --------------------------------------------------------
 
@@ -142,9 +137,7 @@ INSERT INTO `utilisateurs` (`id_utilisateur`, `Nom`, `Prenom`, `ID_Groupe`, `COD
 (25, NULL, NULL, 1, 'FdyWT', NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (26, NULL, NULL, 1, 'sxLkJ', NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (27, NULL, NULL, 1, 'tuX2A', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(28, NULL, NULL, 1, 'I9KNM', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(29, NULL, NULL, 8, 'CzpEC', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(30, NULL, NULL, 8, 'EQtBi', NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(28, NULL, NULL, 1, 'I9KNM', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -155,7 +148,7 @@ INSERT INTO `utilisateurs` (`id_utilisateur`, `Nom`, `Prenom`, `ID_Groupe`, `COD
 CREATE TABLE `utilisateur_activites` (
   `ID_Eleve_Activite` int(11) NOT NULL,
   `ID_Utilisateur` int(11) NOT NULL,
-  `ID_Activite_Prevue` int(11) NOT NULL,
+  `ID_Activite` int(11) NOT NULL,
   `Present` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -163,10 +156,9 @@ CREATE TABLE `utilisateur_activites` (
 -- Contenu de la table `utilisateur_activites`
 --
 
-INSERT INTO `utilisateur_activites` (`ID_Eleve_Activite`, `ID_Utilisateur`, `ID_Activite_Prevue`, `Present`) VALUES
+INSERT INTO `utilisateur_activites` (`ID_Eleve_Activite`, `ID_Utilisateur`, `ID_Activite`, `Present`) VALUES
 (1, 1, 1, 1),
-(2, 2, 2, 1),
-(3, 1, 2, 1);
+(2, 2, 1, 1);
 
 --
 -- Index pour les tables exportées
@@ -179,9 +171,9 @@ ALTER TABLE `activites`
   ADD PRIMARY KEY (`ID_Activite`);
 
 --
--- Index pour la table `activites_prevues`
+-- Index pour la table `activite_prevue`
 --
-ALTER TABLE `activites_prevues`
+ALTER TABLE `activite_prevue`
   ADD PRIMARY KEY (`ID_activite_prevue`);
 
 --
@@ -212,10 +204,10 @@ ALTER TABLE `utilisateur_activites`
 ALTER TABLE `activites`
   MODIFY `ID_Activite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT pour la table `activites_prevues`
+-- AUTO_INCREMENT pour la table `activite_prevue`
 --
-ALTER TABLE `activites_prevues`
-  MODIFY `ID_activite_prevue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `activite_prevue`
+  MODIFY `ID_activite_prevue` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `groupes`
 --
@@ -225,12 +217,12 @@ ALTER TABLE `groupes`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT pour la table `utilisateur_activites`
 --
 ALTER TABLE `utilisateur_activites`
-  MODIFY `ID_Eleve_Activite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_Eleve_Activite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

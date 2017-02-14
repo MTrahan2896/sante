@@ -64,17 +64,28 @@
 
  <ul class="collapsible" data-collapsible="expandable">
               
-              <li ng-repeat="activite in activites"> <!-- ANGULAR REPEAT -->
-              <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{activite.Nom_Activite}} <span class="new badge green right" data-badge-caption="">{{}}10/25</span>
+
+
+              <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
+              <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} <span class="new badge green right" data-badge-caption="">{{0}}/{{activite.Participants_Max}}</span>
                
+              <table>
+
+                <tr ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_Activite)">
+                <td>{{eleve}}</td>
+                </tr>
+  
+
+              </table>
+
+
+
               </div>
                 <div class="collapsible-body collapsibleWithButton">
                 
                  
                 </div>
                 
-
-
               </li>
 </ul>
 
@@ -189,7 +200,7 @@
 
 
 <?php 
-
+if (isset($_SESSION['admin']))
 echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminTabs").remove()}}</script>';
 //INVERSE
 ?>

@@ -10,9 +10,21 @@ app.controller("ctrl", function($scope) {
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
 
+    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues')?>;
+
     $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
     
+
+        $scope.nomActiviteFromId = function(id){
+
+            let act = $scope.activites.filter(function(ac){
+                return ac.ID_Activite == id;
+            })[0];
+
+            return act.Nom_Activite;
+
+        }
 
 
         $scope.elevesDansGroupe = function(groupe){
@@ -22,20 +34,42 @@ app.controller("ctrl", function($scope) {
     	});
     	}
 
-        $scope.elevesDansActivite = function(activite){
+        $scope.getElevesForActivitePrevue = function(activite){
+           
 
-/*
-        let x = $scope.eleves_activites.filter(function(el_ac){ //returns id only
-                return el_ac.id_activite == activite;
-        });  
 
-        return $scope.eleves.filter(function(el){
+           let liste_el_ac = ( $scope.eleves_activites.filter(function(ac){
+                return ac.ID_Activite_Prevue == activite;
+            }));
 
-            return x.includes(el.id_utilisateur)
 
-        })
-*/
+
+     
+           var listeId = liste_el_ac.map(function(a) {return a.ID_Utilisateur;});
+           
+            let arr =[];
+            for (var i = listeId.length - 1; i >= 0; i--) {
+                arr.push(eleveFromId(listeId[i]));
+            }
+
+
+            console.log(arr);
+               /*
+               return listePresence; 
+               */
+
         }
+
+        $scope.eleveFromId = function(id){
+
+            let elev = $scope.eleves.filter(function(el){
+                return el.ID_Utilisateur == id;
+            })[0];
+
+            return elev;
+
+        }
+
 
 
         $scope.comptesAvecCodeDansGroupe = function(groupe){
@@ -53,7 +87,7 @@ app.controller("ctrl", function($scope) {
             url: "php_scripts/generercode.php",
             data: {'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
-                
+                location.reload();
                 console.log(data);
             },
             error: function (req) {
@@ -130,6 +164,8 @@ app.controller("ctrl", function($scope) {
         });
 		}
 		}
+
+
 
 
 
