@@ -7,7 +7,7 @@
     <div class="contenu-modal">
       <div class="row">
         <form class="col s12">
-          <div class="row">
+          <div class="row" style="margin-bottom:0px">
             <div class="input-field col s12" style="margin-top:15px">
               <i class="material-icons prefix">vpn_key</i>
               <input id="code_acces" name="code_acces" type="text" class="validate">

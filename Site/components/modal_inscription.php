@@ -70,7 +70,6 @@
             </div>
             <div class="row">
               <div class="col s6">
-              <a class="btn green" href=""> Accepter</a>
               <button type="button" class="btn green" href="" onclick="valider()">Enregistrer</a>
 
               </div>

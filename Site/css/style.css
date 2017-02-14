@@ -33,36 +33,74 @@ button{
 
 }
 
+/* Css sur grands écans */
  @media screen and (min-width: 700px) {
+   
     .modal 
     { 
-      width: 25% !important;
       bottom: 35%;
+      overflow-y: hidden !important ; /* Enlève la scroll bar */
     }
 
-    #modal_ins
+    #modal_new_activite /* Modal de création d'activité */
     {
-      height: 100%;
-
+      width: 20%;
+      height: 650px;
     }
 
-    #modal_code
+     #modal_code /* Modal de connexion */
     {
-      height: 40%;
+      height: 35%;
+      width: 20%;
+      padding-bottom: 0px;
     }
 
-    #modal_code .modal-content
+    #modal_ins /* Modal d'inscription */
     {
-        padding-bottom: 0px;
+      bottom: 20%;
+      height: 100% !important;
+      max-height: 80%;
+      width: 25%;
+     
     }
 
-    #modal_creer_act
+   #modal_login /* Modal de connexion */
     {
+      width: 25%;
+      height: 46%;
     }
 
-
+    #modal_planif
+    {
+      width:25%;
+      height: 50%;
+    }
   }
 
+/* CSS sur petits écrans (mobiles) */
+@media screen and (max-width: 699px) 
+{
+
+    .modal 
+    { 
+      margin-left:10%;
+      margin-right:10%;
+    }
+
+    #modal_code /* Modal de connexion */
+    {
+      height: 55%;
+      overflow-y: hidden !important ; /* Enlève la scroll bar */
+    }
+
+
+    #modal_ins /* Modal d'inscription */
+    {
+      height: 100%;
+    }
+
+
+}
 
     #imgDef 
     {

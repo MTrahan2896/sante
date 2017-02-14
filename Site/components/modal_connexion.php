@@ -1,6 +1,6 @@
 <?php 
-  include 'inscription.php';
-  include 'code_acces.php';
+  include 'modal_inscription.php';
+  include 'modal_code_acces.php';
   
 ?>
 <script>

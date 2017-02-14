@@ -28,26 +28,26 @@
 
 
       <div class="row">
-        <div class="input-field col s6 l4">
+        <div class="input-field col s6 l6">
           <label  for="participants_max">Nom de participants maximum</label>
           <input type="number" step="1" maximum="180" minimum="0" id="participants_max" name="participants_max"/>
         </div>
 
-        <div class="input-field col s6 l4">
+        <div class="input-field col s6 l6">
           <label  for="frais">Frais de l'activité</label>
           <input type="number" step="5" minimum="0" id="frais" name="frais"/>
         </div>
       </div>
 
-
-  </div>
-  <div class="modal-footer">
- <div class="row">
+       <div class="row">
         <div class="col s6 l6">
           <a class="btn green" href=""> Accepter</a>
         </div>
         <div class="col s6 l6">
           <a class="btn red" href=""> Annuler</a>
         </div>
-    </div>    </div>
+    </div>  
+
   </div>
+ 
+</div>
