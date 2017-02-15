@@ -4,16 +4,28 @@ var app = angular.module("app_angular", []);
 app.controller("ctrl", function($scope) {
 
     
-    $scope.eleves = <?php echo phpSelectQuery('select eleves.id_groupe, eleves.nom, eleves.prenom, eleves.code_acces, eleves.points_bonus, eleves.points_debut_session, eleves.points_fin_session from eleves, groupes, professeurs where professeurs.ID_Prof = 1 and eleves.id_groupe = groupes.id_groupe and groupes.id_prof = professeurs.id_prof')?>;
+    $scope.eleves = <?php echo phpSelectQuery('select utilisateurs.id_groupe, utilisateurs.nom, utilisateurs.prenom, utilisateurs.code_acces from utilisateurs')?>;
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes where ID_Prof = 1')?>;
 
-    $scope.elevesDansGroupe = function(groupe){
-    	return $scope.eleves.filter(function(el){
-    		
-    		return el.id_groupe == groupe;
-    	});
-    	}
+    $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
+
+    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues')?>;
+
+    $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
+
+    
+
+        $scope.nomActiviteFromId = function(id){
+
+            let act = $scope.activites.filter(function(ac){
+                return ac.ID_Activite == id;
+            })[0];
+
+            return act.Nom_Activite;
+
+        }
+
 
         $scope.elevesDansGroupe = function(groupe){
     	return $scope.eleves.filter(function(el){
@@ -21,6 +33,43 @@ app.controller("ctrl", function($scope) {
     		return el.id_groupe == groupe && el.code_acces == "";
     	});
     	}
+
+        $scope.getElevesForActivitePrevue = function(activite){
+           
+
+
+           let liste_el_ac = ( $scope.eleves_activites.filter(function(ac){
+                return ac.ID_Activite_Prevue == activite;
+            }));
+
+
+
+     
+           var listeId = liste_el_ac.map(function(a) {return a.ID_Utilisateur;});
+           
+            let arr =[];
+            for (var i = listeId.length - 1; i >= 0; i--) {
+                arr.push(eleveFromId(listeId[i]));
+            }
+
+
+            console.log(arr);
+               /*
+               return listePresence; 
+               */
+
+        }
+
+        $scope.eleveFromId = function(id){
+
+            let elev = $scope.eleves.filter(function(el){
+                return el.ID_Utilisateur == id;
+            })[0];
+
+            return elev;
+
+        }
+
 
 
         $scope.comptesAvecCodeDansGroupe = function(groupe){
@@ -32,13 +81,14 @@ app.controller("ctrl", function($scope) {
 
 
     	 $scope.genererCodePourGroupe = function(groupe, nb_codes){
-
+    	 	console.log($("#codeGroupe"+groupe).val());
     	 	 $.ajax({
             type: "POST",
             url: "php_scripts/generercode.php",
             data: {'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
                 location.reload();
+                console.log(data);
             },
             error: function (req) {
                 alert("erreur");
@@ -50,6 +100,9 @@ app.controller("ctrl", function($scope) {
 
 
     $scope.creergroupe = function() {
+        
+        console.log($("#rangeEleves").val());
+
         $.ajax({
             type: "POST",
             url: "php_scripts/creerGroupe.php",
@@ -60,7 +113,9 @@ app.controller("ctrl", function($scope) {
 
             }, //TODO: CHANGE PROF ID
             success: function(data) {
-            		location.reload();
+            		
+                    location.reload();
+            		
             },
             error: function(req) {
                 alert("erreur");
@@ -68,7 +123,7 @@ app.controller("ctrl", function($scope) {
         });
     }
 
-    $scope.su
+    
 
 	setTimeout(function () {
         $scope.$apply(function () {
@@ -92,7 +147,7 @@ app.controller("ctrl", function($scope) {
 
 		var nom_Groupe = prompt("Pour confirmer la suppression, veuillez entrer le nom du groupe", "");
 
-if(nom_Groupe == nomGroupe){
+		if(nom_Groupe == nomGroupe){
 		$.ajax({
             type: "POST",
             url: "php_scripts/supprimerGroupe.php",
@@ -100,14 +155,17 @@ if(nom_Groupe == nomGroupe){
                 'id_groupe': groupe,
             }, //TODO: CHANGE PROF ID
             success: function(data) {
+            		
             		location.reload();
             },
             error: function(req) {
                 alert("erreur");
             }
         });
-	}
-}
+		}
+		}
+
+
 
 
 

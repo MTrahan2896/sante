@@ -18,6 +18,7 @@ $('.datepicker').pickadate({selectYears: 20});
 
 
 
+
 $("#calendar").fullCalendar({
 
 viewRender: function(view, element){

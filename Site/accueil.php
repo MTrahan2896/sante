@@ -14,6 +14,11 @@ if (!ISSET($_SESSION['uid']))
   <!DOCTYPE html>
   <html>
     <head>
+
+    <?php
+    include 'components/headContent.php';
+    ?>
+
       <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
@@ -32,12 +37,18 @@ if (!ISSET($_SESSION['uid']))
       <?php 
           include 'components/nav.php';
       ?>  
+
       </header>      
 
 <main>	
-        
-	<div class="container">
+<script src="js/jscolor.js"></script>
+<script src="js/jscolor.min.js"></script>
+
+
+  	<div class="container">
 	<div class="row">
+
+  
 
 
 	<div class="input-field col s12">
@@ -60,7 +71,27 @@ if (!ISSET($_SESSION['uid']))
 
 	</form>
 </div>
+
+
+<a class="waves-effect waves-light btn" href="#modal_new_activite">Créer une activité</a>
+
+<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
+
+<a class="waves-effect waves-light btn" href="#modal_planif">Planifier une activité</a>
+
+<a class="waves-effect waves-light btn" href="#modal_login">Login</a>
+
+<a class="waves-effect waves-light btn" href="#modal_code">code</a>
+
+
+<?php 
+include 'components/modal_creer_activite.php';
+include 'components/modal_planifier_activite.php';
+?>
+
 </main>
+
+
 
         <footer class="page-footer" class="col l12" style="width: 100%!important">
           <div class="container">
@@ -87,27 +118,24 @@ if (!ISSET($_SESSION['uid']))
             </div>
           </div>
         </footer>
+      
 
 
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/moment.js">moment.locale="fr"</script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>  
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
 
-
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-      <script src="js/moment.js">moment.locale="fr"</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>
-     
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-		
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
-         <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
 		<script type="text/javascript" src="js/gcal.js"></script>
 		<script type="text/javascript" src="js/sc-date-time.js"></script>
 
 
       <script src="js/scripts.js"></script>
-      
+
+
     </body>
   </html>
 </html>

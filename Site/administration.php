@@ -28,7 +28,7 @@
                     <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                       
                       <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                      <td class="">{{eleve.points_bonus}}/15</td>
+                      <td class="">{{}}/15</td>
                       
                     </div>
                     </tr>
@@ -52,11 +52,58 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
+          <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités <span class="new badge green right" data-badge-caption="">{{activites.length}}</span></div>
+               
           <div class="collapsible-body">
+
+
             
+
+
+
+
+ <ul class="collapsible" data-collapsible="expandable">
+              
+
+
+              <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
+              <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} <span class="new badge green right" data-badge-caption="">{{0}}/{{activite.Participants_Max}}</span>
+               
+              <table>
+
+                <tr ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_Activite)">
+                <td>{{eleve}}</td>
+                </tr>
+  
+
+              </table>
+
+
+
+              </div>
+                <div class="collapsible-body collapsibleWithButton">
+                
+                 
+                </div>
+                
+              </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
-        </li>
+
         <li>
           <div class="collapsible-header"><i class="material-icons">settings</i>Paramètres</div>
           <div class="collapsible-body">
@@ -65,7 +112,7 @@
       </ul>
       
     </div>
-    <div id="modalNouveauGroupe" class="modal">
+    <div id="modalNouveauGroupe" class="modal" style="height: 300px !important">
       <div class="modal-content">
         <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
           Ajouter un groupe
@@ -108,36 +155,32 @@
 
 
   <div ng-repeat="groupe in groupes">
-    <div id="modalGroupe{{groupe.id_groupe}}" class="modal">
-      <div class="modal-content">
-        <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
+    <div id="modalGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px !important">
+      <div class="modal-content" style="height: 100%; ">
+        <div class="entete-modal" style="margin-bottom: 15px; text-align:center;">
         Code d'accès du groupe "{{groupe.nom_groupe}}"
         </div>
         <div class="contenu-modal">
-          <div class="row" id="codesGroupe{{groupe.id_groupe}}">
+          <div class="row" >
 
             <div ng-repeat="compte in comptesAvecCodeDansGroupe(groupe.id_groupe)">
               {{compte.code_acces}}
             </div>
-          
-          <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)"><i class="material-icons left">print</i>Imprimer</a>
-          
+          <div style="text-align:center;">
+          <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
+          </div>
         </div>
       </div>
     </div>
-  <script>
-
- 
-
-
-  </script>
+    </div>
+  
     
 
   </div>
 
   
   <div ng-repeat="groupe in groupes">
-    <div id="modalGenGroupe{{groupe.id_groupe}}" class="modal">
+    <div id="modalGenGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px">
       <div class="modal-content" style="text-align: center">
         <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
         Générer des codes d'accès pour le groupe "{{groupe.nom_groupe}}"
@@ -153,6 +196,14 @@
     </div>
   </div>
 
+
+
+
+<?php 
+if (isset($_SESSION['admin']))
+echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminTabs").remove()}}</script>';
+//INVERSE
+?>
 
 
 
@@ -197,4 +248,12 @@
           
 </script>
 
-  <div class="hiddendiv common"></div></body></html>
+  <div class="hiddendiv common"></div>
+
+
+
+
+
+
+
+  </body></html>
