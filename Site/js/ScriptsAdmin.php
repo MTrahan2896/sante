@@ -4,7 +4,7 @@ var app = angular.module("app_angular", []);
 app.controller("ctrl", function($scope) {
 
     
-    $scope.eleves = <?php echo phpSelectQuery('select utilisateurs.id_groupe, utilisateurs.nom, utilisateurs.prenom, utilisateurs.code_acces from utilisateurs')?>;
+    $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs')?>;
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes where ID_Prof = 1')?>;
 
@@ -27,6 +27,10 @@ app.controller("ctrl", function($scope) {
         }
 
 
+
+
+
+
         $scope.elevesDansGroupe = function(groupe){
     	return $scope.eleves.filter(function(el){
     		
@@ -35,46 +39,108 @@ app.controller("ctrl", function($scope) {
     	}
 
         $scope.getElevesForActivitePrevue = function(activite){
-           
-
 
            let liste_el_ac = ( $scope.eleves_activites.filter(function(ac){
                 return ac.ID_Activite_Prevue == activite;
             }));
 
-
-
      
            var listeId = liste_el_ac.map(function(a) {return a.ID_Utilisateur;});
-           
+
             let arr =[];
-            for (var i = listeId.length - 1; i >= 0; i--) {
-                arr.push(eleveFromId(listeId[i]));
+
+            for (var i = 0; i < listeId.length; i++) {   
+                arr.push($scope.eleveFromId(listeId[i]));
             }
-
-
-            console.log(arr);
-               /*
-               return listePresence; 
-               */
+               return arr;
 
         }
 
+        $scope.getPresenceForEleve = function(activite_prevue, eleve){
+
+           let present = ( $scope.eleves_activites.filter(function(ac){
+                return ac.ID_Activite_Prevue == activite_prevue && ac.ID_Utilisateur == eleve;
+            }))[0].Present;
+
+        
+           console.log(present);
+
+           if(present == 1){
+            return true;
+           }
+           else return false;
+           
+
+        }
+
+        $scope.annulerActivite = function(activite){
+
+             if (confirm("Vous êtes sur le point de supprimer cette activité, êtes vous sûr?") == true) {
+                             $.ajax({
+            type: "POST",
+            url: "php_scripts/annulerActivite.php",
+            data: {
+                'ID_ACTIVITE': activite,
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                    location.reload();
+                    
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+
+             } 
+
+
+   
+
+        }
+
+
+
         $scope.eleveFromId = function(id){
 
+            
             let elev = $scope.eleves.filter(function(el){
-                return el.ID_Utilisateur == id;
+                return el.id_utilisateur == id;
             })[0];
-
+            
             return elev;
 
         }
 
 
+        $scope.enregistrerPresence = function(activite_prevue){
+        var values = new Array();
+        $.each($("input[name='presenceActivite"+activite_prevue+"']:checked"), function() {
+        values.push($(this).val());
+        });
+        
+
+        $.ajax({
+            type: "POST",
+            url: "php_scripts/prendrePresence.php",
+            data: {
+                'PRESENTS': values,
+                'ACTIVITE': activite_prevue
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                    location.reload();
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+
+
+
+        }
+
 
         $scope.comptesAvecCodeDansGroupe = function(groupe){
     	return $scope.eleves.filter(function(el){
-    		
     		return el.id_groupe == groupe && el.code_acces != "";
     	});
     	}
@@ -100,8 +166,6 @@ app.controller("ctrl", function($scope) {
 
 
     $scope.creergroupe = function() {
-        
-        console.log($("#rangeEleves").val());
 
         $.ajax({
             type: "POST",
@@ -164,6 +228,7 @@ app.controller("ctrl", function($scope) {
         });
 		}
 		}
+
 
 
 

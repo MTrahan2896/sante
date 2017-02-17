@@ -2,7 +2,7 @@
 * @Author: 1425165
 * @Date:   2017-01-30 16:07:24
 * @Last Modified by:   1425165
-* @Last Modified time: 2017-02-13 13:05:56
+* @Last Modified time: 2017-02-17 10:10:41
 */
 nav{
 	background-color:#71C0E5;
@@ -39,7 +39,7 @@ button{
     .modal 
     { 
       bottom: 35%;
-      overflow-y: hidden !important ; /* Enlève la scroll bar */
+      
     }
 
     #modal_new_activite /* Modal de création d'activité */
@@ -134,4 +134,21 @@ button{
 }
 .margin-right{
   margin-right: 15px;
+}
+
+.presence:nth-child(even) {
+  background-color: #E2E2E2;
+margin-bottom: 0px;
+height: 45px;
+}
+
+
+.presence:nth-child(odd) {
+  background-color: #FFFFFF;
+margin-bottom: 0px;
+height: 45px;
+}
+
+.field{
+  margin-top: 10px;
 }

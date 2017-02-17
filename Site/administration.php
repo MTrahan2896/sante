@@ -52,7 +52,7 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités <span class="new badge green right" data-badge-caption="">{{activites.length}}</span></div>
+          <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités <span class="new badge green right" data-badge-caption="">{{activites_prevues.length}}</span></div>
                
           <div class="collapsible-body">
 
@@ -64,27 +64,41 @@
 
  <ul class="collapsible" data-collapsible="expandable">
               
-
+  
 
               <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
-              <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} <span class="new badge green right" data-badge-caption="">{{0}}/{{activite.Participants_Max}}</span>
-               
+              <div class="collapsible-header">
+              <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} 
+
+              <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
+
+              </div>
+              <div class="collapsible-body collapsibleWithButton container">
+                               
               <table>
 
-                <tr ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_Activite)">
-                <td>{{eleve}}</td>
-                </tr>
+                <div class="row" ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)">
+                <div class="col s8">{{eleve.nom}}, {{eleve.prenom}}</div><div class="col s2"> 
+        
+                <input class="field filled-in" ng-checked="{{getPresenceForEleve(activite.ID_activite_prevue, eleve.id_utilisateur)}}" type="checkbox" name="viewid{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}" disabled readonly
+                id="viewid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px">
+                <label for="viewid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
+            
+            
+
+
+                 </div>
+                </div>
   
 
               </table>
-
-
-
+              <div style="text-align: center">
+              <div class="row" style="margin-bottom: 0px">
+                <button type="button" data-target="modalPresence{{activite.ID_activite_prevue}}" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Prendre les présences</button>   
+                <button ng-click="annulerActivite(activite.ID_activite_prevue)" type="button" class="btn l6 s12 red waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Annuler l'activité</button>
+             </div>
+             </div>
               </div>
-                <div class="collapsible-body collapsibleWithButton">
-                
-                 
-                </div>
                 
               </li>
 </ul>
@@ -198,6 +212,29 @@
 
 
 
+  <div ng-repeat="activite in activites_prevues">
+    <div id="modalPresence{{activite.ID_activite_prevue}}" class="modal" style="height: 400px; width: 400px" >
+      <div class="modal-content" style="text-align: center; height: 100%" >
+        <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
+        <h5>Liste de présence </h1>
+        </div>
+        <div class="contenu-modal">
+          <div class="row ">
+                <div ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)" class="row presence">
+                <div class="col s8 field">{{eleve.nom}}, {{eleve.prenom}}</div><div class="field col s2"></div> <input class="field filled-in" checked="checked" type="checkbox" name="presenceActivite{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}"
+                id="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px"><label for="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
+                </div>
+                <button ng-click="enregistrerPresence(activite.ID_activite_prevue)" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Enregistrer</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
 <?php 
 if (isset($_SESSION['admin']))
@@ -233,7 +270,7 @@ echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminT
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
   <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
   <script type="text/javascript" src="js/gcal.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+
   <script type="text/javascript" src="js/sc-date-time.js"></script>
   <script src="js/scripts.js"></script>
   <?php include 'js/ScriptsAdmin.php';?>
@@ -250,7 +287,7 @@ echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminT
 
   <div class="hiddendiv common"></div>
 
-
+<button type="button" ng-click="eleveFromId(1)">TEST</button>
 
 
 
