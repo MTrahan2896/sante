@@ -19,11 +19,9 @@ if (!ISSET($_SESSION['uid']))
     include 'components/headContent.php';
     ?>
 
-      <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
+	  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
   	<link type="text/css" rel="stylesheet" href="css/sc-date-time.css">
   	<link type="text/css" rel="stylesheet" href="css/style.css">
 
@@ -31,7 +29,7 @@ if (!ISSET($_SESSION['uid']))
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       
     </head>
-    <body>
+<body>
 
       <header>
       <?php 
@@ -86,7 +84,8 @@ if (!ISSET($_SESSION['uid']))
 
 <?php 
 include 'components/modal_creer_activite.php';
-include 'components/modal_planifier_activite.php';
+include 'components/modal_inscription.php';
+include 'components/modal_planifier_activite.php'
 ?>
 
 </main>
@@ -138,5 +137,4 @@ include 'components/modal_planifier_activite.php';
 
     </body>
   </html>
-</html>
 

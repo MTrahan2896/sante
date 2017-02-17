@@ -1,7 +1,4 @@
 <?php
-include '/php_scripts/queryFunctions.php';
-
-
 	function phpQuery($query){
     $mysqli = new mysqli('localhost','root','','bd_application');
 	$myArray = array();

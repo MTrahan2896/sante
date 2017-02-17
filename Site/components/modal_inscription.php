@@ -16,13 +16,13 @@
 
             <div class="row">
               
-              <div class="input-field col s7">
-                <i class="material-icons prefix">person_pin</i>
+              <div class="input-field col s12 l6">
+            <!--    <i class="material-icons prefix">person_pin</i> -->
                 <input name="prenom" id="prenom" type="text" class="validate">
                 <label for="prenom">Prenom</label>
               </div>
           
-              <div class="input-field col s5">
+              <div class="input-field col s12 l6">
                 <input name="nom" id="nom_t" type="text" class="validate">
                 <label for="nom">Nom</label>
               </div>
@@ -69,12 +69,12 @@
               </div>
             </div>
             <div class="row">
-              <div class="col s6">
-              <button type="button" class="btn green" href="" onclick="valider()">Enregistrer</a>
-
+              <div class="col s12 l12">
+              <button type="button" class="btn green" href="" onclick="valider()" style="width:100%">Enregistrer</a>
               </div>
-              <div class="col s6">
-              <a class="btn red" href="">Annuler</a>
+              <div class="col s12 l12" style="height:15px"></div>
+              <div class="col s12 l12">
+              <button type="button" class="btn red" href="" onclick="" style="width:100%">Annuler</button>
               </div>
             </div>
             </form>
