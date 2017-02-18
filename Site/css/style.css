@@ -1,8 +1,8 @@
 /*
 * @Author: 1425165
 * @Date:   2017-01-30 16:07:24
-* @Last Modified by:   1425165
-* @Last Modified time: 2017-02-06 14:25:59
+* @Last Modified by:   JLafreniere
+* @Last Modified time: 2017-02-11 14:10:39
 */
 nav{
 	background-color: #42e2f4;
@@ -89,4 +89,8 @@ button{
 }
 .margin-right{
   margin-right: 15px;
+}
+
+#modalNouveauGroupe{
+  height: 355px;
 }
