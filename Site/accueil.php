@@ -131,7 +131,8 @@ include 'components/modal_planifier_activite.php'
 		<script type="text/javascript" src="js/gcal.js"></script>
 		<script type="text/javascript" src="js/sc-date-time.js"></script>
 
-   <?php include 'js/ScriptsAdmin.php'; ?>
+      <?php include 'js/ScriptsAdmin.php'; ?>
+      
       <script src="js/scripts.js"></script>
 
 
