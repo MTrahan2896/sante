@@ -4,8 +4,10 @@
 	if ($result = $mysqli->query($query)) {
 
     while($row = $result->fetch_array()) {
+
             $myArray[] = $row;
     }
+
     echo json_encode($myArray);
 	}
 
@@ -30,6 +32,7 @@
 
     while($row = $result->fetch_array()) {
         return $row['nom']; 
+        
     }
      
 	}

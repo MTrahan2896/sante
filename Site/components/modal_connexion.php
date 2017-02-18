@@ -1,7 +1,7 @@
 <?php 
-  include 'inscription.php';
-  include 'code_acces.php';
-  include 'php_scripts/connecter.php';
+  include 'modal_inscription.php';
+  include 'modal_code_acces.php';
+  
 ?>
 <script>
   
@@ -14,7 +14,7 @@
 
 
 </script>
-<script src="js/ScriptsConnexion.js"></script> 
+
 
 <div id="modal_login" class="modal">
   <div class="modal-content">
@@ -51,4 +51,28 @@
 </div>
 
 
+<script>
+  function post_connexion(){
+    $.ajax({
+            type: "POST",
+            url: "php_scripts/connecter.php",
+            data: {'nom_user': $("#username").val(),
+                   'password': $('#pwd').val() }, 
+            success: function (data) {
+                console.log(data);
+                if(data.toString() == 1){
+                  location.reload();
+                }else{
+                  alert('Nom d\'utilisateur ou mot de passe invalide');
+                }
+                
+        },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+}    
 
+
+    
+</script>

@@ -1,15 +1,20 @@
 /*
 * @Author: 1425165
 * @Date:   2017-01-30 16:07:24
+<<<<<<< HEAD
 * @Last Modified by:   JLafreniere
 * @Last Modified time: 2017-02-11 14:10:39
+=======
+* @Last Modified by:   1425165
+* @Last Modified time: 2017-02-17 10:10:41
+>>>>>>> e2e23813854bd061062ace18c682d34d99806262
 */
 nav{
-	background-color: #42e2f4;
+	background-color:#71C0E5;
 }
 
 footer.page-footer{
-	background-color: #42e2f4;
+	background-color:#71C0E5;
 	color: black;
 }
 
@@ -33,30 +38,92 @@ button{
 
 }
 
+/* Css sur grands écans */
  @media screen and (min-width: 700px) {
+   
     .modal 
     { 
-      width: 25% !important;
       bottom: 35%;
+      
     }
 
-    #modal_ins
+    #modal_new_activite /* Modal de création d'activité */
+    {
+      width: 20%;
+      height: 90%;
+    }
+
+     #modal_code /* Modal de connexion */
+    {
+      height: 38%;
+      width: 20%;
+      padding-bottom: 0px;
+    }
+
+    #modal_ins /* Modal d'inscription */
+    {
+      bottom: 20%;
+      height: 100% !important;
+      max-height: 92%;
+      width: 25%;
+     bottom: 10%;
+    }
+
+   #modal_login /* Modal de connexion */
+    {
+      width: 25%;
+      height: 52%;
+    }
+
+    #modal_planif
+    {
+      width:25%;
+      height: 60%;
+    }
+  }
+
+/* CSS sur petits écrans (mobiles) */
+@media screen and (max-width: 699px) 
+{
+
+    .modal 
+    { 
+      margin-left:10%;
+      margin-right:10%;
+    }
+
+    #modal_code /* Modal de connexion */
+    {
+      height: 55%;
+      overflow-y: hidden !important ; /* Enlève la scroll bar */
+    }
+
+
+    #modal_ins /* Modal d'inscription */
     {
       height: 100%;
-
     }
 
-    #modal_code
+    #modal_login
     {
-      height: 40%;
+      height: 75%;
+      max-height: 90%;
+      overflow-y: hidden !important ; /* Enlève la scroll bar */
+
     }
 
-    #modal_code .modal-content
+
+    #modal_planif
     {
-        padding-bottom: 0px;
+      height: 100%;
+      max-height: 90%;
+      bottom:10%;
+
     }
 
-  }
+
+}
+
     #imgDef 
     {
       width: 200px; height: 200px;
@@ -91,6 +158,24 @@ button{
   margin-right: 15px;
 }
 
+<<<<<<< HEAD
 #modalNouveauGroupe{
   height: 355px;
+=======
+.presence:nth-child(even) {
+  background-color: #E2E2E2;
+margin-bottom: 0px;
+height: 45px;
+}
+
+
+.presence:nth-child(odd) {
+  background-color: #FFFFFF;
+margin-bottom: 0px;
+height: 45px;
+}
+
+.field{
+  margin-top: 10px;
+>>>>>>> e2e23813854bd061062ace18c682d34d99806262
 }

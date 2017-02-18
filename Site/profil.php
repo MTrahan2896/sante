@@ -1,6 +1,8 @@
-<html ng-app='app_angular_profil' ng-controller="ctrl_profil">
+<?php
+session_start();
+?>
+<html>
 <head>
-
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -9,7 +11,8 @@
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
     <style>
     .collapsible-body
     {
@@ -36,7 +39,6 @@
     
   </header>
   <main>
-  
 
   <div class="container">
     
@@ -45,8 +47,49 @@
       <li class="">
         <div class="collapsible-header"><i class="material-icons">person</i>Coordonnees personnelles</div>
         <div class="collapsible-body" style="display: none;">
-          
-          
+        
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="prenom_user" name="prenom_user" type="text" class="validate">
+              <label for="prenom_user">Prénom</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="nom" name="nom" type="text" class="validate">
+              <label for="nom">Nom</label>
+            </div>
+          </div>
+       
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate">
+              <label for="email">Courriel</label>
+            </div>
+          </div>
+      
+          <div class="input-field col s6">
+          <i class="material-icons prefix">phone</i>
+          <input id="tel" name="tel" type="tel" class="validate">
+          <label for="tel">Téléphone</label>
+        </div>
+
+          <div class="row">
+                <div class="col s12">
+                  <i class="material-icons prefix">people</i>
+                  <input name="sexe" type="radio" id="sH" value="H" class="with-gap" />
+                  <label for="sH" style="margin:auto;">Homme</label>
+                  <input name="sexe" type="radio" id="sF" value="F" class="with-gap" />
+                  <label for="sF" style="margin:auto;">Femme</label>
+               </div>
+          </div>
+          <div class="row">
+            <div class="col s12 l12">
+            <button class="btn green" type="button" style="width:100%">Enregistrer</button>
+            </div>
+            <div class="col l12 s12" style="height:15px"></div>
+            <div class="col s12 l12">
+            <button class="btn red" type="button" style="width:100%">Annuler</button>
+            </div>
+          </div>
         </div>
       </li>
       <!-- ACTIVITE -->
@@ -87,7 +130,7 @@
                   <label for="nom_ressource">Nom</label>
                 </div>
                 <div class="input-field col s6 l2">
-                  <input id="prenom_ressource" type="text" class="validate">
+                  <input id="prenom_ressource" name="prenom_ressource" type="text" class="validate">
                   <label for="prenom_ressource">Prénom</label>
                 </div>
               </div>
@@ -103,7 +146,6 @@
                     <label for="tel_ressource">Téléphone</label>
                   </div>
               </div>
-            </form>
           </div>
           
           <ul class="collapsible" data-collapsible="expandable">
@@ -114,7 +156,7 @@
               <div class="collapsible-header"><i class="material-icons">healing</i>Blessures</div>
               <div class="collapsible-body" style="display: none;">
                 
-                <div class="row" ng-repeat="u in utilisateurs">
+                <div class="row" >
         
 
                   <label class="col s6">Description blessure {{u.description}}
@@ -300,7 +342,7 @@
                   <div class="col s2" style="margin-left: -15px; vertical-align: middle;">
                     <p style="vertical-align: bottom;"><a class="btn-floating  waves-effect waves-light red"><i class="material-icons">clear</i></a></p>
                   </div>
-                  
+                
                 </div>
                 <div class="row">
                   <div class="input-field col s5">
@@ -328,6 +370,14 @@
 </li>
 </ul>
 </div>
+<?php
+include '/php_scripts/afficher_info_user.php'; 
+if(($_SESSION['uid'] != 0) and (isset($_SESSION['uid'])))
+{
+  obtenir_info($_SESSION['uid']);
+}
+?>
+
 </main>
 <footer class="page-footer" style="width: 100%!important">
     <div class="container">
@@ -356,11 +406,8 @@
     </div>
 </footer>
  
-
-
  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/moment.js">moment.locale="fr"</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -370,12 +417,16 @@
 <script type="text/javascript" src="js/sc-date-time.js"></script>
 <script src="js/scripts.js"></script>
 <script type="text/javascript">
- <?php include 'js/ScriptsProfil.php';?>
+ <?php include 'js/ScriptsProfil.php';
+include 'php_scripts/afficher_info_user.php';
+?>
 
-
+<script>
 $('.datepicker').pickadate({
 selectMonths: true, // Creates a dropdown to control month
 selectYears: 15 // Creates a dropdown of 15 years to control year
 });
 </script>
+
+
 <div class="hiddendiv common"></div></body></html>

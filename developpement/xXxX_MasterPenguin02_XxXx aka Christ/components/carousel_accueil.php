@@ -17,7 +17,7 @@
          
         .slider .slides li img {
                 background-color: #fff;
-                height: 200px;
+
             background-size:100% auto;
             background-repeat: no-repeat;
 
@@ -28,6 +28,16 @@
 
 
             }
+            .slider .slides li,{
+
+                height:520px !important;
+            }
+            .slider .slides,.slider{
+                height:540px  !important;
+            }
+            .indicators{
+                z-index:3 !important;
+            }
 
 
 
@@ -37,8 +47,9 @@
 
         @media screen and (max-width: 480px) {
             .slider .slides li img {
+                width:294px !important;
                 background-color: #fff;
-                height:200px;
+                height:200px !important;
 
             background-size:100% auto;
             background-repeat: no-repeat;
@@ -47,11 +58,11 @@
         .slider .slides {
              background-color: transparent;
              margin: 0;
-             height:300px;
+             height:300px !important;
 
             }
         .slider{
-            height:360px;
+            height:360px !important;
         }
         
 
@@ -63,43 +74,31 @@
     </head>
 
     <body>
-<div class="container">
-   
+
+       
+
 <div class="slider">
     <ul class="slides">
-        <?php 
-         /*mysqli_select_db('localhost','root','','defi_sante');
-        $resultat = mysqli_query("SELECT * FROM photo");
-		
-			
-			while($enregistrement= mysqli_fetch_array($resultat)){
-			
-				}
-				
-				mysqli_close($maconnexion);      */ 
-
-    
-        ?>
       <li>
           <div class="center" >
-             <h3>Bienvenue</h3>
-             <h5 class="light black-text text-lighten-3">Les Inscriptions pour le grand défi pierre lavoie se termine bientot </h5>
-             <img src="defi_pierre.png" > 
+             <h4>Bienvenue</h4>
+             <h5 class="light black-text text-lighten-3">Les Inscriptions pour le grand défi Pierre Lavoie se termine bientot </h5>
+             <img src="image/defi_pierre.png" style="height:192px;width:627px;" > 
         </div>
       </li>
       <li>
           <div class="center">
-              <h3>Badminton</h3>
+              <h4>Badminton</h4>
           <h5 class="light black-text text-lighten-3">Inscrivez-vous à nos activités de badminton les mardi et jeudi midis</h5>
-        <img src="badminton.jpg" > 
+        <img src="image/badminton.jpg" style="height:400px;width:720px;" > 
 
         </div>
       </li>
       <li>
           <div class ="center">
-              <h3>volleyball</h3>
+              <h4>volleyball</h4>
           <h5 class="light black-text text-lighten-3">Inscrivez-vous en grand nombre</h5>
-        <img src="volleyball.jpg" > 
+        <img src="image/volleyball.jpg" style="height:400px;width:720px;"> 
 
         </div>
       </li>
@@ -108,8 +107,9 @@
 
               
  </div>
+
      
-</div>
+
 
 
             <!--Import jQuery before materialize.js-->

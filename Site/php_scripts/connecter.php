@@ -2,11 +2,14 @@
 if(isset($_POST['nom_user']) and isset($_POST['password'])){
 $x = $_POST['nom_user'];
 $y = $_POST['password'];
-echo $x;
-echo $y;
+
+session_start();
+
+
 function verifier_user_existant($username,$pwd_input)
 {
-  $query = "Select * from utilisateur where username = '".$username."'";
+  $query = "select * from utilisateurs where username = '".$username."'";
+  
   $mysqli = new mysqli('localhost','root','','bd_application');
   $myArray = array();
   if ($result = $mysqli->query($query)) {
@@ -14,11 +17,12 @@ function verifier_user_existant($username,$pwd_input)
     if ( mysqli_num_rows($result) == 1) 
     {
     $row = $result->fetch_array();
+    
     verifier_password($row['id_utilisateur'],$username, $pwd_input, $row['password']);
     }
     else
     {
-    echo "<script>alert('User invalid');</script>";
+    
     }
     
   
@@ -31,15 +35,29 @@ function verifier_password($id,$username,$pwd_input,$pwd)
 { 
   if (password_verify($pwd_input,$pwd))
   {
-    echo "<script>alert('Login completed');</script>";
+    $mysqli = new mysqli('localhost','root','','bd_application');
+    $getAdmin =  $mysqli->query("SELECT administrateur FROM utilisateurs WHERE id_utilisateur =".$id)->fetch_object()->administrateur; 
+    
+    
+    $_SESSION['admin'] = $getAdmin;
     $_SESSION['uid'] = $id;
-    header('Location: accueil.php');
+    $_SESSION['username'] = $username;
+
+    echo true;
   }
   else
   {
-    echo "<script>alert('Login failed');</script>";
+    
   }
 
 }
+<<<<<<< HEAD
 }
 ?>
+=======
+
+verifier_user_existant($_POST['nom_user'], $_POST['password']);
+
+?>
+
+>>>>>>> e2e23813854bd061062ace18c682d34d99806262

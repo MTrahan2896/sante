@@ -4,15 +4,31 @@ var app = angular.module("app_angular", []);
 app.controller("ctrl", function($scope) {
 
     
-    $scope.eleves = <?php echo phpSelectQuery('select utilisateurs.id_groupe, utilisateurs.nom, utilisateurs.prenom, utilisateurs.code_acces from utilisateurs, groupes, professeurs where professeurs.ID_Prof = 1 and utilisateurs.id_groupe = groupes.id_groupe and groupes.id_prof = professeurs.id_prof')?>;
+    $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs')?>;
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes where ID_Prof = 1')?>;
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
 
-    $scope.eleves_activites = <?php echo phpSelectQuery('select * from eleves_activites')?>;
+    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues')?>;
+
+    $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
     
+
+        $scope.nomActiviteFromId = function(id){
+
+            let act = $scope.activites.filter(function(ac){
+                return ac.ID_Activite == id;
+            })[0];
+
+            return act.Nom_Activite;
+
+        }
+
+
+
+
 
 
         $scope.elevesDansGroupe = function(groupe){
@@ -22,10 +38,109 @@ app.controller("ctrl", function($scope) {
     	});
     	}
 
+        $scope.getElevesForActivitePrevue = function(activite){
+
+           let liste_el_ac = ( $scope.eleves_activites.filter(function(ac){
+                return ac.ID_Activite_Prevue == activite;
+            }));
+
+     
+           var listeId = liste_el_ac.map(function(a) {return a.ID_Utilisateur;});
+
+            let arr =[];
+
+            for (var i = 0; i < listeId.length; i++) {   
+                arr.push($scope.eleveFromId(listeId[i]));
+            }
+               return arr;
+
+        }
+
+        $scope.getPresenceForEleve = function(activite_prevue, eleve){
+
+           let present = ( $scope.eleves_activites.filter(function(ac){
+                return ac.ID_Activite_Prevue == activite_prevue && ac.ID_Utilisateur == eleve;
+            }))[0].Present;
+
+        
+           console.log(present);
+
+           if(present == 1){
+            return true;
+           }
+           else return false;
+           
+
+        }
+
+        $scope.annulerActivite = function(activite){
+
+             if (confirm("Vous êtes sur le point de supprimer cette activité, êtes vous sûr?") == true) {
+                             $.ajax({
+            type: "POST",
+            url: "php_scripts/annulerActivite.php",
+            data: {
+                'ID_ACTIVITE': activite,
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                    location.reload();
+                    
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+
+             } 
+
+
+   
+
+        }
+
+
+
+        $scope.eleveFromId = function(id){
+
+            
+            let elev = $scope.eleves.filter(function(el){
+                return el.id_utilisateur == id;
+            })[0];
+            
+            return elev;
+
+        }
+
+
+        $scope.enregistrerPresence = function(activite_prevue){
+        var values = new Array();
+        $.each($("input[name='presenceActivite"+activite_prevue+"']:checked"), function() {
+        values.push($(this).val());
+        });
+        
+
+        $.ajax({
+            type: "POST",
+            url: "php_scripts/prendrePresence.php",
+            data: {
+                'PRESENTS': values,
+                'ACTIVITE': activite_prevue
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                    location.reload();
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+
+
+
+        }
+
 
         $scope.comptesAvecCodeDansGroupe = function(groupe){
     	return $scope.eleves.filter(function(el){
-    		
     		return el.id_groupe == groupe && el.code_acces != "";
     	});
     	}
@@ -38,8 +153,8 @@ app.controller("ctrl", function($scope) {
             url: "php_scripts/generercode.php",
             data: {'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
-                
                 location.reload();
+                console.log(data);
             },
             error: function (req) {
                 alert("erreur");
@@ -51,6 +166,7 @@ app.controller("ctrl", function($scope) {
 
 
     $scope.creergroupe = function() {
+
         $.ajax({
             type: "POST",
             url: "php_scripts/creerGroupe.php",
@@ -62,7 +178,8 @@ app.controller("ctrl", function($scope) {
             }, //TODO: CHANGE PROF ID
             success: function(data) {
             		
-            		location.reload();
+                    location.reload();
+            		
             },
             error: function(req) {
                 alert("erreur");
@@ -111,6 +228,9 @@ app.controller("ctrl", function($scope) {
         });
 		}
 		}
+
+
+
 
 
 
