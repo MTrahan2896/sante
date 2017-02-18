@@ -39,6 +39,9 @@ if (!ISSET($_SESSION['uid']))
       </header>      
 
 <main>	
+
+<?php include 'php_scripts/formater_champ.php';?>
+
 <script src="js/jscolor.js"></script>
 <script src="js/jscolor.min.js"></script>
 

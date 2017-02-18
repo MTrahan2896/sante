@@ -3,15 +3,11 @@ session_start();
 ?>
 <html>
 <head>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
-    <link type="text/css" rel="stylesheet" href="css/style.css">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <?php include '/components/headContent.php'; ?>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/ajax_coord_perso.js"></script>
+    <script src="js/ajax_coord_ressource.js"></script>
 
     <style>
     .collapsible-body
@@ -61,7 +57,7 @@ session_start();
        
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate">
+              <input id="email" name="email" type="email" class="validate">
               <label for="email">Courriel</label>
             </div>
           </div>
@@ -83,7 +79,7 @@ session_start();
           </div>
           <div class="row">
             <div class="col s12 l12">
-            <button class="btn green" type="button" style="width:100%">Enregistrer</button>
+            <button class="btn green" type="button" style="width:100%" onclick="transfert_coord_perso()">Enregistrer</button>
             </div>
             <div class="col l12 s12" style="height:15px"></div>
             <div class="col s12 l12">
@@ -120,10 +116,9 @@ session_start();
       <!-- PROFIL MEDICAL -->
       <li class="">
         <div class="collapsible-header"><i class="material-icons">info</i>Profil médical</div>
-        <div class="collapsible-body" style="display: none;">
-          <div class="row">
-            <form class="col s12">
-              <legend style="font-size:20px;">Personne ressource en cas d'urgence</legend>
+        <div class="collapsible-body" style="margin-left:10px;display: none;">
+          <div class="row" style="margin-left:10px">
+            <h1 style="font-size:20px;">Personne ressource en cas d'urgence</h1>
               <div class="row">
                 <div class="input-field col s6 l2">
                   <input id="nom_ressource" type="text" class="validate">
@@ -145,6 +140,15 @@ session_start();
                     <input id="tel_ressource" type="tel" class="validate">
                     <label for="tel_ressource">Téléphone</label>
                   </div>
+              </div>
+              <div class="row">
+                <div class="col s12 l12">
+                  <button class="btn green" type="button" style="width:100%" onclick="transfert_coord_ressource()">Enregistrer</button>
+                </div>
+                <div class="col l12 s12" style="height:15px"></div>
+                <div class="col s12 l12">
+                 <button class="btn red" type="button" style="width:100%">Annuler</button>
+                </div>
               </div>
           </div>
           
@@ -418,7 +422,7 @@ if(($_SESSION['uid'] != 0) and (isset($_SESSION['uid'])))
 <script src="js/scripts.js"></script>
 <script type="text/javascript">
  <?php include 'js/ScriptsProfil.php';
-include 'php_scripts/afficher_info_user.php';
+       include 'php_scripts/afficher_info_user.php';
 ?>
 
 <script>

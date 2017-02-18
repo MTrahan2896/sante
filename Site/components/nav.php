@@ -34,7 +34,7 @@
           echo '
             <form action="Accueil.php" method="POST">
             <ul id="nav-mobile" class="right">
-            <li style="margin-right: 20px"><span id="Greet_User"></span></li>
+            <li style="margin-right: 20px"><a href="profil.php"><span id="Greet_User"></span></a></li>
             <li>  <button class="btn blue waves-effect waves-light right" style="margin-top:14px;margin-right:10px;" type="submit" name="deconnexion">Déconnexion
               </button></li>
             </form>';
