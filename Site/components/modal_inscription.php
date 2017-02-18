@@ -19,7 +19,7 @@
               <div class="input-field col s12 l6">
             <!--    <i class="material-icons prefix">person_pin</i> -->
                 <input name="prenom" id="prenom" type="text" class="validate">
-                <label for="prenom">Prenom</label>
+                <label for="prenom">Prénom</label>
               </div>
           
               <div class="input-field col s12 l6">
@@ -32,7 +32,7 @@
              <div class="input-field col s12">
                <i class="material-icons prefix">email</i>
                <input name="courriel" id="courriel" type="text" class="validate">
-               <label for="courriel">courriel</label>
+               <label for="courriel">Courriel</label>
              </div>
             </div>
             <div class="row">
@@ -40,7 +40,7 @@
               <div class="input-field col s10">
                 <i class="material-icons prefix">phone</i>
                 <input name="telephone" id="telephone" type="text" class="validate">
-                <label for="telephone">Telephone</label>
+                <label for="telephone">Téléphone</label>
               </div>
             </div>
             <div class="row">

@@ -10,7 +10,7 @@ function charger_liste ()
   
 	if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-    	echo "<option value = 1 >".$row['nom_activite']." , ".$row['duree']." minutes </option>";
+    	echo "<option value = \"".$row['ID_Activite']."\" >".$row['ID_Activite'].'  '.$row['nom_activite']." , ".$row['duree']." minutes </option>";
     	}
     $result->close();
     }

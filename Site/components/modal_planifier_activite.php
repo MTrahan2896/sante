@@ -6,7 +6,7 @@
       </div>
 
         <div class="input-field col s12">
-          <select required id="nom_act">
+          <select required id="nom_act" name="nom_act">
           <option value="">Choisir une activité</option>
           <?php charger_liste(); ?>
           </select>

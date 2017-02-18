@@ -1,5 +1,5 @@
 <?php
-	echo date("Y-m-d H:M:S", strtotime($_POST['date_act'],$_POST['heure_deb']));
+	$date_activite = date("Y-m-d", strtotime($_POST['date_act']));
 	echo $_POST['nom_act']."    marche tu? ";
 	function phpQuery($query){
     $mysqli = new mysqli('localhost','root','','bd_application');
@@ -16,10 +16,13 @@
 										 ",'".$_POST['endroit']."',".$_POST['nom_act'].");";
 										 */
 
-    $req = "insert into activites_prevues values (null,".
-										 "'2017:02:17 11:19:00',".$_POST['participants_max'].
+    $req = "insert into activites_prevues values (null
+										  ,'".$date_activite.
+										 "','".$_POST['heure_deb'].
+										 "',".$_POST['participants_max'].
 										 ",".$_POST['frais'].
-										 ",'".$_POST['endroit']."',1);";
+										 ",'".$_POST['endroit'].
+										 "',".$_POST['nom_act'].");";
 	echo $req;									
 	echo phpQuery($req);
 
