@@ -21,9 +21,12 @@
 	$result->close();
 	$mysqli->close();
 	}
-phpQuery("insert into groupes values(null, \"".$_POST['nomgroupe']."\", 1, 0)");
-
+	session_start();
+	phpQuery("insert into groupes values(null, \"".$_POST['nomgroupe']."\", ".$_SESSION['uid'].",".$_POST['session'].",".$_POST['ensemble'].")");
+	echo  "insert into groupes values(null, \"".$_POST['nomgroupe']."\", ".$_SESSION['uid'].",".$_POST['ensemble'].")";
 	$value = phpSelectQuery("select max(id_groupe) from groupes");
+
+	$session = 1; //SELECT SESSION WHERE SYSDATE
 
 	$nb_codes = 0;
 
@@ -34,7 +37,7 @@ phpQuery("insert into groupes values(null, \"".$_POST['nomgroupe']."\", 1, 0)");
 		$nb_codes = $_POST['nb_codes'];
 	}
 	for ($x = 0; $x < $nb_codes; $x++) {
-		$query ='insert into utilisateurs(ID_Groupe, CODE_ACCES, administrateur) values('.$value.', "'.substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5).'",  0)';
+		$query ='insert into utilisateurs(ID_Groupe, CODE_ACCES, administrateur) values('.$value.', "'.substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5).'",0)';
 		echo $query;
 	 echo phpQuery($query);
 	}

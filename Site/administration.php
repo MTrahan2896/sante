@@ -51,10 +51,10 @@
               
               <li> <!-- SANS GROUPE -->
               <div class="collapsible-header"><i class="material-icons">supervisor_account</i>Utilisateurs sans groupes
-                <span class="new badge blue right" data-badge-caption="">{{elevesDansGroupe(0).length}} Utilisateur<span ng-show="elevesDansGroupe(0).length>1">s</span></span>
+                <span class="new badge blue right" data-badge-caption="">{{utilisateursSansGroupes.length}} Utilisateur<span ng-show="utilisateursSansGroupes.length>1">s</span></span>
               </div>
               <div class="collapsible-body collapsibleWithButton">
-                    <div ng-repeat="eleve in elevesDansGroupe(0)">{{eleve.nom}}, {{eleve.prenom}}</div>
+                    <div ng-repeat="eleve in utilisateursSansGroupes">{{eleve.Nom}}, {{eleve.Prenom}}</div>
 
                                  <div class="row" style="text-align: center">
               <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
