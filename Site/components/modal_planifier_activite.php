@@ -1,4 +1,3 @@
-  <?php include 'php_scripts/charger_liste_activite.php'; ?>
   <div id="modal_planif" class="modal">
     <div class="modal-content">
       <div class="row" style="text-align:center">
@@ -65,7 +64,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 <script src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
-    
+  
 <script>
   //Time Picker:
 $('.timepicker').pickatime({
@@ -81,7 +80,7 @@ $('.timepicker').pickatime({
       type: "POST",
       url: "php_scripts/planifier_activite.php",
       data: {
-             'nom_act': $("#nom_activite").val(),
+             'nom_act': $("#nom_act").val(),
              'date_act': $("#date_act").val(),
              'heure_deb': $("#heure_deb").val(),
              'participants_max': $('#participants_max').val(),
