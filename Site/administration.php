@@ -136,7 +136,7 @@
               <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
               </div>
               </row>
-              <a class="waves-effect waves-light btn" href="#modal_new_activite">Créer une activité</a>
+              <a class="waves-effect waves-light btn" data-target="modal_new_activite">Créer une activité</a>
              </div>
             </li>
 
@@ -215,94 +215,24 @@ include 'components/modal_inscription.php';
   </ul>
   
 </div>
-<div id="modalNouveauGroupe" class="modal" style="height: 300px !important">
-  <div class="modal-content">
-    <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-      Ajouter un groupe
-    </div>
-    <div class="contenu-modal">
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12" style="margin-top:15px">
-              <i class="material-icons prefix">account_circle</i>
-              <input name="nomgroupe" id="nomgroupe" type="text" class="validate">
-              <label for="nom_groupe">Nom du groupe</label>
-            </div>
-            <div class="input-field col s12" style="margin-top:15px">
-              <i class="material-icons prefix">supervisor_account</i>
-              <input type="number" id="rangeEleves" name="rangeEleves">
-              <label for="rangeEleves">Nombre d'élèves</label>
-              
-            </div>
-            <div class="col s12" style="margin-top:15px">
-              <button id="CreerGroupe" class="btn col s12" type="button" ng-click="creergroupe()">Créer le groupe</button>
-            </div>
-            
-          </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
-<div ng-repeat="groupe in groupes">
-  <div id="modalGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px !important">
-    <div class="modal-content" style="height: 100%; ">
-      <div class="entete-modal" style="margin-bottom: 15px; text-align:center;">
-        Code d'accès du groupe "{{groupe.nom_groupe}}"
-      </div>
-      <div class="contenu-modal">
-        <div class="row" >
-          <div ng-repeat="compte in comptesAvecCodeDansGroupe(groupe.id_groupe)">
-            {{compte.code_acces}}
-          </div>
-          <div style="text-align:center;">
-            <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-</div>
 
-<div ng-repeat="groupe in groupes">
-  <div id="modalGenGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px">
-    <div class="modal-content" style="text-align: center">
-      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-        Générer des codes d'accès pour le groupe "{{groupe.nom_groupe}}"
-      </div>
-      <div class="contenu-modal">
-        <div class="row">
-          <label for="qt_code">Nombre de codes</label>
-          <input type="number" name="qt_code" id="codeGroupe{{groupe.id_groupe}}" min="1" max="60" ng-min="1" ng-max="60" validate>
-        </div>
-        <button type="button" class="btn" ng-click="genererCodePourGroupe(groupe.id_groupe)">Générer</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div ng-repeat="activite in activites_prevues">
-  <div id="modalPresence{{activite.ID_activite_prevue}}" class="modal" style="height: 400px; width: 400px" >
-    <div class="modal-content" style="text-align: center; height: 100%" >
-      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-        <h5>Liste de présence </h1>
-      </div>
-      <div class="contenu-modal">
-        <div class="row ">
-          <div ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)" class="row presence">
-            <div class="col s8 field">{{eleve.nom}}, {{eleve.prenom}}</div><div class="field col s2"></div> <input class="field filled-in" checked="checked" type="checkbox" name="presenceActivite{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}"
-            id="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px"><label for="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
-          </div>
-          <button ng-click="enregistrerPresence(activite.ID_activite_prevue)" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Enregistrer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
+
+include 'components/modals_admin.php';
+
 if (isset($_SESSION['admin']))
 echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminTabs").remove()}}</script>';
 //INVERSE
