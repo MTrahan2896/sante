@@ -7,7 +7,7 @@
         <div class="input-field col s12">
           <select required id="nom_act" name="nom_act">
           <option value="">Choisir une activité</option>
-          <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}}</option>
+          <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
           </select>
           <label>Nom de l'activité</label>
         </div>
