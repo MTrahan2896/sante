@@ -11,15 +11,16 @@
         </ul>
         
         <?php
-        if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+       if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
 
-        if(!isset($_SESSION['uid']) and $_SESSION['uid'] != 0){
+        if(!isset($_SESSION['uid'])){
          $_SESSION['uid'] = 0;
+          }
+         if (isset($_SESSION['username'])){
           echo "<script> document.getElementById('Greet_User').innerHTML ='".$_SESSION['username']."'; $('.adminTabs').remove();</script>";
-       
-        }
+          }
         if ($_SESSION['uid'] == 0)
         {
         echo '
@@ -48,8 +49,9 @@
           }
         }
         
-
-
+       
+        
+        
 
         ?>
 
