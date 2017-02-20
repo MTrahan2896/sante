@@ -34,11 +34,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s6">
-        <button class="btn green" onclick="creer_act()"> Accepter</button>
+      <div class="col s12 l12">
+        <button class="btn green" onclick="creer_act()" style="width:100%"> Créer</button>
       </div>
-      <div class="col s6">
-        <a class="btn red" href=""> Annuler</a>
+      <div class="col s12 l12" style="height:15px"></div>
+      <div class="col s12 l12">
+        <a class="btn red" href="" style="width:100%"> Annuler</a>
       </div>
     </div>
   </div>

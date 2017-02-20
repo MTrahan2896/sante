@@ -1,7 +1,8 @@
 <?php
+if(isset($_POST['nom_user']) and isset($_POST['password'])){
 $x = $_POST['nom_user'];
 $y = $_POST['password'];
-
+}
 session_start();
 
 
@@ -49,9 +50,9 @@ function verifier_password($id,$username,$pwd_input,$pwd)
     
   }
 
+
 }
 
 verifier_user_existant($_POST['nom_user'], $_POST['password']);
 
 ?>
-

@@ -12,18 +12,16 @@ if (!ISSET($_SESSION['uid']))
 ?>
 
   <!DOCTYPE html>
-  <html>
+  <html ng-app='app_angular' ng-controller="ctrl">
     <head>
 
     <?php
     include 'components/headContent.php';
     ?>
 
-      <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
+	  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
   	<link type="text/css" rel="stylesheet" href="css/sc-date-time.css">
   	<link type="text/css" rel="stylesheet" href="css/style.css">
 
@@ -31,7 +29,7 @@ if (!ISSET($_SESSION['uid']))
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       
     </head>
-    <body>
+<body>
 
       <header>
       <?php 
@@ -41,6 +39,9 @@ if (!ISSET($_SESSION['uid']))
       </header>      
 
 <main>	
+
+<?php include 'php_scripts/formater_champ.php';?>
+
 <script src="js/jscolor.js"></script>
 <script src="js/jscolor.min.js"></script>
 
@@ -86,7 +87,8 @@ if (!ISSET($_SESSION['uid']))
 
 <?php 
 include 'components/modal_creer_activite.php';
-include 'components/modal_planifier_activite.php';
+include 'components/modal_inscription.php';
+include 'components/modal_planifier_activite.php'
 ?>
 
 </main>
@@ -121,7 +123,7 @@ include 'components/modal_planifier_activite.php';
       
 
 
-	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/moment.js">moment.locale="fr"</script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>  
@@ -132,11 +134,11 @@ include 'components/modal_planifier_activite.php';
 		<script type="text/javascript" src="js/gcal.js"></script>
 		<script type="text/javascript" src="js/sc-date-time.js"></script>
 
-
+      <?php include 'js/ScriptsAdmin.php'; ?>
+      
       <script src="js/scripts.js"></script>
 
 
     </body>
   </html>
-</html>
 
