@@ -1,11 +1,5 @@
 <?php
-	function formater($champ)
-{
-	$champ = str_replace("'","''",$champ);
-	$champ = trim($champ);
-	$champ = ucfirst($champ);	
-	return $champ;
-}
+
 	$date_activite = date("Y-m-d", strtotime($_POST['date_act']));
 
 	function phpQuery($query){

@@ -7,9 +7,9 @@
 	$mysqli->close();
 	}
 
-	$req = "insert into activites values (null,'".$_POST['nom_act'].
-										 "',".$_POST['duree'].
-										 ",'".$_POST['desc'].
+	$req = "insert into activites values (null,'".formater($_POST['nom_act']).
+										 "',".formater($_POST['duree']).
+										 ",'".formater($_POST['desc']).
 										 "',".$_POST['nbr_pts'].",'".
 										 $_POST['couleur']."');";
 	echo $req;
