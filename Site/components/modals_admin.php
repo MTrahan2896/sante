@@ -159,6 +159,8 @@
     </div>
   </div>
 </div>
+
+
 <div ng-repeat="activite in activites_prevues">
   <div id="modalPresence{{activite.ID_activite_prevue}}" class="modal" style="height: 400px; width: 400px" >
     <div class="modal-content" style="text-align: center; height: 100%" >
@@ -178,8 +180,65 @@
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+  <div id="modalCodeAdmin" class="modal" style="height: 400px; width: 400px" >
+    <div class="modal-content" style="text-align: center; height: 100%" >
+      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
+        <h5>Générer des codes administrateurs</h1>
+      </div>
+      <div class="contenu-modal">
+        <div class="row ">
+
+        <div class="row">
+          <label for="qt_code">Nombre de codes</label>
+          <input type="number" name="qt_code" id="codeAdmin" min="1" max="10" ng-min="1" ng-max="10" validate>
+        </div>
+
+       
+          <button ng-click="genererCodeAdmin()" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Générer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div id="modalAfficherCodeAdmin" class="modal" style="height: 400px; width: 400px" >
+    <div class="modal-content" style="text-align: center; height: 100%" >
+      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
+        <h5>Codes administrateurs</h1>
+      </div>
+      <div class="contenu-modal">
+        <div class="row ">
+
+        <div class="row" ng-repeat="admin in codesAdmin">
+           {{admin.CODE_ACCES}}
+        </div>
+
+       
+          <button ng-click="genererCodeAdmin()" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Générer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
 <?php 
-include 'components/modal_creer_activite.php';
+
 include 'components/modal_inscription.php';
 include 'components/modal_planifier_activite.php';
 ?>

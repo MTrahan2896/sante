@@ -16,6 +16,8 @@ app.controller("ctrl", function($scope) {
 
     $scope.sessions = <?php echo phpSelectQuery('select * from sessions')?>;
 
+    $scope.codesAdmin = <?php echo phpSelectQuery('select * from utilisateurs where administrateur = 1 and not CODE_ACCES=""')?>;
+
     
 
         $scope.nomActiviteFromId = function(id){
@@ -163,7 +165,7 @@ app.controller("ctrl", function($scope) {
     	 	 $.ajax({
             type: "POST",
             url: "php_scripts/generercode.php",
-            data: {'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
+            data: {'admin' : 0, 'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
                 location.reload();
                 console.log(data);
@@ -174,6 +176,24 @@ app.controller("ctrl", function($scope) {
         });
 
     	 }
+
+                 $scope.genererCodeAdmin = function(nb_codes){
+            
+             $.ajax({
+            type: "POST",
+            url: "php_scripts/generercode.php",
+            data: {'admin' : 1, 'id_groupe': '0', 'nb_codes': $("#codeAdmin").val() }, 
+            success: function (data) {
+                location.reload();
+                console.log(data);
+            },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+
+         }
+
 
 
 

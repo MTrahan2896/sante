@@ -28,7 +28,7 @@
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                    <td class="">{{}}/15</td>
+                    <td style="text-align: center" class="">{{}}/15</td>
                     
                   </div>
                 </tr>
@@ -86,6 +86,9 @@
           
         </li>
       </ul>
+  
+      <a class="waves-effect waves-light btn right" href="#modal_planif" style="margin-top: 0px;">Planifier une activité</a>
+      <div style="margin-bottom: 40px"></div>
       </div></li>
     
 
@@ -113,8 +116,8 @@
               <li ng-repeat="admin in comptesAdmin()">{{admin.nom}}, {{admin.prenom}}</li>
               </ul>
               <row>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
+              <button type="button" data-target="modalCodeAdmin" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
+              <button type="button" data-target="modalAfficherCodeAdmin"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
               </row>
              </div>
             </li>
@@ -133,10 +136,10 @@
               <row>
               <br><br>
               <div style="text-align: center">
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
+              <button type="button"  class="btn l6 s12 waves-effect waves-light"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
               </div>
               </row>
-              <a class="waves-effect waves-light btn" data-target="modal_new_activite">Créer une activité</a>
+              
              </div>
             </li>
 
@@ -159,18 +162,14 @@
 
 <a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
 
-<a class="waves-effect waves-light btn" href="#modal_planif">Planifier une activité</a>
+
 
 <a class="waves-effect waves-light btn" href="#modal_login">Login</a>
 
 <a class="waves-effect waves-light btn" href="#modal_code">code</a>
 
 
-<?php 
-include 'components/modal_creer_activite.php';
-include 'components/modal_inscription.php';
-//include 'components/modal_planifier_activite.php';
-?>
+
 
               </row>
              </div>
@@ -181,37 +180,7 @@ include 'components/modal_inscription.php';
       </ul>
       </div>
 
-      </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+      </li>    
   </ul>
   
 </div>

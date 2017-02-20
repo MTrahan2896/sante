@@ -1,6 +1,11 @@
 <?php
-	include 'php_scripts/formater_champ.php';
-
+	function formater($champ)
+{
+	$champ = str_replace("'","''",$champ);
+	$champ = trim($champ);
+	$champ = ucfirst($champ);	
+	return $champ;
+}
 	$date_activite = date("Y-m-d", strtotime($_POST['date_act']));
 
 	function phpQuery($query){
@@ -9,6 +14,9 @@
 	$mysqli->query($query);
 	$mysqli->close();
 	}
+
+
+	echo $_POST['nom_act'];
 
     $req = "insert into activites_prevues values (null
 										  ,'".$date_activite.

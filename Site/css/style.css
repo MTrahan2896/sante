@@ -2,8 +2,8 @@
 * @Author: 1425165
 * @Date:   2017-01-30 16:07:24
 <<<<<<< HEAD
-* @Last Modified by:   JLafreniere
-* @Last Modified time: 2017-02-11 14:10:39
+* @Last Modified by:   1425165
+* @Last Modified time: 2017-02-20 14:43:06
 =======
 * @Last Modified by:   1425165
 * @Last Modified time: 2017-02-17 10:10:41
@@ -47,12 +47,6 @@ button{
       
     }
 
-    #modal_new_activite /* Modal de création d'activité */
-    {
-      width: 20%;
-      height: 90%;
-    }
-
      #modal_code /* Modal de connexion */
     {
       height: 38%;
@@ -88,7 +82,7 @@ button{
 
     .modal 
     { 
-      margin-left:10%;
+      margin-left:0% !important;
       margin-right:10%;
     }
 
@@ -158,17 +152,12 @@ button{
   margin-right: 15px;
 }
 
-<<<<<<< HEAD
+
 #modalNouveauGroupe{
   height: 355px;
-=======
-.presence:nth-child(even) {
-  background-color: #E2E2E2;
-margin-bottom: 0px;
-height: 45px;
 }
 
-
+ 
 .presence:nth-child(odd) {
   background-color: #FFFFFF;
 margin-bottom: 0px;
@@ -177,5 +166,12 @@ height: 45px;
 
 .field{
   margin-top: 10px;
->>>>>>> e2e23813854bd061062ace18c682d34d99806262
+
 }
+
+.modal /* Modal de création d'activité */
+    {
+      width: 360px !important;
+      height: 90% !important;
+      
+    }

@@ -12,6 +12,7 @@
 										 ",'".$_POST['desc'].
 										 "',".$_POST['nbr_pts'].",'".
 										 $_POST['couleur']."');";
+	echo $req;
 
 	echo phpQuery($req);
 
