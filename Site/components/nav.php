@@ -15,7 +15,7 @@
     session_start();
 }
 
-        if(!isset($_SESSION['uid'])){
+        if(!isset($_SESSION['uid']) and $_SESSION['uid'] != 0){
          $_SESSION['uid'] = 0;
           echo "<script> document.getElementById('Greet_User').innerHTML ='".$_SESSION['username']."'; $('.adminTabs').remove();</script>";
        

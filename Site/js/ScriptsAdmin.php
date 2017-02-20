@@ -14,6 +14,8 @@ app.controller("ctrl", function($scope) {
 
     $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
+    $scope.sessions = <?php echo phpSelectQuery('select * from sessions')?>;
+
     
 
         $scope.nomActiviteFromId = function(id){
@@ -146,6 +148,16 @@ app.controller("ctrl", function($scope) {
     	}
 
 
+
+        $scope.comptesAdmin = function(groupe){
+        return $scope.eleves.filter(function(el){
+            console.log("ADMIN: "+ el.administrateur)
+            return el.administrateur == 1 && el.code_acces == "";
+        });
+        }
+
+
+
     	 $scope.genererCodePourGroupe = function(groupe, nb_codes){
     	 	console.log($("#codeGroupe"+groupe).val());
     	 	 $.ajax({
@@ -190,9 +202,7 @@ app.controller("ctrl", function($scope) {
     
 
 	setTimeout(function () {
-        $scope.$apply(function () {
-           console.log("scope applied");
-        });
+        $scope.$apply();
     }, 2000);
 
 
