@@ -28,7 +28,7 @@
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                    <td class="">{{}}/15</td>
+                    <td style="text-align: center" class="">{{}}/15</td>
                     
                   </div>
                 </tr>
@@ -58,7 +58,7 @@
             
             <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
-              <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}}
+              <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
               <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
             </div>
             <div class="collapsible-body collapsibleWithButton container">
@@ -86,6 +86,9 @@
           
         </li>
       </ul>
+  
+      <a class="waves-effect waves-light btn right" href="#modal_planif" style="margin-top: 0px;">Planifier une activité</a>
+      <div style="margin-bottom: 40px"></div>
       </div></li>
     
 
@@ -113,8 +116,8 @@
               <li ng-repeat="admin in comptesAdmin()">{{admin.nom}}, {{admin.prenom}}</li>
               </ul>
               <row>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
+              <button type="button" data-target="modalCodeAdmin" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
+              <button type="button" data-target="modalAfficherCodeAdmin"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
               </row>
              </div>
             </li>
@@ -123,17 +126,20 @@
             <div class="collapsible-header">
               <i class="material-icons">explore</i>
               Activités
-                <span class="new badge green right" data-badge-caption="">{{comptesAdmin().length}}</span>
+                <span class="new badge green right" data-badge-caption="">{{activites.length}}</span>
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
               <ul>
-              <li ng-repeat="admin in comptesAdmin()">{{admin.nom}}, {{admin.prenom}}</li>
+              <li ng-repeat="activite in activites">{{activite.Nom_Activite}}</li>
               </ul>
               <row>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
+              <br><br>
+              <div style="text-align: center">
+              <button type="button"  class="btn l6 s12 waves-effect waves-light"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
+              </div>
               </row>
+              
              </div>
             </li>
 
@@ -152,6 +158,19 @@
               <row>
               <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
               
+
+
+<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
+
+
+
+<a class="waves-effect waves-light btn" href="#modal_login">Login</a>
+
+<a class="waves-effect waves-light btn" href="#modal_code">code</a>
+
+
+
+
               </row>
              </div>
             </li>
@@ -160,133 +179,37 @@
 
       </ul>
       </div>
-      </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+      </li>    
   </ul>
   
 </div>
-<div id="modalNouveauGroupe" class="modal" style="height: 300px !important">
-  <div class="modal-content">
-    <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-      Ajouter un groupe
-    </div>
-    <div class="contenu-modal">
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12" style="margin-top:15px">
-              <i class="material-icons prefix">account_circle</i>
-              <input name="nomgroupe" id="nomgroupe" type="text" class="validate">
-              <label for="nom_groupe">Nom du groupe</label>
-            </div>
-            <div class="input-field col s12" style="margin-top:15px">
-              <i class="material-icons prefix">supervisor_account</i>
-              <input type="number" id="rangeEleves" name="rangeEleves">
-              <label for="rangeEleves">Nombre d'élèves</label>
-              
-            </div>
-            <div class="col s12" style="margin-top:15px">
-              <button id="CreerGroupe" class="btn col s12" type="button" ng-click="creergroupe()">Créer le groupe</button>
-            </div>
-            
-          </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
-<div ng-repeat="groupe in groupes">
-  <div id="modalGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px !important">
-    <div class="modal-content" style="height: 100%; ">
-      <div class="entete-modal" style="margin-bottom: 15px; text-align:center;">
-        Code d'accès du groupe "{{groupe.nom_groupe}}"
-      </div>
-      <div class="contenu-modal">
-        <div class="row" >
-          <div ng-repeat="compte in comptesAvecCodeDansGroupe(groupe.id_groupe)">
-            {{compte.code_acces}}
-          </div>
-          <div style="text-align:center;">
-            <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-</div>
 
-<div ng-repeat="groupe in groupes">
-  <div id="modalGenGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px">
-    <div class="modal-content" style="text-align: center">
-      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-        Générer des codes d'accès pour le groupe "{{groupe.nom_groupe}}"
-      </div>
-      <div class="contenu-modal">
-        <div class="row">
-          <label for="qt_code">Nombre de codes</label>
-          <input type="number" name="qt_code" id="codeGroupe{{groupe.id_groupe}}" min="1" max="60" ng-min="1" ng-max="60" validate>
-        </div>
-        <button type="button" class="btn" ng-click="genererCodePourGroupe(groupe.id_groupe)">Générer</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div ng-repeat="activite in activites_prevues">
-  <div id="modalPresence{{activite.ID_activite_prevue}}" class="modal" style="height: 400px; width: 400px" >
-    <div class="modal-content" style="text-align: center; height: 100%" >
-      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-        <h5>Liste de présence </h1>
-      </div>
-      <div class="contenu-modal">
-        <div class="row ">
-          <div ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)" class="row presence">
-            <div class="col s8 field">{{eleve.nom}}, {{eleve.prenom}}</div><div class="field col s2"></div> <input class="field filled-in" checked="checked" type="checkbox" name="presenceActivite{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}"
-            id="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px"><label for="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
-          </div>
-          <button ng-click="enregistrerPresence(activite.ID_activite_prevue)" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Enregistrer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
+
+include 'components/modals_admin.php';
+
 if (isset($_SESSION['admin']))
 echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminTabs").remove()}}</script>';
 //INVERSE
 ?>
 </div>
+
+
+
 </main>
 <footer class="page-footer" style="width: 100%!important">
 
@@ -313,5 +236,5 @@ $('.modal').modal();
 
 </script>
 <div class="hiddendiv common"></div>
-<button type="button" ng-click="eleveFromId(1)">TEST</button>
+
 </body></html>

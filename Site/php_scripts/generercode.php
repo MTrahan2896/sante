@@ -41,7 +41,7 @@ function phpSelectQuery($query){
 		$nb_codes = $_POST['nb_codes'];
 	}
 	for ($x = 0; $x < $nb_codes; $x++) {
-		$query ='insert into utilisateurs values(null, null, null, '.$_POST['id_groupe'].', "'.substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5).'", null, null, null, null, null, null, 0)';
+		$query ='insert into utilisateurs values(null, null, null, '.$_POST['id_groupe'].', "'.substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5).'", null, null, null, null, null, null, '.$_POST['admin'].', null, null, null, null)';
 		echo $query;
 	 echo phpQuery($query);
 	}
