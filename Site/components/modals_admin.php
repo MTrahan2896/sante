@@ -161,6 +161,40 @@
 </div>
 
 
+
+  <div id="modalGenGroupe0" class="modal" style="height: 300px">
+    <div class="modal-content" style="text-align: center">
+      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
+        Générer des codes d'accès pour le groupe "{{groupe.nom_groupe}}"
+      </div>
+      <div class="contenu-modal">
+        <div class="row">
+          <label for="qt_code">Nombre de codes</label>
+          <input type="number" name="qt_code" id="codeGroupe0" min="1" max="60" ng-min="1" ng-max="60" validate>
+        </div>
+        <button type="button" class="btn" ng-click="genererCodePourGroupe(0)">Générer</button>
+      </div>
+    </div>
+  </div>
+
+    <div id="modalGroupe0" class="modal" style="height: 300px !important">
+    <div class="modal-content" style="height: 100%; ">
+      <div class="entete-modal" style="margin-bottom: 15px; text-align:center;">
+        Code d'accès sans groupe
+      </div>
+      <div class="contenu-modal">
+        <div class="row" >
+          <div ng-repeat="compte in comptesAvecCodeDansGroupe(0)">
+            {{compte.code_acces}}
+          </div>
+          <div style="text-align:center;">
+            <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <div ng-repeat="activite in activites_prevues">
   <div id="modalPresence{{activite.ID_activite_prevue}}" class="modal" style="height: 400px; width: 400px" >
     <div class="modal-content" style="text-align: center; height: 100%" >
