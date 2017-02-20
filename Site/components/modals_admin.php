@@ -264,8 +264,6 @@
     </div>
   </div>
 
-
-
 <script src="js/ajax_creer_session.js"></script>
 <!-- Modal Structure -->
 <div id="modal_session" class="modal">
