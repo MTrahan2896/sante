@@ -29,11 +29,12 @@ session_start();
 </head>
 <body>
   <header>
-    <?php 
-    include 'components/nav.php';
-    ?>
+
     
   </header>
+      <?php 
+    include 'components/nav.php';
+    ?>
   <main>
 
   <div class="container">

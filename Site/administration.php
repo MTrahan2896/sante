@@ -58,7 +58,7 @@
             
             <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
-              <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}}
+              <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
               <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
             </div>
             <div class="collapsible-body collapsibleWithButton container">
@@ -123,17 +123,20 @@
             <div class="collapsible-header">
               <i class="material-icons">explore</i>
               Activités
-                <span class="new badge green right" data-badge-caption="">{{comptesAdmin().length}}</span>
+                <span class="new badge green right" data-badge-caption="">{{activites.length}}</span>
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
               <ul>
-              <li ng-repeat="admin in comptesAdmin()">{{admin.nom}}, {{admin.prenom}}</li>
+              <li ng-repeat="activite in activites">{{activite.Nom_Activite}}</li>
               </ul>
               <row>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
+              <br><br>
+              <div style="text-align: center">
+              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
+              </div>
               </row>
+              <a class="waves-effect waves-light btn" href="#modal_new_activite">Créer une activité</a>
              </div>
             </li>
 
@@ -152,6 +155,23 @@
               <row>
               <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
               
+
+
+<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
+
+<a class="waves-effect waves-light btn" href="#modal_planif">Planifier une activité</a>
+
+<a class="waves-effect waves-light btn" href="#modal_login">Login</a>
+
+<a class="waves-effect waves-light btn" href="#modal_code">code</a>
+
+
+<?php 
+include 'components/modal_creer_activite.php';
+include 'components/modal_inscription.php';
+//include 'components/modal_planifier_activite.php';
+?>
+
               </row>
              </div>
             </li>
@@ -160,6 +180,7 @@
 
       </ul>
       </div>
+
       </li>
 
 
@@ -287,6 +308,9 @@ echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminT
 //INVERSE
 ?>
 </div>
+
+
+
 </main>
 <footer class="page-footer" style="width: 100%!important">
 
