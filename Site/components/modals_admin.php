@@ -90,7 +90,7 @@
   }
 </script>
 
-<div id="modalNouveauGroupe" class="modal" style="height: 300px !important">
+<div id="modalNouveauGroupe" class="modal" style="height: 510px !important">
   <div class="modal-content">
     <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
       Ajouter un groupe
@@ -104,11 +104,28 @@
               <input name="nomgroupe" id="nomgroupe" type="text" class="validate" maxlength="65">
               <label for="nom_groupe">Nom du groupe</label>
             </div>
+            
+            <div class="input-field col s12" style="margin-top:15px">
+            <i class="material-icons prefix">date_range</i>
+            <select id="session" name="session" ng-options="session.Nom_Session as session.Nom_Session for session in sessions track by session.ID_Session" ng-model="selected">
+
+               <option value="" disabled selected>Session</option>
+            </select>
+            </div>
+
+            <div class="input-field col s12" style="margin-top:15px">
+            
+            <select id="ensemble" name="ensemble" ng-model="selected">
+            <option value="" disabled selected>Ensemble</option>
+            <option value="1">Ensemble 1</option>
+            <option value="2">Ensemble 2</option>
+            <option value="3">Ensemble 3</option>
+            </select>
+            </div>
             <div class="input-field col s12" style="margin-top:15px">
               <i class="material-icons prefix">supervisor_account</i>
               <input type="number" id="rangeEleves" name="rangeEleves">
               <label for="rangeEleves">Nombre d'élèves</label>
-              
             </div>
             <div class="col s12" style="margin-top:15px">
               <button id="CreerGroupe" class="btn col s12" type="button" ng-click="creergroupe()">Créer le groupe</button>

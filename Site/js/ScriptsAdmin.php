@@ -6,7 +6,7 @@ app.controller("ctrl", function($scope) {
     
     $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs')?>;
     
-    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes where ID_Prof = 1')?>;
+    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes')?>;
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
 
@@ -18,6 +18,9 @@ app.controller("ctrl", function($scope) {
 
     $scope.codesAdmin = <?php echo phpSelectQuery('select * from utilisateurs where administrateur = 1 and not CODE_ACCES=""')?>;
 
+    $scope.ensembles = [1, 2, 3];
+
+    $scope.utilisateursSansGroupes =   <?php echo phpSelectQuery('select * from utilisateurs where id_groupe is null and CODE_ACCES=""')?>;
     
 
         $scope.nomActiviteFromId = function(id){
@@ -204,12 +207,14 @@ app.controller("ctrl", function($scope) {
             data: {
                 'nomgroupe': $("#nomgroupe").val(),
                 'id_prof': 1,
-                'nb_codes': $("#rangeEleves").val()
+                'nb_codes': $("#rangeEleves").val(),
+                'ensemble': $("#ensemble").val(),
+                'session':  $("#session").val()
 
             }, //TODO: CHANGE PROF ID
             success: function(data) {
             		
-                    location.reload();
+                    console.log(data);
             		
             },
             error: function(req) {

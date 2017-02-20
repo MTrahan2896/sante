@@ -1,14 +1,4 @@
-/*
-* @Author: 1425165
-* @Date:   2017-01-30 16:07:24
-<<<<<<< HEAD
-* @Last Modified by:   1425165
-* @Last Modified time: 2017-02-20 16:39:46
-=======
-* @Last Modified by:   1425165
-* @Last Modified time: 2017-02-17 10:10:41
->>>>>>> e2e23813854bd061062ace18c682d34d99806262
-*/
+
 nav{
 	background-color:#71C0E5;
 }
@@ -153,9 +143,6 @@ button{
 }
 
 
-#modalNouveauGroupe{
-  height: 355px;
-}
 
  
 .presence:nth-child(odd) {
@@ -177,4 +164,3 @@ height: 45px;
     }
 
 
-    
