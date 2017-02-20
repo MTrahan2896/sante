@@ -313,5 +313,5 @@ $('.modal').modal();
 
 </script>
 <div class="hiddendiv common"></div>
-<button type="button" ng-click="eleveFromId(1)">TEST</button>
+
 </body></html>
