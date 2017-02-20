@@ -19,7 +19,7 @@
              white-space: normal;
         }
         .modalinsact{
-            bottom:35% !important;
+            bottom:20% !important;
         }
       </style>
     </head>
@@ -131,17 +131,40 @@
                 <input type="time"  id="fin"  readonly>
             </div> 
         </div>
-        <div class="row">
+        <div class="row" id="divSub">
             <?php
+                    //vérification pour voir s'il est déja inscrit'
+                    $mysqli = new mysqli("localhost", "root", "", "bd_application");
+                    if ($mysqli->connect_errno) {
+                        echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                    }
+                    $query = "SELECT ap.ID_Activite_Prevue, ap.Date_Activite, ap.Heure, a.Duree 
+                              FROM activites_prevues ap, activites a, utilisateur_activites ua
+                              where ua.ID_Utilisateur = ".$_SESSION['uid']." 
+                               and ap.ID_Activite = a.ID_Activite
+                               and ua.ID_Activite_prevue = ap.ID_Activite_Prevue";
+                    $result = $mysqli->query($query);
+                    echo "<script>activite_inscrit = [";
+                    if ($result->num_rows > 0) {
+                        $i = 1;
+                        
+                        while($row = $result->fetch_assoc()) {
+                            
+                            echo "[".$row['ID_Activite_Prevue'].",'".$row['Date_Activite']."','".$row['Heure']."',".$row['Duree']."]";
+                            if ($result->num_rows > $i) {
+                                echo ",";
+                            }
+                        }
+                    }
+                    echo "];
+                    
+                    </script>";
+
+                    
             if($_SESSION['uid'] == 0){
                 echo "Vous devez être connecter pour vous inscrire à cette activité";
-            }elseif(){
-
             }
-            elseif(){
-                
-            }
-            else echo "<button class='btn green col l12' name='SubInsAct'  type='submit'  form='inscAct'>S''inscrire</button>";
+            else echo "<button class='btn green col l12' name='SubInsAct' id='SubInsAct' type='submit' form='inscAct'>S'inscrire</button>";
             
             ?>
         </div>
@@ -155,7 +178,7 @@
 
 
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -232,6 +255,9 @@
                 allDaySlot: false,
                 events: evenements,
                 eventClick: function(event) {
+                    var inscrit = false;
+                    var conflit = false;
+                    
                     
                     $('#modalinsact').modal('open');
                     $('#id_act').attr({
@@ -250,6 +276,26 @@
                     $('#fin').attr({
                         value:event.end.toISOString().substring(event.end.toISOString().indexOf("T")+1,16)
                     });
+                    for(i=0;i<activite_inscrit.length;i++){
+                            if(event.id == activite_inscrit[i][0]){
+                                inscrit = true;
+                            }
+                            alert(activite_inscrit[i][1]);
+                            alert($('input.a').html);
+                            if(activite_inscrit[i][1] == input.date.value){
+                                if(true){
+                                    conflit = true
+                                }
+                            }
+                    }
+                    if(inscrit){
+                        $('#SubInsAct').hide();
+                        $('#divSub').html("Vous êtes déja inscrit à cette activité")
+                    }else if(conflit){
+                        $('#SubInsAct').hide();
+                        $('#divSub').html("Vous êtes inscrit à une activité ayant un conflit d'horaire avec celle-cì")
+                    }
+                    
 
                 }
             })
@@ -261,6 +307,6 @@
         </script>
 
       <script src="js/scripts.js"></script>
-        </main>
+        
     </body>
 </html>
