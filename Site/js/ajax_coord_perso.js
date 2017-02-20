@@ -10,10 +10,11 @@
              'sexe': $("input[name='sexe']:checked"). val()
             },
       success: function (data) {
-        console.log(data);
+        alert('Mise à jour du profil réussie');
+        Location.reload();
       },
       error: function (req) {
-        alert("erreur");
+        alert("Erreur lors de la mise à jour du profil");
       }
     });
   }

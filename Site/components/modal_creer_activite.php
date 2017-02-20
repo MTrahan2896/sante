@@ -1,3 +1,4 @@
+<script src="js/ajax_creer_act.js"></script>
 <!-- Modal Structure -->
 <div id="modal_new_activite" class="modal">
   <div class="modal-content">
@@ -45,9 +46,6 @@
   </div>
 </div>
 
-
-
-
   <script>
    function generer_couleur()
     {
@@ -67,25 +65,6 @@
   $("#couleur_activite").val(code_couleur.substr(1,6));
 }
 
-  
-
-  function creer_act(){
-    $.ajax({
-      type: "POST",
-      url: "php_scripts/creer_activite.php",
-      data: {
-             'nom_act': $("#nom_activite").val(),
-             'duree': $('#duree').val(),
-             'nbr_pts': $('#point').val(),
-             'couleur':$('#couleur_activite').val(),
-             'desc':$('#description').val()
-            },
-      success: function (data) {
-        console.log(data);
-      },
-      error: function (req) {
-        alert("erreur");
-      }
-    });
-  }
 </script>
+
+

@@ -15,7 +15,6 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/ajax_coord_perso.js"></script>
-    <script src="js/ajax_coord_ressource.js"></script>
 
     <style>
     .collapsible-body
@@ -155,7 +154,6 @@ obtenir_info($_SESSION['uid']);
  <?php 
 
        include 'js/ScriptsProfil.php';
-       include 'php_scripts/afficher_info_user.php';
 ?>
 
 <script>
