@@ -46,7 +46,7 @@
 
       <div class="row">
         <div class="input-field col s12 l12">
-          <textarea id="endroit" class="materialize-textarea"></textarea>
+          <textarea id="endroit" class="materialize-textarea" maxlength="200"></textarea>
           <label for="endroit">Endroit</label>
         </div>
       </div>

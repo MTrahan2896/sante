@@ -6,7 +6,7 @@
     </div>
     <div class="row">
       <div class="input-field col s12 l8">
-        <input id="nom_activite" type="text" class="validate">
+        <input id="nom_activite" type="text" class="validate" maxlength="75">
         <label for="nom_activite">Nom de l'activité</label>
       </div>
     </div>
@@ -23,13 +23,13 @@
     Couleur de l'activité
     <div class="row">
       <div class="input-field col s12 l6">
-           <input class="jscolor" value="3152C3" id="couleur_activite">
+           <input class="jscolor" value="3152C3" id="couleur_activite" maxlength="6">
       </div>
       <button class="btn col s12 l6" onclick="appliquer_couleur()" style="margin-top: 15px; height: 45px">Générer couleur</button>
     </div>
     <div class="row">
       <div class="input-field col s12 l12">
-        <textarea id="description" class="materialize-textarea"></textarea>
+        <textarea id="description" class="materialize-textarea" maxlength="255"></textarea>
         <label for="description">Description</label>
       </div>
     </div>
@@ -101,7 +101,7 @@
           <div class="row">
             <div class="input-field col s12" style="margin-top:15px">
               <i class="material-icons prefix">account_circle</i>
-              <input name="nomgroupe" id="nomgroupe" type="text" class="validate">
+              <input name="nomgroupe" id="nomgroupe" type="text" class="validate" maxlength="65">
               <label for="nom_groupe">Nom du groupe</label>
             </div>
             <div class="input-field col s12" style="margin-top:15px">
@@ -242,7 +242,7 @@
     </div>
     <div class="row">
       <div class="input-field col s12 l8">
-        <input id="nom_session" type="text" class="validate">
+        <input id="nom_session" type="text" class="validate" maxlength="60">
         <label for="nom_session">Nom de la session</label>
       </div>
     </div>
@@ -278,15 +278,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-<?php 
-
-
-?>

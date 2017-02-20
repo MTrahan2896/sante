@@ -39,9 +39,7 @@ session_start();
 
     
   </header>
-      <?php 
-    include 'components/nav.php';
-    ?>
+      <?php include 'components/nav.php';?>
   <main>
 
   <div class="container">
@@ -54,25 +52,25 @@ session_start();
         
           <div class="row">
             <div class="input-field col s6">
-              <input id="prenom_user" name="prenom_user" type="text" class="validate">
+              <input id="prenom_user" name="prenom_user" type="text" class="validate" maxlength="50">
               <label for="prenom_user">Prénom</label>
             </div>
             <div class="input-field col s6">
-              <input id="nom" name="nom" type="text" class="validate">
+              <input id="nom" name="nom" type="text" class="validate" maxlength="50">
               <label for="nom">Nom</label>
             </div>
           </div>
        
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" name="email" type="email" class="validate">
+              <input id="email" name="email" type="email" class="validate" maxlength="75">
               <label for="email">Courriel</label>
             </div>
           </div>
       
           <div class="input-field col s6">
           <i class="material-icons prefix">phone</i>
-          <input id="tel" name="tel" type="tel" class="validate">
+          <input id="tel" name="tel" type="tel" class="validate" maxlength="10">
           <label for="tel">Téléphone</label>
         </div>
 

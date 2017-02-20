@@ -36,8 +36,6 @@ if (!ISSET($_SESSION['uid']))
 
 <main>	
 
-<?php include 'php_scripts/formater_champ.php';?>
-
 <script src="js/jscolor.js"></script>
 <script src="js/jscolor.min.js"></script>
 
@@ -81,10 +79,11 @@ if (!ISSET($_SESSION['uid']))
 
 <a class="waves-effect waves-light btn" href="#modal_session">Session</a>
 
+<a class="waves-effect waves-light btn" href="#modal_new_activite">Creer</a>
+
+
 <?php 
-include 'components/modal_inscription.php';
-include 'components/modal_planifier_activite.php';
-include 'components/modal_creer_session.php';
+include 'components/modals_admin.php';
 ?>
 
 </main>
