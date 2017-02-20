@@ -156,7 +156,7 @@
               <li ng-repeat="session in sessions">{{session.Nom_Session}}</li>
               </ul>
               <row>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
+              <button type="button"  class="btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
               
 
 

@@ -11,7 +11,7 @@
             },
       success: function (data) {
         alert('Mise à jour du profil réussie');
-        Location.reload();
+        location.reload();
       },
       error: function (req) {
         alert("Erreur lors de la mise à jour du profil");

@@ -7,7 +7,8 @@
                    'mi': $("#mi_session").val(),
                    'fin': $('#fin_session').val() }, 
             success: function (data) {
-                console.log(data);               
+                console.log(data);     
+                location.reload();          
         },
             error: function (req) {
                 alert("erreur");
