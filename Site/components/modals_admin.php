@@ -184,14 +184,15 @@
       </div>
       <div class="contenu-modal">
         <div class="row" >
-          <div ng-repeat="compte in comptesAvecCodeDansGroupe(0)">
-            {{compte.code_acces}}
+          <div ng-repeat="compte in comptesAvecCodeDansGroupe(0)" >
+            <div ng-show="compte.administrateur <1">{{compte.code_acces}}</div>
           </div>
           <div style="text-align:center;">
             <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
           </div>
         </div>
       </div>
+    </div>
     </div>
 
 
@@ -228,16 +229,14 @@
         <h5>Générer des codes administrateurs</h1>
       </div>
       <div class="contenu-modal">
-        <div class="row ">
+
 
         <div class="row">
           <label for="qt_code">Nombre de codes</label>
           <input type="number" name="qt_code" id="codeAdmin" min="1" max="10" ng-min="1" ng-max="10" validate>
         </div>
-
-       
           <button ng-click="genererCodeAdmin()" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Générer</button>
-        </div>
+    
       </div>
     </div>
   </div>
@@ -255,7 +254,7 @@
         <div class="row ">
 
         <div class="row" ng-repeat="admin in codesAdmin">
-           {{admin.CODE_ACCES}}
+           <span ng-show="admin.administrateur >= 1">{{admin.CODE_ACCES}}</span>
         </div>
 
        
@@ -312,3 +311,92 @@
     </div>
   </div>
 </div>
+
+
+<div id="modal_planif" class="modal">
+     <div class="modal-content">
+       <div class="row" style="text-align:center">
+           <h4>Planifier une activité</h4>
+       </div>
+ 
+         <div class="input-field col s12">
+           <select required id="nom_act" name="nom_act">
+           <option value="">Choisir une activité</option>
+           <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
+           </select>
+           <label>Nom de l'activité</label>
+         </div>
+ 
+         <div class="input-field col s12">
+           <input id="date_act" type="date" class="datepicker">
+           <label for="date_act">Date de l'activité</label>
+         </div>
+ 
+         <div class="row">
+           <div class="input-field col s12">
+             <label for="heure_deb">Heure de début</label>
+             <input id="heure_deb" class="timepicker" type="time" ng-model="$ctrl.NA">
+           </div>
+         </div>
+ 
+ 
+       <div class="row">
+         <div class="input-field col s6 l6">
+           <label  for="participants_max">Nombre de participants maximum</label>
+           <input type="number" step="1" maximum="180" minimum="0" id="participants_max" name="participants_max"/>
+         </div>
+ 
+         <div class="input-field col s6 l6">
+           <label  for="frais">Frais de l'activité</label>
+           <input type="number" step="5" minimum="0" id="frais" name="frais"/>
+         </div>
+       </div>
+ 
+       <div class="row">
+         <div class="input-field col s12 l12">
+           <textarea id="endroit" class="materialize-textarea"></textarea>
+           <label for="endroit">Endroit</label>
+         </div>
+       </div>
+ 
+        <div class="row">
+         <div class="col s12 l12">
+           <button type="button" class="btn green" href="" style="width:100%" ng-click="test()" onclick="planifier_act();"> Planifier</button>
+         </div>
+         <div class="col s12 l12" style="height: 15px;"></div>
+         <div class="col s12 l12">
+           <button class="btn red" href="" style="width: 100%"> Annuler</button>
+         </div>
+     </div>  
+ 
+   </div>
+  
+ </div>
+<script>
+  
+
+    function planifier_act(){
+    $.ajax({
+      type: "POST",
+      url: "php_scripts/planifier_activite.php",
+      data: {
+             'nom_act': $("#nom_act").val(),
+             'date_act': $("#date_act").val(),
+             'heure_deb': $("#heure_deb").val(),
+             'participants_max': $('#participants_max').val(),
+             'frais': $('#frais').val(),
+             'endroit':$('#endroit').val()
+            },
+      success: function (data) {
+        alert("L'activité a été planifiée avec succès")
+        location.reload();
+      },
+      error: function (req) {
+        alert("erreur");
+      }
+    });
+  }
+</script>
+
+
+

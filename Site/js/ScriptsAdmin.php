@@ -67,7 +67,7 @@ app.controller("ctrl", function($scope) {
             }))[0].Present;
 
         
-           console.log(present);
+           
 
            if(present == 1){
             return true;
@@ -153,7 +153,6 @@ app.controller("ctrl", function($scope) {
 
         $scope.comptesAdmin = function(groupe){
         return $scope.eleves.filter(function(el){
-            console.log("ADMIN: "+ el.administrateur)
             return el.administrateur == 1 && el.code_acces == "";
         });
         }
