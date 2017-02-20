@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	include 'formater_champ.php';
 	function phpQuery($query){
     $mysqli = new mysqli('localhost','root','','bd_application');
 	$myArray = array();

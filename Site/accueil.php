@@ -70,7 +70,6 @@ if (!ISSET($_SESSION['uid']))
 </div>
 
 
-<a class="waves-effect waves-light btn" href="#modal_new_activite">Créer une activité</a>
 
 <a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
 
@@ -83,7 +82,6 @@ if (!ISSET($_SESSION['uid']))
 <a class="waves-effect waves-light btn" href="#modal_session">Session</a>
 
 <?php 
-include 'components/modal_creer_activite.php';
 include 'components/modal_inscription.php';
 include 'components/modal_planifier_activite.php';
 include 'components/modal_creer_session.php';
