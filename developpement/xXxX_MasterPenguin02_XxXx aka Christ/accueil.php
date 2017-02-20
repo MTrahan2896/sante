@@ -35,14 +35,35 @@
         <main>
           <?php   
           include('components/carousel_accueil.php'); 
+          if(isset($_SESSION['uid']) && $_SESSION['uid'] !=0){
+                if(isset($_POST['SubInsAct'])){
+                    // Create connection
+                      $conn = new mysqli("Localhost", "root", "", "bd_application");
+                      // Check connection
+                      if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                      } 
+                  
+                      $sql = "INSERT INTO utilisateur_activites (ID_Utilisateur,ID_Activite_Prevue,Present)
+                      VALUES (".$_SESSION['uid'].",".$_POST['id_activite'].",1)";
+                  
+                      if ($conn->query($sql) === TRUE) {
+                          echo "<script>
+                              alert('Inscription à l'activité complété');
+                          </script>";
+                      } else {
+                          echo "Error: " . $sql . "<br>" . $conn->error;
+                      }
+                  
+                      $conn->close();
+                }
+          }
           ?>
           <div class="container">
 	<div class="row">
 
 
 	<div class="input-field col s12">
-	<!--<input type="date" class="datepicker">
-	<label>Date de l'évènement</label>-->
 
 <div class="row">
 	<div class="input-field col s12">
@@ -54,12 +75,12 @@
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
-                    $query = "SELECT distinct nom FROM activites";
+                    $query = "SELECT distinct Nom_Activite FROM activites";
                     $result = $mysqli->query($query);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            echo "<option value='".$row['nom']."'>".$row['nom']."</option>";
+                            echo "<option value='".$row['Nom_Activite']."'>".$row['Nom_Activite']."</option>";
                         }
                     }
 
@@ -111,7 +132,18 @@
             </div> 
         </div>
         <div class="row">
-            <button class="btn green col l12" type="submit"  form="inscAct">S'inscrire</button>
+            <?php
+            if($_SESSION['uid'] == 0){
+                echo "Vous devez être connecter pour vous inscrire à cette activité";
+            }elseif(){
+
+            }
+            elseif(){
+                
+            }
+            else echo "<button class='btn green col l12' name='SubInsAct'  type='submit'  form='inscAct'>S''inscrire</button>";
+            
+            ?>
         </div>
     </div>
     
@@ -155,8 +187,11 @@
                         $i = 1;
     
                         while($row = $result->fetch_assoc()) {
-                            //strtotime("+15 minutes", strtotime($row['heure']))
-                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure']."', end:'".$row['Date_Activite']."T".$row['Heure']."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black'}";
+
+                            $timestamp = strtotime($row['Heure']) + $row['Duree']*60;
+                            $time = date('H:i:i', $timestamp);
+                            
+                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure']."', end:'".$row['Date_Activite']."T".$time."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black'}";
                             if ($result->num_rows > $i) {
                                 echo ",";
                             }
