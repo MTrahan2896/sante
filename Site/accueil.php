@@ -1,18 +1,4 @@
-<<<<<<< HEAD
 <html>
-=======
-<?php
-session_start();
-
-if (!ISSET($_SESSION['uid']))
-{
-  $_SESSION['uid'] = 0;
-}
-?>
-
-  <!DOCTYPE html>
-  <html ng-app='app_angular' ng-controller="ctrl">
->>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
     <head>
         <meta charset="UTF-8">
         <!--Import Google Icon Font-->
@@ -37,7 +23,6 @@ if (!ISSET($_SESSION['uid']))
         }
       </style>
     </head>
-<<<<<<< HEAD
     <body>
         <header>
             
@@ -75,24 +60,6 @@ if (!ISSET($_SESSION['uid']))
           }
           ?>
           <div class="container">
-=======
-<body>
-
-      <header>
-      <?php 
-          include 'components/nav.php';
-      ?>  
-
-      </header>      
-
-<main>	
-
-<script src="js/jscolor.js"></script>
-<script src="js/jscolor.min.js"></script>
-
-
-  	<div class="container">
->>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
 	<div class="row">
 
 
@@ -128,7 +95,6 @@ if (!ISSET($_SESSION['uid']))
 
 	</form>
 </div>
-<<<<<<< HEAD
 <!-- Modal Structure -->
   <div id="modalinsact" class="modal" >
       <div class="container">
@@ -172,7 +138,7 @@ if (!ISSET($_SESSION['uid']))
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
-                    $query = "SELECT ap.ID_Activite_Prevue, ap.Date_Activite, ap.Heure_Debut, a.Duree 
+                    $query = "SELECT ap.ID_Activite_Prevue, ap.Date_Activite, ap.Heure, a.Duree 
                               FROM activites_prevues ap, activites a, utilisateur_activites ua
                               where ua.ID_Utilisateur = ".$_SESSION['uid']." 
                                and ap.ID_Activite = a.ID_Activite
@@ -184,7 +150,7 @@ if (!ISSET($_SESSION['uid']))
                         
                         while($row = $result->fetch_assoc()) {
                             
-                            echo "[".$row['ID_Activite_Prevue'].",'".$row['Date_Activite']."','".$row['Heure_Debut']."',".$row['Duree']."]";
+                            echo "[".$row['ID_Activite_Prevue'].",'".$row['Date_Activite']."','".$row['Heure']."',".$row['Duree']."]";
                             if ($result->num_rows > $i) {
                                 echo ",";
                             }
@@ -206,41 +172,11 @@ if (!ISSET($_SESSION['uid']))
     
      </div>
   </div>
-=======
-
-
-
-<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
-
-<a class="waves-effect waves-light btn" href="#modal_planif">Planifier une activité</a>
-
-<a class="waves-effect waves-light btn" href="#modal_login">Login</a>
-
-<a class="waves-effect waves-light btn" href="#modal_code">code</a>
-
-<a class="waves-effect waves-light btn" href="#modal_session">Session</a>
-
-<a class="waves-effect waves-light btn" href="#modal_new_activite">Creer</a>
-
-
-<?php 
-include 'components/modals_admin.php';
-?>
-
->>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
 </main>
 
         
 
 
-<<<<<<< HEAD
-=======
-        <footer class="page-footer" class="col l12" style="width: 100%!important">
-         
-        </footer>
-      
-
->>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
@@ -266,7 +202,7 @@ include 'components/modals_admin.php';
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
-                    $query = "SELECT ap.ID_Activite_prevue, a.Couleur, a.Nom_Activite, ap.Date_Activite, ap.Heure_Debut, a.Duree FROM activites a, activites_prevues ap
+                    $query = "SELECT ap.ID_Activite_prevue, a.Couleur, a.Nom_Activite, ap.Date_Activite, ap.Heure, a.Duree FROM activites a, activites_prevues ap
                               where a.ID_Activite = ap.ID_Activite";
                     $result = $mysqli->query($query);
 
@@ -275,10 +211,10 @@ include 'components/modals_admin.php';
     
                         while($row = $result->fetch_assoc()) {
 
-                            $timestamp = strtotime($row['Heure_Debut']) + $row['Duree']*60;
+                            $timestamp = strtotime($row['Heure']) + $row['Duree']*60;
                             $time = date('H:i:i', $timestamp);
                             
-                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure_Debut']."', end:'".$row['Date_Activite']."T".$time."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black'}";
+                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure']."', end:'".$row['Date_Activite']."T".$time."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black'}";
                             if ($result->num_rows > $i) {
                                 echo ",";
                             }
