@@ -3,8 +3,7 @@ session_start();
 ?>
 <html>
 <head>
-
-      <style type="text/css"></style>
+  <style type="text/css"></style>
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
@@ -15,41 +14,20 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/ajax_coord_perso.js"></script>
-
-    <style>
-    .collapsible-body
-    {
-    padding-left: 10px;
-    padding-right: 10px;
-    }
-    .prob_medic
-    {
-    text-align: right;
-    }
-
-    .act label
-    {
-      font-size: 12px;
-      color:black;
-    }
-    </style>
 </head>
 <body>
   <header>
-
-    
+        <?php include 'components/nav.php';?>
   </header>
-      <?php include 'components/nav.php';?>
   <main>
-
   <div class="container">
-    
     <ul class="collapsible" data-collapsible="expandable">
-      <!-- PROFIL -->
+      <!-- Coordonées personnelle -->
       <li class="">
         <div class="collapsible-header"><i class="material-icons">person</i>Coordonnees personnelles</div>
         <div class="collapsible-body" style="display: none;">
         
+        <!-- Nom prénom -->
           <div class="row">
             <div class="input-field col s6 l4">
               <input id="prenom_user" name="prenom_user" type="text" class="validate" maxlength="50">
@@ -61,7 +39,8 @@ session_start();
               <label for="nom">Nom</label>
             </div>
           </div>
-       
+
+       <!-- Courriel Téléphone -->
           <div class="row">
             <div class="input-field col s12 l5">
               <input id="email" name="email" type="email" class="validate" maxlength="75">
@@ -75,22 +54,45 @@ session_start();
             </div>
           </div>
 
+          <!-- Sexe -->
           <div class="row">
-                <div class="col s12 l6">
+                <div class="col s6 l3">
                   <i class="material-icons prefix">people</i>
                   <input name="sexe" type="radio" id="sH" value="H" class="with-gap" />
                   <label for="sH" style="margin:auto;">Homme</label>
                   <input name="sexe" type="radio" id="sF" value="F" class="with-gap" />
                   <label for="sF" style="margin:auto;">Femme</label>
                </div>
+
+               <div class="col s6 l3">                 
+                  <select id="type_utilisateur">
+                      <option>Type d'utilisateur</option>
+                      <optgroup label="Élève">
+                        <option value="1">Élève sans ensemble</option>
+                        <option value="2">Élève ensemble 1</option>
+                        <option value="3">Élève ensemble 2</option>
+                        <option value="4">Élève ensemble 3</option>
+                      </optgroup>
+                      <optgroup label="Membre du personnel">
+                        <option value="5">Professeur</option>
+                        <option value="6">Membre de la direction</option>
+                        <option value="7">Membre de l'administration</option>
+                      </optgroup>
+                     <optgroup label="Autre">
+                        <option value="8">Personne externe</option>
+                     </optgroup>
+                  </select>
+               </div>
           </div>
+
+          <!-- Boutons annuler/enregistrer -->
           <div class="row">
             <div class="col s12 l12">
             <button class="btn green" type="button" style="width:100%" onclick="transfert_coord_perso()">Enregistrer</button>
             </div>
             <div class="col l12 s12" style="height:15px"></div>
             <div class="col s12 l12">
-            <button class="btn red" type="button" style="width:100%">Annuler</button>
+            <button class="btn red" type="button" style="width:100%" onclick="location.reload()">Annuler</button>
             </div>
           </div>
         </div>
@@ -99,53 +101,67 @@ session_start();
       <li class="act">
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
         <div class="collapsible-body" style="display: none;">
+         
+           <ul class="collapsible" data-collapsible="expandable">
+         
+           <!-- Chaque LI représente 1 activité -->
+           <li>
+           <div class="collapsible-header"><i class="material-icons">directions_bike</i>Nom_act+Date</div>
+           <div class="collapsible-body">
+
+            <div class="row">
+                <div class="input-field col s6 l4">
+                  <input id="nom_activite" type="text" class="validate" disabled />
+                  <label for="nom_activite">Nom de l'activité</label>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="input-field col s12 l4">
+                    <input id="date_act" type="date" class="datepicker" disabled />
+                    <label for="date_act">Date de l'activité</label>
+                </div>
+
+                <div class="input-field col s6 l4">
+                    <label for="heure_deb">Heure de début</label>
+                    <input id="heure_deb" class="timepicker" type="time" disabled />
+                </div>
+                <div class="input-field col s6 l4">
+                     <label for="duree">Durée</label>
+                  <input type="number" step="5" minimum="0" id="frais" name="duree" disabled />
+                 </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s6 l4">
+                  <label  for="frais">Frais de l'activité</label>
+                  <input type="number" step="5" minimum="0" id="frais" name="frais" disabled />
+                </div>
               
-          <div class="row">
-            <div class="input-field col s6 l4">
-              <input id="nom_activite" type="text" class="validate">
-              <label for="nom_activite">Nom de l'activité</label>
-            </div>
-          
+                <div class="input-field col s6 l4">
+                  <label  for="point">Nombre de points</label>
+                  <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point" disabled />
+                </div>
+              </div>
 
-            <div class="input-field col s12 l4">
-                <input id="date_act" type="date" class="datepicker">
-                <label for="date_act">Date de l'activité</label>
-            </div>
+              <div class="row">
+                <div class="input-field col s12 l12">
+                  <textarea id="endroit" class="materialize-textarea" maxlength="200" disabled></textarea>
+                  <label for="endroit">Endroit</label>
+                </div>
+              </div>
+                  
+              <div class="row">
+                <div class="input-field col s12 l12">
+                  <textarea id="commentaire" class="materialize-textarea" maxlength="200" disabled></textarea>
+                  <label for="commentaire">Commentaire</label>
+                </div>
+              </div>
 
-            <div class="input-field col s6 l4">
-                <label for="heure_deb">Heure de début</label>
-                <input id="heure_deb" class="timepicker" type="time">
-            </div>
-            <div class="input-field col s6 l4">
-                <label for="heure_fin">Heure de fin</label>
-                <input id="heure_fin" class="timepicker" type="time">
-             </div>
-    
-            <div class="input-field col s6 l4">
-              <label  for="frais">Frais de l'activité</label>
-              <input type="number" step="5" minimum="0" id="frais" name="frais"/>
-            </div>
-          
-            <div class="input-field col s6 l4">
-              <label  for="point">Nombre de points</label>
-              <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point"/>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="input-field col s12 l12">
-              <textarea id="endroit" class="materialize-textarea" maxlength="200"></textarea>
-              <label for="endroit">Endroit</label>
-            </div>
-          </div>
+           </div>
+           </li>
               
-          <div class="row">
-            <div class="input-field col s12 l12">
-              <textarea id="commentaire" class="materialize-textarea" maxlength="200"></textarea>
-              <label for="commentaire">Commentaire</label>
-            </div>
-          </div>
-
+           
         </div>
       </li>
 
