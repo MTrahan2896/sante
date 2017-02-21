@@ -19,7 +19,7 @@
          $_SESSION['uid'] = 0;
           }
          if (isset($_SESSION['username'])){
-          echo "<script> document.getElementById('Greet_User').innerHTML ='".$_SESSION['username']."'; $('.adminTabs').remove();</script>";
+          echo "<script> document.getElementById('Greet_User').innerHTML ='".$_SESSION['username']."';</script>";
           }
         if ($_SESSION['uid'] == 0)
         {
