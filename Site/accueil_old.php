@@ -1,11 +1,27 @@
-<html>
+<?php
+session_start();
+
+if (!ISSET($_SESSION['uid']))
+{
+  $_SESSION['uid'] = 0;
+}
+
+  
+
+
+?>
+
+  <!DOCTYPE html>
+  <html ng-app='app_angular' ng-controller="ctrl">
     <head>
-        <meta charset="UTF-8">
-        <!--Import Google Icon Font-->
+
+    <?php
+    include 'components/headContent.php';
+    ?>
+
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
+	  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
   	<link type="text/css" rel="stylesheet" href="css/sc-date-time.css">
   	<link type="text/css" rel="stylesheet" href="css/style.css">
 
@@ -23,16 +39,31 @@
         }
       </style>
     </head>
-    <body>
-        <header>
-            
-        
-        <?php 
-              include('components/nav.php') ;
-              
-        ?>
-        </header>
-        <main>
+<body>
+
+      <header>
+      <?php 
+          include 'components/nav.php';
+      ?>  
+
+      </header>      
+
+<main>	
+
+<?php include 'php_scripts/formater_champ.php';?>
+
+<script src="js/jscolor.js"></script>
+<script src="js/jscolor.min.js"></script>
+
+
+<!--
+<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
+
+<a class="waves-effect waves-light btn" href="#modal_login">Login</a>
+
+<a class="waves-effect waves-light btn" href="#modal_code">code</a>
+-->
+       
           <?php   
           include('components/carousel_accueil.php'); 
           if(isset($_SESSION['uid']) && $_SESSION['uid'] !=0){
@@ -60,10 +91,7 @@
           }
           ?>
           <div class="container">
-	<div class="row">
 
-
-	<div class="input-field col s12">
 
 <div class="row">
 	<div class="input-field col s12">
@@ -93,7 +121,6 @@
 		
 	</div>
 
-	</form>
 </div>
 <!-- Modal Structure -->
   <div id="modalinsact" class="modal" >
@@ -268,11 +295,11 @@
                     $('#date').attr({
                         value:event.start.toISOString().substring(0,event.start.toISOString().indexOf("T")).replace(new RegExp('/', 'g'), '-')
                     });
-                    //$('#debut').text("Debut: "+ event.start.toISOString().substring(event.start.toISOString().indexOf("T")+1,16));
+                    
                     $('#debut').attr({
                         value:event.start.toISOString().substring(event.start.toISOString().indexOf("T")+1,16)
                     });
-                    //$('#fin').text("Fin:"+event.end.toISOString().substring(event.end.toISOString().indexOf("T")+1,16));
+                    
                     $('#fin').attr({
                         value:event.end.toISOString().substring(event.end.toISOString().indexOf("T")+1,16)
                     });
@@ -281,8 +308,8 @@
                                 inscrit = true;
                             }
                             alert(activite_inscrit[i][1]);
-                            alert($('input.a').html);
-                            if(activite_inscrit[i][1] == input.date.value){
+                            alert($('input.date').html);
+                            if(activite_inscrit[i][1] == $('input.date').html){
                                 if(true){
                                     conflit = true
                                 }
@@ -306,7 +333,11 @@
             inicalendrier();
         </script>
 
+      <?php include 'js/ScriptsAdmin.php'; ?>
+      
       <script src="js/scripts.js"></script>
-        
+
+
     </body>
-</html>
+  </html>
+

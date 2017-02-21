@@ -241,7 +241,7 @@
 
 
   <div id="modalCodeAdmin" class="modal" style="height: 400px; width: 400px" >
-    <div class="modal-content" style="text-align: center; height: 100%" >
+    <div class="modal-content container" style="text-align: center; height: 100%" >
       <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
         <h5>Générer des codes administrateurs</h1>
       </div>
@@ -251,7 +251,20 @@
         <div class="row">
           <label for="qt_code">Nombre de codes</label>
           <input type="number" name="qt_code" id="codeAdmin" min="1" max="10" ng-min="1" ng-max="10" validate>
-        </div>
+   </div>
+  <div style="text-align: left;">
+    <p>
+      <input name="group1" type="radio" id="test1" />
+      <label for="test1">Administrateur</label>
+    </p>
+    <p>
+      <input name="group1" type="radio" id="test2" />
+      <label for="test2">Planificateur</label>
+    </p>
+
+ </div>
+
+     
           <button ng-click="genererCodeAdmin()" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Générer</button>
     
       </div>
@@ -401,6 +414,7 @@
              'participants_max': $('#participants_max').val(),
              'frais': $('#frais').val(),
              'endroit':$('#endroit').val()
+
             },
       success: function (data) {
         alert("L'activité a été planifiée avec succès")
