@@ -172,7 +172,7 @@ if (!ISSET($_SESSION['uid']))
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
-                    $query = "SELECT ap.ID_Activite_Prevue, ap.Date_Activite, ap.Heure, a.Duree 
+                    $query = "SELECT ap.ID_Activite_Prevue, ap.Date_Activite, ap.Heure_Debut, a.Duree 
                               FROM activites_prevues ap, activites a, utilisateur_activites ua
                               where ua.ID_Utilisateur = ".$_SESSION['uid']." 
                                and ap.ID_Activite = a.ID_Activite
@@ -184,7 +184,7 @@ if (!ISSET($_SESSION['uid']))
                         
                         while($row = $result->fetch_assoc()) {
                             
-                            echo "[".$row['ID_Activite_Prevue'].",'".$row['Date_Activite']."','".$row['Heure']."',".$row['Duree']."]";
+                            echo "[".$row['ID_Activite_Prevue'].",'".$row['Date_Activite']."','".$row['Heure_Debut']."',".$row['Duree']."]";
                             if ($result->num_rows > $i) {
                                 echo ",";
                             }
@@ -266,7 +266,7 @@ include 'components/modals_admin.php';
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
-                    $query = "SELECT ap.ID_Activite_prevue, a.Couleur, a.Nom_Activite, ap.Date_Activite, ap.Heure, a.Duree FROM activites a, activites_prevues ap
+                    $query = "SELECT ap.ID_Activite_prevue, a.Couleur, a.Nom_Activite, ap.Date_Activite, ap.Heure_Debut, a.Duree FROM activites a, activites_prevues ap
                               where a.ID_Activite = ap.ID_Activite";
                     $result = $mysqli->query($query);
 
@@ -275,10 +275,10 @@ include 'components/modals_admin.php';
     
                         while($row = $result->fetch_assoc()) {
 
-                            $timestamp = strtotime($row['Heure']) + $row['Duree']*60;
+                            $timestamp = strtotime($row['Heure_Debut']) + $row['Duree']*60;
                             $time = date('H:i:i', $timestamp);
                             
-                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure']."', end:'".$row['Date_Activite']."T".$time."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black'}";
+                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure_Debut']."', end:'".$row['Date_Activite']."T".$time."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black'}";
                             if ($result->num_rows > $i) {
                                 echo ",";
                             }
