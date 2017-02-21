@@ -1,3 +1,10 @@
+  <script src="js/ajax_planifier_act.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/css/materialize.clockpicker.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <script src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
+
   <div id="modal_planif" class="modal">
     <div class="modal-content">
       <div class="row" style="text-align:center">
@@ -39,7 +46,7 @@
 
       <div class="row">
         <div class="input-field col s12 l12">
-          <textarea id="endroit" class="materialize-textarea"></textarea>
+          <textarea id="endroit" class="materialize-textarea" maxlength="200"></textarea>
           <label for="endroit">Endroit</label>
         </div>
       </div>
@@ -57,9 +64,6 @@
   </div>
  
 </div>
-
-
-
   
 <script>
   //Time Picker:
@@ -70,27 +74,5 @@ $('.timepicker').pickatime({
   autoclose: false,
   vibrate: true // vibrate the device when dragging clock hand
 });
-  
-  function planifier_act(){
-    $.ajax({
-      type: "POST",
-      url: "php_scripts/planifier_activite.php",
-      data: {
-             'nom_act': $("#nom_act").val(),
-             'date_act': $("#date_act").val(),
-             'heure_deb': $("#heure_deb").val(),
-             'participants_max': $('#participants_max').val(),
-             'frais': $('#frais').val(),
-             'endroit':$('#endroit').val()
-            },
-      success: function (data) {
-        alert("L'activité a été planifiée avec succès")
-        console.log(data);
-      },
-      error: function (req) {
-        alert("erreur");
-      }
-    });
-  }
 </script>
 

@@ -15,7 +15,6 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/ajax_coord_perso.js"></script>
-    <script src="js/ajax_coord_ressource.js"></script>
 
     <style>
     .collapsible-body
@@ -40,9 +39,7 @@ session_start();
 
     
   </header>
-      <?php 
-    include 'components/nav.php';
-    ?>
+      <?php include 'components/nav.php';?>
   <main>
 
   <div class="container">
@@ -54,31 +51,32 @@ session_start();
         <div class="collapsible-body" style="display: none;">
         
           <div class="row">
-            <div class="input-field col s6">
-              <input id="prenom_user" name="prenom_user" type="text" class="validate">
+            <div class="input-field col s6 l4">
+              <input id="prenom_user" name="prenom_user" type="text" class="validate" maxlength="50">
               <label for="prenom_user">Prénom</label>
             </div>
-            <div class="input-field col s6">
-              <input id="nom" name="nom" type="text" class="validate">
+
+            <div class="input-field col s6 l4">
+              <input id="nom" name="nom" type="text" class="validate" maxlength="50">
               <label for="nom">Nom</label>
             </div>
           </div>
        
           <div class="row">
-            <div class="input-field col s12">
-              <input id="email" name="email" type="email" class="validate">
+            <div class="input-field col s12 l5">
+              <input id="email" name="email" type="email" class="validate" maxlength="75">
               <label for="email">Courriel</label>
             </div>
+          <div class="col l1"></div>
+            <div class="input-field col s6 l2">
+              <i class="material-icons prefix">phone</i>
+              <input id="tel" name="tel" type="tel" class="validate" maxlength="10">
+              <label for="tel">Téléphone</label>
+            </div>
           </div>
-      
-          <div class="input-field col s6">
-          <i class="material-icons prefix">phone</i>
-          <input id="tel" name="tel" type="tel" class="validate">
-          <label for="tel">Téléphone</label>
-        </div>
 
           <div class="row">
-                <div class="col s12">
+                <div class="col s12 l6">
                   <i class="material-icons prefix">people</i>
                   <input name="sexe" type="radio" id="sH" value="H" class="with-gap" />
                   <label for="sH" style="margin:auto;">Homme</label>
@@ -101,25 +99,53 @@ session_start();
       <li class="act">
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
         <div class="collapsible-body" style="display: none;">
+              
+          <div class="row">
+            <div class="input-field col s6 l4">
+              <input id="nom_activite" type="text" class="validate">
+              <label for="nom_activite">Nom de l'activité</label>
+            </div>
           
-      <div class="row">
-      <label for="nom_activite" class="col s4">Actitvé</label><label name="nom_activite" class="col s6"> Badminton</label>
-      </div>
 
-      <div class="row">
-      <label for="date_activite" class="col s4">Date de l'activité</label><label name="date_activite" class="col s4"> 2017-02-05</label>
-      </div>
+            <div class="input-field col s12 l4">
+                <input id="date_act" type="date" class="datepicker">
+                <label for="date_act">Date de l'activité</label>
+            </div>
 
-      <div class="row">
-      <label for="heure_deb" class="col s4">Heure de début</label><label name="heure_deb" class="col s2"> 8:10</label>
-
-      <label for="heure_fin" class="col s4">Heure de fin</label><label name="heure_deb" class="col s2"> 8:10</label>
-
-      </div>
-
-      <div class="row">
-      </div>
+            <div class="input-field col s6 l4">
+                <label for="heure_deb">Heure de début</label>
+                <input id="heure_deb" class="timepicker" type="time">
+            </div>
+            <div class="input-field col s6 l4">
+                <label for="heure_fin">Heure de fin</label>
+                <input id="heure_fin" class="timepicker" type="time">
+             </div>
+    
+            <div class="input-field col s6 l4">
+              <label  for="frais">Frais de l'activité</label>
+              <input type="number" step="5" minimum="0" id="frais" name="frais"/>
+            </div>
           
+            <div class="input-field col s6 l4">
+              <label  for="point">Nombre de points</label>
+              <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12 l12">
+              <textarea id="endroit" class="materialize-textarea" maxlength="200"></textarea>
+              <label for="endroit">Endroit</label>
+            </div>
+          </div>
+              
+          <div class="row">
+            <div class="input-field col s12 l12">
+              <textarea id="commentaire" class="materialize-textarea" maxlength="200"></textarea>
+              <label for="commentaire">Commentaire</label>
+            </div>
+          </div>
+
         </div>
       </li>
 
@@ -155,7 +181,6 @@ obtenir_info($_SESSION['uid']);
  <?php 
 
        include 'js/ScriptsProfil.php';
-       include 'php_scripts/afficher_info_user.php';
 ?>
 
 <script>

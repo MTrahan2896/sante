@@ -24,11 +24,11 @@
               </div>
               <div class="collapsible-body collapsibleWithButton">
                 <table class="striped" align="center">
-                  <thead><tr><td>Nom</td><td>Points accumulés</td></tr></thead>
+                  <thead><tr><td>Nom</td><td class="center">Points accumulés</td></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                    <td style="text-align: center" class="">{{}}/15</td>
+                    <td style="text-align: center" class="center">{{}}/15</td>
                     
                   </div>
                 </tr>
@@ -45,6 +45,29 @@
             
           </li>
         </ul>
+
+
+          <ul class="collapsible" data-collapsible="expandable" >
+              
+              <li> <!-- SANS GROUPE -->
+              <div class="collapsible-header"><i class="material-icons">supervisor_account</i>Utilisateurs sans groupes
+                <span class="new badge blue right" data-badge-caption="">{{elevesDansGroupe(0).length}} Utilisateur<span ng-show="elevesDansGroupe(0).length>1">s</span></span>
+              </div>
+              <div class="collapsible-body collapsibleWithButton">
+                    <div ng-repeat="eleve in elevesDansGroupe(0)">{{eleve.nom}}, {{eleve.prenom}}</div>
+
+                                 <div class="row" style="text-align: center">
+              <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
+              <div class="row"  style="text-align: center">
+                <button data-target="modalGroupe0" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
+              </div>
+
+              </div>
+
+            
+               </li>
+          </ul>
+
         <button data-target="modalNouveauGroupe" style="margin-bottom: 0px !important" class="btn right">Nouveau Groupe</button>
       </div>
       
@@ -87,7 +110,7 @@
         </li>
       </ul>
   
-      <a class="waves-effect waves-light btn right" href="#modal_planif" style="margin-top: 0px;">Planifier une activité</a>
+      <a class="waves-effect waves-light btn right" data-target="modal_planif" style="margin-top: 0px;">Planifier une activité</a>
       <div style="margin-bottom: 40px"></div>
       </div></li>
     
@@ -117,7 +140,7 @@
               </ul>
               <row>
               <button type="button" data-target="modalCodeAdmin" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
-              <button type="button" data-target="modalAfficherCodeAdmin"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
+              <button type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
               </row>
              </div>
             </li>
@@ -130,9 +153,25 @@
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
-              <ul>
-              <li ng-repeat="activite in activites">{{activite.Nom_Activite}}</li>
-              </ul>
+              
+                <table>
+                <thead>
+                  <th class="center">Activité</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th>
+                </thead>                
+                <tr ng-repeat="activite in activites">
+                  <td class="center">{{activite.Nom_Activite}}</td>
+                  <td class="center">{{activite.Duree}}</td>
+                  <td class="center">{{activite.Ponderation}}</td>
+                </tr>
+  
+
+                </table>
+
+
+
+
+              
+              
               <row>
               <br><br>
               <div style="text-align: center">
@@ -152,11 +191,16 @@
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
-              <ul>
-              <li ng-repeat="session in sessions">{{session.Nom_Session}}</li>
-              </ul>
-              <row>
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
+              <table><thead><th>Nom de la session</th><th>Début</th>
+              <th>Mi-Session</th>
+              <th>Fin</th></thead>
+              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td>
+              </tr>
+              </table>
+              
+              
+              
+              <button type="button"  class="btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
               
 
 
@@ -216,7 +260,7 @@ echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminT
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="js/moment.js">moment.locale="fr"</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -225,16 +269,39 @@ echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminT
 <script type="text/javascript" src="js/gcal.js"></script>
 <script type="text/javascript" src="js/sc-date-time.js"></script>
 <script src="js/scripts.js"></script>
+<script src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
+
 <?php include 'js/ScriptsAdmin.php';?>
 
 
+
+
+
+
+
+
 <script>
+
 $(document).ready(function(){
 // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 $('.modal').modal();
+$('.timepicker').pickatime({
+    default: 'now',
+    twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+    donetext: 'OK',
+  autoclose: false,
+  vibrate: true // vibrate the device when dragging clock hand
 });
+
+
+
+
+});
+
+
 
 </script>
 <div class="hiddendiv common"></div>
 
 </body></html>
+

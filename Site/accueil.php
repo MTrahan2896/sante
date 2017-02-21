@@ -1,4 +1,18 @@
+<<<<<<< HEAD
 <html>
+=======
+<?php
+session_start();
+
+if (!ISSET($_SESSION['uid']))
+{
+  $_SESSION['uid'] = 0;
+}
+?>
+
+  <!DOCTYPE html>
+  <html ng-app='app_angular' ng-controller="ctrl">
+>>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
     <head>
         <meta charset="UTF-8">
         <!--Import Google Icon Font-->
@@ -23,6 +37,7 @@
         }
       </style>
     </head>
+<<<<<<< HEAD
     <body>
         <header>
             
@@ -60,6 +75,24 @@
           }
           ?>
           <div class="container">
+=======
+<body>
+
+      <header>
+      <?php 
+          include 'components/nav.php';
+      ?>  
+
+      </header>      
+
+<main>	
+
+<script src="js/jscolor.js"></script>
+<script src="js/jscolor.min.js"></script>
+
+
+  	<div class="container">
+>>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
 	<div class="row">
 
 
@@ -95,6 +128,7 @@
 
 	</form>
 </div>
+<<<<<<< HEAD
 <!-- Modal Structure -->
   <div id="modalinsact" class="modal" >
       <div class="container">
@@ -172,11 +206,41 @@
     
      </div>
   </div>
+=======
+
+
+
+<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
+
+<a class="waves-effect waves-light btn" href="#modal_planif">Planifier une activité</a>
+
+<a class="waves-effect waves-light btn" href="#modal_login">Login</a>
+
+<a class="waves-effect waves-light btn" href="#modal_code">code</a>
+
+<a class="waves-effect waves-light btn" href="#modal_session">Session</a>
+
+<a class="waves-effect waves-light btn" href="#modal_new_activite">Creer</a>
+
+
+<?php 
+include 'components/modals_admin.php';
+?>
+
+>>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
 </main>
 
         
 
 
+<<<<<<< HEAD
+=======
+        <footer class="page-footer" class="col l12" style="width: 100%!important">
+         
+        </footer>
+      
+
+>>>>>>> cacdb00fcd7461068907e6e26c5c09a9c53f0d6f
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>

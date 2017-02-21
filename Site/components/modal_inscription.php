@@ -1,3 +1,5 @@
+    <script src="js/ajax_inscription.js"></script>
+
     <div class="modal" id="modal_ins">
         <div class="modal-content ">
           <div class="row" style="text-align: center;">
@@ -9,7 +11,7 @@
           
               <div class="input-field col s12">
                  <i class="material-icons prefix">perm_identity</i>
-                 <input name="username" id="user" type="text" class="validate">
+                 <input name="username" id="user" type="text" class="validate" maxlength="30">
                  <label for="username">nom d'utilisateur</label>
               </div>
           </div>
@@ -18,12 +20,12 @@
               
               <div class="input-field col s12 l6">
             <!--    <i class="material-icons prefix">person_pin</i> -->
-                <input name="prenom" id="prenom" type="text" class="validate">
+                <input name="prenom" id="prenom" type="text" class="validate" maxlength="50">
                 <label for="prenom">Prénom</label>
               </div>
           
               <div class="input-field col s12 l6">
-                <input name="nom" id="nom_t" type="text" class="validate">
+                <input name="nom" id="nom_t" type="text" class="validate" maxlength="50">
                 <label for="nom">Nom</label>
               </div>
             </div>
@@ -31,7 +33,7 @@
               
              <div class="input-field col s12">
                <i class="material-icons prefix">email</i>
-               <input name="courriel" id="courriel" type="text" class="validate">
+               <input name="courriel" id="courriel" type="text" class="validate" maxlength="75">
                <label for="courriel">Courriel</label>
              </div>
             </div>
@@ -39,7 +41,7 @@
               
               <div class="input-field col s10">
                 <i class="material-icons prefix">phone</i>
-                <input name="telephone" id="telephone" type="text" class="validate">
+                <input name="telephone" id="telephone" type="text" class="validate" maxlength="10">
                 <label for="telephone">Téléphone</label>
               </div>
             </div>
@@ -81,34 +83,3 @@
         </div>
         
       </div>
-
-      <script>
-        function valider(){
-        
-         $.ajax({
-            type: "POST",
-            url: "php_scripts/inscrire.php",
-            data: {
-            'username': $("#user").val(), 
-            'prenom': $("#prenom").val(), 
-            'nom': $("#nom_t").val(), 
-            'courriel': $("#courriel").val(), 
-            'telephone': $("#telephone").val(), 
-            'sexe': $("input[type='radio'][name='sexe']:checked").val(),
-            'password': $("#pass").val(),
-            'code' : $("#code_acces").val()}, 
-            success: function (data) {
-                alert('Inscription Réussie!')
-                location.reload();
-                
-            },
-            error: function (req) {
-                
-            }
-        }
-
-       ); }
-
-
-
-      </script>

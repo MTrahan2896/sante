@@ -6,7 +6,7 @@
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li><a href="accueil.php">Accueil</a></li>
           <li><a class="adminTabs" href="administration.php">Administration</a></li>
-          <li><a href="collapsible.html"></a></li>
+          <li><a href="stats.php">Statistiques</a></li>
           
         </ul>
         

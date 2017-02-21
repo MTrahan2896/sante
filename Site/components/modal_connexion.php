@@ -1,18 +1,15 @@
 <?php 
   include 'modal_inscription.php';
   include 'modal_code_acces.php';
-  
 ?>
+<script src="js/ajax_connexion.js"></script>
 <script>
-  
    function Close_Open_Modal(close_modal_id,open_modal_id)
   {
      $(close_modal_id).modal('close');
       $(open_modal_id).modal('open');
      
   }  
-
-
 </script>
 
 
@@ -28,7 +25,7 @@
           <div class="row">
             <div class="input-field col s12" style="margin-top:15px">
               <i class="material-icons prefix">account_circle</i>
-              <input id="username" name="username" type="text" class="validate">
+              <input id="username" name="username" type="text" class="validate" maxlength="50">
               <label for="username">Nom d'utilisateur</label>
             </div>
             <div class="input-field col s12" style="margin-top:15px">
@@ -49,30 +46,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-  function post_connexion(){
-    $.ajax({
-            type: "POST",
-            url: "php_scripts/connecter.php",
-            data: {'nom_user': $("#username").val(),
-                   'password': $('#pwd').val() }, 
-            success: function (data) {
-                console.log(data);
-                if(data.toString() == 1){
-                  location.reload();
-                }else{
-                  alert('Nom d\'utilisateur ou mot de passe invalide');
-                }
-                
-        },
-            error: function (req) {
-                alert("erreur");
-            }
-        });
-}    
-
-
-    
-</script>
