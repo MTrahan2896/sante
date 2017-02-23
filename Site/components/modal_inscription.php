@@ -48,7 +48,7 @@
             <div class="row">
               <div class="col s12">
                 <i class="material-icons prefix">people</i>
-                <input name="sexe" type="radio" id="s1" value="H" />
+                <input name="sexe" type="radio" id="s1" value="H" checked />
                 <label for="s1" style="margin:auto;">Homme</label>
                 <input name="sexe" type="radio" id="s2" value="F" />
                 <label for="s2" style="margin:auto;">Femme</label>

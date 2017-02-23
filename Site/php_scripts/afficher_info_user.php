@@ -24,14 +24,14 @@ function obtenir_info($id)
       echo "<script>$('input[name=sexe][value=\"".$row['Sexe']."\"]').prop(\"checked\",true);</script>";
       
        //Set Lien Personne ressource
-      //echo "<script>$('#type_utilisateur').val('".$row['Type_Utilisateur']."');</script>";
+      echo "<script>$('#type_utilisateur').val('".$row['Type_Utilisateur']."');</script>";
     }
   $result->close();
   }
 
   $mysqli->close();
 }
-
+  //Si l'utilisateur ne fait pas parti d'un groupe, alors on lui demande le type d'utilisateur qu'il est
   function afficher_select_type($id){
 
     $query = "select * from utilisateurs where id_utilisateur =".$id;
@@ -43,6 +43,7 @@ function obtenir_info($id)
       
       if ($row['ID_Groupe'] === null)
       {
+        // Le select contenant les differents types d'utilisateur
           echo "<label for='type_utilisateur'>Type d''utilisateur</label>
         <select id='type_utilisateur'>
           <option value='eleve'>Élève</option>
