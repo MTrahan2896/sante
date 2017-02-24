@@ -1,6 +1,4 @@
 <?php
-
-echo $_POST['code'];
 function formater($champ)
 {
   $champ = str_replace("'","''",$champ);
