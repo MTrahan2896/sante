@@ -11,7 +11,7 @@
 										 "',".formater($_POST['duree']).
 										 ",'".formater($_POST['desc']).
 										 "',".$_POST['nbr_pts'].",'".
-										 $_POST['couleur']."');";
+										 $_POST['couleur']."', null);";
 	echo $req;
 
 	echo phpQuery($req);
