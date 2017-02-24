@@ -107,7 +107,7 @@
             
             <div class="input-field col s12" style="margin-top:15px">
             <i class="material-icons prefix">date_range</i>
-            <select id="session" name="session" ng-options="session.Nom_Session as session.Nom_Session for session in sessions track by session.ID_Session" ng-model="selected">
+            <select id="session" name="session" ng-options="session.Nom_Session as session.Nom_Session for session in sessions track by session.ID_Session" ng-model="session">
 
                <option value="" disabled selected>Session</option>
             </select>
@@ -254,12 +254,12 @@
    </div>
   <div style="text-align: left;">
     <p>
-      <input name="group1" type="radio" id="test1" />
-      <label for="test1">Administrateur</label>
+      <input name="niveauAdmin" type="radio" id="adminNiveauAdmin" value="2"/>
+      <label for="adminNiveauAdmin">Administrateur</label>
     </p>
     <p>
-      <input name="group1" type="radio" id="test2" />
-      <label for="test2">Planificateur</label>
+      <input name="niveauAdmin" type="radio" id="adminNiveauPlanif" value="1"/>
+      <label for="adminNiveauPlanif">Planificateur</label>
     </p>
 
  </div>
@@ -386,7 +386,25 @@
            <label for="endroit">Endroit</label>
          </div>
        </div>
- 
+
+
+
+
+
+       <div class="row">
+         <div class="input-field col s12 l12">
+              <select id="selectResponsable"
+            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
+            ng-model="responsableSelectionne"
+            
+            >
+              
+            </select>
+            
+           
+         </div>
+       </div>
+      
         <div class="row">
          <div class="col s12 l12">
            <button type="button" class="btn green" href="" style="width:100%" ng-click="test()" onclick="planifier_act();"> Planifier</button>
@@ -396,6 +414,27 @@
            <button class="btn red" href="" style="width: 100%"> Annuler</button>
          </div>
      </div>  
+ 
+   </div>
+  
+ </div>
+
+
+ <div id="modal_niveauAdmin" class="modal" style="height: 300px!important">
+     <div class="modal-content">
+       <div class="row" style="text-align:center">
+           <h4>Modifier les permissions</h4>
+       </div>
+          <input type="hidden" id="utilisateurNivAdmin">
+          <select id="niveauUser">
+            <option value="1">Responsable</option>
+            <option value="2">Administrateur</option>
+            <option value="0">Utilisateur Régulier</option>
+          </select>
+          <br>
+          <div class="center">
+          <button type="button" class="blue btn" ng-click="saveAdmin()">Enregistrer</button>
+        </div>
  
    </div>
   
@@ -425,6 +464,12 @@
       }
     });
   }
+
+
+
+
+
+
 </script>
 
 

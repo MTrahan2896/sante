@@ -1,6 +1,13 @@
 <?php
 echo $_POST['code'];
-include '/formater_champ.php';
+function formater($champ)
+{
+  $champ = str_replace("'","''",$champ);
+  $champ = trim($champ);
+  $champ = strtolower($champ);
+  $champ = ucfirst($champ); 
+  return $champ;
+}
 
 function guillemeter($champ){ //Aurtografe korect
 
@@ -56,7 +63,7 @@ $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$
 
 
 if($valide){
-	echo "LE KEK IS PASSED";
+	
 	
   //Si le nom d'utilisateur est disponible
   if(verifier_user_existant($_POST['username'],$_POST['password']))
@@ -84,7 +91,7 @@ if($valide){
   }
 }
 else{
-	ECHO "NO IS LE KEK, NO NO NO!";
+	
 }
 
 
