@@ -1,4 +1,4 @@
-<!-- Modal Structure -->
+<!-- Modal Création d'activité -->
 <div id="modal_new_activite" class="modal">
   <div class="modal-content">
     <div class="row" style="text-align: center;">
@@ -45,9 +45,7 @@
   </div>
 </div>
 
-
-
-
+<!-- Génère un code hexadecimal et l'assigne au textbox -->
   <script>
    function generer_couleur()
     {
@@ -68,7 +66,7 @@
 }
 
   
-
+//Fonction ajax pour créer une activité
   function creer_act(){
     $.ajax({
       type: "POST",
@@ -90,6 +88,7 @@
   }
 </script>
 
+<!-- Modal pour créer un groupe -->
 <div id="modalNouveauGroupe" class="modal" style="height: 510px !important">
   <div class="modal-content">
     <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
@@ -294,8 +293,9 @@
     </div>
   </div>
 
-<script src="js/ajax_creer_session.js"></script>
-<!-- Modal Structure -->
+
+
+<!-- Modal pour créer des sessions -->
 <div id="modal_session" class="modal">
   <div class="modal-content">
     <div class="row" style="text-align: center;">
@@ -340,7 +340,31 @@
   </div>
 </div>
 
+<!-- Fonction AJAX pour créer des sessions -->
+<script>
+  function creer_session(){
+    $.ajax({
+            type: "POST",
+            url: "php_scripts/creer_session.php",
+            data: {'nom': $("#nom_session").val(),
+                   'deb': $('#deb_session').val(),
+                   'mi': $("#mi_session").val(),
+                   'fin': $('#fin_session').val() }, 
+            success: function (data) {
+                console.log(data);     
+                location.reload();          
+        },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+}        
+</script>
 
+
+
+
+<!-- Modal pour planifier des activités -->
 <div id="modal_planif" class="modal">
      <div class="modal-content">
        <div class="row" style="text-align:center">
@@ -418,31 +442,9 @@
    </div>
   
  </div>
-
-
- <div id="modal_niveauAdmin" class="modal" style="height: 300px!important">
-     <div class="modal-content">
-       <div class="row" style="text-align:center">
-           <h4>Modifier les permissions</h4>
-       </div>
-          <input type="hidden" id="utilisateurNivAdmin">
-          <select id="niveauUser">
-            <option value="1">Responsable</option>
-            <option value="2">Administrateur</option>
-            <option value="0">Utilisateur Régulier</option>
-          </select>
-          <br>
-          <div class="center">
-          <button type="button" class="blue btn" ng-click="saveAdmin()">Enregistrer</button>
-        </div>
- 
-   </div>
-  
- </div>
+<!-- Fonction AJAX pour  Modal Planifier-->
 <script>
-  
-
-    function planifier_act(){
+  function planifier_act(){
     $.ajax({
       type: "POST",
       url: "php_scripts/planifier_activite.php",
@@ -464,13 +466,30 @@
       }
     });
   }
-
-
-
-
-
-
 </script>
+
+
+ <div id="modal_niveauAdmin" class="modal" style="height: 300px!important">
+     <div class="modal-content">
+       <div class="row" style="text-align:center">
+           <h4>Modifier les permissions</h4>
+       </div>
+          <input type="hidden" id="utilisateurNivAdmin">
+          <select id="niveauUser">
+            <option value="1">Responsable</option>
+            <option value="2">Administrateur</option>
+            <option value="0">Utilisateur Régulier</option>
+          </select>
+          <br>
+          <div class="center">
+          <button type="button" class="blue btn" ng-click="saveAdmin()">Enregistrer</button>
+        </div>
+ 
+   </div>
+  
+ </div>
+
+
 
 
 

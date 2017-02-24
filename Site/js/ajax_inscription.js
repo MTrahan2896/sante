@@ -12,10 +12,10 @@ function valider(){
             'sexe': $("input[type='radio'][name='sexe']:checked").val(),
             'password': $("#pass").val(),
             'confirm_password': $("#confpass").val(),
+            'type_utilisateur':$("#type_utilisateur").val(),
             'code' : $("#code_acces").val()}, 
             success: function (data) {
                 console.log(data);
-                alert('ici');
             },
             error: function (req) { 
             }
