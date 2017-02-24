@@ -168,7 +168,7 @@
                 <tr ng-repeat="activite in activites">
                   <td class="center">{{activite.Nom_Activite}}</td>
                   <td class="center">{{activite.Duree}}</td>
-                  <td class="center">{{activite.Ponderation}}</td> 
+                  <td class="center">{{activite.Ponderation}} point<span ng-show="activite.Ponderation>1">s</span></td> 
 
                   <td class="center"><a class="btn-floating  waves-effect waves-light red" ng-click="supprimerActivite(activite.ID_Activite)"><i class="material-icons">delete</i></a></td>
                 </tr>
