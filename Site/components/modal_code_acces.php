@@ -1,4 +1,3 @@
-
 <div id="modal_code" class="modal">
   <div class="modal-content">
     <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">

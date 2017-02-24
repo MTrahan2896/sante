@@ -1,6 +1,6 @@
 <?php
-$_SESSION['code_insc'] = $_POST['code'];
-$_SESSION['code_insc'] = 2;
+session_start();
+ $_SESSION['code_insc'] = $_POST['code'];
 $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$_POST['code']."'";
   
   $mysqli = new mysqli('localhost','root','','bd_application');
