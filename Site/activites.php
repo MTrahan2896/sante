@@ -1,6 +1,7 @@
 <html ng-app='app_angular' ng-controller="ctrl">
   <head>
     <?php include 'components/headContent.php';?>
+      <meta charset="UTF-8">
   </head>
   <body>
     
@@ -82,9 +83,7 @@
             <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
               <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
-
               <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
-              <i class="material-icons right">settings</i>
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
@@ -137,18 +136,13 @@
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
-              <table>
-            
-              <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td>{{adminLevelFromID(admin.administrateur)}}</td><td><button type="button" class="btn blue small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)">Permissions</button></td></tr>
-                </table>
-              <div class="row">
-              <a class="waves-effect waves-light btn col l5" style="margin-left: 15px; margin-top: 15px;" data-target="modalCodeAdmin"><i class="material-icons left">cloud</i>Générer des codes d'accès</a>
-            <a class="waves-effect waves-light btn col l5" style="margin-left: 15px; margin-top: 15px;" type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')"><i class="material-icons right">cloud</i>Afficher les codes d'accès</a>
-
-
-              
-              
-              </div>
+              <ul>
+              <li ng-repeat="admin in comptesAdmin()">{{admin.nom}}, {{admin.prenom}}</li>
+              </ul>
+              <row>
+              <button type="button" data-target="modalCodeAdmin" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Générer des codes d'accès</button>
+              <button type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Afficher les codes d'accès</button>
+              </row>
              </div>
             </li>
 
@@ -163,14 +157,12 @@
               
                 <table>
                 <thead>
-                  <th class="center">Activité</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th><th></th>
+                  <th class="center">Activité</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th>
                 </thead>                
                 <tr ng-repeat="activite in activites">
                   <td class="center">{{activite.Nom_Activite}}</td>
                   <td class="center">{{activite.Duree}}</td>
-                  <td class="center">{{activite.Ponderation}}</td> 
-
-                  <td class="center"><a class="btn-floating  waves-effect waves-light red" ng-click="supprimerActivite(activite.ID_Activite)"><i class="material-icons">delete</i></a></td>
+                  <td class="center">{{activite.Ponderation}}</td>
                 </tr>
   
 
@@ -202,8 +194,8 @@
               
               <table><thead><th>Nom de la session</th><th>Début</th>
               <th>Mi-Session</th>
-              <th>Fin</th></thead><th></th>
-              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats()"><i class="material-icons">assessment</i></a></td>
+              <th>Fin</th></thead>
+              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td>
               </tr>
               </table>
               
@@ -253,7 +245,7 @@
 
 <?php
 
-
+include 'components/modals_admin.php';
 
 if (isset($_SESSION['admin']))
 echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminTabs").remove()}}</script>';
@@ -280,10 +272,7 @@ echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminT
 <script src="js/scripts.js"></script>
 <script src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
 
-<?php include 'js/ScriptsAdmin.php';
-
-include 'components/modals_admin.php';
-?>
+<?php include 'js/ScriptsAdmin.php';?>
 
 
 
@@ -304,7 +293,7 @@ $('.timepicker').pickatime({
   autoclose: false,
   vibrate: true // vibrate the device when dragging clock hand
 });
-$('#date_act').pickadate();
+
 
 
 

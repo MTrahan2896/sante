@@ -1,5 +1,6 @@
 <?php function phpSelectQuery($query){
     $mysqli = new mysqli('localhost','root','','bd_application');
+
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
 

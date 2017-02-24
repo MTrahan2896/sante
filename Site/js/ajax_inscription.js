@@ -11,11 +11,11 @@ function valider(){
             'telephone': $("#telephone").val(), 
             'sexe': $("input[type='radio'][name='sexe']:checked").val(),
             'password': $("#pass").val(),
+            'confirm_password': $("#confpass").val(),
+            'type_utilisateur':$("#type_utilisateur").val(),
             'code' : $("#code_acces").val()}, 
             success: function (data) {
-                alert('Inscription Réussie!')
-                location.reload();
-                
+                console.log(data);
             },
             error: function (req) { 
             }

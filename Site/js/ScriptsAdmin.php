@@ -8,9 +8,9 @@ app.controller("ctrl", function($scope) {
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes')?>;
 
-    $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
+    $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
-    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues')?>;
+    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where hidden=false or hidden is null')?>;
 
     $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
@@ -21,7 +21,60 @@ app.controller("ctrl", function($scope) {
     $scope.ensembles = [1, 2, 3];
 
     $scope.utilisateursSansGroupes =   <?php echo phpSelectQuery('select * from utilisateurs where id_groupe is null and CODE_ACCES=""')?>;
+
+    $scope.comptesAdministrateur = (<?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES=""')?>);
+
+
+    $scope.responsableSelectionne;
     
+    $scope.supprimerActivite = function(id){
+
+
+
+             if (confirm("Vous êtes sur le point de supprimer cette activité, êtes vous sûr?") == true) {
+                             $.ajax({
+            type: "POST",
+            url: "php_scripts/supprimerActivite.php",
+            data: {
+                'ID_ACTIVITE': id,
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                console.log(data);
+                    location.reload();
+                    
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+
+             } 
+
+
+
+    }
+    
+    $scope.niveauxAdmin=['Administrateur', 'Planificateur'];
+
+        $scope.saveAdmin = function(){
+            $.ajax({
+            type: "POST",
+            url: "php_scripts/updateAdmin.php",
+            data: {
+                'user': $('#utilisateurNivAdmin').val(),
+                'admin': $('#niveauUser').val()
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                    location.reload();
+                    
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+            });
+
+        }
+
 
         $scope.nomActiviteFromId = function(id){
 
@@ -33,9 +86,28 @@ app.controller("ctrl", function($scope) {
 
         }
 
+        $scope.test222 = function(){
+            alert($('#selectResponsable').val());
+        }
 
+        $scope.adminLevelFromID = function(admin){
 
+            let adminLevel;
 
+            switch(admin) {
+            case '2':
+                adminLevel = 'Administrateur';
+                break;
+            case '1':
+                adminLevel = 'Responsable';
+            break;
+            default:
+            adminLevel = 'Utilisateur Régulier';
+            
+            }
+            return adminLevel;
+
+        }
 
 
         $scope.elevesDansGroupe = function(groupe){
@@ -156,7 +228,7 @@ app.controller("ctrl", function($scope) {
 
         $scope.comptesAdmin = function(groupe){
         return $scope.eleves.filter(function(el){
-            return el.administrateur == 1 && el.code_acces == "";
+            return el.administrateur >= 1 && el.code_acces == "";
         });
         }
 
@@ -179,14 +251,14 @@ app.controller("ctrl", function($scope) {
 
     	 }
 
-                 $scope.genererCodeAdmin = function(nb_codes){
+        $scope.genererCodeAdmin = function(nb_codes){
             
              $.ajax({
             type: "POST",
             url: "php_scripts/generercode.php",
-            data: {'admin' : 1, 'id_groupe': '0', 'nb_codes': $("#codeAdmin").val() }, 
+            data: {'admin' : $('input[name=niveauAdmin]:checked').val(), 'id_groupe': 'null', 'nb_codes': $("#codeAdmin").val() }, 
             success: function (data) {
-                location.reload();
+                
                 console.log(data);
             },
             error: function (req) {
@@ -214,13 +286,13 @@ app.controller("ctrl", function($scope) {
             }, //TODO: CHANGE PROF ID
             success: function(data) {
             		
-                    console.log(data);
+                    location.reload();
             		
             },
             error: function(req) {
                 alert("erreur");
             }
-        });
+        }); 
     }
 
     
@@ -229,7 +301,14 @@ app.controller("ctrl", function($scope) {
         $scope.$apply();
     }, 2000);
 
+    $scope.ouvrirModalModifierPermission= function(id_admin, niveau){
+        console.log(id_admin+" .... "+niveau);
+    $("#utilisateurNivAdmin").val(id_admin);
+    $('#modal_niveauAdmin').modal('open');
+    $('#niveauUser').val(niveau).change();
+    $('#niveauUser').material_select();
 
+}
 
 	$scope.print = function(groupe){
 		var prtContent = document.getElementById('codesGroupe'+groupe);
@@ -270,6 +349,6 @@ app.controller("ctrl", function($scope) {
 
 });
 
-
-
+$("#selectResponsable").val($("#selectResponsable option:first").val());
+    $('#selectResponsable').material_select()
 </script>

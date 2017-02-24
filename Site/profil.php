@@ -15,6 +15,8 @@ session_start();
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/ajax_coord_perso.js"></script>
 </head>
+
+<?php include 'php_scripts/afficher_info_user.php'; ?>
 <body>
   <header>
         <?php include 'components/nav.php';?>
@@ -25,7 +27,7 @@ session_start();
       <!-- Coordonées personnelle -->
       <li class="">
         <div class="collapsible-header"><i class="material-icons">person</i>Coordonnees personnelles</div>
-        <div class="collapsible-body" style="display: none;">
+        <div class="collapsible-body container" style="display: none;">
         
         <!-- Nom prénom -->
           <div class="row">
@@ -46,9 +48,8 @@ session_start();
               <input id="email" name="email" type="email" class="validate" maxlength="75">
               <label for="email">Courriel</label>
             </div>
-          <div class="col l1"></div>
-            <div class="input-field col s6 l2">
-              <i class="material-icons prefix">phone</i>
+         
+            <div class="input-field col s6 l3">
               <input id="tel" name="tel" type="tel" class="validate" maxlength="10">
               <label for="tel">Téléphone</label>
             </div>
@@ -56,33 +57,21 @@ session_start();
 
           <!-- Sexe -->
           <div class="row">
-                <div class="col s6 l3">
-                  <i class="material-icons prefix">people</i>
+                <div class="col s6 l6">
                   <input name="sexe" type="radio" id="sH" value="H" class="with-gap" />
                   <label for="sH" style="margin:auto;">Homme</label>
                   <input name="sexe" type="radio" id="sF" value="F" class="with-gap" />
                   <label for="sF" style="margin:auto;">Femme</label>
                </div>
-
-               <div class="col s6 l3">                 
-                  <select id="type_utilisateur">
-                      <option>Type d'utilisateur</option>
-                      <optgroup label="Élève">
-                        <option value="1">Élève sans ensemble</option>
-                        <option value="2">Élève ensemble 1</option>
-                        <option value="3">Élève ensemble 2</option>
-                        <option value="4">Élève ensemble 3</option>
-                      </optgroup>
-                      <optgroup label="Membre du personnel">
-                        <option value="5">Professeur</option>
-                        <option value="6">Membre de la direction</option>
-                        <option value="7">Membre de l'administration</option>
-                      </optgroup>
-                     <optgroup label="Autre">
-                        <option value="8">Personne externe</option>
-                     </optgroup>
-                  </select>
+          </div>
+          <div class="row">
+               <div class="col s6 l6" id="section_type_utilisateur">                 
+                 <?php
+                   afficher_select_type($_SESSION['uid']);
+                  ?>
+                  
                </div>
+
           </div>
 
           <!-- Boutons annuler/enregistrer -->
@@ -171,13 +160,11 @@ session_start();
 </ul>
 </div>
 <?php
-include 'php_scripts/afficher_info_user.php'; 
 if(($_SESSION['uid'] != 0) and (isset($_SESSION['uid'])))
 {
 obtenir_info($_SESSION['uid']);
 }
 ?>
-
 </main>
 <footer class="page-footer" style="width: 100%!important">
 

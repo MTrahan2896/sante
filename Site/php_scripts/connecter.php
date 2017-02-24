@@ -19,13 +19,7 @@ function verifier_user_existant($username,$pwd_input)
     $row = $result->fetch_array();
     
     verifier_password($row['id_utilisateur'],$username, $pwd_input, $row['password']);
-    }
-    else
-    {
-    
-    }
-    
-  
+    }  
   }
 
   $mysqli->close();  

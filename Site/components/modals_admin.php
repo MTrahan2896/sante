@@ -1,4 +1,4 @@
-<!-- Modal Structure -->
+<!-- Modal Création d'activité -->
 <div id="modal_new_activite" class="modal">
   <div class="modal-content">
     <div class="row" style="text-align: center;">
@@ -45,9 +45,7 @@
   </div>
 </div>
 
-
-
-
+<!-- Génère un code hexadecimal et l'assigne au textbox -->
   <script>
    function generer_couleur()
     {
@@ -68,7 +66,7 @@
 }
 
   
-
+//Fonction ajax pour créer une activité
   function creer_act(){
     $.ajax({
       type: "POST",
@@ -90,6 +88,7 @@
   }
 </script>
 
+<!-- Modal pour créer un groupe -->
 <div id="modalNouveauGroupe" class="modal" style="height: 510px !important">
   <div class="modal-content">
     <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
@@ -107,7 +106,7 @@
             
             <div class="input-field col s12" style="margin-top:15px">
             <i class="material-icons prefix">date_range</i>
-            <select id="session" name="session" ng-options="session.Nom_Session as session.Nom_Session for session in sessions track by session.ID_Session" ng-model="selected">
+            <select id="session" name="session" ng-options="session.Nom_Session as session.Nom_Session for session in sessions track by session.ID_Session" ng-model="session">
 
                <option value="" disabled selected>Session</option>
             </select>
@@ -241,7 +240,7 @@
 
 
   <div id="modalCodeAdmin" class="modal" style="height: 400px; width: 400px" >
-    <div class="modal-content" style="text-align: center; height: 100%" >
+    <div class="modal-content container" style="text-align: center; height: 100%" >
       <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
         <h5>Générer des codes administrateurs</h1>
       </div>
@@ -251,7 +250,20 @@
         <div class="row">
           <label for="qt_code">Nombre de codes</label>
           <input type="number" name="qt_code" id="codeAdmin" min="1" max="10" ng-min="1" ng-max="10" validate>
-        </div>
+   </div>
+  <div style="text-align: left;">
+    <p>
+      <input name="niveauAdmin" type="radio" id="adminNiveauAdmin" value="2"/>
+      <label for="adminNiveauAdmin">Administrateur</label>
+    </p>
+    <p>
+      <input name="niveauAdmin" type="radio" id="adminNiveauPlanif" value="1"/>
+      <label for="adminNiveauPlanif">Planificateur</label>
+    </p>
+
+ </div>
+
+     
           <button ng-click="genererCodeAdmin()" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Générer</button>
     
       </div>
@@ -281,8 +293,9 @@
     </div>
   </div>
 
-<script src="js/ajax_creer_session.js"></script>
-<!-- Modal Structure -->
+
+
+<!-- Modal pour créer des sessions -->
 <div id="modal_session" class="modal">
   <div class="modal-content">
     <div class="row" style="text-align: center;">
@@ -327,7 +340,31 @@
   </div>
 </div>
 
+<!-- Fonction AJAX pour créer des sessions -->
+<script>
+  function creer_session(){
+    $.ajax({
+            type: "POST",
+            url: "php_scripts/creer_session.php",
+            data: {'nom': $("#nom_session").val(),
+                   'deb': $('#deb_session').val(),
+                   'mi': $("#mi_session").val(),
+                   'fin': $('#fin_session').val() }, 
+            success: function (data) {
+                console.log(data);     
+                location.reload();          
+        },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+}        
+</script>
 
+
+
+
+<!-- Modal pour planifier des activités -->
 <div id="modal_planif" class="modal">
      <div class="modal-content">
        <div class="row" style="text-align:center">
@@ -369,11 +406,29 @@
  
        <div class="row">
          <div class="input-field col s12 l12">
-           <textarea id="endroit" class="materialize-textarea"></textarea>
+           <input type="text" id="endroit" class="materialize-textarea"></textarea>
            <label for="endroit">Endroit</label>
          </div>
        </div>
- 
+
+
+
+
+
+       <div class="row">
+         <div class="input-field col s12 l12">
+              <select id="selectResponsable"
+            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
+            ng-model="responsableSelectionne"
+            
+            >
+              
+            </select>
+            
+           
+         </div>
+       </div>
+      
         <div class="row">
          <div class="col s12 l12">
            <button type="button" class="btn green" href="" style="width:100%" ng-click="test()" onclick="planifier_act();"> Planifier</button>
@@ -387,10 +442,9 @@
    </div>
   
  </div>
+<!-- Fonction AJAX pour  Modal Planifier-->
 <script>
-  
-
-    function planifier_act(){
+  function planifier_act(){
     $.ajax({
       type: "POST",
       url: "php_scripts/planifier_activite.php",
@@ -401,6 +455,7 @@
              'participants_max': $('#participants_max').val(),
              'frais': $('#frais').val(),
              'endroit':$('#endroit').val()
+
             },
       success: function (data) {
         alert("L'activité a été planifiée avec succès")
@@ -412,6 +467,29 @@
     });
   }
 </script>
+
+
+ <div id="modal_niveauAdmin" class="modal" style="height: 300px!important">
+     <div class="modal-content">
+       <div class="row" style="text-align:center">
+           <h4>Modifier les permissions</h4>
+       </div>
+          <input type="hidden" id="utilisateurNivAdmin">
+          <select id="niveauUser">
+            <option value="1">Responsable</option>
+            <option value="2">Administrateur</option>
+            <option value="0">Utilisateur Régulier</option>
+          </select>
+          <br>
+          <div class="center">
+          <button type="button" class="blue btn" ng-click="saveAdmin()">Enregistrer</button>
+        </div>
+ 
+   </div>
+  
+ </div>
+
+
 
 
 

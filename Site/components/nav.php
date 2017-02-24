@@ -6,6 +6,7 @@
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li><a href="accueil.php">Accueil</a></li>
           <li><a class="adminTabs" href="administration.php">Administration</a></li>
+          <li><a class="adminTabs" href="activites.php">Mes Activités</a></li>
           <li><a href="stats.php">Statistiques</a></li>
           
         </ul>
@@ -19,7 +20,7 @@
          $_SESSION['uid'] = 0;
           }
          if (isset($_SESSION['username'])){
-          echo "<script> document.getElementById('Greet_User').innerHTML ='".$_SESSION['username']."'; $('.adminTabs').remove();</script>";
+          echo "<script> document.getElementById('Greet_User').innerHTML ='".$_SESSION['username']."';</script>";
           }
         if ($_SESSION['uid'] == 0)
         {

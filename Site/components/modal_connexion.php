@@ -2,8 +2,28 @@
   include 'modal_inscription.php';
   include 'modal_code_acces.php';
 ?>
-<script src="js/ajax_connexion.js"></script>
 <script>
+    function post_connexion(){
+    $.ajax({
+            type: "POST",
+            url: "php_scripts/connecter.php",
+            data: {'nom_user': $("#username").val(),
+                   'password': $('#pwd').val() }, 
+            success: function (data) {
+                console.log(data);
+                if(data.toString() == 1){
+                  location.reload();
+                }else{
+                  alert('Nom d\'utilisateur ou mot de passe invalide');
+                }
+                
+        },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+      }        
+
    function Close_Open_Modal(close_modal_id,open_modal_id)
   {
      $(close_modal_id).modal('close');
@@ -46,3 +66,4 @@
     </div>
   </div>
 </div>
+

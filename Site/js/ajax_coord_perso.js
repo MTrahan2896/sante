@@ -7,10 +7,10 @@
              'nom': $('#nom').val(),
              'courriel': $('#email').val(),
              'telephone':$('#tel').val(),
-             'sexe': $("input[name='sexe']:checked"). val()
+             'sexe': $("input[name='sexe']:checked"). val(),
+             'type_user': $('#type_utilisateur').val()
             },
       success: function (data) {
-        alert('Mise à jour du profil réussie');
         location.reload();
       },
       error: function (req) {

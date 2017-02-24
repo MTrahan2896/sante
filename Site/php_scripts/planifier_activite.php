@@ -25,7 +25,7 @@ function formater($champ)
 										 "',".$_POST['participants_max'].
 										 ",".$_POST['frais'].
 										 ",'".formater($_POST['endroit']).
-										 "',".$_POST['nom_act'].");";
+										 "',".$_POST['nom_act'].", null);";
 	echo $req;									
 	echo phpQuery($req);
 
