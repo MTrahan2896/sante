@@ -85,28 +85,41 @@
                 
               <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
               <i class="material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
-              <a href=" " style="text-decoration-color:black"><i class="material-icons right">settings</i></a>
+              <i class="material-icons right" style="pointer-events: visiblePainted !important;" ng-click="show_params()">settings</i>
 
               
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
               <table>
-                <div class="row" ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)">
-                  <div class="col s8">{{eleve.nom}}, {{eleve.prenom}}</div><div class="col s2">
+                <b>Responsable: </b>{{eleveFromId(activite.responsable).nom}}, {{eleveFromId(activite.responsable).prenom}}
+                <br>  
+                <b>Frais: </b> {{activite.Frais}}$ <br>  
+                <b>Endroit: </b> {{activite.Endroit}} <br>  
+
+
+                  <br>
+                  
+                  <br>  
+                    <h5>Liste de présences <span style="color: green; font-size: 0.75em" ng-show="activite.presences_prises > 0"> - Présences prises</span></h5> 
+                 <table> 
+                 <thead><th>Nom</th><th class="center">Present</th>  </thead>
+                <tr  ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)">
+                  <td class="col s8">{{eleve.nom}}, {{eleve.prenom}}</td><td class="col s2 center">
                   
                   <input class="field filled-in" ng-checked="{{getPresenceForEleve(activite.ID_activite_prevue, eleve.id_utilisateur)}}" type="checkbox" name="viewid{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}" disabled readonly
                   id="viewid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px">
                   <label for="viewid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
                   
                   
-                </div>
-              </div>
+                </td>
+              </tr>
+               </table>   
               
             </table>
             <div style="text-align: center">
               <div class="row" style="margin-bottom: 0px">
-                <button type="button" data-target="modalPresence{{activite.ID_activite_prevue}}" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Prendre les présences</button>
+                <button type="button" data-target="modalPresence{{activite.ID_activite_prevue}}" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px"><span ng-show="activite.presences_prises > 0">Re</span>Prendre les présences</button>
                 <button ng-click="annulerActivite(activite.ID_activite_prevue)" type="button" class="btn l6 s12 red waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Annuler l'activité</button>
               </div>
             </div>

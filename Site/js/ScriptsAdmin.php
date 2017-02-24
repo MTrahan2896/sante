@@ -76,6 +76,10 @@ app.controller("ctrl", function($scope) {
         }
 
 
+        $scope.show_params = function(){
+            alert('test');
+        }
+
         $scope.nomActiviteFromId = function(id){
 
             let act = $scope.activites.filter(function(ac){
@@ -116,6 +120,13 @@ app.controller("ctrl", function($scope) {
     		return el.id_groupe == groupe && el.code_acces == "";
     	});
     	}
+
+        $scope.eleveFromId = function(id){
+        return $scope.eleves.filter(function(el){
+            
+            return el.id_utilisateur == id;
+        })[0];
+        }
 
         $scope.getElevesForActivitePrevue = function(activite){
 
