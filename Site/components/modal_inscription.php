@@ -61,10 +61,8 @@ include_once 'php_scripts/afficher_info_user.php';
         $query = "select * from utilisateurs where code_acces = '".$_SESSION['code_insc']."'";
         $mysqli = new mysqli('localhost','root','','bd_application');
         $result = $mysqli->query($query);
-
         if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
-           
             if(is_null($row['ID_Groupe']))
               {
                  echo "<label for='type_utilisateur'>Type d''utilisateur</label>
