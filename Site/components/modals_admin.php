@@ -382,7 +382,7 @@
  
        <div class="row">
          <div class="input-field col s12 l12">
-           <textarea id="endroit" class="materialize-textarea"></textarea>
+           <input type="text" id="endroit" class="materialize-textarea"></textarea>
            <label for="endroit">Endroit</label>
          </div>
        </div>

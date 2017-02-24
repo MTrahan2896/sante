@@ -163,12 +163,14 @@
               
                 <table>
                 <thead>
-                  <th class="center">Activité</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th>
+                  <th class="center">Activité</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th><th></th>
                 </thead>                
                 <tr ng-repeat="activite in activites">
                   <td class="center">{{activite.Nom_Activite}}</td>
                   <td class="center">{{activite.Duree}}</td>
-                  <td class="center">{{activite.Ponderation}}</td>
+                  <td class="center">{{activite.Ponderation}}</td> 
+
+                  <td class="center"><a class="btn-floating  waves-effect waves-light red" ng-click="supprimerActivite(activite.ID_Activite)"><i class="material-icons">delete</i></a></td>
                 </tr>
   
 
@@ -200,8 +202,8 @@
               
               <table><thead><th>Nom de la session</th><th>Début</th>
               <th>Mi-Session</th>
-              <th>Fin</th></thead>
-              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td>
+              <th>Fin</th></thead><th></th>
+              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats()"><i class="material-icons">assessment</i></a></td>
               </tr>
               </table>
               
@@ -302,7 +304,7 @@ $('.timepicker').pickatime({
   autoclose: false,
   vibrate: true // vibrate the device when dragging clock hand
 });
-
+$('#date_act').pickadate();
 
 
 

@@ -8,9 +8,9 @@ app.controller("ctrl", function($scope) {
     
     $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes')?>;
 
-    $scope.activites = <?php echo phpSelectQuery('select * from activites')?>;
+    $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
-    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues')?>;
+    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where hidden=false or hidden is null')?>;
 
     $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
@@ -27,7 +27,32 @@ app.controller("ctrl", function($scope) {
 
     $scope.responsableSelectionne;
     
-    
+    $scope.supprimerActivite = function(id){
+
+
+
+             if (confirm("Vous êtes sur le point de supprimer cette activité, êtes vous sûr?") == true) {
+                             $.ajax({
+            type: "POST",
+            url: "php_scripts/supprimerActivite.php",
+            data: {
+                'ID_ACTIVITE': id,
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                console.log(data);
+                    location.reload();
+                    
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+
+             } 
+
+
+
+    }
     
     $scope.niveauxAdmin=['Administrateur', 'Planificateur'];
 
