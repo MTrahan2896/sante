@@ -454,8 +454,8 @@
              'heure_deb': $("#heure_deb").val(),
              'participants_max': $('#participants_max').val(),
              'frais': $('#frais').val(),
-             'endroit':$('#endroit').val()
-
+             'endroit':$('#endroit').val(),
+             'responsable':$('#selectResponsable').val()
             },
       success: function (data) {
         alert("L'activité a été planifiée avec succès")
