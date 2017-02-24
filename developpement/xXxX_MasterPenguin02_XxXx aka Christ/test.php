@@ -4,26 +4,40 @@
     </head>
 <body>
 
-        <?php
-            $mysqli = new mysqli("localhost", "root", "", "bd_application");
-            if ($mysqli->connect_errno) {
-                echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        <script>
+        function daysInMonth(month,year) {
+            return new Date(year, month, 0).getDate();
+        }
+        function pad(x){
+            if(x< 10){
+                x= "0"+x;
+                alert(x);
             }
-            $query = "SELECT ap.ID_Activite_prevue, a.Couleur, a.Nom_Activite, ap.Date_Activite, ap.Heure, a.Duree FROM activites a, activites_prevues ap
-                      where a.ID_Activite = ap.ID_Activite";
-            $result = $mysqli->query($query);
-
-                while($row = $result->fetch_assoc()) {
-                    $debut = $row['Heure'] ;
-                    $a = '00:'.$row['Duree'].':00' ;
-                    $fin =$debut + $a ;
-                    str_replace($debut,""," ") ;
-                    echo"<script>
-                        alert('$debut   ".$row['Duree']."   ".$fin."');
-                    </script>";
-                }
+            return x;
+        }
+        function ajout_jour_date_string(str,add){
+            var date;
+            alert(str.substring(0,4)+" "+str.substring(5,1)+" "+str.substring(8,1)+" "+str.substring(11,1)+" "+str.substring(14,1)+" ")+str.substring(17,1);
+            var y = Number(str.substring(0,4));
+            var m = Number(str.substring(5,2));
+            var d = Number(str.substring(8,2)) + add;
+            var h = Number(str.substring(11,2));
+            var min = Number(str.substring(14,2));
+            var s = Number(str.substring(17,2));
             
-            ?>
+            if( d > daysInMonth(m,y)){
+                m= m + Math.floor(d/daysInMonth(m,y));
+                d = d - daysInMonth(m-1,y);
+                if(m > 12){
+                    m= m + Math.floor(m/12)
+                    y=y+1;
+                }
+            }
+            date = y+"/"+pad(m)+"/"+pad(d)+"T"+pad(h)+":"+pad(min)+":"+pad(s)
+            return date;
+        }
+        alert(ajout_jour_date_string("2017/02/24T10:42:00",2));
+        </script>
                         
 </body>
                         
