@@ -1,11 +1,18 @@
 <?php
 
-include 'formater_champ.php';
+echo $_POST['code'];
+function formater($champ)
+{
+  $champ = str_replace("'","''",$champ);
+  $champ = trim($champ);
+  $champ = strtolower($champ);
+  $champ = ucfirst($champ); 
+  return $champ;
+}
 
 function guillemeter($champ){ //Aurtografe korect
 
 	return "'".$champ."'";
-
 }
 
 //Vérifie si le username est déjà utilisé
@@ -56,6 +63,7 @@ $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$
 
 
 if($valide){
+
   if(($_POST['username'] !='') && ($_POST['nom'] !='') && ($_POST['prenom'] !='') && ($_POST['courriel'] !='') && ($_POST['password'] !='') && ($_POST['confirm_password'] !=''))
   {
       //Si le nom d'utilisateur est disponible
@@ -99,6 +107,4 @@ if($valide){
   }
 
 }
-
-
 ?>
