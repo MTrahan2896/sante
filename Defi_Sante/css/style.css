@@ -1,0 +1,166 @@
+
+nav{
+	background-color:#71C0E5;
+}
+
+footer.page-footer{
+	background-color:#71C0E5;
+	color: black;
+}
+
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+      
+   #calendar div div h2{
+text-transform: capitalize;
+   }
+
+button{
+	background-color: grey;
+
+}
+
+/* Css sur grands écans */
+ @media screen and (min-width: 700px) {
+   
+    .modal 
+    { 
+      bottom: 35%;
+      
+    }
+
+     #modal_code /* Modal de connexion */
+    {
+      height: 38%;
+      width: 20%;
+      padding-bottom: 0px;
+    }
+
+    #modal_ins /* Modal d'inscription */
+    {
+      bottom: 20%;
+      height: 100% !important;
+      max-height: 92%;
+      width: 25%;
+     bottom: 10%;
+    }
+
+   #modal_login /* Modal de connexion */
+    {
+      width: 25%;
+      height: 52%;
+    }
+
+    #modal_planif
+    {
+      width:25%;
+      height: 60%;
+    }
+  }
+
+/* CSS sur petits écrans (mobiles) */
+@media screen and (max-width: 699px) 
+{
+
+    .modal 
+    { 
+      margin-left:0% !important;
+      margin-right:10%;
+    }
+
+    #modal_code /* Modal de connexion */
+    {
+      height: 55%;
+      overflow-y: hidden !important ; /* Enlève la scroll bar */
+    }
+
+
+    #modal_ins /* Modal d'inscription */
+    {
+      height: 100%;
+    }
+
+    #modal_login
+    {
+      height: 75%;
+      max-height: 90%;
+      overflow-y: hidden !important ; /* Enlève la scroll bar */
+
+    }
+
+
+    #modal_planif
+    {
+      height: 100%;
+      max-height: 90%;
+      bottom:10%;
+
+    }
+
+
+}
+
+    #imgDef 
+    {
+      width: 200px; height: 200px;
+    }
+
+    .input-field label {
+    font-size: 12px !important;
+    }
+
+    .modal-content{
+    	background-color: white;
+    }
+
+
+
+.collapsible-body{
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+
+
+.collapsible-body:odd{
+	
+	background-color: grey;
+}
+
+.collapsibleWithButton{
+
+  padding-bottom: 45px;
+}
+.margin-right{
+  margin-right: 15px;
+}
+
+
+
+ 
+.presence:nth-child(odd) {
+  background-color: #FFFFFF;
+margin-bottom: 0px;
+height: 45px;
+}
+
+.field{
+  margin-top: 10px;
+
+}
+
+.modal /* Modal de création d'activité */
+    {
+      width: 360px !important;
+      height: 90% !important;
+      background-color: white !important;      
+    }
+
+
