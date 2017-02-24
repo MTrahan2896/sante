@@ -11,7 +11,6 @@
              'type_user': $('#type_utilisateur').val()
             },
       success: function (data) {
-        alert('Mise à jour du profil réussie');
         location.reload();
       },
       error: function (req) {

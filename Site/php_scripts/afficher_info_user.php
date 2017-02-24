@@ -62,6 +62,7 @@ function obtenir_info($id)
     }
   $result->close();
   }
+  $mysqli->close();
 }
 
 ?>

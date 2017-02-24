@@ -1,6 +1,6 @@
 <?php
-echo $_POST['code'];
-include '/formater_champ.php';
+
+include 'formater_champ.php';
 
 function guillemeter($champ){ //Aurtografe korect
 
@@ -56,35 +56,48 @@ $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$
 
 
 if($valide){
-	echo "LE KEK IS PASSED";
-	
-  //Si le nom d'utilisateur est disponible
-  if(verifier_user_existant($_POST['username'],$_POST['password']))
+  if(($_POST['username'] !='') && ($_POST['nom'] !='') && ($_POST['prenom'] !='') && ($_POST['courriel'] !='') && ($_POST['password'] !='') && ($_POST['confirm_password'] !=''))
   {
-    //Vérification si les deux mots de passe sont identiques
-    if ($_POST['password'] == $_POST['confirm_password'])
-    {
-      $pass=$_POST['password'];
-      $pass=password_hash($pass, PASSWORD_DEFAULT);
+      //Si le nom d'utilisateur est disponible
+      if(verifier_user_existant($_POST['username'],$_POST['password']))
+      {
+        //Vérification si les deux mots de passe sont identiques
+        if ($_POST['password'] == $_POST['confirm_password'])
+        {
+          $pass=$_POST['password'];
+          $pass=password_hash($pass, PASSWORD_DEFAULT);
 
-      $query = "update utilisateurs set nom=".guillemeter(formater($_POST['nom'])).", prenom=".guillemeter(formater($_POST['prenom'])).", username=".guillemeter(formater($_POST['username'])).", actif=1, courriel=".guillemeter(formater($_POST['courriel'])).",   telephone=".guillemeter($_POST['telephone']).", sexe=".guillemeter(formater($_POST['sexe'])).", password=".guillemeter($pass).", code_acces='' where code_acces=".guillemeter($_POST['code']);
-      ECHO $query;
+          $query = "update utilisateurs set nom=".guillemeter(formater($_POST['nom'])).
+                   ", prenom=".guillemeter(formater($_POST['prenom'])).", username=".guillemeter(formater($_POST['username'])).
+                   ", actif=1, courriel=".guillemeter(formater($_POST['courriel'])).",   telephone=".guillemeter($_POST['telephone']).
+                   ", sexe=".guillemeter(formater($_POST['sexe'])).", password=".guillemeter($pass).",";
 
-      $mysqli = new mysqli('localhost','root','','bd_application');
-      $mysqli->query($query);
-    }
-    else
-    {
-      echo "<script>alert('Les deux mots de passe ne sont pas identiques')</script>";
-    }
+          if (isset($_POST['type_utilisateur']))
+          {
+          $query = $query. "Type_Utilisateur='".$_POST['type_utilisateur']."',code_acces='' where code_acces=".guillemeter($_POST['code']).";";
+          }
+          else
+          {
+          $query = $query. "Type_Utilisateur='Eleve',code_acces='' where code_acces=".guillemeter($_POST['code']).";";
+          }
+          $mysqli = new mysqli('localhost','root','','bd_application');
+          $mysqli->query($query);
+          echo "Inscription réussie";
+        }
+        else
+        {
+         echo "Les deux mots de passe ne sont pas identiques";
+        }
+      }
+      else
+      {
+        echo "Veuillez choisir un autre nom d'utilisateur";
+      }
   }
-  else
-  {
-    echo "<script>alert('Veuillez choisir un autre nom d''utilisateur')</script>";
+  else{
+    echo "Veuillez remplir les champs obligatoires";
   }
-}
-else{
-	ECHO "NO IS LE KEK, NO NO NO!";
+
 }
 
 

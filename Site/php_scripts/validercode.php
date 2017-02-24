@@ -1,4 +1,6 @@
 <?php
+session_start();
+$_SESSION['code_insc'] = $_POST['code'];
 
 $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$_POST['code']."'";
   
@@ -8,8 +10,8 @@ $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$
 
     if ( mysqli_num_rows($result) == 1) 
     {
+
     $row = $result->fetch_array();
-    
     echo "succes";
     }
     else
