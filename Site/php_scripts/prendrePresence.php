@@ -10,10 +10,19 @@
 		$mysqli->query($query);
 
 
+		$query = "update activites_prevues  set presences_prises=1 where ID_Activite_Prevue = ".$activite_prevue;
+
+		echo $query;
+
+		$mysqli = new mysqli('localhost','root','','bd_application');
+		$mysqli->query($query);
+
+
+
 
 		//$query = "delete from utilisateur_activites where ID_Activite_Prevue = ".$act;
 
-		print_r($eleves_presents);
+		
 
 		
 		foreach ((array)$eleves_presents as $value) {

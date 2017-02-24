@@ -82,9 +82,12 @@
             <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
               <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
-
+                
               <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
-              <i class="material-icons right">settings</i>
+              <i class="material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
+              <a href=" " style="text-decoration-color:black"><i class="material-icons right">settings</i></a>
+
+              
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               

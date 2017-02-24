@@ -10,7 +10,7 @@ app.controller("ctrl", function($scope) {
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
-    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where hidden=false or hidden is null')?>;
+    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where hidden=false or hidden is null order by presences_prises')?>;
 
     $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
