@@ -120,11 +120,11 @@
     </div>
     <div class="row">
       <div class="col s12 l12">
-        <button class="btn green" onclick="" style="width:100%"> Créer</button>
+        <button class="btn green" onclick="modifier_mod_new_act()" style="width:100%">Modifier</button>
       </div>
       <div class="col s12 l12" style="height:15px"></div>
       <div class="col s12 l12">
-        <a class="btn red" href="" style="width:100%"> Annuler</a>
+        <button class="btn red" href="" style="width:100%"> Annuler</button>
       </div>
     </div>
   </div>
@@ -132,19 +132,20 @@
 
   <script>  
   //Fonction ajax pour créer une activité
-  function creer_act2(){
+  function modifier_mod_new_act(){
     $.ajax({
       type: "POST",
-      url: "php_scripts/creer_activite.php",
+      url: "php_scripts/modifier_activite.php",
       data: {
-             'nom_act': $("#nom_activite").val(),
-             'duree': $('#duree').val(),
-             'nbr_pts': $('#point').val(),
-             'couleur':$('#couleur_activite').val(),
-             'desc':$('#description').val()
+             'id_act':$("#id_mod_act").val(),
+             'nom_act': $("#nom_activite_mod").val(),
+             'duree': $('#duree_mod').val(),
+             'nbr_pts': $('#point_mod').val(),
+             'desc':$('#description_mod').val()
             },
       success: function (data) {
-        console.log(data);
+        alert(data);
+        location.reload();
       },
       error: function (req) {
         alert("erreur");
