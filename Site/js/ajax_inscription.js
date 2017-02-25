@@ -15,7 +15,7 @@ function valider(){
             'type_utilisateur':$("#type_utilisateur").val(),
             'code' : $("#code_acces").val()}, 
             success: function (data) {
-                console.log(data);
+                alert(data);
             },
             error: function (req) { 
             }

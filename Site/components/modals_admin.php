@@ -35,7 +35,7 @@
     </div>
     <div class="row">
       <div class="col s12 l12">
-        <button class="btn green" onclick="creer_act()" style="width:100%"> Créer</button>
+        <button class="btn green" onclick="" style="width:100%"> Créer</button>
       </div>
       <div class="col s12 l12" style="height:15px"></div>
       <div class="col s12 l12">
@@ -87,6 +87,83 @@
     });
   }
 </script>
+
+<!-- Modal Création d'activité -->
+<div id="modal_mod_new_activite" class="modal">
+  <div class="modal-content">
+  <input type="hidden" name="id_mod_act" id="id_mod_act" value="1"/> 
+    <div class="row" style="text-align: center;">
+      <h4 class="">Modifier une activité</h4>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input id="nom_activite_mod" type="text" class="validate" maxlength="75">
+        <label for="nom_activite_mod" class="ACTIVER">Nom de l'activité</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6 l4">
+        <label  for="duree_mod" class="ACTIVER">Durée (Minutes)</label>
+        <input type="number" step="1" maximum="180" minimum="0" id="duree_mod" name="duree"/>
+      </div>
+      <div class="input-field col s6 l4">
+        <label  for="point_mod" class="ACTIVER">Nombre de points</label>
+        <input type="number" step="0.25" maximum="3" minimum="0" id="point_mod" name="point"/>
+      </div>
+    </div>
+   
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <textarea id="description_mod" class="materialize-textarea" maxlength="255"></textarea>
+        <label for="description_mod">Description</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 l12">
+        <button class="btn green" onclick="" style="width:100%"> Créer</button>
+      </div>
+      <div class="col s12 l12" style="height:15px"></div>
+      <div class="col s12 l12">
+        <a class="btn red" href="" style="width:100%"> Annuler</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php
+ 
+?>
+
+
+  <script>  
+  //Fonction ajax pour créer une activité
+  function creer_act2(){
+    $.ajax({
+      type: "POST",
+      url: "php_scripts/creer_activite.php",
+      data: {
+             'nom_act': $("#nom_activite").val(),
+             'duree': $('#duree').val(),
+             'nbr_pts': $('#point').val(),
+             'couleur':$('#couleur_activite').val(),
+             'desc':$('#description').val()
+            },
+      success: function (data) {
+        console.log(data);
+      },
+      error: function (req) {
+        alert("erreur");
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
 
 <!-- Modal pour créer un groupe -->
 <div id="modalNouveauGroupe" class="modal" style="height: 510px !important">

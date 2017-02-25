@@ -100,6 +100,19 @@ app.controller("ctrl", function($scope) {
 
 
     }
+
+    $scope.modifierActivite = function(activite){
+        console.log(activite);
+        $('#id_mod_act').val(activite.ID_Activite); 
+        $('#nom_activite_mod').val(activite.Nom_Activite);     
+        $('#duree_mod').val(activite.Duree); 
+        $('#point_mod').val(activite.Ponderation);
+         $('#description_mod').val(activite.Commentaire);
+        $('#modal_mod_new_activite').modal("open");
+        $('#modal_mod_new_activite label').addClass( "active");
+    }
+
+
     
     $scope.niveauxAdmin=['Administrateur', 'Planificateur'];
 

@@ -65,12 +65,27 @@ session_start();
                </div>
           </div>
           <div class="row">
-               <div class="col s6 l6" id="section_type_utilisateur">                 
-                 <?php
-                   afficher_select_type($_SESSION['uid']);
-                  ?>
-                  
+               <div class="col s6 l6">
+                <div id="section_type_utilisateur">                 
+                 <label for='type_utilisateur_profil'>Type d'utilisateur</label>
+                  <select id='type_utilisateur_profil'>
+                    <option value='eleve'>Élève</option>
+                    <optgroup label='Membre du personnel'>
+                      <option value='administration'>Administration</option>
+                      <option value='enseignant'>Enseignant</option>
+                      <option value='professionnel'>Professionnel</option>
+                      <option value='soutien'>Soutien</option>
+                    </optgroup>
+                    <optgroup label='Autre'>
+                      <option value='ami'>Ami</option>
+                      <option value='parent'>Parent</option>
+                    </optgroup>
+                  </select>
+                  </div>
                </div>
+               <?php 
+               afficher_select_type($_SESSION['uid']);
+               ?>
 
           </div>
 
