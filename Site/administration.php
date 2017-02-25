@@ -102,7 +102,7 @@ if(isset($_SESSION['admin'])){
       </div>
       
       <li>
-        <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités <span class="new badge green right" data-badge-caption="">{{activites_prevues.length}}</span></div>
+        <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités Prévues<span class="new badge green right" data-badge-caption="">{{activites_prevues.length}}</span></div>
         
         <div class="collapsible-body">
           <div class="center">
@@ -223,7 +223,7 @@ if(isset($_SESSION['admin'])){
               
                 <table>
                 <thead>
-                  <th class="center">Activité</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th><th></th>
+                  <th class="center">Activités Disponibles</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th><th></th>
                 </thead>                
                 <tr ng-repeat="activite in activites">
                   <td class="center">{{activite.Nom_Activite}}</td>
