@@ -26,6 +26,53 @@ app.controller("ctrl", function($scope) {
 
 
     $scope.responsableSelectionne;
+
+    $scope.show_params = function(activite){
+        $('#modal_mod_planif').modal('open');
+        console.log(activite);
+        $('#ID_ACT_PLAN').val(activite.ID_activite_prevue);
+
+        $('#mod_nom_act').val(activite.ID_Activite);
+        $('#mod_nom_act').material_select();
+        $('#mod_date_act').val(activite.Date_Activite);
+        $('#mod_heure_deb').val(activite.Heure_debut);
+        $('#mod_participants_max').val(activite.Participants_Max);
+        $('#mod_frais').val(activite.Frais);
+        $('#mod_endroit').val(activite.Endroit);
+        $('#mod_responsable').val(activite.responsable);
+        $('#mod_responsable').material_select();
+        $('.ACTIVER').addClass( "active" );
+    
+
+    }
+
+    $scope.modifierActivitePrevue = function(){
+
+        $.ajax({
+            type: "POST",
+            url: "php_scripts/modifierActivitePrevue.php",
+            data: {
+                'ID_ACTIVITE_PREVUE': $('#ID_ACT_PLAN').val(),
+                'ID_ACTIVITE': $('#mod_nom_act').val(),
+                'DATE_ACT':  $('#mod_date_act').val(),
+                'HEURE_ACT':  $('#mod_heure_deb').val(),
+                'PARTICIPANTS_MAX' : $('#mod_participants_max').val(),
+                'FRAIS':  $('#mod_frais').val(),
+                'ENDROIT':  $('#mod_endroit').val(),
+                'RESPONSABLE': $('#mod_responsable').val()
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                console.log(data);
+                   
+                    
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        });
+
+
+    }
     
     $scope.supprimerActivite = function(id){
 
@@ -76,9 +123,7 @@ app.controller("ctrl", function($scope) {
         }
 
 
-        $scope.show_params = function(){
-            alert('test');
-        }
+        
 
         $scope.nomActiviteFromId = function(id){
 

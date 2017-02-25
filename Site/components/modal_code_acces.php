@@ -33,10 +33,24 @@
             url: "php_scripts/validerCode.php",
             data: {'code': $("#code_acces").val()}, 
             success: function (data) {
-                  if(data =="succes"){
-                 $('#modal_code').modal('close');
-                 $('#modal_ins').modal('open');
-                 }
+                  console.log(data+"!!");
+                  if(data != "fail"){
+                console.log("DATA: "+data);
+                     if (data=='1'){
+                    $('#nePasAfficher').attr('hidden','true');
+                    $('#modal_code').modal('close');
+                    $('#modal_ins').modal('open');
+                  }else if (data == '2'){
+                    $('#nePasAfficher').removeAttr('hidden');
+                    $('#modal_code').modal('close');
+                    $('#modal_ins').modal('open');
+                  
+                  }
+                  };
+
+               
+                 
+                 
                 
         },
             error: function (req) {

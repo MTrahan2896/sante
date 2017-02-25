@@ -367,6 +367,7 @@
 <!-- Modal pour planifier des activités -->
 <div id="modal_planif" class="modal">
      <div class="modal-content">
+      
        <div class="row" style="text-align:center">
            <h4>Planifier une activité</h4>
        </div>
@@ -493,3 +494,85 @@
 
 
 
+<!-- MODIFIER ACTIVITE -->
+<div id="modal_mod_planif" class="modal">
+      <div class="modal-content">
+      <input type="hidden" id="ID_ACT_PLAN">
+       <div class="row" style="text-align:center">
+           <h4>Modifier une activité</h4>
+       </div>
+        <div class="row">
+         <div class="input-field col s12">
+           <select required id="mod_nom_act" name="nom_act">
+           <option value="">Choisir une activité</option>
+           <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
+           </select>
+           <label class="ACTIVER" for="mod_nom_act">Nom de l'activité</label>
+         </div>
+         </div>
+
+          <div class="row">
+          <div class="input-field col s12">
+           <input id="mod_date_act" type="date" class="datepicker">
+           <label  class="ACTIVER" for="mod_date_act">Date de l'activité</label>
+         </div>
+         </div>
+ 
+         <div class="row">
+           <div class="input-field col s12">
+             <label class="ACTIVER" for="mod_heure_deb">Heure de début</label>
+             <input id="mod_heure_deb" class="timepicker" type="time" ng-model="$ctrl.NA">
+           </div>
+         </div>
+ 
+ 
+       <div class="row">
+         <div class="input-field col s6 l6">
+           <label   class="ACTIVER" for="mod_participants_max">Nombre de participants maximum</label>
+           <input type="number" step="1" maximum="180" minimum="0" id="mod_participants_max" name="participants_max"/>
+         </div>
+ 
+         <div class="input-field col s6 l6">
+           <label class="ACTIVER"  for="mod_frais">Frais de l'activité</label>
+           <input type="number" step="5" minimum="0" id="mod_frais" name="frais"/>
+         </div>
+       </div>
+ 
+       <div class="row">
+         <div class="input-field col s12 l12">
+           <input type="text" id="mod_endroit" class="materialize-textarea"></textarea>
+           <label class="ACTIVER" for="mod_endroit">Endroit</label>
+         </div>
+       </div>
+
+
+
+
+
+       <div class="row">
+         <div class="input-field col s12 l12">
+              <select id="mod_responsable"
+            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
+            ng-model="responsableSelectionne"
+            
+            >
+              
+            </select>
+            
+           
+         </div>
+       </div>
+      
+        <div class="row">
+         <div class="col s12 l12">
+           <button type="button" class="btn green" href="" style="width:100%" ng-click="modifierActivitePrevue()">Enregistrer</button>
+         </div>
+         <div class="col s12 l12" style="height: 15px;"></div>
+         <div class="col s12 l12">
+           <button class="btn red" href="" style="width: 100%" onclick="$('.modal').modal('close');">Annuler</button>
+         </div>
+     </div>  
+ 
+   </div>
+  </div>
+ </div>

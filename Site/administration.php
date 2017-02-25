@@ -85,7 +85,7 @@
                 
               <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
               <i class="material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
-              <i class="material-icons right" style="pointer-events: visiblePainted !important;" ng-click="show_params()">settings</i>
+              <i class="material-icons right" style="pointer-events: visiblePainted !important;" ng-click="show_params(activite)">settings</i>
 
               
             </div>
@@ -103,7 +103,7 @@
                   <br>  
                     <h5>Liste de présences <span style="color: green; font-size: 0.75em" ng-show="activite.presences_prises > 0"> - Présences prises</span></h5> 
                  <table> 
-                 <thead><th>Nom</th><th class="center">Present</th>  </thead>
+                 <thead><th>Nom</th><th class="center">Présent</th>  </thead>
                 <tr  ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)">
                   <td class="col s8">{{eleve.nom}}, {{eleve.prenom}}</td><td class="col s2 center">
                   
@@ -321,6 +321,7 @@ $('.timepicker').pickatime({
   vibrate: true // vibrate the device when dragging clock hand
 });
 $('#date_act').pickadate();
+$('#mod_date_act').pickadate();
 
 
 

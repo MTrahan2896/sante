@@ -57,16 +57,10 @@ include_once 'php_scripts/afficher_info_user.php';
 
     <div class="row">
       <div class="col s12 l12" id="section_type_utilisateur">                 
-        <?php
-        echo $_SESSION['code_insc'];
-        $query = "select * from utilisateurs where code_acces = '".$_SESSION['code_insc']."'";
-        $mysqli = new mysqli('localhost','root','','bd_application');
-        $result = $mysqli->query($query);
-        if ($result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
-            if(is_null($row['ID_Groupe']))
-              {
-                 echo "<label for='type_utilisateur'>Type d''utilisateur</label>
+ 
+       
+
+            <div id='nePasAfficher'><label for='type_utilisateur'>Type d''utilisateur</label>
               <select id='type_utilisateur'>
                 <option value='eleve'>Élève</option>
                 <optgroup label='Membre du personnel'>
@@ -79,13 +73,8 @@ include_once 'php_scripts/afficher_info_user.php';
                   <option value='ami'>Ami</option>
                   <option value='parent'>Parent</option>
                 </optgroup>
-              </select>";
-              }
-          }
-        $result->close();
-        }
-        $mysqli->close();
-        ?>   
+            </select>
+            </div>
       </div>
 
     </div>

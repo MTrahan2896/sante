@@ -1,7 +1,7 @@
 <?php
 session_start();
- $_SESSION['code_insc'] = $_POST['code'];
-$query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$_POST['code']."'";
+$_SESSION['code_insc'] = $_POST['code'];
+$query = "select id_utilisateur, id_groupe from utilisateurs where BINARY CODE_ACCES = '".$_POST['code']."'";
   
   $mysqli = new mysqli('localhost','root','','bd_application');
   $myArray = array();
@@ -11,10 +11,15 @@ $query = "select id_utilisateur from utilisateurs where BINARY CODE_ACCES = '".$
     {
 
     $row = $result->fetch_array();
-    echo "succes";
+    
+    if ($row[1] != '0'){
+      echo '1';
+    }
+    else echo '2';
     }
     else
     {
+    echo $query;
     echo 'fail';
     }
     
