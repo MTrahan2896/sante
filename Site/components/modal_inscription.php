@@ -56,11 +56,9 @@ include_once 'php_scripts/afficher_info_user.php';
     </div>
 
     <div class="row">
-      <div class="col s12 l12" id="section_type_utilisateur">                 
- 
-       
-
-            <div id='nePasAfficher'><label for='type_utilisateur'>Type d''utilisateur</label>
+      <div class="col s12 l12">                 
+            <div id='nePasAfficher'>
+            <label for='type_utilisateur'>Type d'utilisateur</label>
               <select id='type_utilisateur'>
                 <option value='eleve'>Élève</option>
                 <optgroup label='Membre du personnel'>

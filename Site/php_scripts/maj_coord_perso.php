@@ -29,13 +29,13 @@
 				  	$req = $req .",Type_Utilisateur ='".$_POST['type_user']."'
 					where id_utilisateur = ".$_SESSION['uid'].";";
 					echo phpQuery($req);
-					alert('Mise à jour du profil réussie');
+					echo 'Mise à jour du profil réussie';
 				  }
 				  else
 				  {
 				  	$req = $req. " where id_utilisateur = ".$_SESSION['uid'].";";
 					echo phpQuery($req);
-					alert('Mise à jour du profil réussie');
+					echo 'Mise à jour du profil réussie';
 				  }
 			  
 			}	  
