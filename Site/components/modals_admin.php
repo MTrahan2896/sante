@@ -130,11 +130,6 @@
   </div>
 </div>
 
-<?php
- 
-?>
-
-
   <script>  
   //Fonction ajax pour créer une activité
   function creer_act2(){
