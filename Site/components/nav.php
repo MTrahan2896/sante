@@ -1,11 +1,21 @@
  <nav>
-
+<?php        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            } ?>
 
       <div class="nav-wrapper">
         <a href="#" class="brand-logo center">Défi Santé</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li><a href="accueil.php">Accueil</a></li>
+
+          <?php
+          if(isset($_SESSION['admin'] )){
+           if($_SESSION['admin'] != 0){?>
+          
           <li><a class="adminTabs" href="administration.php">Administration</a></li>
+          <?php }}?>
+
+
           <li><a class="adminTabs" href="activites.php">Mes Activités</a></li>
           <li><a href="stats.php">Statistiques</a></li>
           
@@ -46,6 +56,8 @@
           if (isset($_POST['deconnexion']))
           {
             $_SESSION['uid'] = 0;
+            $_SESSION['admin'] = 0;
+            $_SESSION['username'] = "nobody";
             header('Location: accueil.php');
           }
         }

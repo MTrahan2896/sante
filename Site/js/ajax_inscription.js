@@ -16,6 +16,8 @@ function valider(){
             'code' : $("#code_acces").val()}, 
             success: function (data) {
                 console.log(data);
+                
+                location.reload();
             },
             error: function (req) { 
             }

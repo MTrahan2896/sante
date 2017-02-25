@@ -1,3 +1,16 @@
+<?php  
+       if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+if(isset($_SESSION['admin'])){
+    if ($_SESSION['admin'] == '0'){
+     header('Location: accueil.php');
+    }
+
+}else{ header('Location: accueil.php');};
+
+?>
+
 <html ng-app='app_angular' ng-controller="ctrl">
   <head>
     <?php include 'components/headContent.php';?>
@@ -9,18 +22,32 @@
       
     </header>
     <main>
+
+    <script>
+      
+      
+    </script>
     <div class="container">
       <h4>Administration</h4>
       <ul class="collapsible" data-collapsible="expandable">
         <li>
           <div class="collapsible-header"><i class="material-icons">supervisor_account</i>Groupes <span class="new badge blue right" data-badge-caption="">{{groupes.length}}</span></div>
           <div class="collapsible-body" class="collapsibleWithButton" style="padding-bottom: 45px !important">
-            
+          <div class="center"><h4>Groupes</h4></div>
+          <div class="container">
+              <input type="checkbox" checked name="masquerGroupes" ng-model="masquerGroupes" id="masquerGroupes" value="1" class="field filled-in">  
+             <label for="masquerGroupes" style="margin-top: 10px" >Masquer les groupes dont je ne suis pas responsable</label><br><br>
+          </div>
+
+           
+
             <ul class="collapsible" data-collapsible="expandable" >
               
-              <li ng-repeat="groupe in groupes"> <!-- ANGULAR REPEAT -->
+              <li ng-repeat="groupe in groupes" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>) || !masquerGroupes"> <!-- ANGULAR REPEAT -->
               <div class="collapsible-header"><i class="material-icons">supervisor_account</i>{{groupe.nom_groupe}}
+
                 <span class="new badge blue right" data-badge-caption="">{{elevesDansGroupe(groupe.id_groupe).length}} élève<span ng-show="elevesDansGroupe(groupe.id_groupe).length>1">s</span></span>
+                <i class="material-icons right" ng-show="!(groupe.id_prof == <?=$_SESSION['uid']?>)" title="Vous n'êtes pas responsable de ce groupe">lock</i>
               </div>
               <div class="collapsible-body collapsibleWithButton">
                 <table class="striped" align="center">
@@ -34,12 +61,12 @@
                 </tr>
               </table>
               <div class="row" style="text-align: center">
-              <button data-target="modalGenGroupe{{groupe.id_groupe}}" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
+              <button data-target="modalGenGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalGroupe{{groupe.id_groupe}}" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
+                <button data-target="modalGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
               </div>
               <div class="row"  style="text-align: center">
-                <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
+                <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
               </div>
             </div>
             
@@ -51,11 +78,14 @@
               
               <li> <!-- SANS GROUPE -->
               <div class="collapsible-header"><i class="material-icons">supervisor_account</i>Utilisateurs sans groupes
+
                 <span class="new badge blue right" data-badge-caption="">{{utilisateursSansGroupes.length}} Utilisateur<span ng-show="utilisateursSansGroupes.length>1">s</span></span>
               </div>
               <div class="collapsible-body collapsibleWithButton">
-                    <div ng-repeat="eleve in utilisateursSansGroupes">{{eleve.Nom}}, {{eleve.Prenom}}</div>
-
+              <table class="striped" align="center">
+              <thead> <th>Utilisateur</th></thead>
+                    <tr ng-repeat="eleve in utilisateursSansGroupes"><td> {{eleve.Nom}}, {{eleve.Prenom}}</td></tr>
+</table>
                                  <div class="row" style="text-align: center">
               <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
@@ -75,13 +105,27 @@
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités <span class="new badge green right" data-badge-caption="">{{activites_prevues.length}}</span></div>
         
         <div class="collapsible-body">
-          
+          <div class="center">
+          <h4>Activités Planifiées</h4>
+          </div>
+          <div class="container">
+          <input type="checkbox" checked name="masquerPasse" ng-model="masquerPasse" id="masquerPasse" value="1" class="filtresActivites field filled-in">  
+            <label for="masquerPasse" style="margin-top: 10px" >Masquer les activités passées</label>
+          <br>
+
+          <input type="checkbox" checked name="masquerPresence" id="masquerPresence" ng-model="masquerPresence" value="1" class="filtresActivites field filled-in">  
+            <label for="masquerPresence" style="margin-top: 10px" >Masquer les activités où les présences ont été prises</label>
+
+
+            <br><br>  
+          </div>
           <ul class="collapsible" data-collapsible="expandable">
             
             
-            <li ng-repeat="activite in activites_prevues"> <!-- ANGULAR REPEAT -->
+            <li ng-repeat="activite in activites_prevues" ng-show="!(activite.presences_prises > 0 && masquerPresence) && !(toDate(activite.Date_Activite) < now && masquerPasse) ">
+            <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
-              <i class="material-icons">directions_bike</i>{{nomActiviteFromId(activite.ID_Activite)}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
+              <i class="material-icons">directions_bike</i>{{activiteFromId(activite.ID_Activite).Nom_Activite}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
                 
               <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
               <i class="material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
@@ -96,7 +140,7 @@
                 <br>  
                 <b>Frais: </b> {{activite.Frais}}$ <br>  
                 <b>Endroit: </b> {{activite.Endroit}} <br>  
-
+                <b>Commentaire: </b>{{activiteFromId(activite.ID_Activite).Commentaire}}
 
                   <br>
                   
@@ -320,6 +364,7 @@ $('.timepicker').pickatime({
   autoclose: false,
   vibrate: true // vibrate the device when dragging clock hand
 });
+ 
 $('#date_act').pickadate();
 $('#mod_date_act').pickadate();
 

@@ -1,4 +1,4 @@
-  <style type="text/css"></style>
+  
   <!--Import Google Icon Font-->
   <link rel="stylesheet" href="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/css/materialize.clockpicker.css">
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

@@ -4,9 +4,9 @@ var app = angular.module("app_angular", []);
 app.controller("ctrl", function($scope) {
 
     
-    $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs')?>;
+    $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs order by nom ASC')?>;
     
-    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe from groupes')?>;
+    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof from groupes order by nom_groupe ASC')?>;
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
@@ -20,12 +20,16 @@ app.controller("ctrl", function($scope) {
 
     $scope.ensembles = [1, 2, 3];
 
-    $scope.utilisateursSansGroupes =   <?php echo phpSelectQuery('select * from utilisateurs where id_groupe is null and CODE_ACCES=""')?>;
+    $scope.utilisateursSansGroupes =   <?php echo phpSelectQuery('select * from utilisateurs where id_groupe is null and CODE_ACCES="" order by nom ASC')?>;
 
-    $scope.comptesAdministrateur = (<?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES=""')?>);
+    $scope.comptesAdministrateur = (<?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>);
 
 
     $scope.responsableSelectionne;
+
+            $scope.masquerPresence = true;
+        $scope.masquerPasse = true;
+        $scope.masquerGroupes = true;
 
     $scope.show_params = function(activite){
         $('#modal_mod_planif').modal('open');
@@ -45,6 +49,7 @@ app.controller("ctrl", function($scope) {
     
 
     }
+
 
     $scope.modifierActivitePrevue = function(){
 
@@ -122,16 +127,23 @@ app.controller("ctrl", function($scope) {
 
         }
 
+        $scope.now = new Date();
 
+        $scope.toDate = function(dateMod){
+            return new Date(dateMod);
+        }
+        $scope.scopePrint = function(val){
+            console.log(val);
+        }
         
 
-        $scope.nomActiviteFromId = function(id){
+        $scope.activiteFromId = function(id){
 
             let act = $scope.activites.filter(function(ac){
                 return ac.ID_Activite == id;
             })[0];
 
-            return act.Nom_Activite;
+            return act;
 
         }
 
@@ -351,11 +363,8 @@ app.controller("ctrl", function($scope) {
         }); 
     }
 
-    
 
-	setTimeout(function () {
-        $scope.$apply();
-    }, 2000);
+
 
     $scope.ouvrirModalModifierPermission= function(id_admin, niveau){
         console.log(id_admin+" .... "+niveau);
