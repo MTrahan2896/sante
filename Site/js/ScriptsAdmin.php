@@ -101,9 +101,6 @@ app.controller("ctrl", function($scope) {
         });
 
              } 
-
-
-
     }
 
     $scope.modifierActivite = function(activite){
@@ -117,7 +114,17 @@ app.controller("ctrl", function($scope) {
         $('#modal_mod_new_activite label').addClass( "active");
     }
 
+    $scope.modifierSession = function(session){
+        console.log(session);
+        $('#id_session_mod').val(session.ID_Session);   
+        $('#nom_session_mod').val(session.Nom_Session);     
+        $('#deb_session_mod').val(session.Debut_Session); 
+        $('#mi_session_mod').val(session.Mi_Session);
+        $('#fin_session_mod').val(session.Fin_Session);
+        $('#modal_session_mod').modal('open');
+        $('#modal_session_mod label').addClass( "active");
 
+    }
     
     $scope.niveauxAdmin=['Administrateur', 'Planificateur'];
 
