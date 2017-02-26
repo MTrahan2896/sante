@@ -18,7 +18,7 @@
 			$result = $mysqli->query($requete);
 			if ($result->num_rows == 0)
 			{
-			    $req = "insert into sessions values (null,'{$_POST['deb']}','{$_POST['mi']}','{$_POST['fin']}','".formater($_POST['nom'])."');";
+			    $req = "insert into sessions values (null,'{$_POST['deb']}','{$_POST['fin']}','{$_POST['mi']}','".formater($_POST['nom'])."');";
 
 				echo phpQuery($req);
 				echo "Création de la session réussie";

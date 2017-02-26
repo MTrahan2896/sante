@@ -80,11 +80,11 @@ if(isset($_SESSION['admin'])){
               </div>
 
                 <table class="striped" align="center">
-                  <thead><tr><td>Nom</td><td class="center">Points accumulés</td></tr></thead>
+                  <thead><tr><th>Nom</th><th class="center">Début</th><th>Fin</th><th>Bonus</th><th>Total</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                    <td style="text-align: center" class="center">{{}}/15</td>
+                    <td style="text-align: center" class="center">{{pointsDebutForEleve(eleve.id_utilisateur)}}/5</td><td> {{pointsFinForEleve(eleve.id_utilisateur)}}/5</td><td> {{pointsBonusForEleve(eleve.id_utilisateur)}}/5</td><td>{{pointsDebutForEleve(eleve.id_utilisateur)+pointsFinForEleve(eleve.id_utilisateur)+pointsBonusForEleve(eleve.id_utilisateur)}}/15</td>
                     
                   </div>
                 </tr>
@@ -412,15 +412,3 @@ $(".session:last").attr("checked", true);
 <div class="hiddendiv common"></div>
 
 </body></html>
-
-select sum(ponderation) 
-from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
-where activites_prevues.id_activite = activites.id_activite 
-and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
-and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
-and utilisateurs.ID_Groupe = groupes.ID_Groupe
-and groupes.ID_Session = Sessions.ID_Session
-and activites_prevues.date_activite > sessions.Debut_Session
-and activites_prevues.date_activite < sessions.mi_session
-and utilisateurs.id_utilisateur = 289
-and utilisateur_activites.present = 1
