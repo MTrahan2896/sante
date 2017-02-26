@@ -1,9 +1,9 @@
 <?php
-
+include_once 'connexion_bd.php';
 function obtenir_info($id)
 {
   $query = "select * from utilisateurs where id_utilisateur =".$id;
-  $mysqli = new mysqli('localhost','root','','bd_application');
+  $mysqli = connexion();
   $result = $mysqli->query($query);
 
   if ($result->num_rows > 0) {
@@ -35,7 +35,7 @@ function obtenir_info($id)
   function afficher_select_type($id){
 
     $query = "select * from utilisateurs where id_utilisateur =".$id;
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
     $result = $mysqli->query($query);
 
   if ($result->num_rows > 0) {

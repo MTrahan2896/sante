@@ -1,6 +1,7 @@
 <?php
+include_once 'connexion_bd.php';
 	function phpQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
 	$myArray = array();
 	$mysqli->query($query);
 	

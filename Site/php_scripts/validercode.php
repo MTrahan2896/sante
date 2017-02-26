@@ -1,9 +1,11 @@
 <?php
+include_once 'connexion_bd.php';
+  include_once 'formater_champ.php';
 session_start();
 $_SESSION['code_insc'] = $_POST['code'];
 $query = "select id_utilisateur, id_groupe from utilisateurs where BINARY CODE_ACCES = '".$_POST['code']."'";
   
-  $mysqli = new mysqli('localhost','root','','bd_application');
+  $mysqli = connexion();
   $myArray = array();
   if ($result = $mysqli->query($query)) {
 

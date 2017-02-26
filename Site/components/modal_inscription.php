@@ -48,9 +48,9 @@ include_once 'php_scripts/afficher_info_user.php';
     <div class="row">
       <div class="col s12">
         <i class="material-icons prefix">people</i>
-        <input name="sexe" type="radio" id="s1" value="H" checked />
+        <input name="sexe" type="radio" id="s1" value="H" checked class="with-gap" />
         <label for="s1" style="margin:auto;">Homme</label>
-        <input name="sexe" type="radio" id="s2" value="F" />
+        <input name="sexe" type="radio" id="s2" value="F" class="with-gap"/>
         <label for="s2" style="margin:auto;">Femme</label>
       </div>
     </div>

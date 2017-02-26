@@ -1,9 +1,9 @@
 <?php
 	session_start();
-	include 'formater_champ.php';
-
+	include_once 'connexion_bd.php';
+	include_once 'formater_champ.php';
 	function phpQuery($query_sql){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
 	$mysqli->query($query_sql);
 	
 	$mysqli->close();
@@ -19,7 +19,7 @@
 				Sexe = '".$_POST['sexe']."'";
 
 		$query = "select * from utilisateurs where id_utilisateur =".$id;
-	    $mysqli = new mysqli('localhost','root','','bd_application');
+	    $mysqli = connexion();
 	  	$result = $mysqli->query($query);
 		if ($result->num_rows > 0) {
 		  while($row = $result->fetch_assoc()) {

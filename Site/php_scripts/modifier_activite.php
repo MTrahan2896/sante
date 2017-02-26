@@ -1,7 +1,8 @@
 <?php
-	include 'formater_champ.php';
+	include_once 'connexion_bd.php';
+	include_once 'formater_champ.php';
 	function phpQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
 	$myArray = array();
 	$mysqli->query($query);
 	

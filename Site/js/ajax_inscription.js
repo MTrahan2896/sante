@@ -18,8 +18,10 @@ function valider(){
 
                 alert(data);
                 
+                if(data == "Inscription réussie")
+                {
                 location.reload();
-
+                }
             },
             error: function (req) { 
             }

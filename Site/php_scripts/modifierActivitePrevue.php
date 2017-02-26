@@ -1,18 +1,12 @@
 
 <?php
                 
-function formater($champ)
-{
-        $champ = str_replace("'","''",$champ);
-        $champ = trim($champ);
-        $champ = strtolower($champ);
-        $champ = ucfirst($champ);       
-        return $champ;
-}
+include_once 'connexion_bd.php';
+  include_once 'formater_champ.php';
         
 
         function phpQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
         $myArray = array();
         $mysqli->query($query);
         $mysqli->close();
