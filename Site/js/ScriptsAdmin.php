@@ -6,15 +6,15 @@ app.controller("ctrl", function($scope) {
     
     $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs order by nom ASC')?>;
     
-    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof from groupes order by nom_groupe ASC')?>;
+    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = Sessions.id_session order by nom_groupe ASC')?>;
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
-    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where hidden=false or hidden is null order by presences_prises')?>;
+    $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where hidden=false or hidden is null order by presences_prises, date_activite ')?>;
 
     $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
-    $scope.sessions = <?php echo phpSelectQuery('select * from sessions')?>;
+    $scope.sessions = <?php echo phpSelectQuery('select * from sessions order by debut_session ASC')?>;
 
     $scope.codesAdmin = <?php echo phpSelectQuery('select * from utilisateurs where administrateur = 1 and not CODE_ACCES=""')?>;
 
@@ -23,6 +23,8 @@ app.controller("ctrl", function($scope) {
     $scope.utilisateursSansGroupes =   <?php echo phpSelectQuery('select * from utilisateurs where id_groupe is null and CODE_ACCES="" order by nom ASC')?>;
 
     $scope.comptesAdministrateur = (<?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>);
+
+    
 
 
     $scope.responsableSelectionne;
@@ -48,6 +50,11 @@ app.controller("ctrl", function($scope) {
         $('.ACTIVER').addClass( "active" );
     
 
+    }
+    
+    $scope.AFFICHER= function(){
+
+        console.log($scope.tri_session);
     }
 
 
