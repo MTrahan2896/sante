@@ -22,10 +22,31 @@ app.controller("ctrl", function($scope) {
 
     $scope.utilisateursSansGroupes =   <?php echo phpSelectQuery('select * from utilisateurs where id_groupe is null and CODE_ACCES="" order by nom ASC')?>;
 
-    $scope.comptesAdministrateur = (<?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>);
+    $scope.comptesAdministrateur = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>;
 
-    
+    $scope.points_debut = <?php echo phpSelectQuery('select sum(ponderation) as points_debut, utilisateurs.id_utilisateur
+    from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
+            where activites_prevues.id_activite = activites.id_activite 
+            and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
+            and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
+            and utilisateurs.ID_Groupe = groupes.ID_Groupe
+            and groupes.ID_Session = Sessions.ID_Session
+            and activites_prevues.date_activite > sessions.Debut_Session
+            and activites_prevues.date_activite < sessions.mi_session
+            and utilisateur_activites.present = 1
+            group by utilisateurs.id_utilisateur')?>;
 
+    $scope.points_fin = <?php echo phpSelectQuery('select sum(ponderation) as points_fin, utilisateurs.id_utilisateur
+    from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
+            where activites_prevues.id_activite = activites.id_activite 
+            and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
+            and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
+            and utilisateurs.ID_Groupe = groupes.ID_Groupe
+            and groupes.ID_Session = Sessions.ID_Session
+            and activites_prevues.date_activite > sessions.mi_Session
+            and activites_prevues.date_activite < sessions.fin_session
+            and utilisateur_activites.present = 1
+            group by utilisateurs.id_utilisateur')?>
 
     $scope.responsableSelectionne;
 
@@ -52,10 +73,54 @@ app.controller("ctrl", function($scope) {
 
     }
     
-    $scope.AFFICHER= function(){
 
-        console.log($scope.tri_session);
-    }
+        $scope.pointsDebutForEleve = function(id){
+       let pts = $scope.points_debut.filter(function(el){
+            
+            return el.id_utilisateur == id;
+        })[0].points_debut;
+
+        if(pts > 5){
+            return 5;
+        }
+        else return pts;
+
+        }
+
+        $scope.pointsFinForEleve = function(id){
+        let pts =  $scope.points_fin.filter(function(el){
+            
+            return el.id_utilisateur == id;
+        })[0].points_fin;
+
+        if(pts > 5){
+            return 5;
+        }
+        else return pts;
+        }
+
+
+        $scope.pointsBonusForEleve = function(id){
+        let pts_fin = $scope.points_fin.filter(function(el){
+            return el.id_utilisateur == id;
+        })[0].points_fin;
+
+        let pts_debut = $scope.points_debut.filter(function(el){
+            
+            return el.id_utilisateur == id;
+        })[0].points_debut;
+
+        let pts_bonus = 0;
+
+        if(pts_fin > 5){
+            pts_bonus += pts_fin -5;
+        }
+
+        if(pts_debut > 5){
+            pts_bonus += pts_debut -5;
+        }
+        return pts_bonus;
+        }
 
 
     $scope.modifierActivitePrevue = function(){
