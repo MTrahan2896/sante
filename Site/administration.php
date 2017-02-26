@@ -22,7 +22,17 @@ if(isset($_SESSION['admin'])){
       
     </header>
     <main>
-
+  <div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue darken-2">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating blue"><i class="material-icons">home</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">supervisor_account</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">directions_bike</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">assessment</i></a></li>
+    </ul>
+  </div>
     <script>
       
       
@@ -35,8 +45,19 @@ if(isset($_SESSION['admin'])){
           <div class="collapsible-body" class="collapsibleWithButton" style="padding-bottom: 45px !important">
           <div class="center"><h4>Groupes</h4></div>
           <div class="container">
+            <div input-field class="center">
               <input type="checkbox" checked name="masquerGroupes" ng-model="masquerGroupes" id="masquerGroupes" value="1" class="field filled-in">  
-             <label for="masquerGroupes" style="margin-top: 10px" >Masquer les groupes dont je ne suis pas responsable</label><br><br>
+              <label for="masquerGroupes" style="margin-top: 10px" >Masquer les groupes dont je ne suis pas responsable</label>
+              <br>
+              <div class="row">
+              <br>
+              </div>
+         
+              
+              
+              
+              </div>
+              
           </div>
 
            
@@ -46,10 +67,18 @@ if(isset($_SESSION['admin'])){
               <li ng-repeat="groupe in groupes" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>) || !masquerGroupes"> <!-- ANGULAR REPEAT -->
               <div class="collapsible-header"><i class="material-icons">supervisor_account</i>{{groupe.nom_groupe}}
 
-                <span class="new badge blue right" data-badge-caption="">{{elevesDansGroupe(groupe.id_groupe).length}} élève<span ng-show="elevesDansGroupe(groupe.id_groupe).length>1">s</span></span>
+                <span class="hide-on-small-only new badge blue right" data-badge-caption="">{{elevesDansGroupe(groupe.id_groupe).length}} élève<span ng-show="elevesDansGroupe(groupe.id_groupe).length>1">s</span></span>
                 <i class="material-icons right" ng-show="!(groupe.id_prof == <?=$_SESSION['uid']?>)" title="Vous n'êtes pas responsable de ce groupe">lock</i>
               </div>
-              <div class="collapsible-body collapsibleWithButton">
+
+              <div class="collapsible-body collapsibleWithButton"><div class="container">
+              <b>Session: </b>{{groupe.nom_session}} <br>
+              <b>Ensemble: </b>{{groupe.ensemble}} <br>
+              <b>Professeur responsable: </b>{{eleveFromId(groupe.id_prof).nom}}, {{eleveFromId(groupe.id_prof).prenom}}
+
+
+              </div>
+
                 <table class="striped" align="center">
                   <thead><tr><td>Nom</td><td class="center">Points accumulés</td></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
@@ -68,6 +97,7 @@ if(isset($_SESSION['admin'])){
               <div class="row"  style="text-align: center">
                 <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
               </div>
+
             </div>
             
           </li>
@@ -78,8 +108,8 @@ if(isset($_SESSION['admin'])){
               
               <li> <!-- SANS GROUPE -->
               <div class="collapsible-header"><i class="material-icons">supervisor_account</i>Utilisateurs sans groupes
-
-                <span class="new badge blue right" data-badge-caption="">{{utilisateursSansGroupes.length}} Utilisateur<span ng-show="utilisateursSansGroupes.length>1">s</span></span>
+                
+                <span class="new badge blue right hide-on-small-only" data-badge-caption="">{{utilisateursSansGroupes.length}} Utilisateur<span ng-show="utilisateursSansGroupes.length>1">s</span></span>
               </div>
               <div class="collapsible-body collapsibleWithButton">
               <table class="striped" align="center">
@@ -127,9 +157,9 @@ if(isset($_SESSION['admin'])){
             <div class="collapsible-header">
               <i class="material-icons">directions_bike</i>{{activiteFromId(activite.ID_Activite).Nom_Activite}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
                 
-              <span class="new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
-              <i class="material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
-              <i class="material-icons right" style="pointer-events: visiblePainted !important;" ng-click="show_params(activite)">settings</i>
+              <span class=" hide-on-small-only new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
+              <i class=" hide-on-small-only material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
+              <i class=" hide-on-small-only material-icons right" style="pointer-events: visiblePainted !important;" ng-click="show_params(activite)">settings</i>
 
               
             </div>
@@ -367,8 +397,11 @@ $('.timepicker').pickatime({
  
 $('#date_act').pickadate();
 $('#mod_date_act').pickadate();
+$('input[type="date"]').pickadate();
 
+$("select").material_select();
 
+$(".session:last").attr("checked", true);
 
 });
 
@@ -380,3 +413,14 @@ $('#mod_date_act').pickadate();
 
 </body></html>
 
+select sum(ponderation) 
+from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
+where activites_prevues.id_activite = activites.id_activite 
+and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
+and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
+and utilisateurs.ID_Groupe = groupes.ID_Groupe
+and groupes.ID_Session = Sessions.ID_Session
+and activites_prevues.date_activite > sessions.Debut_Session
+and activites_prevues.date_activite < sessions.mi_session
+and utilisateurs.id_utilisateur = 289
+and utilisateur_activites.present = 1

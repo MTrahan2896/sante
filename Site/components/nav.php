@@ -5,6 +5,33 @@
 
       <div class="nav-wrapper">
         <a href="#" class="brand-logo center">Défi Santé</a>
+
+
+
+        <div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large red">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+    </ul>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li><a href="accueil.php">Accueil</a></li>
 
@@ -30,8 +57,7 @@
          $_SESSION['uid'] = 0;
           }
          if (isset($_SESSION['username'])){
-          echo "<script> document.getElementById('Greet_User').innerHTML ='".$_SESSION['username']."';</script>";
-          }
+                    }
         if ($_SESSION['uid'] == 0)
         {
         echo '
@@ -46,8 +72,8 @@
           echo '
             <form action="Accueil.php" method="POST">
             <ul id="nav-mobile" class="right">
-            <li style="margin-right: 20px"><a href="profil.php"><span id="Greet_User"></span></a></li>
-            <li>  <button class="btn blue waves-effect waves-light right" style="margin-top:14px;margin-right:10px;" type="submit" name="deconnexion">Déconnexion
+            <li style="margin-right: 20px"><a href="profil.php"><span id="Greet_User" class="hide-on-small-only"></span></a></li>
+            <li>  <button class="btn blue waves-effect waves-light right hide-on-small-only" style="margin-top:14px;margin-right:10px;" type="submit" name="deconnexion">Déconnexion
               </button></li>
             </form>';
 
