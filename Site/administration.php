@@ -293,7 +293,7 @@ if(isset($_SESSION['admin'])){
               <table><thead><th>Nom de la session</th><th>Début</th>
               <th>Mi-Session</th>
               <th>Fin</th></thead><th></th>
-              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats()"><i class="material-icons">assessment</i></a></td>
+              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light green " ng-click="modifierSession(session)"><i class="material-icons">edit</i></a></td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats()"><i class="material-icons">assessment</i></a></td>
               </tr>
               </table>
               
@@ -404,6 +404,7 @@ $("select").material_select();
 $(".session:last").attr("checked", true);
 
 });
+
 
 
 

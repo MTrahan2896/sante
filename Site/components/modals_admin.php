@@ -17,7 +17,7 @@
       </div>
       <div class="input-field col s6 l4">
         <label  for="point">Nombre de points</label>
-        <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point"/>
+        <input type="number" step="0.5" maximum="3" minimum="0" id="point" name="point"/>
       </div>
     </div>
     Couleur de l'activité
@@ -108,7 +108,7 @@
       </div>
       <div class="input-field col s6 l4">
         <label  for="point_mod" class="ACTIVER">Nombre de points</label>
-        <input type="number" step="0.25" maximum="3" minimum="0" id="point_mod" name="point"/>
+        <input type="number" step="0.5" maximum="3" minimum="0" id="point_mod" name="point"/>
       </div>
     </div>
    
@@ -120,36 +120,32 @@
     </div>
     <div class="row">
       <div class="col s12 l12">
-        <button class="btn green" onclick="" style="width:100%"> Créer</button>
+        <button class="btn green" onclick="modifier_mod_new_act()" style="width:100%">Modifier</button>
       </div>
       <div class="col s12 l12" style="height:15px"></div>
       <div class="col s12 l12">
-        <a class="btn red" href="" style="width:100%"> Annuler</a>
+        <button class="btn red" onclick="$('#modal_mod_new_activite').modal('close');" style="width:100%"> Annuler</button>
       </div>
     </div>
   </div>
 </div>
 
-<?php
- 
-?>
-
-
   <script>  
   //Fonction ajax pour créer une activité
-  function creer_act2(){
+  function modifier_mod_new_act(){
     $.ajax({
       type: "POST",
-      url: "php_scripts/creer_activite.php",
+      url: "php_scripts/modifier_activite.php",
       data: {
-             'nom_act': $("#nom_activite").val(),
-             'duree': $('#duree').val(),
-             'nbr_pts': $('#point').val(),
-             'couleur':$('#couleur_activite').val(),
-             'desc':$('#description').val()
+             'id_act':$("#id_mod_act").val(),
+             'nom_act': $("#nom_activite_mod").val(),
+             'duree': $('#duree_mod').val(),
+             'nbr_pts': $('#point_mod').val(),
+             'desc':$('#description_mod').val()
             },
       success: function (data) {
-        console.log(data);
+        alert(data);
+        location.reload();
       },
       error: function (req) {
         alert("erreur");
@@ -381,33 +377,33 @@
     <div class="row">
       <div class="input-field col s12 l8">
         <input id="nom_session" type="text" class="validate" maxlength="60">
-        <label for="nom_session">Nom de la session</label>
+        <label for="nom_session">Nom de la session*</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12 l8">
         <input type="date" class="datepicker" id="deb_session">
-        <label for="deb_session">Date du début de la session</label>  
+        <label for="deb_session">Date du début de la session*</label>  
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12 l8">
         <input type="date" class="datepicker" id="mi_session">
-        <label for="mi_session">Date de la mi-session</label>
+        <label for="mi_session">Date de la mi-session*</label>
       </div>  
     </div>
 
     <div class="row">
       <div class="input-field col s12 l8">
         <input type="date" class="datepicker" id="fin_session">
-        <label for="fin_session">Date de la fin de la session</label> 
+        <label for="fin_session">Date de la fin de la session*</label> 
       </div>
     </div>
 
     <div class="row">
       <div class="col s12 l12">
-        <button class="btn green" onclick="creer_session()" style="width:100%"> Créer</button>
+        <button class="btn green" onclick="creer_session()" style="width:100%">Créer</button>
       </div>
       <div class="col s12 l12" style="height:15px"></div>
       <div class="col s12 l12">
@@ -428,8 +424,81 @@
                    'mi': $("#mi_session").val(),
                    'fin': $('#fin_session').val() }, 
             success: function (data) {
-                console.log(data);     
-                location.reload();          
+                alert(data);
+                if (data == "Création de la session réussie")
+                {
+                  location.reload();
+                }           
+        },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+}        
+</script>
+
+
+<div id="modal_session_mod" class="modal">
+  <div class="modal-content">
+  <input type="hidden" name="id_session_mod" id="id_session_mod" />
+    <div class="row" style="text-align: center;">
+      <h4 class="">Modifier une session</h4>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input id="nom_session_mod" type="text" class="validate" maxlength="60">
+        <label for="nom_session_mod">Nom de la session*</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input type="date" class="datepicker" id="deb_session_mod">
+        <label for="deb_session_mod">Date du début de la session*</label>  
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input type="date" class="datepicker" id="mi_session_mod">
+        <label for="mi_session_mod">Date de la mi-session*</label>
+      </div>  
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input type="date" class="datepicker" id="fin_session_mod">
+        <label for="fin_session_mod">Date de la fin de la session*</label> 
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 l12">
+        <button class="btn green" onclick="modifier_session()" style="width:100%">Enregistrer</button>
+      </div>
+      <div class="col s12 l12" style="height:15px"></div>
+      <div class="col s12 l12">
+        <a class="btn red" href="" style="width:100%"> Annuler</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function modifier_session(){
+    $.ajax({
+            type: "POST",
+            url: "php_scripts/modifier_session.php",
+            data: {'id_session': $('#id_session_mod').val(),
+                   'nom': $('#nom_session_mod').val(),
+                   'deb': $("#deb_session_mod").val(),
+                   'mi': $('#mi_session_mod').val(),
+                   'fin': $('#fin_session_mod').val() }, 
+            success: function (data) {
+                alert(data);
+                if (data == "Mise à jour de la session réussie")
+                {
+                  location.reload();
+                }  
         },
             error: function (req) {
                 alert("erreur");
@@ -653,3 +722,12 @@
    </div>
   </div>
  </div>
+
+
+ <script>
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    format: 'yyyy-mm-dd'
+  });
+ </script>
