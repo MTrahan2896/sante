@@ -86,7 +86,7 @@
     <a class="btn-floating btn-large blue darken-2">
       <i class="material-icons">menu</i>
     </a>
-    <ul>
+    <ul id="nav_mobile_fab">
       <li><a ng-show="<?=$_SESSION['admin']?> > 1" class="btn-floating  waves-effect waves-light blue" href="administration.php"><i class="material-icons">supervisor_account</i></a></li>
       <li><a ng-show="<?=$_SESSION['admin']?> > 1" class="btn-floating blue waves-effect waves-light" href="statistiques.php"><i class="material-icons">assessment</i></a></li>
       <li><a ng-show="<?=$_SESSION['uid']?> != 0" class="btn-floating  waves-effect waves-light blue" href="activites.php"><i class="material-icons">directions_bike</i></a></li>
@@ -120,6 +120,11 @@
 
 
     }
+
+document.addEventListener('DOMContentLoaded', function() {
+    $("#nav_mobile_fab").css("right", 30);
+    });
+
 
   </script>
 
