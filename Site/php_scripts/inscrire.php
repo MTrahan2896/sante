@@ -70,7 +70,7 @@ if($valide){
           $query = "update utilisateurs set nom=".guillemeter(formater($_POST['nom'])).
                    ", prenom=".guillemeter(formater($_POST['prenom'])).", username=".guillemeter(formater($_POST['username'])).
                    ", actif=1, courriel=".guillemeter(formater($_POST['courriel'])).",   telephone=".guillemeter($_POST['telephone']).
-                   ", sexe=".guillemeter(formater($_POST['sexe'])).", password=".guillemeter($pass).", Type_Utilisateur='".$_POST['type_utilisateur']."',code_acces='' where code_acces=".guillemeter($_POST['code']).";";
+                   ", sexe=".guillemeter(formater($_POST['sexe'])).", password=".str_replace("'","''",$pass).", Type_Utilisateur='".$_POST['type_utilisateur']."',code_acces='' where code_acces=".guillemeter($_POST['code']).";";
          
           $mysqli = connexion();
           $mysqli->query($query);
