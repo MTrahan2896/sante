@@ -32,7 +32,11 @@ $scope.annuler_participation = function(activite){
                 'heure':$('#heure_deb').val()
             }, 
             success: function(data) {
-                console.log(data);                    
+                console.log(data);
+                if (data == "Vous avez quitté l'activité avec succès")
+                {
+                	location.reload();
+                }                    
             },
             error: function(req) {
                 alert("erreur");

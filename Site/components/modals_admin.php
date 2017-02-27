@@ -79,7 +79,7 @@
              'desc':$('#description').val()
             },
       success: function (data) {
-        console.log(data);
+        alert(data);
       },
       error: function (req) {
         alert("erreur");
@@ -558,31 +558,23 @@
          </div>
        </div>
 
-
-
-
-
        <div class="row">
          <div class="input-field col s12 l12">
               <select id="selectResponsable"
             ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
-            ng-model="responsableSelectionne"
-            
-            >
+            ng-model="responsableSelectionne">
               
             </select>
-            
-           
          </div>
        </div>
       
         <div class="row">
          <div class="col s12 l12">
-           <button type="button" class="btn green" href="" style="width:100%" ng-click="test()" onclick="planifier_act();"> Planifier</button>
+           <button type="button" class="btn green" style="width:100%"  onclick="planifier_act();"> Planifier</button>
          </div>
          <div class="col s12 l12" style="height: 15px;"></div>
          <div class="col s12 l12">
-           <button class="btn red" href="" style="width: 100%"> Annuler</button>
+           <button class="btn red" onclick="location.reload()" style="width: 100%"> Annuler</button>
          </div>
      </div>  
  
@@ -605,8 +597,11 @@
              'responsable':$('#selectResponsable').val()
             },
       success: function (data) {
-        alert("L'activité a été planifiée avec succès")
-        location.reload();
+        console.log(data);
+        if (data == "L'activité a été planifiée avec succès")
+          {
+            location.reload();
+          }
       },
       error: function (req) {
         alert("erreur");
