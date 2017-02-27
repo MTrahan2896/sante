@@ -20,7 +20,11 @@ function verifier_user_existant($username,$pwd_input)
     $row = $result->fetch_array();
     
     verifier_password($row['id_utilisateur'],$username, $pwd_input, $row['password']);
-    }  
+    } 
+    else
+    {
+      echo "Nom d'utilisateur ou mot de passe invalide";
+    }
   }
 
   $mysqli->close();  
@@ -38,11 +42,11 @@ function verifier_password($id,$username,$pwd_input,$pwd)
     $_SESSION['uid'] = $id;
     $_SESSION['username'] = $username;
 
-    echo true;
+    echo "Connexion réussie";
   }
   else
   {
-    
+    echo "Nom d'utilisateur ou mot de passe invalide";
   }
 
 

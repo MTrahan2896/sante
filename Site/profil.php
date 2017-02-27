@@ -188,7 +188,6 @@ obtenir_info($_SESSION['uid']);
 <script type="text/javascript" src="js/gcal.js"></script>
 <script type="text/javascript" src="js/sc-date-time.js"></script>
 <script src="js/scripts.js"></script>
-<script type="text/javascript">
  <?php 
 
        include 'js/ScriptsProfil.php';

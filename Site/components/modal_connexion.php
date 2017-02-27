@@ -10,13 +10,10 @@
             data: {'nom_user': $("#username").val(),
                    'password': $('#pwd').val() }, 
             success: function (data) {
-                console.log(data);
-                if(data.toString() == 1){
+                alert(data);
+                if(data == "Connexion réussie"){
                   location.reload();
-                }else{
-                  alert('Nom d\'utilisateur ou mot de passe invalide');
-                }
-                
+                }               
         },
             error: function (req) {
                 alert("erreur");
