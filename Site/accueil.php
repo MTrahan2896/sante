@@ -1,34 +1,23 @@
+<?php  
+       if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+?>
+
 <html>
   <head>
-    
-          <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      
-        <?php 
-
-              include('components/headContent.php') ;
-              
-        ?>
-
+    <?php include 'components/headContent.php';?>
   </head>
   <body>
     
+    <header>
+      <?php include 'components/nav.php';?>
+      
+    </header>
+    <main>
 
 
 
-
-    <body>
-        <header>
-            
-        
-        <?php 
-
-              include('components/nav.php') ;
-              
-        ?>
-
-        </header>
-        <main>
           <?php 
             include_once 'php_scripts/connexion_bd.php';
      $mysqli = connexion();  

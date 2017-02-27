@@ -33,14 +33,13 @@
             url: "php_scripts/validerCode.php",
             data: {'code': $("#code_acces").val()}, 
             success: function (data) {
-                  console.log(data+"!!");
                   if(data != "fail"){
                 console.log("DATA: "+data);
-                     if (data=='1'){
+                     if (data=='Groupe'){
                     $('#nePasAfficher').attr('hidden','true');
                     $('#modal_code').modal('close');
                     $('#modal_ins').modal('open');
-                  }else if (data == '2'){
+                  }else if (data == 'SansGroupe'){
                     $('#nePasAfficher').removeAttr('hidden');
                     $('#modal_code').modal('close');
                     $('#modal_ins').modal('open');

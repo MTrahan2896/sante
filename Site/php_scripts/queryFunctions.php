@@ -28,7 +28,7 @@ include_once 'connexion_bd.php';
 	
 	$mysqli->close();
 	}
-
+}
 
 	function phpSelectReturnSingleName($query){
     $mysqli = connexion();
@@ -53,5 +53,7 @@ include_once 'connexion_bd.php';
 
 
 
-}
+
+
+
 ?>
