@@ -129,10 +129,12 @@ if(isset($_SESSION['admin'])){
                 <span class="new badge blue right hide-on-small-only" data-badge-caption="">{{utilisateursSansGroupes.length}} Utilisateur<span ng-show="utilisateursSansGroupes.length>1">s</span></span>
               </div>
               <div class="collapsible-body collapsibleWithButton">
+  
               <table class="striped" align="center">
-              <thead> <th>Utilisateur</th></thead>
+              <thead> <th>Utilisateurs</th></thead>
                     <tr ng-repeat="eleve in utilisateursSansGroupes"><td> {{eleve.Nom}}, {{eleve.Prenom}}</td></tr>
               </table>
+
                                  <div class="row" style="text-align: center">
               <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
