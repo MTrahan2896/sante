@@ -13,11 +13,10 @@ $query = "select id_utilisateur, id_groupe from utilisateurs where BINARY CODE_A
     {
 
     $row = $result->fetch_array();
-    
     if ($row[1] != '0'){
-      echo '1';
+      echo 'Groupe';
     }
-    else echo '2';
+    else echo 'SansGroupe';
     }
     else
     {
