@@ -7,6 +7,13 @@
 <html>
   <head>
     <?php include 'components/headContent.php';?>
+    <style>
+    .remove_margin_bottom{
+        margin-bottom: 0px !important;
+    }
+
+   .fc-content {display:flex;flex-flow:column-reverse nowrap;}
+    </style>
   </head>
   <body>
     
@@ -64,6 +71,19 @@
                   
                       $conn->close();
                 }
+          }else if(isset($_POST['Sub_liste_attente'])){
+              $sql = "INSERT INTO utilisateur_activites (ID_Utilisateur,ID_Activite_Prevue,Present)
+                      VALUES (".$_SESSION['uid'].",".$_POST['id_activite'].",2)";
+                  
+                      if ($conn->query($sql) === TRUE) {
+                          echo "<script>
+                              alert('Vous êtes Maintenant sur la liste d'attente);
+                          </script>";
+                      } else {
+                          echo "Error: " . $sql . "<br>" . $conn->error;
+                      }
+                  
+                      $conn->close();
           }
           }
           ?>
@@ -110,7 +130,7 @@
      
     <div class="modal-content">
         <form id="inscAct" method="POST" action="" hidden>
-              <input type="text" id="id_act" name="id_activite" value="">
+              <input type="text" class="remove_margin_bottom" id="id_act" name="id_activite" value="">
         </form>  
         <div class="row">
           <h3 id="titre" style="margin-bottom:0px;text-align:center;"></h3>
@@ -120,7 +140,7 @@
                 Date:
             </div>
             <div class="input-field col l8" style="margin-top:0px;">
-                <input type="date"  id="date"  readonly>
+                <input type="date"  class="remove_margin_bottom"  id="date"  readonly>
             </div>  
         </div>
         <div class="row">
@@ -128,7 +148,7 @@
                 Debut:
             </div>
             <div class="input-field col l8" style="margin-top:0px;">
-                <input type="time"  id="debut"  readonly>
+                <input type="time"  class="remove_margin_bottom"  id="debut"  readonly>
             </div>  
         </div>
         <div class="row">
@@ -136,7 +156,15 @@
                 Fin:
             </div>
             <div class="input-field col l8" style="margin-top:0px;">
-                <input type="time"  id="fin"  readonly>
+                <input type="time"  class="remove_margin_bottom"  id="fin"  readonly>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col l4" style="margin-top:14px;text-align:right">
+                Endroit:
+            </div>
+            <div class="input-field col l8" style="margin-top:0px;">
+                <input type="text"  class="remove_margin_bottom"  id="endroit" value=""  readonly>
             </div> 
         </div>
         <div class="row" id="divSub">
@@ -263,7 +291,7 @@
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
-                    $query = "SELECT ap.ID_Activite_prevue, a.Couleur, a.Nom_Activite, ap.Date_Activite, ap.Heure_Debut, a.Duree, count(ua.ID_Eleve_Activite) as participant, ap.Participants_Max
+                    $query = "SELECT ap.ID_Activite_prevue, a.Couleur, a.Nom_Activite, ap.Date_Activite, ap.Heure_Debut, a.Duree, count(ua.ID_Eleve_Activite) as participant, ap.Participants_Max, ap.Endroit
                               FROM activites a, activites_prevues ap 
                               left join utilisateur_activites ua on ua.ID_activite_prevue = ap.ID_activite_prevue
                               where a.ID_Activite = ap.ID_Activite
@@ -278,7 +306,7 @@
                             $timestamp = strtotime($row['Heure_Debut']) + $row['Duree']*60;
                             $time = date('H:i:i', $timestamp);
                             
-                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure_Debut']."', end:'".$row['Date_Activite']."T".$time."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black', participant:".$row['participant'].", participant_max:".$row['Participants_Max']." }";
+                            echo "{ title:'".$row['Nom_Activite']."', start:'".$row['Date_Activite']."T".$row['Heure_Debut']."', end:'".$row['Date_Activite']."T".$time."', allday: false,  id:".$row['ID_Activite_prevue'].", backgroundColor:'#".$row['Couleur']."', borderColor:'black', participant:".$row['participant'].", participant_max:".$row['Participants_Max'].", Endroit:'".$row['Endroit']."' }";
                             if ($result->num_rows > $i) {
                                 echo ",";
                             }
@@ -318,6 +346,9 @@
                 slotEventOverlap: false,
                 allDaySlot: false,
                 events: evenements,
+                timeFormat: 'H:mm',
+                eventLimit: true,  
+                eventLimitText: "Activité",
                 eventClick: function(event) {
                     var inscrit = false;
                     var conflit = false;
@@ -348,6 +379,10 @@
                     
                     $('#fin').attr({
                         value:event.end.toISOString().substring(event.start.toISOString().indexOf("T")+1,16)
+                    });
+
+                    $('#endroit').attr({
+                        value:event.Endroit
                     });
                     var v = new Date();
                     var x = v.getFullYear() + "-" + pad((v.getMonth()+1)) + "-"+pad(v.getDate()) + "T" + pad(v.getHours()) + ":" + pad(v.getMinutes()) + ":"+ pad(v.getSeconds());
@@ -386,21 +421,23 @@
                     if(con){
         
                     if(trop_tot){
-                        $('#divSub').html("L'inscription pour cette activité n'est pas disponible");
+                        $('#divSub').html("L'inscription pour cette activitée n'est pas disponible");
                     }else if(retard){
-                        $('#divSub').html("L'activité est déja terminé");
+                        $('#divSub').html("L'activitée est déja terminé");
                     }else if(inscrit){
-                        $('#divSub').html("Vous êtes déja inscrit à cette activité");
+                        $('#divSub').html("Vous êtes déja inscrit à cette activitée");
                     }else if(conflit){
-                        $('#divSub').html("Vous êtes inscrit à une activité ayant un conflit d'horaire avec celle-cì");
+                        $('#divSub').html("Vous êtes inscrit à une activitée ayant un conflit d'horaire avec celle-cì");
                     }else if(event.participant_max != 0 && event.participant >= event.participant_max){
-                        $('#divSub').html("Le nombre de participant maximum est atteint");
+                        //$('#divSub').html("Le nombre de participant maximum est atteint");
+                        $('#divSub').html("<button class='btn green col l12' name='Sub_Liste_attente' id='Sub_liste_Attente' type='submit' form='inscAct'>Rejoindre la liste d'attente</button>");
+
                     }else{
                         $('#divSub').html("<button class='btn green col l12' name='SubInsAct' id='SubInsAct' type='submit' form='inscAct'>S'inscrire</button>");
                     }
                     
                 }else {
-                    $('#divSub').html("Vous devez être connecter pour vous inscrire à cette activité");
+                    $('#divSub').html("Vous devez être connecter pour vous inscrire aux activitées");
                 }
             }
             })
