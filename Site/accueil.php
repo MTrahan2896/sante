@@ -3,7 +3,7 @@
     
           <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
+      
         <?php 
 
               include('components/headContent.php') ;
@@ -30,7 +30,7 @@
         </header>
         <main>
           <?php 
-            include_once 'connexion_bd.php';
+            include_once 'php_scripts/connexion_bd.php';
      $mysqli = connexion();  
      $conn = connexion();
           include('components/carousel_accueil.php'); 

@@ -6,7 +6,7 @@ app.controller("ctrl", function($scope) {
     
     $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs order by nom ASC')?>;
     
-    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = Sessions.id_session order by nom_groupe ASC')?>;
+    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = sessions.id_session order by nom_groupe ASC')?>;
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
@@ -30,7 +30,7 @@ app.controller("ctrl", function($scope) {
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
             and utilisateurs.ID_Groupe = groupes.ID_Groupe
-            and groupes.ID_Session = Sessions.ID_Session
+            and groupes.ID_Session = sessions.ID_Session
             and activites_prevues.date_activite > sessions.Debut_Session
             and activites_prevues.date_activite < sessions.mi_session
             and utilisateur_activites.present = 1
@@ -42,7 +42,7 @@ app.controller("ctrl", function($scope) {
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
             and utilisateurs.ID_Groupe = groupes.ID_Groupe
-            and groupes.ID_Session = Sessions.ID_Session
+            and groupes.ID_Session = sessions.ID_Session
             and activites_prevues.date_activite > sessions.mi_Session
             and activites_prevues.date_activite < sessions.fin_session
             and utilisateur_activites.present = 1
