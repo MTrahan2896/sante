@@ -11,19 +11,18 @@
         function pad(x){
             if(x< 10){
                 x= "0"+x;
-                alert(x);
+                
             }
             return x;
         }
         function ajout_jour_date_string(str,add){
             var date;
-            alert(str.substring(0,4)+" "+str.substring(5,1)+" "+str.substring(8,1)+" "+str.substring(11,1)+" "+str.substring(14,1)+" ")+str.substring(17,1);
             var y = Number(str.substring(0,4));
-            var m = Number(str.substring(5,2));
-            var d = Number(str.substring(8,2)) + add;
-            var h = Number(str.substring(11,2));
-            var min = Number(str.substring(14,2));
-            var s = Number(str.substring(17,2));
+            var m = Number(str.substring(5,7));
+            var d = Number(str.substring(8,10)) + add;
+            var h = Number(str.substring(11,13));
+            var min = Number(str.substring(14,16));
+            var s = Number(str.substring(17,19));
             
             if( d > daysInMonth(m,y)){
                 m= m + Math.floor(d/daysInMonth(m,y));
@@ -36,7 +35,7 @@
             date = y+"/"+pad(m)+"/"+pad(d)+"T"+pad(h)+":"+pad(min)+":"+pad(s)
             return date;
         }
-        alert(ajout_jour_date_string("2017/02/24T10:42:00",2));
+        alert("02/26/2017T12:00:02" < "02/26/2017T12:01:00");
         </script>
                         
 </body>

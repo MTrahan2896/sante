@@ -219,18 +219,17 @@
         function pad(x){
             if(x< 10){
                 x= "0"+x;
-                alert(x);
             }
             return x;
         }
-        /*function ajout_jour_date_string(str,add){
+        function ajout_jour_date_string(str,add){
             var date;
-            var y = event.start.toISOString().substring(0,4);
-            var m = event.start.toISOString().substring(5,2);
-            var d = event.start.toISOString().substring(8,2) + add;
-            var h = event.start.toISOString().substring(11,2);
-            var min = event.start.toISOString().substring(14,2);
-            var s = event.start.toISOString().substring(17,2);
+            var y = Number(str.substring(0,4));
+            var m = Number(str.substring(5,7));
+            var d = Number(str.substring(8,10)) + add;
+            /*var h = Number(str.substring(11,13));
+            var min = Number(str.substring(14,16));
+            var s = Number(str.substring(17,19));*/
             
             if( d > daysInMonth(m,y)){
                 m= m + Math.floor(d/daysInMonth(m,y));
@@ -240,9 +239,9 @@
                     y=y+1;
                 }
             }
-            date = y+"/"+pad(m)+"/"+pad(d)+"T"+pad(h)+":"+pad(min)+":"+pad(s)
+            date = y+"/"+pad(m)+"/"+pad(d)/*+"T"+pad(h)+":"+pad(min)+":"+pad(s)*/
             return date;
-        }*/
+        }
         
         function ajout_jour_Ajd(add){
             //ajoute un nombre de jour à la date du jour
@@ -255,9 +254,9 @@
             var y = v.getFullYear();
             var m = v.getMonth()+1;
             var d = v.getDate() + add;
-            var h = v.getHours();
+            /*var h = v.getHours();
             var min = v.getMinutes();
-            var s = v.getSeconds();
+            var s = v.getSeconds();*/
             
             if( d > daysInMonth(m,y)){
                 m= m + Math.floor(d/daysInMonth(m,y));
@@ -267,7 +266,7 @@
                     y=y+1;
                 }
             }
-            date = y+"/"+pad(m)+"/"+pad(d)+"T"+pad(h)+":"+pad(min)+":"+pad(s)
+            date = y+"/"+pad(m)+"/"+pad(d)/*+"T"+pad(h)+":"+pad(min)+":"+pad(s)*/
             return date;
         }
 
@@ -366,14 +365,15 @@
                         value:event.end.toISOString().substring(event.start.toISOString().indexOf("T")+1,16)
                     });
                     var v = new Date();
-                    var x = v.getFullYear() + "/" + pad((v.getMonth()+1)) + "/"+pad(v.getDate()) + "T" + pad(v.getHours()) + ":" + pad(v.getMinutes()) + ":"+ pad(v.getSeconds());
-        
-                    if(x > event.end ){
+                    var x = v.getFullYear() + "-" + pad((v.getMonth()+1)) + "-"+pad(v.getDate()) + "T" + pad(v.getHours()) + ":" + pad(v.getMinutes()) + ":"+ pad(v.getSeconds());
+                    alert(x + ">" + event.end.toISOString() )
+                    if(x > event.end.toISOString() ){
                         retard = true;
                     }
-                    if(date_jour_mois(14) )
-                   
                     
+                    if(ajout_jour_date_string(event.start.toISOString(),0) > ajout_jour_Ajd(14)){
+                        trop_tot = true;
+                    }
 
                     for(i=0;i<activite_inscrit.length;i++){
                             
@@ -393,8 +393,10 @@
                             }
                             
                     }
-                    if(){
-
+                    if(trop_tot){
+                        $('#divSub').html("L'inscription pour cette activité n'est pas disponible");
+                    }else if(retard){
+                        $('#divSub').html("L'activité est déja terminé");
                     }else if(inscrit){
                         $('#divSub').html("Vous êtes déja inscrit à cette activité");
                     }else if(conflit){
