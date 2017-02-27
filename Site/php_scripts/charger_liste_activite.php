@@ -1,10 +1,13 @@
 
 <?php
+
+include_once 'connexion_bd.php';
+
 //Fonction énumérant les activités sous le format nom_activite / durée
 function charger_liste ()
 {
  $query = "select ID_Activite,nom_activite,duree from activites";
-  $mysqli = new mysqli('localhost','root','','bd_application');
+  $mysqli = connexion();
   $result = $mysqli->query($query);
   
   

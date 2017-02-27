@@ -29,12 +29,15 @@
 
         </header>
         <main>
-          <?php   
+          <?php 
+            include_once 'connexion_bd.php';
+     $mysqli = connexion();  
+     $conn = connexion();
           include('components/carousel_accueil.php'); 
           if(isset($_SESSION['uid']) && $_SESSION['uid'] !=0){
                 if(isset($_POST['SubInsAct'])){
                     // Create connection
-                      $conn = new mysqli("Localhost", "root", "", "bd_application");
+                      
                       // Check connection
                       if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
@@ -67,7 +70,7 @@
       <option value="" disabled selected>Choisissez une activité</option>
       <option value="n">Tout les sports</option>
       <?php
-            $mysqli = new mysqli("localhost", "root", "", "bd_application");
+            
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
@@ -130,7 +133,7 @@
         <div class="row" id="divSub">
             <?php
                     //vérification pour voir s'il est déja inscrit'
-                    $mysqli = new mysqli("localhost", "root", "", "bd_application");
+                   
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }
@@ -194,7 +197,7 @@
     var view;
         eventbase = [
                     <?php
-                    $mysqli = new mysqli("localhost", "root", "", "bd_application");
+                   
                     if ($mysqli->connect_errno) {
                         echo "Erreur de connection vers MYSQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                     }

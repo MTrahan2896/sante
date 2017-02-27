@@ -1,14 +1,17 @@
 <?php
+	include_once 'connexion_bd.php';
+	$mysqli = connexion();
+
 
 	function phpQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    
 	$myArray = array();
 	$mysqli->query($query);
 	
 	$mysqli->close();
 	}
 	function phpSelectQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
 
