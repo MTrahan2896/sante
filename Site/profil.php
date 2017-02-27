@@ -98,8 +98,8 @@ session_start();
       <li class="act">
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
         <div class="collapsible-body" style="display: none;">
-         
-           <ul class="collapsible" data-collapsible="expandable">
+           <p id="aucune_activite"> </p>
+           <ul class="collapsible" data-collapsible="expandable" id="liste_activite">
          
            <!-- Chaque LI représente 1 activité -->
            <li ng-repeat="activite in activites" id="li_activite">
@@ -173,6 +173,19 @@ if(($_SESSION['uid'] != 0) and (isset($_SESSION['uid'])))
 obtenir_info($_SESSION['uid']);
 }
 ?>
+<script>
+
+if (($("#liste_activite").children.length) == 2)
+{
+    $("#liste_activite").hide();
+    $("#aucune_activite").html("Aucune activé, veuillez vous inscrire depuis la <a href=\"accueil.php\">Page d'accueil</a>");
+}
+else
+{
+   $("#liste_activite").show();
+    $("#aucune_activite").html(" ");
+}
+</script>
 </main>
 <footer class="page-footer" style="width: 100%!important">
 

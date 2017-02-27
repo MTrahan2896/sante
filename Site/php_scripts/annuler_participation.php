@@ -14,7 +14,7 @@ if($_POST['date_activite'] == date('Y-m-d'))
 	{
 		$query = "delete from utilisateur_activites where ID_Eleve_Activite = {$_POST['id_act_utilisateur']}";
 		phpQuery($query);
-		echo "Annulation de participation réussie"
+		echo "Vous avez quitté l'activité avec succès";
 	}
 }
 
