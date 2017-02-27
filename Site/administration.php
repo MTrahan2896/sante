@@ -22,7 +22,7 @@ if(isset($_SESSION['admin'])){
       
     </header>
     <main>
-  <div class="fixed-action-btn horizontal click-to-toggle">
+  <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only " >
     <a class="btn-floating btn-large blue darken-2">
       <i class="material-icons">menu</i>
     </a>

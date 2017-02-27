@@ -16,7 +16,7 @@ app.controller("ctrl", function($scope) {
 
     $scope.sessions = <?php echo phpSelectQuery('select * from sessions order by debut_session ASC')?>;
 
-    $scope.codesAdmin = <?php echo phpSelectQuery('select * from utilisateurs where administrateur = 1 and not CODE_ACCES=""')?>;
+    $scope.codesAdmin = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and not CODE_ACCES=""')?>;
 
     $scope.ensembles = [1, 2, 3];
 
@@ -401,8 +401,9 @@ app.controller("ctrl", function($scope) {
             url: "php_scripts/generercode.php",
             data: {'admin' : 0, 'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
+                alert(data);
                 location.reload();
-                console.log(data);
+                
             },
             error: function (req) {
                 alert("erreur");

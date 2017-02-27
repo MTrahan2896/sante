@@ -1,37 +1,9 @@
 <?php
 
 	include_once 'connexion_bd.php';
-	   $mysqli = connexion();
-function phpSelectQuery($query){
+	include_once 'queryFunctions.php';
 
-	$myArray = array();
-	if ($result = $mysqli->query($query)) {
-
-    while($row = $result->fetch_array()) {
-            $myArray[] = $row;
-    }
-    echo json_encode($myArray);
-	}
-
-	$result->close();
-	$mysqli->close();
-	}
-
-
-	function phpQuery($query){
-    
-	$myArray = array();
-	if ($result = $mysqli->query($query)) {
-	
-	$mysqli->close();
-	}}
-
-
-
-
-
-
-
+	$mysqli = connexion();
 
 	//MAIN
 
