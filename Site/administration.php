@@ -22,17 +22,7 @@ if(isset($_SESSION['admin'])){
       
     </header>
     <main>
-  <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only " >
-    <a class="btn-floating btn-large blue darken-2">
-      <i class="material-icons">menu</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating blue"><i class="material-icons">home</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">supervisor_account</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">directions_bike</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">assessment</i></a></li>
-    </ul>
-  </div>
+
     <script>
       
       
@@ -79,12 +69,36 @@ if(isset($_SESSION['admin'])){
 
               </div>
 
-                <table class="striped" align="center">
-                  <thead><tr><th>Nom</th><th class="center">Début</th><th>Fin</th><th>Bonus</th><th>Total</th></tr></thead>
+
+              <table class="striped" align="center" ng-show="groupe.ensemble == 1"><!--Ensemble 1 -->
+                  <thead><tr><th>Nom </th><th class="center">Points réguliers</th><th class="center">Points Bonus</th><th class="center">Total</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                    <td style="text-align: center" class="center">{{pointsDebutForEleve(eleve.id_utilisateur)}}/5</td><td> {{pointsFinForEleve(eleve.id_utilisateur)}}/5</td><td> {{pointsBonusForEleve(eleve.id_utilisateur)}}/5</td><td>{{pointsDebutForEleve(eleve.id_utilisateur)+pointsFinForEleve(eleve.id_utilisateur)+pointsBonusForEleve(eleve.id_utilisateur)}}/15</td>
+                    <td style="text-align: center" class="center">{{pointsReguliersForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)}}/5</td><td class="center">{{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)+pointsReguliersForEleve(eleve.id_utilisateur)}}/10</td>
+                    
+                  </div>
+                </tr>
+              </table>
+
+                <table class="striped" align="center" ng-show="groupe.ensemble == 2"><!--Ensemble 2 -->
+                  <thead><tr><th>Nom </th><th class="center">Nombre de points</th></tr></thead>
+                  <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
+                    
+                    <td class="center">{{eleve.nom}}, {{eleve.prenom}}</td><td class="center">{{pointsEnsemble2(eleve.id_utilisateur)}}/5</td>
+                    
+                  </div>
+                </tr>
+              </table>
+
+
+
+                <table class="striped" align="center" ng-show="groupe.ensemble == 3"><!--Ensemble 3 -->
+                  <thead><tr><th>Nom </th><th class="center">Début</th><th>Fin</th><th class="center">Bonus</th><th class="center">Total</th></tr></thead>
+                  <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
+                    
+                    <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
+                    <td style="text-align: center" class="center">{{pointsDebutForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsFinForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsBonusForEleve(eleve.id_utilisateur)}}/5</td><td class="center">{{pointsDebutForEleve(eleve.id_utilisateur)+pointsFinForEleve(eleve.id_utilisateur)+pointsBonusForEleve(eleve.id_utilisateur)}}/15</td>
                     
                   </div>
                 </tr>
@@ -93,6 +107,9 @@ if(isset($_SESSION['admin'])){
               <button data-target="modalGenGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
                 <button data-target="modalGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
+              </div>
+              <div class="row"  style="text-align: center">
+                <button data-target="modalPromotion" ng-click="setPromotionId(groupe.id_groupe)" style="margin-bottom: 15px !important" class="btn  modal-trigger">Promouvoir un responsable</button>
               </div>
               <div class="row"  style="text-align: center">
                 <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
@@ -115,11 +132,14 @@ if(isset($_SESSION['admin'])){
               <table class="striped" align="center">
               <thead> <th>Utilisateur</th></thead>
                     <tr ng-repeat="eleve in utilisateursSansGroupes"><td> {{eleve.Nom}}, {{eleve.Prenom}}</td></tr>
-</table>
+              </table>
                                  <div class="row" style="text-align: center">
               <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
                 <button data-target="modalGroupe0" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
+              </div>
+              <div class="row"  style="text-align: center">
+                <button data-target="modalPromotion" ng-click="setPromotionId()" style="margin-bottom: 15px !important" class="btn  modal-trigger">Promouvoir un responsable</button>
               </div>
 
               </div>
@@ -292,27 +312,15 @@ if(isset($_SESSION['admin'])){
               
               <table><thead><th>Nom de la session</th><th>Début</th>
               <th>Mi-Session</th>
-              <th>Fin</th></thead><th></th>
+              <th>Fin</th><th></th></thead>
               <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light green " ng-click="modifierSession(session)"><i class="material-icons">edit</i></a></td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats()"><i class="material-icons">assessment</i></a></td>
               </tr>
               </table>
+              <br>
               
-              
-              
+              <div class="center">
               <button type="button"  class="btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
-              
-
-
-<a class="waves-effect waves-light btn" href="#modal_ins">ins</a>
-
-
-
-<a class="waves-effect waves-light btn" href="#modal_login">Login</a>
-
-<a class="waves-effect waves-light btn" href="#modal_code">code</a>
-
-
-
+              </div>
 
               </row>
              </div>

@@ -50,13 +50,17 @@ app.controller("ctrl", function($scope) {
 
     $scope.responsableSelectionne;
 
-            $scope.masquerPresence = true;
-        $scope.masquerPasse = true;
-        $scope.masquerGroupes = true;
+    $scope.masquerPresence = true;
+    
+    $scope.masquerPasse = true;
+    
+    $scope.masquerGroupes = true;
+
+    $scope.groupePromotion;
 
     $scope.show_params = function(activite){
         $('#modal_mod_planif').modal('open');
-        console.log(activite);
+        
         $('#ID_ACT_PLAN').val(activite.ID_activite_prevue);
 
         $('#mod_nom_act').val(activite.ID_Activite);
@@ -71,7 +75,8 @@ app.controller("ctrl", function($scope) {
         $('.ACTIVER').addClass( "active" );
     
 
-    }
+        }
+
     
 
         $scope.pointsDebutForEleve = function(id){
@@ -122,6 +127,92 @@ app.controller("ctrl", function($scope) {
         return pts_bonus;
         }
 
+        $scope.pointsReguliersForEleve = function(id){
+        let pts_fin = $scope.points_fin.filter(function(el){
+            return el.id_utilisateur == id;
+        })[0].points_fin;
+
+        let pts_debut = $scope.points_debut.filter(function(el){
+            
+            return el.id_utilisateur == id;
+        })[0].points_debut;
+
+        
+
+        let pts_reg = 0;
+
+        if (pts_debut + pts_fin > 5){
+            pts_reg= 5;
+        }
+        else pts_reg = pts_debut + pts_fin;
+        
+        return pts_reg;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $scope.pointsBonusEnsemble1ForEleve = function(id){
+        let pts_fin = $scope.points_fin.filter(function(el){
+            return el.id_utilisateur == id;
+        })[0].points_fin;
+
+        let pts_debut = $scope.points_debut.filter(function(el){
+            
+            return el.id_utilisateur == id;
+        })[0].points_debut;
+
+        let pts_bonus = 0;
+
+
+        if (pts_debut + pts_fin > 5){
+            pts_bonus += parseInt(pts_debut) + parseInt(pts_fin) - 5;
+        }
+        else pts_bonus += parseInt(pts_debut) + parseInt(pts_fin);
+
+
+        if(pts_bonus > 5){
+            pts_bonus = 5;
+        }
+        return pts_bonus;
+
+        
+        }
+
+
+        $scope.pointsEnsemble2 = function(id){
+        let pts_fin = $scope.points_fin.filter(function(el){
+            return el.id_utilisateur == id;
+        })[0].points_fin;
+
+        let pts_debut = $scope.points_debut.filter(function(el){
+            
+            return el.id_utilisateur == id;
+        })[0].points_debut;
+
+        let pts_totaux = parseInt(pts_fin) +parseInt(pts_debut);
+
+        if(pts_totaux > 5){
+            pts_totaux = 5;
+        }
+
+
+        return pts_totaux;
+
+        
+        }
+
+
+
 
     $scope.modifierActivitePrevue = function(){
 
@@ -139,8 +230,8 @@ app.controller("ctrl", function($scope) {
                 'RESPONSABLE': $('#mod_responsable').val()
             }, //TODO: CHANGE PROF ID
             success: function(data) {
-                console.log(data);
-                   
+                
+                   location.reload();
                     
             },
             error: function(req) {
@@ -163,7 +254,7 @@ app.controller("ctrl", function($scope) {
                 'ID_ACTIVITE': id,
             }, //TODO: CHANGE PROF ID
             success: function(data) {
-                console.log(data);
+                
                     location.reload();
                     
             },
@@ -176,7 +267,7 @@ app.controller("ctrl", function($scope) {
     }
 
     $scope.modifierActivite = function(activite){
-        console.log(activite);
+        
         $('#id_mod_act').val(activite.ID_Activite); 
         $('#nom_activite_mod').val(activite.Nom_Activite);     
         $('#duree_mod').val(activite.Duree); 
@@ -187,7 +278,7 @@ app.controller("ctrl", function($scope) {
     }
 
     $scope.modifierSession = function(session){
-        console.log(session);
+        
         $('#id_session_mod').val(session.ID_Session);   
         $('#nom_session_mod').val(session.Nom_Session);     
         $('#deb_session_mod').val(session.Debut_Session); 
@@ -224,6 +315,7 @@ app.controller("ctrl", function($scope) {
         $scope.toDate = function(dateMod){
             return new Date(dateMod);
         }
+
         $scope.scopePrint = function(val){
             console.log(val);
         }
@@ -239,9 +331,18 @@ app.controller("ctrl", function($scope) {
 
         }
 
-        $scope.test222 = function(){
-            alert($('#selectResponsable').val());
+
+
+        $scope.groupeFromId = function(id){
+
+            let gr = $scope.groupes.filter(function(gr){
+                return gr.id_groupe == id;
+            })[0];
+
+            return gr;
+
         }
+
 
         $scope.adminLevelFromID = function(admin){
 
@@ -276,6 +377,9 @@ app.controller("ctrl", function($scope) {
             return el.id_utilisateur == id;
         })[0];
         }
+
+
+
 
         $scope.getElevesForActivitePrevue = function(activite){
 
@@ -395,13 +499,13 @@ app.controller("ctrl", function($scope) {
 
 
     	 $scope.genererCodePourGroupe = function(groupe, nb_codes){
-    	 	console.log($("#codeGroupe"+groupe).val());
+    	 	
     	 	 $.ajax({
             type: "POST",
             url: "php_scripts/generercode.php",
             data: {'admin' : 0, 'id_groupe': groupe, 'nb_codes': $("#codeGroupe"+groupe).val() }, 
             success: function (data) {
-                alert(data);
+                
                 location.reload();
                 
             },
@@ -420,7 +524,7 @@ app.controller("ctrl", function($scope) {
             data: {'admin' : $('input[name=niveauAdmin]:checked').val(), 'id_groupe': 'null', 'nb_codes': $("#codeAdmin").val() }, 
             success: function (data) {
                 
-                console.log(data);
+                location.reload();
             },
             error: function (req) {
                 alert("erreur");
@@ -429,8 +533,39 @@ app.controller("ctrl", function($scope) {
 
          }
 
+    $scope.setPromotionId = function(groupe){
+        
+        $scope.groupePromotion = $scope.elevesDansGroupe(groupe);
+        
 
 
+    }
+
+
+    $scope.promoteUser = function(id_user){
+
+        if(confirm("Êtes-vous sûr de vouloir promouvoir cet utilisateur?"))
+         $.ajax({
+            type: "POST",
+            url: "php_scripts/updateAdmin.php",
+            data: {
+                
+                'user': id_user,
+                'admin': 1
+
+
+            }, //TODO: CHANGE PROF ID
+            success: function(data) {
+                    
+                    location.reload();
+                    
+            },
+            error: function(req) {
+                alert("erreur");
+            }
+        }); 
+
+    }
 
     $scope.creergroupe = function() {
 
@@ -446,7 +581,7 @@ app.controller("ctrl", function($scope) {
 
             }, //TODO: CHANGE PROF ID
             success: function(data) {
-            		alert(data);
+            		
                     location.reload();
             		
             },
@@ -460,7 +595,7 @@ app.controller("ctrl", function($scope) {
 
 
     $scope.ouvrirModalModifierPermission= function(id_admin, niveau){
-        console.log(id_admin+" .... "+niveau);
+        
     $("#utilisateurNivAdmin").val(id_admin);
     $('#modal_niveauAdmin').modal('open');
     $('#niveauUser').val(niveau).change();
@@ -500,13 +635,8 @@ app.controller("ctrl", function($scope) {
 		}
 		}
 
-
-
-
-
-
 });
 
 $("#selectResponsable").val($("#selectResponsable option:first").val());
-    $('#selectResponsable').material_select()
+    $('#selectResponsable').material_select();
 </script>

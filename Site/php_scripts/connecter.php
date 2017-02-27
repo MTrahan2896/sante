@@ -9,7 +9,7 @@ session_start();
 
 function verifier_user_existant($username,$pwd_input)
 {
-  $query = "select * from utilisateurs where username = '".$username."'";
+  $query = "select * from utilisateurs where lower(username) = lower('".$username."')";
   
   $mysqli = connexion();
   $myArray = array();
