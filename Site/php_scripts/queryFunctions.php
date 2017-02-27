@@ -1,5 +1,9 @@
-<?php function phpSelectQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+<?php
+include_once 'connexion_bd.php';
+	include_once 'formater_champ.php';
+ function phpSelectQuery($query){
+
+    $mysqli = connexion();
 
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
@@ -18,7 +22,7 @@
 
 
 	function phpQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
 	
@@ -27,7 +31,7 @@
 
 
 	function phpSelectReturnSingleName($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
 

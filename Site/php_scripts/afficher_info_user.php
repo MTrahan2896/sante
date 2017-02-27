@@ -1,9 +1,9 @@
 <?php
-
+include_once 'connexion_bd.php';
 function obtenir_info($id)
 {
   $query = "select * from utilisateurs where id_utilisateur =".$id;
-  $mysqli = new mysqli('localhost','root','','bd_application');
+  $mysqli = connexion();
   $result = $mysqli->query($query);
 
   if ($result->num_rows > 0) {
@@ -24,7 +24,7 @@ function obtenir_info($id)
       echo "<script>$('input[name=sexe][value=\"".$row['Sexe']."\"]').prop(\"checked\",true);</script>";
       
        //Set Lien Personne ressource
-      echo "<script>$('#type_utilisateur').val('".$row['Type_Utilisateur']."');</script>";
+      echo "<script>$('#type_utilisateur_profil').val('{$row['Type_Utilisateur']}');</script>";
     }
   $result->close();
   }
@@ -35,29 +35,19 @@ function obtenir_info($id)
   function afficher_select_type($id){
 
     $query = "select * from utilisateurs where id_utilisateur =".$id;
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
     $result = $mysqli->query($query);
 
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       
-      if ($row['ID_Groupe'] === null)
+      if (is_null($row['ID_Groupe']))
       {
-        // Le select contenant les differents types d'utilisateur
-          echo "<label for='type_utilisateur'>Type d''utilisateur</label>
-        <select id='type_utilisateur'>
-          <option value='eleve'>Élève</option>
-          <optgroup label='Membre du personnel'>
-            <option value='administration'>Administration</option>
-            <option value='enseignant'>Enseignant</option>
-            <option value='professionnel'>Professionnel</option>
-            <option value='soutien'>Soutien</option>
-          </optgroup>
-          <optgroup label='Autre'>
-            <option value='ami'>Ami</option>
-            <option value='parent'>Parent</option>
-          </optgroup>
-        </select>";
+        echo "<script>$('#section_type_utilisateur').show();</script>";
+      }
+      else
+      {
+      echo "<script>$('#section_type_utilisateur').hide();</script>";
       }
     }
   $result->close();

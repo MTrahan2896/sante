@@ -1,6 +1,16 @@
 
+        .fc-event{
+             cursor: pointer;
+        }           
+        .fc-day-grid-event > .fc-content {
+             white-space: normal;
+        }
+        .modalinsact{
+            bottom:20% !important;
+        }
+
 nav{
-	background-color:#71C0E5;
+	background-color:#71C0E5 !important:;
 }
 
 footer.page-footer{

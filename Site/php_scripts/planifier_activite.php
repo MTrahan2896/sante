@@ -1,16 +1,10 @@
 <?php
-function formater($champ)
-{
-	$champ = str_replace("'","''",$champ);
-	$champ = trim($champ);
-	$champ = strtolower($champ);
-	$champ = ucfirst($champ);	
-	return $champ;
-}
+include_once 'connexion_bd.php';
+	include_once 'formater_champ.php';
 	$date_activite = date("Y-m-d", strtotime($_POST['date_act']));
 
 	function phpQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
 	$myArray = array();
 	$mysqli->query($query);
 	$mysqli->close();
@@ -25,7 +19,7 @@ function formater($champ)
 										 "',".$_POST['participants_max'].
 										 ",".$_POST['frais'].
 										 ",'".formater($_POST['endroit']).
-										 "',".$_POST['nom_act'].", null);";
+										 "',".$_POST['nom_act'].", null, 0, ".$_POST['responsable'].");";
 	echo $req;									
 	echo phpQuery($req);
 

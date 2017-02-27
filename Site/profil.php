@@ -3,17 +3,10 @@ session_start();
 ?>
 <html>
 <head>
-  <style type="text/css"></style>
-  <!--Import Google Icon Font-->
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
-  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
-  <link type="text/css" rel="stylesheet" href="css/sc-date-time.css">
-  <link type="text/css" rel="stylesheet" href="css/style.css">
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/ajax_coord_perso.js"></script>
+
+  <?php include 'components/headContent.php' ?>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/ajax_coord_perso.js"></script>
 </head>
 
 <?php include 'php_scripts/afficher_info_user.php'; ?>
@@ -65,12 +58,27 @@ session_start();
                </div>
           </div>
           <div class="row">
-               <div class="col s6 l6" id="section_type_utilisateur">                 
-                 <?php
-                   afficher_select_type($_SESSION['uid']);
-                  ?>
-                  
+               <div class="col s6 l6">
+                <div id="section_type_utilisateur">                 
+                 <label for='type_utilisateur_profil'>Type d'utilisateur</label>
+                  <select id='type_utilisateur_profil'>
+                    <option value='eleve'>Élève</option>
+                    <optgroup label='Membre du personnel'>
+                      <option value='administration'>Administration</option>
+                      <option value='enseignant'>Enseignant</option>
+                      <option value='professionnel'>Professionnel</option>
+                      <option value='soutien'>Soutien</option>
+                    </optgroup>
+                    <optgroup label='Autre'>
+                      <option value='ami'>Ami</option>
+                      <option value='parent'>Parent</option>
+                    </optgroup>
+                  </select>
+                  </div>
                </div>
+               <?php 
+               afficher_select_type($_SESSION['uid']);
+               ?>
 
           </div>
 

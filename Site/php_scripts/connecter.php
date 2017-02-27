@@ -1,4 +1,5 @@
 <?php
+include_once 'connexion_bd.php';
 if(isset($_POST['nom_user']) and isset($_POST['password'])){
 $x = $_POST['nom_user'];
 $y = $_POST['password'];
@@ -10,7 +11,7 @@ function verifier_user_existant($username,$pwd_input)
 {
   $query = "select * from utilisateurs where username = '".$username."'";
   
-  $mysqli = new mysqli('localhost','root','','bd_application');
+  $mysqli = connexion();
   $myArray = array();
   if ($result = $mysqli->query($query)) {
 
@@ -29,7 +30,7 @@ function verifier_password($id,$username,$pwd_input,$pwd)
 { 
   if (password_verify($pwd_input,$pwd))
   {
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    $mysqli = connexion();
     $getAdmin =  $mysqli->query("SELECT administrateur FROM utilisateurs WHERE id_utilisateur =".$id)->fetch_object()->administrateur; 
     
     

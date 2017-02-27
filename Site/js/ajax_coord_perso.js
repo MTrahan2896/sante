@@ -8,10 +8,10 @@
              'courriel': $('#email').val(),
              'telephone':$('#tel').val(),
              'sexe': $("input[name='sexe']:checked"). val(),
-             'type_user': $('#type_utilisateur').val()
+             'type_user': $('#type_utilisateur_profil').val()
             },
       success: function (data) {
-        location.reload();
+        alert(data);
       },
       error: function (req) {
         alert("Erreur lors de la mise à jour du profil");

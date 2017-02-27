@@ -17,7 +17,7 @@
       </div>
       <div class="input-field col s6 l4">
         <label  for="point">Nombre de points</label>
-        <input type="number" step="0.25" maximum="3" minimum="0" id="point" name="point"/>
+        <input type="number" step="0.5" maximum="3" minimum="0" id="point" name="point"/>
       </div>
     </div>
     Couleur de l'activité
@@ -87,6 +87,79 @@
     });
   }
 </script>
+
+<!-- Modal Création d'activité -->
+<div id="modal_mod_new_activite" class="modal">
+  <div class="modal-content">
+  <input type="hidden" name="id_mod_act" id="id_mod_act" value="1"/> 
+    <div class="row" style="text-align: center;">
+      <h4 class="">Modifier une activité</h4>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input id="nom_activite_mod" type="text" class="validate" maxlength="75">
+        <label for="nom_activite_mod" class="ACTIVER">Nom de l'activité</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6 l4">
+        <label  for="duree_mod" class="ACTIVER">Durée (Minutes)</label>
+        <input type="number" step="1" maximum="180" minimum="0" id="duree_mod" name="duree"/>
+      </div>
+      <div class="input-field col s6 l4">
+        <label  for="point_mod" class="ACTIVER">Nombre de points</label>
+        <input type="number" step="0.5" maximum="3" minimum="0" id="point_mod" name="point"/>
+      </div>
+    </div>
+   
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <textarea id="description_mod" class="materialize-textarea" maxlength="255"></textarea>
+        <label for="description_mod">Description</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 l12">
+        <button class="btn green" onclick="modifier_mod_new_act()" style="width:100%">Modifier</button>
+      </div>
+      <div class="col s12 l12" style="height:15px"></div>
+      <div class="col s12 l12">
+        <button class="btn red" onclick="$('#modal_mod_new_activite').modal('close');" style="width:100%"> Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>  
+  //Fonction ajax pour créer une activité
+  function modifier_mod_new_act(){
+    $.ajax({
+      type: "POST",
+      url: "php_scripts/modifier_activite.php",
+      data: {
+             'id_act':$("#id_mod_act").val(),
+             'nom_act': $("#nom_activite_mod").val(),
+             'duree': $('#duree_mod').val(),
+             'nbr_pts': $('#point_mod').val(),
+             'desc':$('#description_mod').val()
+            },
+      success: function (data) {
+        alert(data);
+        location.reload();
+      },
+      error: function (req) {
+        alert("erreur");
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
 
 <!-- Modal pour créer un groupe -->
 <div id="modalNouveauGroupe" class="modal" style="height: 510px !important">
@@ -304,33 +377,33 @@
     <div class="row">
       <div class="input-field col s12 l8">
         <input id="nom_session" type="text" class="validate" maxlength="60">
-        <label for="nom_session">Nom de la session</label>
+        <label for="nom_session">Nom de la session*</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12 l8">
         <input type="date" class="datepicker" id="deb_session">
-        <label for="deb_session">Date du début de la session</label>  
+        <label for="deb_session">Date du début de la session*</label>  
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12 l8">
         <input type="date" class="datepicker" id="mi_session">
-        <label for="mi_session">Date de la mi-session</label>
+        <label for="mi_session">Date de la mi-session*</label>
       </div>  
     </div>
 
     <div class="row">
       <div class="input-field col s12 l8">
         <input type="date" class="datepicker" id="fin_session">
-        <label for="fin_session">Date de la fin de la session</label> 
+        <label for="fin_session">Date de la fin de la session*</label> 
       </div>
     </div>
 
     <div class="row">
       <div class="col s12 l12">
-        <button class="btn green" onclick="creer_session()" style="width:100%"> Créer</button>
+        <button class="btn green" onclick="creer_session()" style="width:100%">Créer</button>
       </div>
       <div class="col s12 l12" style="height:15px"></div>
       <div class="col s12 l12">
@@ -351,8 +424,81 @@
                    'mi': $("#mi_session").val(),
                    'fin': $('#fin_session').val() }, 
             success: function (data) {
-                console.log(data);     
-                location.reload();          
+                alert(data);
+                if (data == "Création de la session réussie")
+                {
+                  location.reload();
+                }           
+        },
+            error: function (req) {
+                alert("erreur");
+            }
+        });
+}        
+</script>
+
+
+<div id="modal_session_mod" class="modal">
+  <div class="modal-content">
+  <input type="hidden" name="id_session_mod" id="id_session_mod" />
+    <div class="row" style="text-align: center;">
+      <h4 class="">Modifier une session</h4>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input id="nom_session_mod" type="text" class="validate" maxlength="60">
+        <label for="nom_session_mod">Nom de la session*</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input type="date" class="datepicker" id="deb_session_mod">
+        <label for="deb_session_mod">Date du début de la session*</label>  
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input type="date" class="datepicker" id="mi_session_mod">
+        <label for="mi_session_mod">Date de la mi-session*</label>
+      </div>  
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 l8">
+        <input type="date" class="datepicker" id="fin_session_mod">
+        <label for="fin_session_mod">Date de la fin de la session*</label> 
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 l12">
+        <button class="btn green" onclick="modifier_session()" style="width:100%">Enregistrer</button>
+      </div>
+      <div class="col s12 l12" style="height:15px"></div>
+      <div class="col s12 l12">
+        <a class="btn red" href="" style="width:100%"> Annuler</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function modifier_session(){
+    $.ajax({
+            type: "POST",
+            url: "php_scripts/modifier_session.php",
+            data: {'id_session': $('#id_session_mod').val(),
+                   'nom': $('#nom_session_mod').val(),
+                   'deb': $("#deb_session_mod").val(),
+                   'mi': $('#mi_session_mod').val(),
+                   'fin': $('#fin_session_mod').val() }, 
+            success: function (data) {
+                alert(data);
+                if (data == "Mise à jour de la session réussie")
+                {
+                  location.reload();
+                }  
         },
             error: function (req) {
                 alert("erreur");
@@ -367,6 +513,7 @@
 <!-- Modal pour planifier des activités -->
 <div id="modal_planif" class="modal">
      <div class="modal-content">
+      
        <div class="row" style="text-align:center">
            <h4>Planifier une activité</h4>
        </div>
@@ -454,8 +601,8 @@
              'heure_deb': $("#heure_deb").val(),
              'participants_max': $('#participants_max').val(),
              'frais': $('#frais').val(),
-             'endroit':$('#endroit').val()
-
+             'endroit':$('#endroit').val(),
+             'responsable':$('#selectResponsable').val()
             },
       success: function (data) {
         alert("L'activité a été planifiée avec succès")
@@ -493,3 +640,94 @@
 
 
 
+<!-- MODIFIER ACTIVITE -->
+<div id="modal_mod_planif" class="modal">
+      <div class="modal-content">
+      <input type="hidden" id="ID_ACT_PLAN">
+       <div class="row" style="text-align:center">
+           <h4>Modifier une activité</h4>
+       </div>
+        <div class="row">
+         <div class="input-field col s12">
+           <select required id="mod_nom_act" name="nom_act">
+           <option value="">Choisir une activité</option>
+           <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
+           </select>
+           <label class="ACTIVER" for="mod_nom_act">Nom de l'activité</label>
+         </div>
+         </div>
+
+          <div class="row">
+          <div class="input-field col s12">
+           <input id="mod_date_act" type="date" class="datepicker">
+           <label  class="ACTIVER" for="mod_date_act">Date de l'activité</label>
+         </div>
+         </div>
+ 
+         <div class="row">
+           <div class="input-field col s12">
+             <label class="ACTIVER" for="mod_heure_deb">Heure de début</label>
+             <input id="mod_heure_deb" class="timepicker" type="time" ng-model="$ctrl.NA">
+           </div>
+         </div>
+ 
+ 
+       <div class="row">
+         <div class="input-field col s6 l6">
+           <label   class="ACTIVER" for="mod_participants_max">Nombre de participants maximum</label>
+           <input type="number" step="1" maximum="180" minimum="0" id="mod_participants_max" name="participants_max"/>
+         </div>
+ 
+         <div class="input-field col s6 l6">
+           <label class="ACTIVER"  for="mod_frais">Frais de l'activité</label>
+           <input type="number" step="5" minimum="0" id="mod_frais" name="frais"/>
+         </div>
+       </div>
+ 
+       <div class="row">
+         <div class="input-field col s12 l12">
+           <input type="text" id="mod_endroit" class="materialize-textarea"></textarea>
+           <label class="ACTIVER" for="mod_endroit">Endroit</label>
+         </div>
+       </div>
+
+
+
+
+
+       <div class="row">
+         <div class="input-field col s12 l12">
+              <select id="mod_responsable"
+            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
+            ng-model="responsableSelectionne"
+            
+            >
+              
+            </select>
+            
+           
+         </div>
+       </div>
+      
+        <div class="row">
+         <div class="col s12 l12">
+           <button type="button" class="btn green" href="" style="width:100%" ng-click="modifierActivitePrevue()">Enregistrer</button>
+         </div>
+         <div class="col s12 l12" style="height: 15px;"></div>
+         <div class="col s12 l12">
+           <button class="btn red" href="" style="width: 100%" onclick="$('.modal').modal('close');">Annuler</button>
+         </div>
+     </div>  
+ 
+   </div>
+  </div>
+ </div>
+
+
+ <script>
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    format: 'yyyy-mm-dd'
+  });
+ </script>
