@@ -180,11 +180,7 @@
                     </script>";
 
                     
-            if($_SESSION['uid'] == 0){
-                echo "Vous devez être connecter pour vous inscrire à cette activité";
-            }
-            else echo "<button class='btn green col l12' name='SubInsAct' id='SubInsAct' type='submit' form='inscAct'>S'inscrire</button>";
-            
+           
             ?>
         </div>
     </div>
@@ -211,6 +207,7 @@
          <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
 		<script type="text/javascript" src="js/gcal.js"></script>
 		<script type="text/javascript" src="js/sc-date-time.js"></script>
+        
 <script>
         function daysInMonth(month,year) {
             return new Date(year, month, 0).getDate();
@@ -365,7 +362,7 @@
                     });
                     var v = new Date();
                     var x = v.getFullYear() + "-" + pad((v.getMonth()+1)) + "-"+pad(v.getDate()) + "T" + pad(v.getHours()) + ":" + pad(v.getMinutes()) + ":"+ pad(v.getSeconds());
-                    alert(x + ">" + event.end.toISOString() )
+                    alert(x  >  event.end.toISOString() )
                     if(x > event.end.toISOString() ){
                         retard = true;
                     }
@@ -392,6 +389,14 @@
                             }
                             
                     }
+                    var con = 
+                    <?php
+                    $x = ($_SESSION['uid'] != 0) ? 'true' : 'false';
+                    echo $x;
+                    ?>;
+
+                    if(con){
+        
                     if(trop_tot){
                         $('#divSub').html("L'inscription pour cette activité n'est pas disponible");
                     }else if(retard){
@@ -402,16 +407,15 @@
                         $('#divSub').html("Vous êtes inscrit à une activité ayant un conflit d'horaire avec celle-cì");
                     }else if(event.participant_max != 0 && event.participant >= event.participant_max){
                         $('#divSub').html("Le nombre de participant maximum est atteint");
-                    }
-                    else{
+                    }else{
                         $('#divSub').html("<button class='btn green col l12' name='SubInsAct' id='SubInsAct' type='submit' form='inscAct'>S'inscrire</button>");
-                        
                     }
                     
-
+                }else {
+                    $('#divSub').html("Vous devez être connecter pour vous inscrire à cette activité");
                 }
+            }
             })
-            
             $('#calendar').fullCalendar( 'changeView', view.name )
             };
             function addMinutes(time, minsToAdd) {
