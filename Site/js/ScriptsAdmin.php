@@ -6,7 +6,7 @@ app.controller("ctrl", function($scope) {
     
     $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs order by nom ASC')?>;
     
-    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = Sessions.id_session order by nom_groupe ASC')?>;
+    $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = sessions.id_session order by nom_groupe ASC')?>;
 
     $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
@@ -30,7 +30,7 @@ app.controller("ctrl", function($scope) {
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
             and utilisateurs.ID_Groupe = groupes.ID_Groupe
-            and groupes.ID_Session = Sessions.ID_Session
+            and groupes.ID_Session = sessions.ID_Session
             and activites_prevues.date_activite > sessions.Debut_Session
             and activites_prevues.date_activite < sessions.mi_session
             and utilisateur_activites.present = 1
@@ -42,7 +42,7 @@ app.controller("ctrl", function($scope) {
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
             and utilisateurs.ID_Groupe = groupes.ID_Groupe
-            and groupes.ID_Session = Sessions.ID_Session
+            and groupes.ID_Session = sessions.ID_Session
             and activites_prevues.date_activite > sessions.mi_Session
             and activites_prevues.date_activite < sessions.fin_session
             and utilisateur_activites.present = 1
@@ -158,7 +158,7 @@ app.controller("ctrl", function($scope) {
              if (confirm("Vous êtes sur le point de supprimer cette activité, êtes vous sûr?") == true) {
                              $.ajax({
             type: "POST",
-            url: "php_scripts/supprimerActivite.php",
+            url: "php_scripts/supprimeractivite.php",
             data: {
                 'ID_ACTIVITE': id,
             }, //TODO: CHANGE PROF ID
@@ -435,7 +435,7 @@ app.controller("ctrl", function($scope) {
 
         $.ajax({
             type: "POST",
-            url: "php_scripts/creerGroupe.php",
+            url: "php_scripts/creergroupe.php",
             data: {
                 'nomgroupe': $("#nomgroupe").val(),
                 'id_prof': 1,
@@ -445,7 +445,7 @@ app.controller("ctrl", function($scope) {
 
             }, //TODO: CHANGE PROF ID
             success: function(data) {
-            		
+            		alert(data);
                     location.reload();
             		
             },
@@ -484,7 +484,7 @@ app.controller("ctrl", function($scope) {
 		if(nom_Groupe == nomGroupe){
 		$.ajax({
             type: "POST",
-            url: "php_scripts/supprimerGroupe.php",
+            url: "php_scripts/supprimergroupe.php",
             data: {
                 'id_groupe': groupe,
             }, //TODO: CHANGE PROF ID

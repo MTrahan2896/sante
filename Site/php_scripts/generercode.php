@@ -1,6 +1,9 @@
 <?php
+
+	include_once 'connexion_bd.php';
+	   $mysqli = connexion();
 function phpSelectQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
 
@@ -16,7 +19,7 @@ function phpSelectQuery($query){
 
 
 	function phpQuery($query){
-    $mysqli = new mysqli('localhost','root','','bd_application');
+    
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
 	

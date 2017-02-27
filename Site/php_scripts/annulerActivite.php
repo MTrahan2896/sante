@@ -4,8 +4,11 @@
 	
 	$query = "update activites_prevues set hidden=true where ID_Activite_Prevue = ".$act;
 
+	include_once 'connexion_bd.php';
+	$mysqli = connexion();
+
 		ECHO $query;
-		$mysqli = new mysqli('localhost','root','','bd_application');
+	
 		$mysqli->query($query);
 
 

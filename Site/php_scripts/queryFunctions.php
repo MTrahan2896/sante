@@ -16,7 +16,7 @@ include_once 'connexion_bd.php';
     echo json_encode($myArray);
 	}
 
-	$result->close();
+	
 	$mysqli->close();
 	}
 
@@ -42,7 +42,7 @@ include_once 'connexion_bd.php';
      
 	}
 
-	$result->close();
+	
 	$mysqli->close();
 	}
 
