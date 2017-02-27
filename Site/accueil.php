@@ -351,7 +351,6 @@
                     });
                     var v = new Date();
                     var x = v.getFullYear() + "-" + pad((v.getMonth()+1)) + "-"+pad(v.getDate()) + "T" + pad(v.getHours()) + ":" + pad(v.getMinutes()) + ":"+ pad(v.getSeconds());
-                    alert(x  >  event.end.toISOString() )
                     if(x > event.end.toISOString() ){
                         retard = true;
                     }
