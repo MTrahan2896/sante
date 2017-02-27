@@ -442,7 +442,9 @@
                 }
             }
             })
-            $('#calendar').fullCalendar( 'changeView', view.name )
+                if (typeof view != 'undefined') {
+                    $('#calendar').fullCalendar( 'changeView', view.name )
+                }
             };
             function addMinutes(time, minsToAdd) {
                 function D(J){ return (J<10? '0':'') + J;};

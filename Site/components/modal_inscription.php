@@ -40,7 +40,7 @@ include_once 'php_scripts/afficher_info_user.php';
     <div class="row">
       <div class="input-field col s10">
         <i class="material-icons prefix">phone</i>
-        <input name="telephone" id="telephone" type="text" class="validate" maxlength="10">
+        <input name="telephone" id="telephone" type="text" data-mask="(___) ___-____" class="validate" maxlength="10">
         <label for="telephone">Téléphone</label>
       </div>
     </div>
