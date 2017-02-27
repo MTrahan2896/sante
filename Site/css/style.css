@@ -173,4 +173,11 @@ height: 45px;
       background-color: white !important;      
     }
 
-
+#li_activite .collapsible-body .row input
+{
+  color:darkgrey;
+}
+#li_activite .collapsible-body .row label
+{
+  color:black;
+}
