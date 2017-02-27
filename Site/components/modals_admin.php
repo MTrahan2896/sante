@@ -724,6 +724,51 @@
  </div>
 
 
+
+
+
+
+
+<!-- MODAL PROMOTION -->
+
+
+
+<div id="modalPromotion" class="modal">
+  <div class="modal-content">
+    <div class="row" style="text-align: center;">
+      <h4 class="">Promouvoir un élève</h4>
+    </div>
+
+   
+
+   <table>
+     <thead>
+       <th>Nom</th><th></th>
+     </thead>
+     <tr ng-repeat="el in groupePromotion">
+      <td>{{el.nom}}, {{el.prenom}}</td><td><i ng-show="el.administrateur >= 1" style="color: green" class="material-icons prefix">verified_user</i><i ng-show="el.administrateur < 1" style="color: black" class="material-icons prefix" ng-click="promoteUser(el.id_utilisateur)">verified_user</i></td>    
+     </tr>
+   </table>
+   
+
+    
+    <div class="row">
+      <div class="col s12 l12">
+        <button class="btn green" onclick="" style="width:100%"> Créer</button>
+      </div>
+      <div class="col s12 l12" style="height:15px"></div>
+      <div class="col s12 l12">
+        <a class="btn red" href="" style="width:100%"> Annuler</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
  <script>
     $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
