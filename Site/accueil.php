@@ -5,7 +5,7 @@
 
 ?>
 
-<html>
+<html ng-app='empty_app' ng-controller="ctrl">
   <head>
     <?php include 'components/headContent.php';?>
   </head>
@@ -188,12 +188,12 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
       <script src="js/moment.js">moment.locale="fr"</script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr-ca.js"></script>
+	  
      
       <script type="text/javascript" src="js/materialize.min.js"></script>
 		
@@ -415,6 +415,14 @@
         </script>
 
       <script src="js/scripts.js"></script>
+      
+
+
+
+<script type="text/javascript" src="js/materialize.js"></script>
+<script src="js/empty_app.js"></script>
+
+
         
     </body>
 </html>
