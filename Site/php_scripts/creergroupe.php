@@ -1,31 +1,14 @@
 <?php
 	include_once 'connexion_bd.php';
+	include_once 'queryfunctions.php';
 	$mysqli = connexion();
-
-
-	function phpQuery($query){
-    
-	$myArray = array();
-	$mysqli->query($query);
 	
-	$mysqli->close();
-	}
-	function phpSelectQuery($query){
-    
-	$myArray = array();
-	if ($result = $mysqli->query($query)) {
+	echo "ASFSAKFASOFK";
 
-    while($row = $result->fetch_array()) {
-            return $row[0];
-    }
-    
-	}
 
-	$result->close();
-	$mysqli->close();
-	}
 	session_start();
-	phpQuery("insert into groupes(nom_groupe, id_prof, id_session, ensemble) values(\"".$_POST['nomgroupe']."\", ".$_SESSION['uid'].",".$_POST['session'].",".$_POST['ensemble'].")");
+	echo "insert into groupes(Nom_Groupe, ID_Prof, ID_Session, Ensemble) values(\"".$_POST['nomgroupe']."\", ".$_SESSION['uid'].",".$_POST['session'].",".$_POST['ensemble'].")";
+	phpQuery("insert into groupes(Nom_Groupe, ID_Prof, ID_Session, Ensemble) values(\"".$_POST['nomgroupe']."\", ".$_SESSION['uid'].",".$_POST['session'].",".$_POST['ensemble'].")");
 	echo  "insert into groupes(nom_groupe, id_prof, session, ensemble) values(\"".$_POST['nomgroupe']."\", ".$_SESSION['uid'].",".$_POST['session'].",".$_POST['ensemble'].")";
 	$value = phpSelectQuery("select max(id_groupe) from groupes");
 

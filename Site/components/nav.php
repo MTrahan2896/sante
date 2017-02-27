@@ -1,7 +1,5 @@
  <nav>
-<?php        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-            } ?>
+
 
       <div class="nav-wrapper">
         <a href="#" class="brand-logo center">Défi Santé</a>
@@ -39,9 +37,7 @@
         </ul>
         
         <?php
-       if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-            }
+
 
         if(!isset($_SESSION['uid'])){
          $_SESSION['uid'] = 0;

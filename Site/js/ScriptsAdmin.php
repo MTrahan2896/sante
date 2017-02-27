@@ -158,7 +158,7 @@ app.controller("ctrl", function($scope) {
              if (confirm("Vous êtes sur le point de supprimer cette activité, êtes vous sûr?") == true) {
                              $.ajax({
             type: "POST",
-            url: "php_scripts/supprimerActivite.php",
+            url: "php_scripts/supprimeractivite.php",
             data: {
                 'ID_ACTIVITE': id,
             }, //TODO: CHANGE PROF ID
@@ -435,7 +435,7 @@ app.controller("ctrl", function($scope) {
 
         $.ajax({
             type: "POST",
-            url: "php_scripts/creerGroupe.php",
+            url: "php_scripts/creergroupe.php",
             data: {
                 'nomgroupe': $("#nomgroupe").val(),
                 'id_prof': 1,
@@ -445,7 +445,7 @@ app.controller("ctrl", function($scope) {
 
             }, //TODO: CHANGE PROF ID
             success: function(data) {
-            		
+            		alert(data);
                     location.reload();
             		
             },
@@ -484,7 +484,7 @@ app.controller("ctrl", function($scope) {
 		if(nom_Groupe == nomGroupe){
 		$.ajax({
             type: "POST",
-            url: "php_scripts/supprimerGroupe.php",
+            url: "php_scripts/supprimergroupe.php",
             data: {
                 'id_groupe': groupe,
             }, //TODO: CHANGE PROF ID

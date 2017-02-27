@@ -11,7 +11,7 @@
   <meta charset="uft8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php
-  include 'php_scripts/queryFunctions.php';
+  include 'php_scripts/queryfunctions.php';
   include_once 'php_scripts/connexion_bd.php';
   include_once 'php_scripts/formater_champ.php';
   ?>
