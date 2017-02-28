@@ -83,13 +83,13 @@ session_start();
           </div>
 
           <!-- Boutons annuler/enregistrer -->
-          <div class="row">
-            <div class="col s12 l12">
-            <button class="btn green" type="button" style="width:100%" onclick="transfert_coord_perso()">Enregistrer</button>
+          <div class="row center">
+            <div class="">
+            <button class="btn green" type="button"  onclick="transfert_coord_perso()">Enregistrer</button>
             </div>
-            <div class="col l12 s12" style="height:15px"></div>
-            <div class="col s12 l12">
-            <button class="btn red" type="button" style="width:100%" onclick="location.reload()">Annuler</button>
+            <div  style="height:15px"></div>
+            <div >
+            <button class="btn red" type="button"  onclick="location.reload()">Annuler</button>
             </div>
           </div>
         </div>

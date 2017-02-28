@@ -9,7 +9,7 @@
           <div class="row" style="margin-bottom:0px">
             <div class="input-field col s12" style="margin-top:15px">
               <i class="material-icons prefix">vpn_key</i>
-              <input id="code_acces" name="code_acces" onkeydown="return alpha(event)"  maxlength="5" type="text" class="validate">
+              <input id="code_acces" name="code_acces" onkeypress="return RestrictSpaceSpecial(event)"  maxlength="5" type="text" class="validate">
               <label for="code_acces">Code d'accès</label>
             </div>
             
@@ -56,15 +56,11 @@
             }
         });
 }    
-function alpha(e) {
+function RestrictSpaceSpecial(e) {
     var k;
     document.all ? k = e.keyCode : k = e.which;
-    if(k == 32){
-      return false;
-    }
-    else if((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8|| (k >= 48 && k <= 57)){
-      return true;
-    }else return false;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+
 };
 
 

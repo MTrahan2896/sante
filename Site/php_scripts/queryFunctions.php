@@ -1,6 +1,6 @@
 <?php
 include_once 'connexion_bd.php';
-	include_once 'formater_champ.php';
+include_once 'formater_champ.php';
  function phpSelectQuery($query){
 
     $mysqli = connexion();

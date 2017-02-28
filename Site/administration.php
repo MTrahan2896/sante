@@ -36,7 +36,7 @@ if(isset($_SESSION['admin'])){
           <div class="center"><h4>Groupes</h4></div>
           <div class="container">
             <div input-field class="center">
-              <input type="checkbox" checked name="masquerGroupes" ng-model="masquerGroupes" id="masquerGroupes" value="1" class="field filled-in">  
+              <input type="checkbox" checked name="masquerGroupes" ng-model="masquerGroupes" id="masquerGroupes" value="1" class="field green filled-in">  
               <label for="masquerGroupes" style="margin-top: 10px" >Masquer les groupes dont je ne suis pas responsable</label>
               <br>
               <div class="row">
@@ -104,12 +104,12 @@ if(isset($_SESSION['admin'])){
                 </tr>
               </table>
               <div class="row" style="text-align: center">
-              <button data-target="modalGenGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
+              <button data-target="modalGenGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class=" green btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
+                <button data-target="modalGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn  green modal-trigger">Afficher les codes d'accès</button>
               </div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalPromotion" ng-click="setPromotionId(groupe.id_groupe)" style="margin-bottom: 15px !important" class="btn  modal-trigger">Promouvoir un responsable</button>
+                <button data-target="modalPromotion" ng-click="setPromotionId(groupe.id_groupe)" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir un responsable</button>
               </div>
               <div class="row"  style="text-align: center">
                 <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
@@ -136,12 +136,12 @@ if(isset($_SESSION['admin'])){
               </table>
 
                                  <div class="row" style="text-align: center">
-              <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn" >Générer des codes d'accès</button></div>
+              <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn green" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalGroupe0" style="margin-bottom: 15px !important" class="btn  modal-trigger">Afficher les codes d'accès</button>
+                <button data-target="modalGroupe0" style="margin-bottom: 15px !important" class="btn green modal-trigger">Afficher les codes d'accès</button>
               </div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalPromotion" ng-click="setPromotionId()" style="margin-bottom: 15px !important" class="btn  modal-trigger">Promouvoir un responsable</button>
+                <button data-target="modalPromotion" ng-click="setPromotionId()" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir un responsable</button>
               </div>
 
               </div>
@@ -149,8 +149,10 @@ if(isset($_SESSION['admin'])){
             
                </li>
           </ul>
-
-        <button data-target="modalNouveauGroupe" style="margin-bottom: 0px !important" class="btn right">Nouveau Groupe</button>
+          <br>
+      <div class="center">
+        <button data-target="modalNouveauGroupe" style="margin-bottom: 0px !important" class="btn green">Nouveau Groupe</button>
+        </div>
       </div>
       
       <li>
@@ -169,7 +171,7 @@ if(isset($_SESSION['admin'])){
             <label for="masquerPresence" style="margin-top: 10px" >Masquer les activités où les présences ont été prises</label>
 
 
-            <br><br>  
+            <br><br>  <br>
           </div>
           <ul class="collapsible" data-collapsible="expandable">
             
@@ -198,7 +200,8 @@ if(isset($_SESSION['admin'])){
                   
                   <br>  
                     <h5>Liste de présences <span style="color: green; font-size: 0.75em" ng-show="activite.presences_prises > 0"> - Présences prises</span></h5> 
-                 <table> 
+                    <span ng-show="getElevesForActivitePrevue(activite.ID_activite_prevue).length == 0">Aucune inscription pour le moment <br><br></span>
+                 <table ng-show="getElevesForActivitePrevue(activite.ID_activite_prevue).length >= 1"> 
                  <thead><th>Nom</th><th class="center">Présent</th>  </thead>
                 <tr  ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)">
                   <td class="col s8">{{eleve.nom}}, {{eleve.prenom}}</td><td class="col s2 center">
@@ -215,7 +218,7 @@ if(isset($_SESSION['admin'])){
             </table>
             <div style="text-align: center">
               <div class="row" style="margin-bottom: 0px">
-                <button type="button" data-target="modalPresence{{activite.ID_activite_prevue}}" class="btn l6 s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px"><span ng-show="activite.presences_prises > 0">Re</span>Prendre les présences</button>
+                <button type="button" data-target="modalPresence{{activite.ID_activite_prevue}}" class="btn l6 green s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px"><span ng-show="activite.presences_prises > 0">Re</span>Prendre les présences</button>
                 <button ng-click="annulerActivite(activite.ID_activite_prevue)" type="button" class="btn l6 s12 red waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Annuler l'activité</button>
               </div>
             </div>
@@ -223,9 +226,10 @@ if(isset($_SESSION['admin'])){
           
         </li>
       </ul>
-  
-      <a class="waves-effect waves-light btn right" data-target="modal_planif" style="margin-top: 0px;">Planifier une activité</a>
-      <div style="margin-bottom: 40px"></div>
+    <div class="center">
+    <br>
+      <a class="waves-effect green waves-light btn" data-target="modal_planif" style="margin-top: 0px;">Planifier une activité</a></div>
+      <br>
       </div></li>
     
 
@@ -253,9 +257,11 @@ if(isset($_SESSION['admin'])){
             
               <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td>{{adminLevelFromID(admin.administrateur)}}</td><td><button type="button" class="btn blue small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)">Permissions</button></td></tr>
                 </table>
+                <div class="center">
+              <div class="row center">
+              <a class="waves-effect waves-light btn blue" style="margin-top: 15px;" data-target="modalCodeAdmin">Générer des codes d'accès</a></div>
               <div class="row">
-              <a class="waves-effect waves-light btn col l5" style="margin-left: 15px; margin-top: 15px;" data-target="modalCodeAdmin"><i class="material-icons left">cloud</i>Générer des codes d'accès</a>
-            <a class="waves-effect waves-light btn col l5" style="margin-left: 15px; margin-top: 15px;" type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')"><i class="material-icons right">cloud</i>Afficher les codes d'accès</a>
+            <a class="waves-effect waves-light btn blue" style="margin-top: 15px;" type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')">Afficher les codes d'accès</a></div>
 
 
               
@@ -296,7 +302,7 @@ if(isset($_SESSION['admin'])){
               <row>
               <br><br>
               <div style="text-align: center">
-              <button type="button"  class="btn l6 s12 waves-effect waves-light"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
+              <button type="button"  class="btn l5 waves-effect waves-light blue"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
               </div>
               </row>
               
@@ -321,7 +327,7 @@ if(isset($_SESSION['admin'])){
               <br>
               
               <div class="center">
-              <button type="button"  class="btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
+              <button type="button"  class="blue btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
               </div>
 
               </row>
