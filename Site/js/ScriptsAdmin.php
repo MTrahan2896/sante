@@ -228,10 +228,15 @@ app.controller("ctrl", function($scope) {
                 'FRAIS':  $('#mod_frais').val(),
                 'ENDROIT':  $('#mod_endroit').val(),
                 'RESPONSABLE': $('#mod_responsable').val()
-            }, //TODO: CHANGE PROF ID
+            },
             success: function(data) {
-                
-                   location.reload();
+                    
+                    console.log(data.trim());
+                    if (data.trim() == "1")
+                    {
+                    alert("L'activité a été modifiée avec succès!");    
+                    location.reload();
+                    }
                     
             },
             error: function(req) {
