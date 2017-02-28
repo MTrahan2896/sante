@@ -42,7 +42,7 @@
           <div class="row">
             <div class="input-field col s12" style="margin-top:15px">
               <i class="material-icons prefix">account_circle</i>
-              <input id="username" name="username" type="text" class="validate" maxlength="50">
+              <input id="username" name="username" onkeypress="return RestrictSpaceSpecial(event)"  type="text" class="validate" maxlength="50">
               <label for="username">Nom d'utilisateur</label>
             </div>
             <div class="input-field col s12" style="margin-top:15px">
@@ -63,4 +63,12 @@
     </div>
   </div>
 </div>
+<script>
+  function RestrictSpaceSpecial(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+
+};
+</script>
 
