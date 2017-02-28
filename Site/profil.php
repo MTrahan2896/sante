@@ -19,7 +19,7 @@ session_start();
     <ul class="collapsible" data-collapsible="expandable">
       <!-- Coordonées personnelle -->
       <li class="">
-        <div class="collapsible-header"><i class="material-icons">person</i>Coordonnees personnelles</div>
+        <div class="collapsible-header"><i class="material-icons">person</i>Coordonnées personnelles</div>
         <div class="collapsible-body container" style="display: none;">
         
         <!-- Nom prénom -->
@@ -98,11 +98,14 @@ session_start();
       <li class="act">
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
         <div class="collapsible-body" style="display: none;">
-           <p id="aucune_activite"> </p>
-           <ul class="collapsible" data-collapsible="expandable" id="liste_activite">
-         
+           <span ng-show="activites.length == 0">Vous n'êtes pas inscrit à une activité</span>
+           <ul class="collapsible" ng-show="activites.length > 0"data-collapsible="expandable" id="liste_activite">
+
+            <span ng-repeat="activite in activites"></span>
+
+
            <!-- Chaque LI représente 1 activité -->
-           <li ng-repeat="activite in activites" id="li_activite">
+           <li  ng-repeat="activite in activites" id="li_activite">
            <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{activite.nom_activite}} {{activite.date_activite}}<i class=" material-icons right " ng-click="annuler_participation(activite)" >cancel</i></div>
            <div class="collapsible-body">
            <input type="hidden" id="id_act_utilisateur" value="{{activite.ID_Eleve_Activite}}"/>
@@ -162,6 +165,12 @@ session_start();
         </div>
       </li>
 
+
+
+              
+           
+        </div>
+      </li>
 </ul>
 </div>
 </li>
@@ -174,7 +183,7 @@ obtenir_info($_SESSION['uid']);
 }
 ?>
 <script>
-
+/*
 if (($("#liste_activite").children.length) == 2)
 {
     $("#liste_activite").hide();
@@ -184,7 +193,7 @@ else
 {
    $("#liste_activite").show();
     $("#aucune_activite").html(" ");
-}
+}*/
 </script>
 </main>
 <footer class="page-footer" style="width: 100%!important">
@@ -217,3 +226,66 @@ else
    
  </script>
 <div class="hiddendiv common"></div></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <table class="striped" align="center" ng-show="groupe.ensemble == 1"><!--Ensemble 1 -->
+                  <thead><tr><th>Nom </th><th class="center">Points réguliers</th><th class="center">Points Bonus</th><th class="center">Total</th></tr></thead>
+                  <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
+                    
+                    <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
+                    <td style="text-align: center" class="center">{{pointsReguliersForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)}}/5</td><td class="center">{{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)+pointsReguliersForEleve(eleve.id_utilisateur)}}/10</td>
+                    
+                  </div>
+                </tr>
+              </table>
+
+                <table class="striped" align="center" ng-show="groupe.ensemble == 2"><!--Ensemble 2 -->
+                  <thead><tr><th>Nom </th><th class="center">Nombre de points</th></tr></thead>
+                  <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
+                    
+                    <td class="center">{{eleve.nom}}, {{eleve.prenom}}</td><td class="center">{{pointsEnsemble2(eleve.id_utilisateur)}}/5</td>
+                    
+                  </div>
+                </tr>
+              </table>
+
+
+
+                <table class="striped" align="center" ng-show="groupe.ensemble == 3"><!--Ensemble 3 -->
+                  <thead><tr><th>Nom </th><th class="center">Début</th><th>Fin</th><th class="center">Bonus</th><th class="center">Total</th></tr></thead>
+                  <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
+                    
+                    <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
+                    <td style="text-align: center" class="center">{{pointsDebutForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsFinForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsBonusForEleve(eleve.id_utilisateur)}}/5</td><td class="center">{{pointsDebutForEleve(eleve.id_utilisateur)+pointsFinForEleve(eleve.id_utilisateur)+pointsBonusForEleve(eleve.id_utilisateur)}}/15</td>
+                    
+                  </div>
+                </tr>
+              </table>
