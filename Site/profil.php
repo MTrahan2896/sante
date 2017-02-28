@@ -98,7 +98,7 @@ session_start();
       <li class="act">
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
         <div class="collapsible-body" style="display: none;">
-           <span ng-show="activites.length == 0">Vous n'êtes pas inscrit à une activité</span>
+           <span ng-show="activites.length == 0">Vous n'êtes pas inscrit à une activité, inscrivez-vous depuis <a href="accueil.php">l'accueil</a></span>
            <ul class="collapsible" ng-show="activites.length > 0"data-collapsible="expandable" id="liste_activite">
 
             <span ng-repeat="activite in activites"></span>
