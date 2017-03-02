@@ -36,7 +36,7 @@
             group by utilisateurs.id_utilisateur')?>;
 
         $scope.points_fin = <?php echo phpSelectQuery('select sum(ponderation) as points_fin, utilisateurs.id_utilisateur
-    from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
+         from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
             where activites_prevues.id_activite = activites.id_activite 
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
