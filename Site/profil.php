@@ -15,6 +15,7 @@ session_start();
         <?php include 'components/nav.php';?>
   </header>
   <main>
+
   <div class="container">
 
     <h5>Bonjour <?php echo $_SESSION['username'] ?></h5><br>
