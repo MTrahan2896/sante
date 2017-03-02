@@ -624,7 +624,7 @@
            <option value="">Choisir une activité *</option>
            <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
            </select>
-           <label class="ACTIVER" for="mod_nom_act">Nom de l'activité *</label>
+           <label class="ACTIVER" for="mod_nom_act">Nom de l'activité *</label> 
          </div>
          </div>
 

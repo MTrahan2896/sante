@@ -16,7 +16,7 @@
           <?php }}?>
 
 
-          <li><a class="adminTabs" href="activites.php">Mes Activités</a></li>
+          
           <li><a href="stats.php">Statistiques</a></li>
           <li><a href="profil.php">Profil et Inscriptions</a></li>
 
@@ -76,8 +76,6 @@
       <li><a class="btn-floating  waves-effect waves-light blue" href="accueil.php"><i class="material-icons">home</i></a></li>
       <li><a ng-show="<?=$_SESSION['uid']?> != 0" class="btn-floating  waves-effect waves-light blue" href="profil.php"><i class="material-icons">person</i></a></li>
       <li><a ng-show="<?=$_SESSION['admin']?> > 1" class="btn-floating  waves-effect waves-light blue" href="administration.php"><i class="material-icons">supervisor_account</i>Profil</a></li>
-      
-      <li><a ng-show="<?=$_SESSION['uid']?> != 0" class="btn-floating  waves-effect waves-light blue" href="activites.php"><i class="material-icons">directions_bike</i></a></li>
       <li><a ng-show="<?=$_SESSION['admin']?> > 1" class="btn-floating blue waves-effect waves-light" href="statistiques.php"><i class="material-icons">assessment</i></a></li>
       <li><a ng-show="<?=$_SESSION['uid']?> != 0" class="btn-floating blue waves-effect waves-light" onclick="deconnexion()" ><i class="material-icons">exit_to_app</i></a></li>
       <li><a ng-show="<?=$_SESSION['uid']?> == 0" class="btn-floating blue waves-effect waves-light" data-target="modal_login" ><i class="material-icons">account_circle</i></a></li>
