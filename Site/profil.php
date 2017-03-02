@@ -15,6 +15,7 @@ session_start();
         <?php include 'components/nav.php';?>
   </header>
   <main>
+
   <div class="container">
     <ul class="collapsible" data-collapsible="expandable">
       <!-- Coordonées personnelle -->
