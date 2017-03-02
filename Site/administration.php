@@ -260,19 +260,20 @@ if(isset($_SESSION['admin'])){
             <div class="collapsible-header">
               <i class="material-icons">supervisor_account</i>
               Comptes Administrateurs
-                <span class="new badge green right" data-badge-caption="">{{comptesAdmin().length}}</span>
+                <span class="new badge blue right" data-badge-caption="">{{comptesAdmin().length}}</span>
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
-              <table>
+              <table class="striped">
+              <thead><th class="center">Compte</th><th class="center">Niveau</th></thead>
             
-              <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td>{{adminLevelFromID(admin.administrateur)}}</td><td><button type="button" class="hide-on-med-and-down btn blue small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)"><span class="">Permissions</span></button><i ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)" class="hide-on-med-and-up material-icons">settings</i></td></tr>
+              <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td class="center">{{adminLevelFromID(admin.administrateur)}}</td><td><button type="button" class="hide-on-small-only btn green small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)"><span class="">Permissions</span></button><i ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)" class="hide-on-med-and-up material-icons">settings</i></td></tr>
                 </table>
                 <div class="center">
               <div class="row center">
-              <a class="waves-effect waves-light btn blue" style="margin-top: 15px;" data-target="modalCodeAdmin">Générer des codes d'accès</a></div>
+              <a class="waves-effect waves-light btn green" style="margin-top: 15px;" data-target="modalCodeAdmin">Générer des codes d'accès</a></div>
               <div class="row">
-            <a class="waves-effect waves-light btn blue" style="margin-top: 15px;" type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')">Afficher les codes d'accès</a></div>
+            <a class="waves-effect waves-light btn green" style="margin-top: 15px;" type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')">Afficher les codes d'accès</a></div>
 
 
               
@@ -313,7 +314,7 @@ if(isset($_SESSION['admin'])){
               <row>
               <br><br>
               <div style="text-align: center">
-              <button type="button"  class="btn l5 waves-effect waves-light blue"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
+              <button type="button"  class="btn l5 waves-effect waves-light green"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
               </div>
               </row>
               
@@ -332,13 +333,13 @@ if(isset($_SESSION['admin'])){
               <table><thead><th>Nom de la session</th><th class="hide-on-med-and-down">Début</th>
               <th class="hide-on-med-and-down">Mi-Session</th>
               <th class="hide-on-med-and-down">Fin</th><th></th></thead>
-              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td class="hide-on-med-and-down">{{session.Debut_Session}}</td><td class="hide-on-med-and-down">{{session.Mi_Session}}</td><td class="hide-on-med-and-down">{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light green " ng-click="modifierSession(session)"><i class="material-icons">edit</i></a></td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats()"><i class="material-icons">assessment</i></a></td>
+              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td class="hide-on-med-and-down">{{session.Debut_Session}}</td><td class="hide-on-med-and-down">{{session.Mi_Session}}</td><td class="hide-on-med-and-down">{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light green " ng-click="modifierSession(session)"><i class="material-icons">edit</i></a></td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats(session.ID_Session)"><i class="material-icons">assessment</i></a></td>
               </tr>
               </table>
               <br>
               
               <div class="center">
-              <button type="button"  class="blue btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
+              <button type="button"  class="green btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
               </div>
 
               </row>
