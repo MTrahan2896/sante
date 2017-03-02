@@ -47,8 +47,8 @@ function verifier_date_activite()
 											 "',".$_POST['participants_max'].
 											 ",".$_POST['frais'].
 											 ",'".formater($_POST['endroit']).
-											 "',".$_POST['nom_act'].", null, 0, ".$_POST['responsable'].");";
-			echo phpQuery($req);
+											 "',".$_POST['nom_act'].", 0, 0, ".$_POST['responsable'].");";
+			phpQuery($req);
 			echo "L'activité a été planifiée avec succès";
 		}
 		else
@@ -75,5 +75,5 @@ function verif_champs_obligatoires()
 	}
 }
 
-echo verif_champs_obligatoires();
+verif_champs_obligatoires();
 ?>

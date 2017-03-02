@@ -250,8 +250,14 @@
                     'RESPONSABLE': $('#mod_responsable').val()
                 }, //TODO: CHANGE PROF ID
                 success: function(data) {
-
-                    location.reload();
+                   
+                    alert(data);
+                    if (data.trim() == "L'activité a été modifiée avec succès!")
+                    {  
+                        location.reload();
+                    }
+                   
+                 
 
                 },
                 error: function(req) {

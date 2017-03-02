@@ -55,7 +55,7 @@ function verifier_date_activite()
                          RESPONSABLE={$_POST['RESPONSABLE']} 
                          where ID_activite_prevue = {$_POST['ID_ACTIVITE_PREVUE']}";  
       phpQuery($req);
-      echo "1";
+      echo "L'activité a été modifiée avec succès!";
     }
     else
     {

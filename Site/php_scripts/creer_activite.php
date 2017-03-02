@@ -16,8 +16,8 @@ include_once 'connexion_bd.php';
 										 ",'".formater($_POST['desc'])."','".
 										 $_POST['couleur'].
 										 "',0,".$_POST['nbr_pts'].");";
-	echo $req;
-
-	echo phpQuery($req);
+	
+	phpQuery($req);
+	echo "L'activité à été créée avec succès";
 
 ?>

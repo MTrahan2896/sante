@@ -80,6 +80,10 @@
             },
       success: function (data) {
         alert(data);
+        if(data == "L'activité à été créée avec succès")
+        {
+          location.reload();
+        }
       },
       error: function (req) {
         alert("erreur");
@@ -145,7 +149,10 @@
             },
       success: function (data) {
         alert(data);
+        if (data == "Mise à jour de l'activité réussie")
+        {
         location.reload();
+        }
       },
       error: function (req) {
         alert("erreur");
@@ -560,10 +567,9 @@
 
        <div class="row">
          <div class="input-field col s12 l12">
-              <select id="selectResponsable"
-            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
-            ng-model="responsableSelectionne">
-              
+              <select id="selectResponsable" name="selectResponsable">
+              <option value="null">Choisir un responsable</option>
+              <option ng-repeat="admin in comptesAdministrateur" value="{{admin.id_utilisateur}}">{{admin.Nom}}, {{admin.Prenom}}</option>
             </select>
          </div>
        </div>
@@ -597,7 +603,8 @@
              'responsable':$('#selectResponsable').val()
             },
       success: function (data) {
-        alert(data);
+        console.log(data);
+        //alert(data);
         if (data == "L'activité a été planifiée avec succès")
           {
             location.reload();
@@ -662,11 +669,11 @@
          </div>
        </div>
 
-       <div class="row">
+        <div class="row">
          <div class="input-field col s12 l12">
-              <select id="mod_responsable"
-            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
-            ng-model="responsableSelectionne">
+              <select id="mod_responsable" name="mod_responsable">
+              <option value="null">Choisir un responsable</option>
+              <option ng-repeat="admin in comptesAdministrateur" value="{{admin.id_utilisateur}}">{{admin.Nom}}, {{admin.Prenom}}</option>
             </select>
          </div>
        </div>
