@@ -283,32 +283,7 @@
                     }
                 });
 
-        $.ajax({
-            type: "POST",
-            url: "php_scripts/modifierActivitePrevue.php",
-            data: {
-                'ID_ACTIVITE_PREVUE': $('#ID_ACT_PLAN').val(),
-                'ID_ACTIVITE': $('#mod_nom_act').val(),
-                'DATE_ACT':  $('#mod_date_act').val(),
-                'HEURE_ACT':  $('#mod_heure_deb').val(),
-                'PARTICIPANTS_MAX' : $('#mod_participants_max').val(),
-                'FRAIS':  $('#mod_frais').val(),
-                'ENDROIT':  $('#mod_endroit').val(),
-                'RESPONSABLE': $('#mod_responsable').val()
-            },
-            success: function(data) {
-                    
-                    console.log(data.trim());
-                    if (data.trim() == "1")
-                    {
-                    alert("L'activité a été modifiée avec succès!");    
-                    location.reload();
-                    }
-                    
-            },
-            error: function(req) {
-                alert("erreur");
-
+            
             }
         }
 
