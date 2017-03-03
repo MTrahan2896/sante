@@ -1,22 +1,33 @@
 <?php
 	include_once 'connexion_bd.php';
 	include_once 'formater_champ.php';
-	function phpQuery($query){
-    $mysqli = connexion();
-	$myArray = array();
-	$mysqli->query($query);
-	
+	include_once 'queryFunctions.php';
 
-
-	$mysqli->close();
+	if(empty($_POST['nom_act']))
+	{
+		echo "Veuillez saisir le nom de l'activité";
 	}
-	$req = "UPDATE activites
-			set Nom_Activite = '".formater($_POST['nom_act'])."',
-				Duree = {$_POST['duree']},
-				Ponderation = {$_POST['nbr_pts']},
-				Commentaire = '".formater($_POST['desc'])."'
-				where ID_Activite = {$_POST['id_act']}";
-	echo phpQuery($req);
-	echo "Mise à jour de l'activité réussie";
+	else
+	{
+		if (empty($_POST['duree']))
+		{
+			$_POST['duree'] = 0;
+		}
+
+		if (empty($_POST['nbr_pts']))
+		{
+			$_POST['nbr_pts'] = 0;
+		}
+
+		$req = "UPDATE activites
+				set Nom_Activite = '".formater($_POST['nom_act'])."',
+					Duree = {$_POST['duree']},
+					Ponderation = {$_POST['nbr_pts']},
+					Commentaire = '".formater($_POST['desc'])."'
+					where ID_Activite = {$_POST['id_act']}";
+					
+		phpQuery($req);
+		echo "Mise à jour de l'activité réussie";
+	}
 
 ?>

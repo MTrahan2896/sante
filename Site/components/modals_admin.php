@@ -7,17 +7,17 @@
     <div class="row">
       <div class="input-field col s12 l8">
         <input id="nom_activite" type="text" class="validate" maxlength="75">
-        <label for="nom_activite">Nom de l'activité</label>
+        <label for="nom_activite">Nom de l'activité *</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s6 l4">
         <label  for="duree">Durée (Minutes)</label>
-        <input type="number" step="1" maximum="180" minimum="0" id="duree" name="duree"/>
+        <input type="number" step="1" maximum="180" minimum="0" id="duree" name="duree" value="60"/>
       </div>
       <div class="input-field col s6 l4">
         <label  for="point">Nombre de points</label>
-        <input type="number" step="0.5" maximum="3" minimum="0" id="point" name="point"/>
+        <input type="number" step="0.5" maximum="3" minimum="0" value="1" id="point" name="point"/>
       </div>
     </div>
     Couleur de l'activité
@@ -102,7 +102,7 @@
     <div class="row">
       <div class="input-field col s12 l8">
         <input id="nom_activite_mod" type="text" class="validate" maxlength="75">
-        <label for="nom_activite_mod" class="ACTIVER">Nom de l'activité</label>
+        <label for="nom_activite_mod" class="ACTIVER">Nom de l'activité *</label>
       </div>
     </div>
     <div class="row">
