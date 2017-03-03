@@ -1,26 +1,32 @@
 <script>
-var app = angular.module("app_profil", []); 
-app.controller("ctrl", function($scope) {
+    toDate = function(dateMod) {
+        return new Date(dateMod);
+    }
+    var app = angular.module("app_profil", []);
+    app.controller("ctrl", function($scope) {
 
-            $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs order by nom ASC')?>;
-       $scope.activites = <?php 
-       						echo phpSelectQuery("select a.ID_Activite, a.Nom_Activite, ap.date_activite, ap.Heure_Debut, a.Duree, a.Ponderation, ap.Frais, ap.Endroit, a.Commentaire, 							ua.ID_Eleve_Activite, ap.ID_activite_prevue
-       											from utilisateur_activites ua, activites_prevues ap, activites a 
-       											where ua.ID_Utilisateur = {$_SESSION['uid']} and 
-                            ap.hidden = 0 and
-       											ua.ID_Activite_prevue = ap.ID_activite_prevue and
-       											ap.ID_Activite = a.ID_Activite
+        $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs order by nom ASC')?>;
 
+        $scope.liste_activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
+        $scope.activites = <?php 
+                            echo phpSelectQuery("select a.ID_Activite, a.Nom_Activite, ap.date_activite, ap.Heure_Debut, a.Duree, a.Ponderation, ap.Frais, ap.Endroit, a.Commentaire,                           ua.ID_Eleve_Activite, ap.ID_activite_prevue
+                                                from utilisateur_activites ua, activites_prevues ap, activites a 
+                                                where ua.ID_Utilisateur = {$_SESSION['uid']} and 
+                            (ap.hidden = 0 or ap.hidden is null) and
+                                                ua.ID_Activite_prevue = ap.ID_activite_prevue and
+                                                ap.ID_Activite = a.ID_Activite
+                            order by ap.presences_prises
                             ")
-       						?>;
+                            ?>;
 
-                  $scope.activites_responsable = <?php 
-                  echo phpSelectQuery("select * from activites, activites_prevues where activites_prevues.hidden=0 and activites_prevues.id_activite = activites.id_activite and activites.id_activite in(select id_activite from activites_prevues where responsable = ".$_SESSION['uid']." )")
+        $scope.activites_responsable = <?php 
+                  echo phpSelectQuery("select * from activites, activites_prevues where (activites_prevues.hidden=0 or activites_prevues.hidden is null) and activites_prevues.id_activite = activites.id_activite and activites.id_activite in(select id_activite from activites_prevues where responsable = ".$_SESSION['uid']." order by activites_prevues.presences_prises ASC )")
                   ?>;
-                  console.log($scope.activites_responsable);
 
-      $scope.points_debut = <?php echo phpSelectQuery('select sum(ponderation) as points_debut, utilisateurs.id_utilisateur
-    from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
+
+
+        $scope.points_debut = <?php echo phpSelectQuery('select sum(ponderation) as points_debut, utilisateurs.id_utilisateur
+            from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
             where activites_prevues.id_activite = activites.id_activite 
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
@@ -33,7 +39,7 @@ app.controller("ctrl", function($scope) {
             group by utilisateurs.id_utilisateur')?>;
 
         $scope.points_fin = <?php echo phpSelectQuery('select sum(ponderation) as points_fin, utilisateurs.id_utilisateur
-         from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
+            from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
             where activites_prevues.id_activite = activites.id_activite 
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
@@ -44,14 +50,30 @@ app.controller("ctrl", function($scope) {
             and utilisateur_activites.present = 1
             and utilisateur_activites.id_utilisateur = '.$_SESSION['uid'].'
             group by utilisateurs.id_utilisateur')?>;
-       console.log($scope.activites);
 
-     $scope.ensemble = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = sessions.id_session and groupes.id_groupe in (select id_groupe from utilisateurs where id_utilisateur = '.$_SESSION['uid'].') order by nom_groupe ASC')?>[0].ensemble;
+        $scope.masquerPresence = true;
+        
+        $scope.SESSION = 1;
 
-     $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
+
+        $scope.test= function(){
+            alert($scope.SESSION);
+        }
+
+        $scope.now = new Date();
+
+        $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where responsable = '.$_SESSION['uid'].' and hidden=false or hidden is null order by presences_prises, date_activite ')?>;
+
+        console.log($scope.activites);
+        try {
+            $scope.ensemble = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = sessions.id_session and groupes.id_groupe in (select id_groupe from utilisateurs where id_utilisateur = '.$_SESSION['uid'].') order by nom_groupe ASC')?> [0].ensemble;
+        } catch (err) {
+            $scope.ensemble = 0;
+        }
+        $scope.eleves_activites = <?php echo phpSelectQuery('select * from utilisateur_activites')?>;
 
 
-$scope.comptesAdministrateur = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>;
+        $scope.comptesAdministrateur = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>;
         $scope.activiteFromId = function(id) {
 
             let act = $scope.activites.filter(function(ac) {
@@ -62,56 +84,53 @@ $scope.comptesAdministrateur = <?php echo phpSelectQuery('select * from utilisat
 
         }
 
-  console.log($scope.ensemble);
 
-       $scope.dateToString = function(_date){
+        console.log($scope.ensemble);
 
-       		return (_date.toString());
-       		
-       }
+        $scope.dateToString = function(_date) {
 
-               $scope.eleveFromId = function(id) {
+            return (_date.toString());
+
+        }
+
+        $scope.eleveFromId = function(id) {
             return $scope.eleves.filter(function(el) {
 
                 return el.id_utilisateur == id;
             })[0];
         }
-       
-$scope.annuler_participation = function(activite){
-           
-           if(confirm("Voulez-vous réellement annuler votre participation à l'activité: ".concat(activite.nom_activite.concat(" à la date: ".concat(activite.date_activite)))))
-           {
-           	
-           	$.ajax({
-            type: "POST",
-            url: "php_scripts/annuler_participation.php",
-            data: {
-                'id_act_utilisateur': $('#id_act_utilisateur').val(),
-                'date_activite': $('#date_act').val(),
-                'heure':$('#heure_deb').val()
-            }, 
-            success: function(data) {
-                console.log(data);
-                if (data == "Vous avez quitté l'activité avec succès")
-                {
-                	location.reload();
-                }                    
-            },
-            error: function(req) {
-                alert("erreur");
+
+        $scope.annuler_participation = function(activite) {
+
+            if (confirm("Voulez-vous réellement annuler votre participation à l'activité: ".concat(activite.nom_activite.concat(" à la date: ".concat(activite.date_activite))))) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "php_scripts/annuler_participation.php",
+                    data: {
+                        'id_act_utilisateur': $('#id_act_utilisateur').val(),
+                        'date_activite': $('#date_act').val(),
+                        'heure': $('#heure_deb').val()
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if (data == "Vous avez quitté l'activité avec succès") {
+                            location.reload();
+                        }
+                    },
+                    error: function(req) {
+                        alert("erreur");
+                    }
+                });
+
+            } else {
+                console.log(activite.ID_Eleve_Activite);
             }
-        });
-           	
-           }
-           else
-           {
-           	console.log(activite.ID_Eleve_Activite);
-    	   }
-    }
+        }
 
 
         $scope.show_params = function(activite) {
-          console.log(activite);
+            console.log(activite);
             $('#modal_mod_planif').modal('open');
 
             $('#ID_ACT_PLAN').val(activite.ID_activite_prevue);
@@ -133,6 +152,32 @@ $scope.annuler_participation = function(activite){
 
 
 
+        $scope.enregistrerPresence = function(activite_prevue) {
+            var values = new Array();
+            $.each($("input[name='presenceActivite" + activite_prevue + "']:checked"), function() {
+                values.push($(this).val());
+            });
+
+
+            $.ajax({
+                type: "POST",
+                url: "php_scripts/prendrePresence.php",
+                data: {
+                    'PRESENTS': values,
+                    'ACTIVITE': activite_prevue
+                }, //TODO: CHANGE PROF ID
+                success: function(data) {
+                    location.reload();
+                },
+                error: function(req) {
+                    alert("erreur");
+                }
+            });
+
+
+
+        }
+
 
         $scope.getElevesForActivitePrevue = function(activite) {
 
@@ -140,7 +185,7 @@ $scope.annuler_participation = function(activite){
                 return ac.ID_Activite_Prevue == activite;
             }));
 
-
+            console.log(liste_el_ac + " POUR ACTIVITE " + activite);
             var listeId = liste_el_ac.map(function(a) {
                 return a.ID_Utilisateur;
             });
@@ -183,7 +228,7 @@ $scope.annuler_participation = function(activite){
                         'ID_ACTIVITE': activite,
                     }, //TODO: CHANGE PROF ID
                     success: function(data) {
-                      alert(data);
+                        alert(data);
                         location.reload();
 
                     },
@@ -202,13 +247,38 @@ $scope.annuler_participation = function(activite){
 
 
 
+        $scope.modifierActivitePrevue = function() {
+
+            $.ajax({
+                type: "POST",
+                url: "php_scripts/modifierActivitePrevue.php",
+                data: {
+                    'ID_ACTIVITE_PREVUE': $('#ID_ACT_PLAN').val(),
+                    'ID_ACTIVITE': $('#mod_nom_act').val(),
+                    'DATE_ACT': $('#mod_date_act').val(),
+                    'HEURE_ACT': $('#mod_heure_deb').val(),
+                    'PARTICIPANTS_MAX': $('#mod_participants_max').val(),
+                    'FRAIS': $('#mod_frais').val(),
+                    'ENDROIT': $('#mod_endroit').val(),
+                    'RESPONSABLE': $('#mod_responsable').val()
+                }, //TODO: CHANGE PROF ID
+                success: function(data) {
+
+                    alert(data);
+                    if (data.trim() == "L'activité a été modifiée avec succès!") {
+                        location.reload();
+                    }
 
 
 
+                },
+                error: function(req) {
+                    alert("erreur");
+                }
+            });
 
 
-
-
+        }
 
 
 
@@ -252,14 +322,14 @@ $scope.annuler_participation = function(activite){
         $scope.pointsBonusForEleve = function(id) {
             let pts_fin = 0;
             let pts_debut = 0;
-            
+
             try {
                 pts_fin = $scope.points_fin.filter(function(el) {
                     return el.id_utilisateur == id;
                 })[0].points_fin;
             } catch (err) {}
 
-            
+
             try {
                 pts_debut = $scope.points_debut.filter(function(el) {
 
@@ -288,7 +358,7 @@ $scope.annuler_participation = function(activite){
                 })[0].points_fin;
             } catch (err) {}
 
-            
+
             try {
                 pts_debut = $scope.points_debut.filter(function(el) {
 
@@ -342,17 +412,21 @@ $scope.annuler_participation = function(activite){
 
 
         $scope.pointsEnsemble2 = function(id) {
-            
+
             let pts_fin = 0;
-            let pts_debut = 0; 
+            let pts_debut = 0;
 
-            try{pts_fin =$scope.points_fin.filter(function(el) {
-                return el.id_utilisateur == id;
-            })[0].points_fin;} catch (err) {}
+            try {
+                pts_fin = $scope.points_fin.filter(function(el) {
+                    return el.id_utilisateur == id;
+                })[0].points_fin;
+            } catch (err) {}
 
-            try{pts_debut = $scope.points_debut.filter(function(el) {
-                return el.id_utilisateur == id;
-            })[0].points_debut;} catch (err) {}
+            try {
+                pts_debut = $scope.points_debut.filter(function(el) {
+                    return el.id_utilisateur == id;
+                })[0].points_debut;
+            } catch (err) {}
 
             let pts_totaux = parseInt(pts_fin) + parseInt(pts_debut);
 
@@ -369,11 +443,5 @@ $scope.annuler_participation = function(activite){
 
 
 
-
-});
-
-
-
-
-
+    });
 </script>
