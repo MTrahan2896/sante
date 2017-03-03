@@ -40,6 +40,13 @@ if(isset($_SESSION['admin'])){
               <label for="masquerGroupes" style="margin-top: 10px" >Masquer les groupes dont je ne suis pas responsable</label>
               <br>
               <div class="row">
+              <br><br>
+              <b class="center">Limiter à la session</b>
+              <select name="select_session" id="select_session" ng-model="SESSION" ng-change="test()">
+                <option value="-1" disabled>Veuillez sélectionner une session</option>
+                <option value="0" selected>Toutes les sessions</option>
+                <option ng-repeat="s in sessions" value="{{s.ID_Session}}">{{s.Nom_Session}}</option>
+              </select>
               <br>
               </div>
          
@@ -54,10 +61,13 @@ if(isset($_SESSION['admin'])){
 
             <ul class="collapsible" data-collapsible="expandable" >
               
-              <li ng-repeat="groupe in groupes" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>) || !masquerGroupes"> <!-- ANGULAR REPEAT -->
-              <div class="collapsible-header"><i class="material-icons">supervisor_account</i>{{groupe.nom_groupe}}
+              <li ng-repeat="groupe in groupes" ng-show="((groupe.id_prof == <?=$_SESSION['uid']?>) || !masquerGroupes) && (groupe.id_session == SESSION || SESSION<=0)"> <!-- ANGULAR REPEAT -->
+         
 
-                <span class="hide-on-small-only new badge blue right" data-badge-caption="">{{elevesDansGroupe(groupe.id_groupe).length}} élève<span ng-show="elevesDansGroupe(groupe.id_groupe).length>1">s</span></span>
+              <span class="hide-on-small-only new badge blue right" style="margin-right: 14px !important" data-badge-caption="">{{elevesDansGroupe(groupe.id_groupe).length}} élève<span ng-show="elevesDansGroupe(groupe.id_groupe).length>1">s</span></span>
+              <div class="collapsible-header"><i class="material-icons">supervisor_account</i>{{groupe.nom_groupe}} <span class="hide-on-small-only new badge yellow darken-2 right"  data-badge-caption=""> Ens. {{groupe.ensemble}}</span>
+                <span class="right">{{groupe.nom_session}}</span>
+
                 <i class="material-icons right" ng-show="!(groupe.id_prof == <?=$_SESSION['uid']?>)" title="Vous n'êtes pas responsable de ce groupe">lock</i>
               </div>
 
@@ -430,8 +440,8 @@ $('input[type="date"]').pickadate();
 $("select").material_select();
 
 $(".session:last").attr("checked", true);
-    
-      
+    $('#select_session').val(0);    
+   $('#select_session').material_select();   
 
 });
 

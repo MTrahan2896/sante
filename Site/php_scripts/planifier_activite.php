@@ -37,24 +37,43 @@ function verifier_date_activite()
 	//Compare si la date et l'heure de l'activité est avant maintenant
 	if(($dateHeureAct > date('Y-m-d H:i:s',time()))) 
 	{
-		$query = "select count(*) as session_en_cours from sessions where '{$_POST['date_act']}' BETWEEN debut_session and fin_session";
-		//Vérifie si la date choisie fait partie d'une session collégiale
-		if(is_in_session($query))
-		{
+
+		for ($i = 0; $i < $_POST['occurence']; $i++) {
+			
+				$start_date = $_POST['date_act'];  
+				$date = strtotime($start_date);
+				$date = strtotime("+".$i." week", $date);
+
+			if (empty($_POST['participants_max']) )
+			{
+				$_POST['participants_max'] = 0;
+			}
+			if(empty($_POST['frais']) )
+			{
+				$_POST['frais'] = 0;
+			}
 			$req = "insert into activites_prevues values (null
-											  ,'".$_POST['date_act'].
+											  ,'". date('Y/m/d', $date).
 											 "','".$_POST['heure_deb'].
 											 "',".$_POST['participants_max'].
 											 ",".$_POST['frais'].
 											 ",'".formater($_POST['endroit']).
 											 "',".$_POST['nom_act'].", 0, 0, ".$_POST['responsable'].");";
 			phpQuery($req);
-			echo "L'activité a été planifiée avec succès";
+		}
+		
+		if($_POST['occurence'] > 1)
+		{
+			echo "Les activités ont été planifiées avec succès";
 		}
 		else
 		{
-			echo "L'activité doit être planifiée durant une session.";
+			echo "L'activité a été planifiée avec succès";
 		}
+		
+			
+	
+
 	}
 	else
 	{
@@ -71,7 +90,14 @@ function verif_champs_obligatoires()
 	}
 	else
 	{
+		if( ($_POST['occurence'] >= 1) && ($_POST['occurence'] <= 15))
+		{
 		verifier_date_activite();
+		}
+		else
+		{
+			echo "Veuillez saisir une occurence entre 1 et 15";
+		}
 	}
 }
 
