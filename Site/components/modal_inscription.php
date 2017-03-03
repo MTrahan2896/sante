@@ -1,4 +1,5 @@
 <script src="js/ajax_inscription.js"></script>
+
 <?php 
 include_once 'php_scripts/afficher_info_user.php'; 
 ?>
@@ -11,7 +12,7 @@ include_once 'php_scripts/afficher_info_user.php';
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">perm_identity</i>
-        <input name="username" id="user" type="text" class="validate" maxlength="30">
+        <input name="username" id="user" type="text" onkeypress="return restrictSpecial(event)" class="validate" maxlength="30">
         <label for="username">Nom d'utilisateur*</label>
       </div>
     </div>
@@ -19,12 +20,12 @@ include_once 'php_scripts/afficher_info_user.php';
     <div class="row">
       <div class="input-field col s12 l6">
         <!--    <i class="material-icons prefix">person_pin</i> -->
-        <input name="prenom" id="prenom" type="text" class="validate" maxlength="50">
+        <input name="prenom" id="prenom" onkeypress="return onlyCaracter(event)" type="text" class="validate" maxlength="50">
         <label for="prenom">Prénom*</label>
       </div>
       
       <div class="input-field col s12 l6">
-        <input name="nom" id="nom_t" type="text" class="validate" maxlength="50">
+        <input name="nom" id="nom_t" type="text" onkeypress="return onlyCaracter(event)" class="validate" maxlength="50">
         <label for="nom">Nom*</label>
       </div>
     </div>
@@ -40,7 +41,7 @@ include_once 'php_scripts/afficher_info_user.php';
     <div class="row">
       <div class="input-field col s10">
         <i class="material-icons prefix">phone</i>
-        <input name="telephone" id="telephone" type="text" class="validate" maxlength="10">
+        <input name="telephone" id="telephone" type="text"  data-input-showMaskOnHover="false" class="validate" maxlength="14">
         <label for="telephone">Téléphone</label>
       </div>
     </div>
@@ -104,3 +105,19 @@ include_once 'php_scripts/afficher_info_user.php';
 </div>
 
 </div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+<script src="js/inputmask/dist/inputmask/inputmask.js"></script>
+<script src="js/inputmask/dist/inputmask/jquery.inputmask.js"></script>
+<script src="js/inputmask/dist/inputmask/inputmask.???.Extensions.js"></script>
+<script src="js/verifstring.js"></script>
+<script>
+	 
+	 var selector = document.getElementById("telephone");
+   showMaskOnHover: false
+	 
+	 Inputmask({"mask": "(999) 999-9999", showMaskOnHover: false }).mask(selector);
+
+
+
+</script>
