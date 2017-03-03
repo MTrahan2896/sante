@@ -15,11 +15,30 @@ session_start();
         <?php include 'components/nav.php';?>
   </header>
   <main>
+
   <div class="container">
+
+    <h5>Bonjour <?php echo $_SESSION['username'] ?></h5><br>
+
+  <div id="spEnsemble1" ng-show="ensemble == 1"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px"> {{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>)}} points  <br>
+  {{pointsBonusEnsemble1ForEleve(<?php echo $_SESSION['uid'] ?>)}} points bonus </p>
+   Votre note: <b style="color: green">{{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>) + pointsBonusEnsemble1ForEleve(<?php echo $_SESSION['uid'] ?>)}}/5</b><br></div>
+
+  <span id="spEnsemble2" ng-show="ensemble == 2"><b>Vous avez accumulé</b>  <p style="margin-left: 20px; margin-top: 0px">{{pointsEnsemble2(<?php echo $_SESSION['uid'] ?>)}} points</p>
+  Votre note: <b style="color: green">{{pointsEnsemble2(<?php echo $_SESSION['uid'] ?>)}}/5</b><br>
+ 
+  </span>
+
+  <span id="spEnsemble3" ng-show="ensemble == 3"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px">{{pointsDebutForEleve(<?php echo $_SESSION['uid'] ?>)}} points au début de la session <br> {{pointsFinForEleve(<?php echo $_SESSION['uid'] ?>)}} points entre la mi-session et la fin de la session <br> {{pointsBonusForEleve(<?php echo $_SESSION['uid'] ?>)}} points bonus <br>
+ 
+
+  </p>
+   Votre note: <b style="color: green">{{pointsDebutForEleve(<?php echo $_SESSION['uid'] ?>) + pointsFinForEleve(<?php echo $_SESSION['uid'] ?>) + pointsBonusForEleve(<?php echo $_SESSION['uid'] ?>)}}/10</b></span>
+
     <ul class="collapsible" data-collapsible="expandable">
       <!-- Coordonées personnelle -->
       <li class="">
-        <div class="collapsible-header"><i class="material-icons">person</i>Coordonnees personnelles</div>
+        <div class="collapsible-header"><i class="material-icons">person</i>Coordonnées personnelles</div>
         <div class="collapsible-body container" style="display: none;">
         
         <!-- Nom prénom -->
@@ -98,17 +117,20 @@ session_start();
       <li class="act">
         <div class="collapsible-header"><i class="material-icons">directions_bike</i>Activités</div>
         <div class="collapsible-body" style="display: none;">
-           <p id="aucune_activite"> </p>
-           <ul class="collapsible" data-collapsible="expandable" id="liste_activite">
-         
+           <span ng-show="activites.length == 0">Vous n'êtes pas inscrit à une activité, inscrivez-vous depuis <a href="accueil.php">l'accueil</a></span>
+           <ul class="collapsible" ng-show="activites.length > 0"data-collapsible="expandable" id="liste_activite">
+
+            <span ng-repeat="activite in activites"></span>
+
+
            <!-- Chaque LI représente 1 activité -->
-           <li ng-repeat="activite in activites" id="li_activite">
-           <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{activite.nom_activite}} {{activite.date_activite}}<i class=" material-icons right " ng-click="annuler_participation(activite)" >cancel</i></div>
+           <li  ng-repeat="activite in activites" id="li_activite">
+           <div class="collapsible-header"><i class="material-icons">directions_bike</i>{{activite.Nom_Activite}} {{activite.date_activite}}<i class=" material-icons right " ng-click="annuler_participation(activite)" >cancel</i></div>
            <div class="collapsible-body">
            <input type="hidden" id="id_act_utilisateur" value="{{activite.ID_Eleve_Activite}}"/>
             <div class="row">
                 <div class="input-field col s6 l4">
-                  <input id="nom_activite" type="text" class="validate" disabled value="{{activite.nom_activite}}" format='yyyy-mm-dd' />
+                  <input id="nom_activite" type="text" class="validate" disabled value="{{activite.Nom_Activite}}" format='yyyy-mm-dd' />
                   <label for="nom_activite">Nom de l'activité</label>
                 </div>
               </div>
@@ -162,6 +184,110 @@ session_start();
         </div>
       </li>
 
+
+      
+
+
+
+
+
+
+
+
+
+      <li class="act" ng-show="activites_responsable.length >= 1">
+        <div class="collapsible-header"><i class="material-icons">supervisor_account</i>Activités dont vous êtes responsable</div>
+        <div class="collapsible-body" style="display: none;">
+           <span ng-show="activites.length == 0">Vous n'êtes pas inscrit à une activité, inscrivez-vous depuis <a href="accueil.php">l'accueil</a></span>
+           <ul class="collapsible" ng-show="activites.length > 0"data-collapsible="expandable" id="liste_activite">
+
+            
+
+
+
+            <li ng-repeat="activite in activites_responsable" class="coll_act_prev" ng-show="!(activite.presences_prises > 0 && masquerPresence) && !(toDate(activite.Date_Activite) < now && masquerPasse) ">
+            <!-- ANGULAR REPEAT -->
+            <div class="collapsible-header">
+              <i class="material-icons">directions_bike</i>{{activite .Nom_Activite}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
+                
+              <span class=" hide-on-small-only new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
+              <i class=" hide-on-small-only material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
+              <i class=" hide-on-small-only material-icons right" style="pointer-events: visiblePainted !important;" ng-click="show_params(activite)">settings</i>
+
+              
+            </div>
+            <div class="collapsible-body collapsibleWithButton container">
+              <div class="center" >
+              
+              <i class=" hide-on-med-and-up material-icons " style="margin-right: 30px !important; margin-left: 30px !important" ng-show="activite.presences_prises > 0" >playlist_add_check</i>
+              <i class=" hide-on-med-and-up material-icons " style="margin-left: 30px !important; margin-right: 30px !important;" ng-click="show_params(activite)">settings</i><br> <br>  
+              <br>
+            </div>
+              <table>
+                <b>Responsable: </b><b style="color: green">Vous êtes le responsable de cette activité</b>
+                <br>  
+                <b>Frais: </b> {{activite.Frais}}$ <br>  
+                <b>Endroit: </b> {{activite.Endroit}} <br>  
+                <b>Commentaire: </b>{{activiteFromId(activite.ID_Activite).Commentaire}} <br> 
+                <b>Nombre de participants inscrits: </b>{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}
+                  <br>
+                  
+                  <br>  
+                    <h5>Liste de présences <span style="color: green; font-size: 0.75em" ng-show="activite.presences_prises > 0"> - Présences prises</span></h5> 
+                    <span ng-show="getElevesForActivitePrevue(activite.ID_activite_prevue).length == 0">Aucune inscription pour le moment <br><br></span>
+                 <table ng-show="getElevesForActivitePrevue(activite.ID_activite_prevue).length >= 1"> 
+                 <thead><th>Nom</th><th class="center">Présent</th>  </thead>
+                <tr  ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)">
+                  <td class="col s8">{{eleve.nom}}, {{eleve.prenom}}</td><td class="col s2 center">
+                  
+                  <input class="field filled-in" ng-checked="{{getPresenceForEleve(activite.ID_activite_prevue, eleve.id_utilisateur)}}" type="checkbox" name="viewid{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}" disabled readonly
+                  id="viewid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px">
+                  <label for="viewid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
+                  
+                  
+                </td>
+              </tr>
+               </table>   
+              
+            </table>
+            <div style="text-align: center">
+              <div class="row" style="margin-bottom: 0px">
+                <button type="button" data-target="modalPresence{{activite.ID_activite_prevue}}" class="btn l6 green s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px"><span ng-show="activite.presences_prises > 0">Re</span>Prendre les présences</button>
+                <button ng-click="annulerActivite(activite.ID_activite_prevue)" type="button" class="btn l6 s12 red waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Annuler l'activité</button>
+              </div>
+            </div>
+          </div>
+           </li>
+              
+           
+        </div>
+      </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+           
+        </div>
+      </li>
 </ul>
 </div>
 </li>
@@ -174,7 +300,7 @@ obtenir_info($_SESSION['uid']);
 }
 ?>
 <script>
-
+/*
 if (($("#liste_activite").children.length) == 2)
 {
     $("#liste_activite").hide();
@@ -184,7 +310,7 @@ else
 {
    $("#liste_activite").show();
     $("#aucune_activite").html(" ");
-}
+}*/
 </script>
 </main>
 <footer class="page-footer" style="width: 100%!important">
@@ -213,7 +339,42 @@ else
     selectYears: 15, // Creates a dropdown of 15 years to control year
     format: 'yyyy-mm-dd'
   });
+
+     $('.modal').modal();
+
 });
    
  </script>
-<div class="hiddendiv common"></div></body></html>
+<div class="hiddendiv common">
+  
+
+</div>
+
+<?php include 'components/modals_admin.php'; ?>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -64,14 +64,16 @@ if($valide){
         //Vérification si les deux mots de passe sont identiques
         if ($_POST['password'] == $_POST['confirm_password'])
         {
+
+          date_default_timezone_set('America/Montreal');
+          $date_insc = date("Y-m-d");
           $pass=$_POST['password'];
           $pass=password_hash($pass, PASSWORD_DEFAULT);
 
           $query = "update utilisateurs set nom=".guillemeter(formater($_POST['nom'])).
                    ", prenom=".guillemeter(formater($_POST['prenom'])).", username=".guillemeter(formater($_POST['username'])).
                    ", actif=1, courriel=".guillemeter(formater($_POST['courriel'])).",   telephone=".guillemeter($_POST['telephone']).
-                   ", sexe=".guillemeter(formater($_POST['sexe'])).", password=".str_replace("'","''",$pass).", Type_Utilisateur='".$_POST['type_utilisateur']."',code_acces='' where code_acces=".guillemeter($_POST['code']).";";
-         
+                   ", sexe=".guillemeter(formater($_POST['sexe'])).", password='".str_replace("'","''",$pass)."', Type_Utilisateur='".$_POST['type_utilisateur']."', Date_Inscription = '$date_insc',code_acces='' where code_acces=".guillemeter($_POST['code']).";";
           $mysqli = connexion();
           $mysqli->query($query);
           echo "Inscription réussie";
@@ -87,7 +89,7 @@ if($valide){
       }
   }
   else{
-    echo "Veuillez remplir les champs obligatoires";
+    echo "Veuillez renseigner les champs obligatoires";
   }
 
 }

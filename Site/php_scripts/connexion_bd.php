@@ -7,5 +7,4 @@ function connexion()
 	
 	return $conn;
 }
-//ALTER DATABASE mydatabasename charset=utf8;
 ?>

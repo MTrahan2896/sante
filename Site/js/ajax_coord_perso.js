@@ -12,6 +12,10 @@
             },
       success: function (data) {
         alert(data);
+        if(data == "Mise à jour du profil réussie")
+        {
+          location.reload();
+        }
       },
       error: function (req) {
         alert("Erreur lors de la mise à jour du profil");

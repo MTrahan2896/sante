@@ -15,9 +15,7 @@ function valider(){
             'type_utilisateur':$("#type_utilisateur").val(),
             'code' : $("#code_acces").val()}, 
             success: function (data) {
-
                 alert(data);
-                
                 if(data == "Inscription réussie")
                 {
                 location.reload();

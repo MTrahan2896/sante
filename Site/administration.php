@@ -68,8 +68,15 @@ if(isset($_SESSION['admin'])){
 
 
               </div>
+              <div ng-show="elevesDansGroupe(groupe.id_groupe).length == 0"> 
+                <br>  <br>  
+                <div class="center">  
+                <b>Aucun élève inscrit dans ce groupe pour l'instant  </b>
+</div>
+              </div>
 
-
+              <div ng-show="elevesDansGroupe(groupe.id_groupe).length > 0"> 
+              <br>  <br>  
               <table class="striped" align="center" ng-show="groupe.ensemble == 1"><!--Ensemble 1 -->
                   <thead><tr><th>Nom </th><th class="center">Points réguliers</th><th class="center">Points Bonus</th><th class="center">Total</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
@@ -103,6 +110,7 @@ if(isset($_SESSION['admin'])){
                   </div>
                 </tr>
               </table>
+              </div>
               <div class="row" style="text-align: center">
               <button data-target="modalGenGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class=" green btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
@@ -173,10 +181,8 @@ if(isset($_SESSION['admin'])){
 
             <br><br>  <br>
           </div>
-          <ul class="collapsible" data-collapsible="expandable">
-            
-            
-            <li ng-repeat="activite in activites_prevues" ng-show="!(activite.presences_prises > 0 && masquerPresence) && !(toDate(activite.Date_Activite) < now && masquerPasse) ">
+          <ul ng-show="activites_prevues.length > 0" class="collapsible" data-collapsible="expandable">
+            <li ng-repeat="activite in activites_prevues" class="coll_act_prev" ng-show="!(activite.presences_prises > 0 && masquerPresence) && !(toDate(activite.Date_Activite) < now && masquerPasse) ">
             <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
               <i class="material-icons">directions_bike</i>{{activiteFromId(activite.ID_Activite).Nom_Activite}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
@@ -188,14 +194,19 @@ if(isset($_SESSION['admin'])){
               
             </div>
             <div class="collapsible-body collapsibleWithButton container">
+              <div class="center" >
               
+              <i class=" hide-on-med-and-up material-icons " style="margin-right: 30px !important" ng-show="activite.presences_prises > 0" >playlist_add_check</i>
+              <i class=" hide-on-med-and-up material-icons " style="margin-left: 30px !important" ng-click="show_params(activite)">settings</i><br> <br>  
+              <br>
+            </div>
               <table>
                 <b>Responsable: </b>{{eleveFromId(activite.responsable).nom}}, {{eleveFromId(activite.responsable).prenom}}
                 <br>  
                 <b>Frais: </b> {{activite.Frais}}$ <br>  
                 <b>Endroit: </b> {{activite.Endroit}} <br>  
-                <b>Commentaire: </b>{{activiteFromId(activite.ID_Activite).Commentaire}}
-
+                <b>Commentaire: </b>{{activiteFromId(activite.ID_Activite).Commentaire}} <br> 
+                <b>Nombre de participants inscrits: </b>{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}
                   <br>
                   
                   <br>  
@@ -249,19 +260,20 @@ if(isset($_SESSION['admin'])){
             <div class="collapsible-header">
               <i class="material-icons">supervisor_account</i>
               Comptes Administrateurs
-                <span class="new badge green right" data-badge-caption="">{{comptesAdmin().length}}</span>
+                <span class="new badge blue right" data-badge-caption="">{{comptesAdmin().length}}</span>
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
-              <table>
+              <table class="striped">
+              <thead><th class="center">Compte</th><th class="center">Niveau</th></thead>
             
-              <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td>{{adminLevelFromID(admin.administrateur)}}</td><td><button type="button" class="btn blue small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)">Permissions</button></td></tr>
+              <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td class="center">{{adminLevelFromID(admin.administrateur)}}</td><td><button type="button" class="hide-on-small-only btn green small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)"><span class="">Permissions</span></button><i ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)" class="hide-on-med-and-up material-icons">settings</i></td></tr>
                 </table>
                 <div class="center">
               <div class="row center">
-              <a class="waves-effect waves-light btn blue" style="margin-top: 15px;" data-target="modalCodeAdmin">Générer des codes d'accès</a></div>
+              <a class="waves-effect waves-light btn green" style="margin-top: 15px;" data-target="modalCodeAdmin">Générer des codes d'accès</a></div>
               <div class="row">
-            <a class="waves-effect waves-light btn blue" style="margin-top: 15px;" type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')">Afficher les codes d'accès</a></div>
+            <a class="waves-effect waves-light btn green" style="margin-top: 15px;" type="button" data-target="modalAfficherCodeAdmin" onclick="$('#modalAfficherCodeAdmin').modal('open')">Afficher les codes d'accès</a></div>
 
 
               
@@ -281,12 +293,12 @@ if(isset($_SESSION['admin'])){
               
                 <table>
                 <thead>
-                  <th class="center">Activités Disponibles</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th><th></th>
+                  <th class="center">Activités Disponibles</th><th class="center hide-on-med-and-down">Durée (Minutes)</th><th class="center hide-on-med-and-down">Pondération</th><th></th>
                 </thead>                
                 <tr ng-repeat="activite in activites">
                   <td class="center">{{activite.Nom_Activite}}</td>
-                  <td class="center">{{activite.Duree}}</td>
-                  <td class="center">{{activite.Ponderation}} point<span ng-show="activite.Ponderation>1">s</span></td> 
+                  <td class="center hide-on-med-and-down">{{activite.Duree}}</td>
+                  <td class="center hide-on-med-and-down">{{activite.Ponderation}} point<span ng-show="activite.Ponderation>1">s</span></td> 
                   <td class="center"><a class="btn-floating  waves-effect waves-light green" ng-click="modifierActivite(activite)"><i class="material-icons">edit</i></a></td>
                   <td class="center"><a class="btn-floating  waves-effect waves-light red" ng-click="supprimerActivite(activite.ID_Activite)"><i class="material-icons">delete</i></a></td>
                 </tr>
@@ -302,7 +314,7 @@ if(isset($_SESSION['admin'])){
               <row>
               <br><br>
               <div style="text-align: center">
-              <button type="button"  class="btn l5 waves-effect waves-light blue"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
+              <button type="button"  class="btn l5 waves-effect waves-light green"  data-target="modal_new_activite" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une activité</button>
               </div>
               </row>
               
@@ -318,16 +330,16 @@ if(isset($_SESSION['admin'])){
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
-              <table><thead><th>Nom de la session</th><th>Début</th>
-              <th>Mi-Session</th>
-              <th>Fin</th><th></th></thead>
-              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td>{{session.Debut_Session}}</td><td>{{session.Mi_Session}}</td><td>{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light green " ng-click="modifierSession(session)"><i class="material-icons">edit</i></a></td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats()"><i class="material-icons">assessment</i></a></td>
+              <table><thead><th>Nom de la session</th><th class="hide-on-med-and-down">Début</th>
+              <th class="hide-on-med-and-down">Mi-Session</th>
+              <th class="hide-on-med-and-down">Fin</th><th></th></thead>
+              <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td class="hide-on-med-and-down">{{session.Debut_Session}}</td><td class="hide-on-med-and-down">{{session.Mi_Session}}</td><td class="hide-on-med-and-down">{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light green " ng-click="modifierSession(session)"><i class="material-icons">edit</i></a></td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats(session.ID_Session)"><i class="material-icons">assessment</i></a></td>
               </tr>
               </table>
               <br>
               
               <div class="center">
-              <button type="button"  class="blue btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
+              <button type="button"  class="green btn l6 s12 waves-effect waves-light " data-target="modal_session" style="height: 30px; margin-top: 7px; margin-right: 7px">Ajouter une session</button>
               </div>
 
               </row>
@@ -418,9 +430,13 @@ $('input[type="date"]').pickadate();
 $("select").material_select();
 
 $(".session:last").attr("checked", true);
+    
+      
 
 });
 
+
+ 
 
 
 

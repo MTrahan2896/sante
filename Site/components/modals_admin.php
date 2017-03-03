@@ -80,6 +80,10 @@
             },
       success: function (data) {
         alert(data);
+        if(data == "L'activité à été créée avec succès")
+        {
+          location.reload();
+        }
       },
       error: function (req) {
         alert("erreur");
@@ -145,7 +149,10 @@
             },
       success: function (data) {
         alert(data);
+        if (data == "Mise à jour de l'activité réussie")
+        {
         location.reload();
+        }
       },
       error: function (req) {
         alert("erreur");
@@ -520,7 +527,7 @@
  
          <div class="input-field col s12">
            <select required id="nom_act" name="nom_act">
-           <option value="">Choisir une activité</option>
+           <option value="">Choisir une activité *</option>
            <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
            </select>
            <label>Nom de l'activité</label>
@@ -528,12 +535,12 @@
  
          <div class="input-field col s12">
            <input id="date_act" type="date" class="datepicker">
-           <label for="date_act">Date de l'activité</label>
+           <label for="date_act">Date de l'activité *</label>
          </div>
  
          <div class="row">
            <div class="input-field col s12">
-             <label for="heure_deb">Heure de début</label>
+             <label for="heure_deb">Heure de début *</label>
              <input id="heure_deb" class="timepicker" type="time" ng-model="$ctrl.NA">
            </div>
          </div>
@@ -560,10 +567,9 @@
 
        <div class="row">
          <div class="input-field col s12 l12">
-              <select id="selectResponsable"
-            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
-            ng-model="responsableSelectionne">
-              
+              <select id="selectResponsable" name="selectResponsable">
+              <option value="null">Choisir un responsable</option>
+              <option ng-repeat="admin in comptesAdministrateur" value="{{admin.id_utilisateur}}">{{admin.Nom}}, {{admin.Prenom}}</option>
             </select>
          </div>
        </div>
@@ -598,6 +604,7 @@
             },
       success: function (data) {
         console.log(data);
+        //alert(data);
         if (data == "L'activité a été planifiée avec succès")
           {
             location.reload();
@@ -611,30 +618,6 @@
 </script>
 
 
- <div id="modal_niveauAdmin" class="modal" style="height: 300px!important">
-     <div class="modal-content">
-       <div class="row" style="text-align:center">
-           <h4>Modifier les permissions</h4>
-       </div>
-          <input type="hidden" id="utilisateurNivAdmin">
-          <select id="niveauUser">
-            <option value="1">Responsable</option>
-            <option value="2">Administrateur</option>
-            <option value="0">Utilisateur Régulier</option>
-          </select>
-          <br>
-          <div class="center">
-          <button type="button" class="blue btn" ng-click="saveAdmin()">Enregistrer</button>
-        </div>
- 
-   </div>
-  
- </div>
-
-
-
-
-
 <!-- MODIFIER ACTIVITE -->
 <div id="modal_mod_planif" class="modal">
       <div class="modal-content">
@@ -645,23 +628,23 @@
         <div class="row">
          <div class="input-field col s12">
            <select required id="mod_nom_act" name="nom_act">
-           <option value="">Choisir une activité</option>
+           <option value="">Choisir une activité *</option>
            <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
            </select>
-           <label class="ACTIVER" for="mod_nom_act">Nom de l'activité</label>
+           <label class="ACTIVER" for="mod_nom_act">Nom de l'activité *</label> 
          </div>
          </div>
 
           <div class="row">
           <div class="input-field col s12">
            <input id="mod_date_act" type="date" class="datepicker">
-           <label  class="ACTIVER" for="mod_date_act">Date de l'activité</label>
+           <label  class="ACTIVER" for="mod_date_act">Date de l'activité *</label>
          </div>
          </div>
  
          <div class="row">
            <div class="input-field col s12">
-             <label class="ACTIVER" for="mod_heure_deb">Heure de début</label>
+             <label class="ACTIVER" for="mod_heure_deb">Heure de début*</label>
              <input id="mod_heure_deb" class="timepicker" type="time" ng-model="$ctrl.NA">
            </div>
          </div>
@@ -686,21 +669,12 @@
          </div>
        </div>
 
-
-
-
-
-       <div class="row">
+        <div class="row">
          <div class="input-field col s12 l12">
-              <select id="mod_responsable"
-            ng-options=" p.Prenom+', '+p.Nom for p in comptesAdministrateur track by p.id_utilisateur"
-            ng-model="responsableSelectionne"
-            
-            >
-              
+              <select id="mod_responsable" name="mod_responsable">
+              <option value="null">Choisir un responsable</option>
+              <option ng-repeat="admin in comptesAdministrateur" value="{{admin.id_utilisateur}}">{{admin.Nom}}, {{admin.Prenom}}</option>
             </select>
-            
-           
          </div>
        </div>
       
@@ -710,7 +684,7 @@
          </div>
          <div class="col s12 l12" style="height: 15px;"></div>
          <div class="col s12 l12">
-           <button class="btn red" href="" style="width: 100%" onclick="$('.modal').modal('close');">Annuler</button>
+           <button class="btn red"  style="width: 100%" onclick="$('.modal').modal('close');">Annuler</button>
          </div>
      </div>  
  
@@ -722,6 +696,26 @@
 
 
 
+
+ <div id="modal_niveauAdmin" class="modal" style="height: 300px!important">
+     <div class="modal-content">
+       <div class="row" style="text-align:center">
+           <h4>Modifier les permissions</h4>
+       </div>
+          <input type="hidden" id="utilisateurNivAdmin">
+          <select id="niveauUser">
+            <option value="1">Responsable</option>
+            <option value="2">Administrateur</option>
+            <option value="0">Utilisateur Régulier</option>
+          </select>
+          <br>
+          <div class="center">
+          <button type="button" class="blue btn" ng-click="saveAdmin()">Enregistrer</button>
+        </div>
+ 
+   </div>
+  
+ </div>
 
 
 <!-- MODAL PROMOTION -->

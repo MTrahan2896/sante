@@ -20,7 +20,6 @@ $query = "select id_utilisateur, id_groupe from utilisateurs where BINARY CODE_A
     }
     else
     {
-    echo $query;
     echo 'fail';
     }
     
