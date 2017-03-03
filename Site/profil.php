@@ -198,17 +198,30 @@ session_start();
       <li class="act" ng-show="activites_responsable.length >= 1">
         <div class="collapsible-header"><i class="material-icons">supervisor_account</i>Activités dont vous êtes responsable</div>
         <div class="collapsible-body" style="display: none;">
-           <span ng-show="activites.length == 0">Vous n'êtes pas inscrit à une activité, inscrivez-vous depuis <a href="accueil.php">l'accueil</a></span>
-           <ul class="collapsible" ng-show="activites.length > 0"data-collapsible="expandable" id="liste_activite">
+           <span ng-show="activites_responsable.length == 0">Vous n'êtes pas inscrit à une activité, inscrivez-vous depuis <a href="accueil.php">l'accueil</a></span>
+              <div class="center">
+          <h4>Activités Planifiées</h4>
+          </div>
+             <div class="container">
+
+          <input type="checkbox" checked name="masquerPresence" id="masquerPresence" ng-model="masquerPresence" value="1" class="filtresActivites field filled-in">  
+            <label for="masquerPresence" style="margin-top: 10px" >Masquer les activités où les présences ont été prises</label>
+
+
+            <br><br>  <br>
+          </div>
+
+           <ul class="collapsible" ng-show="activites_responsable.length > 0"data-collapsible="expandable" id="liste_activite">
 
             
+          
 
 
+            <li ng-repeat="activite in activites_responsable" class="coll_act_prev"  ng-show="!(activite.presences_prises > 0 && masquerPresence) && !(toDate(activite[2]) < now && masquerPasse) ">
 
-            <li ng-repeat="activite in activites_responsable" class="coll_act_prev" ng-show="!(activite.presences_prises > 0 && masquerPresence) && !(toDate(activite.Date_Activite) < now && masquerPasse) ">
             <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
-              <i class="material-icons">directions_bike</i>{{activite .Nom_Activite}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
+              <i class="material-icons">directions_bike</i>{{activite .Nom_Activite}} le {{activite.Date_Activite}} à {{activite.Heure_debut}} 
                 
               <span class=" hide-on-small-only new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
               <i class=" hide-on-small-only material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
@@ -351,6 +364,86 @@ else
 </div>
 
 <?php include 'components/modals_admin.php'; ?>
+
+
+
+<!-- MODIFIER ACTIVITE -->
+<div id="modal_mod_planif" class="modal">
+      <div class="modal-content">
+      <input type="hidden" id="ID_ACT_PLAN">
+       <div class="row" style="text-align:center">
+           <h4>Modifier une activité</h4>
+       </div>
+        <div class="row">
+         <div class="input-field col s12">
+           <select required id="mod_nom_act" name="nom_act">
+           <option value="">Choisir une activité *</option>
+           <option ng-repeat="activite in liste_activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
+           </select>
+           <label class="ACTIVER" for="mod_nom_act">Nom de l'activité *</label> 
+         </div>
+         </div>
+
+          <div class="row">
+          <div class="input-field col s12">
+           <input id="mod_date_act" type="date" class="datepicker">
+           <label  class="ACTIVER" for="mod_date_act">Date de l'activité *</label>
+         </div>
+         </div>
+ 
+         <div class="row">
+           <div class="input-field col s12">
+             <label class="ACTIVER" for="mod_heure_deb">Heure de début*</label>
+             <input id="mod_heure_deb" class="timepicker" type="time" ng-model="$ctrl.NA">
+           </div>
+         </div>
+ 
+ 
+       <div class="row">
+         <div class="input-field col s6 l6">
+           <label   class="ACTIVER" for="mod_participants_max">Nombre de participants maximum</label>
+           <input type="number" step="1" maximum="180" minimum="0" id="mod_participants_max" name="participants_max"/>
+         </div>
+ 
+         <div class="input-field col s6 l6">
+           <label class="ACTIVER"  for="mod_frais">Frais de l'activité</label>
+           <input type="number" step="5" minimum="0" id="mod_frais" name="frais"/>
+         </div>
+       </div>
+ 
+       <div class="row">
+         <div class="input-field col s12 l12">
+           <input type="text" id="mod_endroit" class="materialize-textarea"></textarea>
+           <label class="ACTIVER" for="mod_endroit">Endroit</label>
+         </div>
+       </div>
+
+        <div class="row" id="select_responsable">
+         <div class="input-field col s12 l12">
+              <select id="mod_responsable" name="mod_responsable">
+              <option value="null">Choisir un responsable</option>
+              <option ng-repeat="admin in comptesAdministrateur" value="{{admin.id_utilisateur}}">{{admin.Nom}}, {{admin.Prenom}}</option>
+            </select>
+         </div>
+       </div>
+      
+        <div class="row">
+         <div class="col s12 l12">
+           <button type="button" class="btn green" href="" style="width:100%" ng-click="modifierActivitePrevue()">Enregistrer</button>
+         </div>
+         <div class="col s12 l12" style="height: 15px;"></div>
+         <div class="col s12 l12">
+           <button class="btn red"  style="width: 100%" onclick="$('.modal').modal('close');">Annuler</button>
+         </div>
+     </div>  
+ 
+   </div>
+  </div>
+ </div>
+
+
+
+
 </body></html>
 
 

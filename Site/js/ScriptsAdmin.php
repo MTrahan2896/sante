@@ -5,7 +5,7 @@
 
         $scope.eleves = <?php echo phpSelectQuery('select id_utilisateur, nom, prenom, id_groupe,code_acces, actif, courriel, telephone, sexe, username, password, administrateur from utilisateurs order by nom ASC')?>;
 
-        $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = sessions.id_session order by nom_groupe ASC')?>;
+        $scope.groupes = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session, sessions.nom_session from groupes, sessions where groupes.id_session = sessions.id_session order by sessions.debut_session,  groupes.nom_groupe ASC')?>;
 
         $scope.activites = <?php echo phpSelectQuery('select * from activites where hidden=false or hidden is null')?>;
 
@@ -48,7 +48,11 @@
             group by utilisateurs.id_utilisateur')?>
 
         $scope.responsableSelectionne;
+        console.log("GROUPES");
+        console.log($scope.groupes);
 
+        $scope.SESSION = 0;
+    
         $scope.masquerPresence = true;
 
         $scope.masquerPasse = true;
@@ -59,9 +63,7 @@
 
         $scope.show_params = function(activite) {
             $('#modal_mod_planif').modal('open');
-
             $('#ID_ACT_PLAN').val(activite.ID_activite_prevue);
-
             $('#mod_nom_act').val(activite.ID_Activite);
             $('#mod_nom_act').material_select();
             $('#mod_date_act').val(activite.Date_Activite);
@@ -72,11 +74,16 @@
             $('#mod_responsable').val(activite.responsable);
             $('#mod_responsable').material_select();
             $('.ACTIVER').addClass("active");
-
-
         }
 
-
+        $('#select_session').on('change', function() {
+            let x = $('#select_session').val();
+            $('#select_session').val(x);
+            console.log($('#select_session').val());
+            $scope.SESSION = x;
+            $scope.$apply();
+            $('#select_session').material_select();
+        });
 
         $scope.pointsDebutForEleve = function(id) {
 
@@ -117,14 +124,14 @@
         $scope.pointsBonusForEleve = function(id) {
             let pts_fin = 0;
             let pts_debut = 0;
-            
+
             try {
                 pts_fin = $scope.points_fin.filter(function(el) {
                     return el.id_utilisateur == id;
                 })[0].points_fin;
             } catch (err) {}
 
-            
+
             try {
                 pts_debut = $scope.points_debut.filter(function(el) {
 
@@ -153,7 +160,7 @@
                 })[0].points_fin;
             } catch (err) {}
 
-            
+
             try {
                 pts_debut = $scope.points_debut.filter(function(el) {
 
@@ -207,17 +214,21 @@
 
 
         $scope.pointsEnsemble2 = function(id) {
-            
+
             let pts_fin = 0;
-            let pts_debut = 0; 
+            let pts_debut = 0;
 
-            try{pts_fin =$scope.points_fin.filter(function(el) {
-                return el.id_utilisateur == id;
-            })[0].points_fin;} catch (err) {}
+            try {
+                pts_fin = $scope.points_fin.filter(function(el) {
+                    return el.id_utilisateur == id;
+                })[0].points_fin;
+            } catch (err) {}
 
-            try{pts_debut = $scope.points_debut.filter(function(el) {
-                return el.id_utilisateur == id;
-            })[0].points_debut;} catch (err) {}
+            try {
+                pts_debut = $scope.points_debut.filter(function(el) {
+                    return el.id_utilisateur == id;
+                })[0].points_debut;
+            } catch (err) {}
 
             let pts_totaux = parseInt(pts_fin) + parseInt(pts_debut);
 
@@ -250,14 +261,13 @@
                     'RESPONSABLE': $('#mod_responsable').val()
                 }, //TODO: CHANGE PROF ID
                 success: function(data) {
-                   
+
                     alert(data);
-                    if (data.trim() == "L'activité a été modifiée avec succès!")
-                    {  
+                    if (data.trim() == "L'activité a été modifiée avec succès!") {
                         location.reload();
                     }
-                   
-                 
+
+
 
                 },
                 error: function(req) {
@@ -289,7 +299,7 @@
                     }
                 });
 
-            
+
             }
         }
 
@@ -671,11 +681,12 @@
                         alert("erreur");
                     }
                 });
-            }
+            }else alert("Le groupe saisi ne correspond pas au groupe que vous souhaitez supprimer. La suppression est annulée")
         }
 
     });
 
     $("#selectResponsable").val($("#selectResponsable option:first").val());
     $('#selectResponsable').material_select();
+
 </script>
