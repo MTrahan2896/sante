@@ -1,5 +1,5 @@
 function valider(){
-        
+    if(validateEmail($("#courriel").val())){
          $.ajax({
             type: "POST",
             url: "php_scripts/inscrire.php",
@@ -26,5 +26,12 @@ function valider(){
             error: function (req) { 
             }
         }
-    ); 
+    )
+    }else alert("Couriel non conforme"); 
 }
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+

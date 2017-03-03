@@ -424,7 +424,7 @@
                     if(trop_tot){
                         $('#divSub').html("L'inscription pour cette activitée n'est pas disponible");
                     }else if(retard){
-                        $('#divSub').html("L'activitée est déja terminé");
+                        $('#divSub').html("L'activitée est déja terminée");
                     }else if(inscrit){
                         $('#divSub').html("Vous êtes déja inscrit à cette activitée");
                     }else if(conflit){
@@ -438,7 +438,7 @@
                     }
                     
                 }else {
-                    $('#divSub').html("Vous devez être connecter pour vous inscrire aux activitées");
+                    $('#divSub').html("Vous devez être connectée pour vous inscrire aux activitées");
                 }
             }
             })
