@@ -520,11 +520,11 @@
 <!-- Modal pour planifier des activités -->
 <div id="modal_planif" class="modal">
      <div class="modal-content">
-      
+    
        <div class="row" style="text-align:center">
            <h4>Planifier une activité</h4>
        </div>
- 
+  
          <div class="input-field col s12">
            <select required id="nom_act" name="nom_act">
            <option value="">Choisir une activité *</option>
@@ -539,12 +539,15 @@
          </div>
  
          <div class="row">
-           <div class="input-field col s12">
+           <div class="input-field col s12 l6">
              <label for="heure_deb">Heure de début *</label>
              <input id="heure_deb" class="timepicker" type="time" ng-model="$ctrl.NA">
            </div>
+          <div class="input-field col s12 l6">
+             <label  for="occuence">Répéter l'activité *</label>
+             <input type="number" step="1" maximum="15" minimum="1" id="occurence" name="occurence" value="1"/>
+           </div>
          </div>
- 
  
        <div class="row">
          <div class="input-field col s6 l6">
@@ -598,16 +601,18 @@
              'date_act': $("#date_act").val(),
              'heure_deb': $("#heure_deb").val(),
              'participants_max': $('#participants_max').val(),
+             'occurence':$("#occurence").val(),
              'frais': $('#frais').val(),
              'endroit':$('#endroit').val(),
              'responsable':$('#selectResponsable').val()
             },
       success: function (data) {
-        console.log(data);
-        //alert(data);
-        if (data == "L'activité a été planifiée avec succès")
+        
+        alert(data);
+        if ((data == "L'activité a été planifiée avec succès") || (data == "Les activités ont été planifiées avec succès") )
           {
             location.reload();
+            console.log("1"); 
           }
       },
       error: function (req) {
