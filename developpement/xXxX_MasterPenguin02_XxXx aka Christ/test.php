@@ -3,10 +3,9 @@
         
     </head>
 <body>
-        <?php
-        
-        
-        ?>
+       <script>
+
+       </script>
                         
 </body>
                         

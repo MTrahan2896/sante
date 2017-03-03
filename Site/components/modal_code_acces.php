@@ -27,6 +27,9 @@
   
 
   function confirmerCode(){
+    if(hasWhiteSpace($("#code_acces").val()) || verif_caracter("#code_access") ){
+      alert ("Le code contient un de ces caractères ~`!#$%^&*+=-[]\\\';,/{}|\":<>? \nCes caractères ne sont pas permit\n");
+    }else{
     $.ajax({
             type: "POST",
             url: "php_scripts/validerCode.php",
@@ -43,7 +46,7 @@
                     $('#modal_code').modal('close');
                     $('#modal_ins').modal('open');
                   
-                  }
+                  }else alert("Code Invalide");
                   };
 
                
@@ -55,14 +58,32 @@
                 alert("erreur");
             }
         });
+      }
 }    
+
 function RestrictSpaceSpecial(e) {
     var k;
     document.all ? k = e.keyCode : k = e.which;
     return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
 
 };
+function hasWhiteSpace(s) {
 
+  return /\s/g.test(s);
+}
+function verif_caracter(s){
+var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
+var x = true;
+for (var i = 0; i < s.length; i++)
+{
+  if (iChars.indexOf(s.charAt(i)) != -1)
+  {
+     
+     x =  false;
+  }
+}
+return x
+}
 
 
 </script>
