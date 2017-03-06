@@ -53,13 +53,29 @@ function validateTelephone(tel){
     return re.test(tel);
     }
 }
-
+//192 252
 function validateNomPrenom(nom,prenom){
- return (hasWhiteSpace(nom) ||hasWhiteSpace(prenom)||verif_caracter_tiret(nom)||verif_caracter_tiret(prenom));
+ 
+ if(hasWhiteSpace(nom) ||hasWhiteSpace(prenom)||verif_caracter_tiret(nom)||verif_caracter_tiret(prenom))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
 }
 
 function validateUsername(username){
- return (hasWhiteSpace(username) || verif_caracter_underscore(username));
+    if(hasWhiteSpace(username) || verif_caracter_underscore(username))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+
 }
 
 function validatePassword(pass){

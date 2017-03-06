@@ -44,14 +44,14 @@
                               FROM activites a, activites_prevues ap 
                               left join utilisateur_activites ua on ua.ID_activite_prevue = ap.ID_activite_prevue
                               where a.ID_Activite = ap.ID_Activite
-                              and ID_Activite = ".$_POST['id_activite']."
+                              and ap.ID_Activite_prevue = ".$_POST['id_activite']."
                               group by ap.ID_activite_prevue";
                     $result = $mysqli->query($query);
                     if ($result->num_rows > 0) {
                         $i = 1;
                         
                         while($row = $result->fetch_assoc()) {
-                            if($row['participant_max'] != 0 and $row['participant']>=$row['participant_max']){
+                            if($row['Participants_Max'] != 0 and $row['participant']>=$row['Participants_Max']){
                                 $insert = false;
                                 break;
                             }
