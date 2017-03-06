@@ -38,7 +38,7 @@ function verifier_date_activite()
 	if(($dateHeureAct > date('Y-m-d H:i:s',time()))) 
 	{
 
-		for ($i = 0; $i < $_POST['occurence']; $i++) {
+		for ($i = 0; $i <= $_POST['occurence']; $i++) {
 			
 				$start_date = $_POST['date_act'];  
 				$date = strtotime($start_date);

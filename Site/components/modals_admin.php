@@ -545,7 +545,7 @@
            </div>
           <div class="input-field col s12 l6">
              <label  for="occuence">Répéter l'activité *</label>
-             <input type="number" step="1" maximum="15" minimum="1" id="occurence" name="occurence" value="1"/>
+             <input type="number" step="1" maximum="15" minimum="1" id="occurence" name="occurence" value="0"/>
            </div>
          </div>
  
@@ -675,10 +675,6 @@
 
     
     <div class="row">
-      <div class="col s12 l12">
-        <button class="btn green" onclick="" style="width:100%"> Créer</button>
-      </div>
-      <div class="col s12 l12" style="height:15px"></div>
       <div class="col s12 l12">
         <a class="btn red" href="" style="width:100%"> Annuler</a>
       </div>
