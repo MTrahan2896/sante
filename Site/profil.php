@@ -10,7 +10,7 @@ session_start();
 </head>
 
 <?php include 'php_scripts/afficher_info_user.php'; ?>
-<body>
+<body class="ng-cloak">
   <header>
         <?php include 'components/nav.php';?>
   </header>

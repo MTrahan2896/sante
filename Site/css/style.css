@@ -18,6 +18,10 @@ footer.page-footer{
 	color: black;
 }
 
+.ng-cloak { display: none !important; }
+.mr{
+  margin-right: 35px;
+}
 
   body {
     display: flex;

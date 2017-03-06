@@ -1,5 +1,8 @@
 <?php
 include_once 'connexion_bd.php';
+if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
 if(isset($_POST['nom_user']) and isset($_POST['password'])){
 $x = $_POST['nom_user'];
 $y = $_POST['password'];

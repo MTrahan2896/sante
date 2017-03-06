@@ -2,8 +2,17 @@
 	include_once 'connexion_bd.php';
 	include_once 'queryfunctions.php';
 	$mysqli = connexion();
+
+	if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
 	
-	echo "ASFSAKFASOFK";
+		if(isset($_SESSION['admin'])){
+    if ($_SESSION['admin'] == '0'){
+     header('Location: accueil.php');
+    }
+
+	}else{ header('Location: accueil.php');};
 
 
 	session_start();

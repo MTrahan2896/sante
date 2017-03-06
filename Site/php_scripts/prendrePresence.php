@@ -3,6 +3,17 @@
 	include_once 'formater_champ.php';
 	$activite_prevue=$_POST['ACTIVITE'];
 	$eleves_presents = $_POST['PRESENTS'];
+
+	if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+
+		if(isset($_SESSION['admin'])){
+    if ($_SESSION['admin'] == '0'){
+     header('Location: accueil.php');
+    }
+
+	}else{ header('Location: accueil.php');};
 	
 	$query = "update utilisateur_activites set present=0 where ID_Activite_Prevue = ".$activite_prevue;
 

@@ -15,7 +15,7 @@ if(isset($_SESSION['admin'])){
   <head>
     <?php include 'components/headContent.php';?>
   </head>
-  <body>
+  <body class="ng-cloak">
     
     <header>
       <?php include 'components/nav.php';?>
@@ -450,14 +450,9 @@ if(isset($_SESSION['admin'])){
 
 
 
-<?php
 
 
 
-if (isset($_SESSION['admin']))
-echo ' <script>window.onload = function(){ if('.$_SESSION['admin'].'){$(".adminTabs").remove()}}</script>';
-//INVERSE
-?>
 </div>
 
 

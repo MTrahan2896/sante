@@ -64,7 +64,7 @@
 
         $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where responsable = '.$_SESSION['uid'].' and hidden=false or hidden is null order by presences_prises, date_activite ')?>;
 
-        console.log($scope.activites);
+        
         try {
             $scope.ensemble = <?php echo phpSelectQuery('select id_groupe, nom_groupe, id_prof, ensemble, nom_session, groupes.id_session from groupes, sessions where groupes.id_session = sessions.id_session and groupes.id_groupe in (select id_groupe from utilisateurs where id_utilisateur = '.$_SESSION['uid'].') order by nom_groupe ASC')?> [0].ensemble;
         } catch (err) {
@@ -85,7 +85,7 @@
         }
 
 
-        console.log($scope.ensemble);
+        
 
         $scope.dateToString = function(_date) {
 
@@ -113,7 +113,7 @@
                         'heure': $('#heure_deb').val()
                     },
                     success: function(data) {
-                        console.log(data);
+                        
                         if (data == "Vous avez quitté l'activité avec succès") {
                             location.reload();
                         }
@@ -124,13 +124,13 @@
                 });
 
             } else {
-                console.log(activite.ID_Eleve_Activite);
+                
             }
         }
 
 
         $scope.show_params = function(activite) {
-            console.log(activite);
+            
             $('#modal_mod_planif').modal('open');
 
             $('#ID_ACT_PLAN').val(activite.ID_activite_prevue);
@@ -185,7 +185,7 @@
                 return ac.ID_Activite_Prevue == activite;
             }));
 
-            console.log(liste_el_ac + " POUR ACTIVITE " + activite);
+            
             var listeId = liste_el_ac.map(function(a) {
                 return a.ID_Utilisateur;
             });
