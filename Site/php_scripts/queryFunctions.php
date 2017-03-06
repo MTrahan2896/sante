@@ -25,9 +25,9 @@ include_once 'formater_champ.php';
     $mysqli = connexion();
 	$myArray = array();
 	if ($result = $mysqli->query($query)) {
-	
 	$mysqli->close();
 	}
+	
 }
 
 	function phpSelectReturnSingleName($query){
