@@ -2,24 +2,27 @@
 
 
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo center" style="bottom: 0px !important;"><span class="hide-on-med-and-up"> <img style="margin-bottom: -18px !important; margin-left: -56px" src="image/logo.png" width="56" height="56"> </span>Défi Santé</a>
+        <a href="accueil.php" class="brand-logo center" style="bottom: 0px !important;"><span class="hide-on-med-and-up"> <img href="accueil.php" style="margin-bottom: -18px !important; margin-left: -56px" src="image/logo.png" width="56" height="56"> </span>Défi Santé</a>
 
 
        <ul id="nav-mobile" class="left hide-on-med-and-down" style="margin-left: 10px">
-          <li><a href="accueil.php"><img src="image/logo.png" width="64" height="64"></a></li>
+          <li><a href="accueil.php"><img src="image/logo.png" href="accueil.php" width="64" height="64"></a></li>
 
           <?php
           if(isset($_SESSION['admin'] )){
            if($_SESSION['admin'] != 0){?>
           
           <li><a class="adminTabs" href="administration.php">Administration</a></li>
+           <li><a href="stats.php">Statistiques</a></li>
           <?php }}?>
 
 
           
-          <li><a href="stats.php">Statistiques</a></li>
+         
+             <?php  if(isset($_SESSION['uid'] )){
+           if($_SESSION['uid'] != 0){?>
           <li><a href="profil.php">Profil et Inscriptions</a></li>
-
+           <?php }}?>
           
         </ul>
         
@@ -76,7 +79,7 @@
       <li><a class="btn-floating  waves-effect waves-light blue" href="accueil.php"><i class="material-icons">home</i></a></li>
       <li><a ng-show="<?=$_SESSION['uid']?> != 0" class="btn-floating  waves-effect waves-light blue" href="profil.php"><i class="material-icons">person</i></a></li>
       <li><a ng-show="<?=$_SESSION['admin']?> > 1" class="btn-floating  waves-effect waves-light blue" href="administration.php"><i class="material-icons">supervisor_account</i>Profil</a></li>
-      <li><a ng-show="<?=$_SESSION['admin']?> > 1" class="btn-floating blue waves-effect waves-light" href="statistiques.php"><i class="material-icons">assessment</i></a></li>
+      <li><a ng-show="<?=$_SESSION['admin']?> > 1" class="btn-floating blue waves-effect waves-light" href="stats.php"><i class="material-icons">assessment</i></a></li>
       <li><a ng-show="<?=$_SESSION['uid']?> != 0" class="btn-floating blue waves-effect waves-light" onclick="deconnexion()" ><i class="material-icons">exit_to_app</i></a></li>
       <li><a ng-show="<?=$_SESSION['uid']?> == 0" class="btn-floating blue waves-effect waves-light" data-target="modal_login" ><i class="material-icons">account_circle</i></a></li>
       
