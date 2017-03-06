@@ -42,8 +42,16 @@ function validateEmail(email) {
 }
 
 function validateTelephone(tel){
+    
+    if($("#telephone").val() == "")
+    {
+      return true;
+    }  
+    else
+    {
     var re = /^\(\d{3}\)\s{0,1}\d{3}-\d{4}$/
     return re.test(tel);
+    }
 }
 
 function validateNomPrenom(nom,prenom){
@@ -55,7 +63,15 @@ function validateUsername(username){
 }
 
 function validatePassword(pass){
-    return (!hasWhiteSpace(pass));
+    
+    if(hasWhiteSpace(pass))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
 }
 
 

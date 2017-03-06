@@ -63,9 +63,5 @@
     </div>
   </div>
 </div>
-<script>
-  <script src="js/verifstring.js"></script>
-
-<script>
-	
+<script src="js/verifstring.js"></script>	
 </script>
