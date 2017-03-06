@@ -45,12 +45,12 @@ session_start();
           <div class="row">
             <div class="input-field col s6 l4">
               <input id="prenom_user" name="prenom_user" type="text" class="validate" maxlength="50">
-              <label for="prenom_user">Prénom</label>
+              <label for="prenom_user">Prénom *</label>
             </div>
 
             <div class="input-field col s6 l4">
               <input id="nom" name="nom" type="text" class="validate" maxlength="50">
-              <label for="nom">Nom</label>
+              <label for="nom">Nom *</label>
             </div>
           </div>
 
@@ -58,7 +58,7 @@ session_start();
           <div class="row">
             <div class="input-field col s12 l5">
               <input id="email" name="email" type="email" class="validate" maxlength="75">
-              <label for="email">Courriel</label>
+              <label for="email">Courriel *</label>
             </div>
          
             <div class="input-field col s6 l3">

@@ -41,7 +41,7 @@ function obtenir_info($id)
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       
-      if (is_null($row['ID_Groupe']))
+      if ($row['ID_Groupe'] == 0)
       {
         echo "<script>$('#section_type_utilisateur').show();</script>";
       }
