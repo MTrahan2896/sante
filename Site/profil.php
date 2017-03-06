@@ -45,12 +45,12 @@ session_start();
           <div class="row">
             <div class="input-field col s6 l4">
               <input id="prenom_user" name="prenom_user" type="text" class="validate" maxlength="50">
-              <label for="prenom_user">Prénom</label>
+              <label for="prenom_user">Prénom *</label>
             </div>
 
             <div class="input-field col s6 l4">
               <input id="nom" name="nom" type="text" class="validate" maxlength="50">
-              <label for="nom">Nom</label>
+              <label for="nom">Nom *</label>
             </div>
           </div>
 
@@ -58,11 +58,11 @@ session_start();
           <div class="row">
             <div class="input-field col s12 l5">
               <input id="email" name="email" type="email" class="validate" maxlength="75">
-              <label for="email">Courriel</label>
+              <label for="email">Courriel *</label>
             </div>
          
             <div class="input-field col s6 l3">
-              <input id="tel" name="tel" type="tel" class="validate" maxlength="10">
+              <input id="tel" name="tel" type="text" class="validate" maxlength="14">
               <label for="tel">Téléphone</label>
             </div>
           </div>
@@ -340,6 +340,14 @@ else
 <script type="text/javascript" src="js/gcal.js"></script>
 <script type="text/javascript" src="js/sc-date-time.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/inputmask/dist/inputmask/inputmask.js"></script>
+<script src="js/inputmask/dist/inputmask/jquery.inputmask.js"></script>
+<script src="js/inputmask/dist/inputmask/inputmask.???.Extensions.js"></script>
+<script>
+	 var selector = document.getElementById("tel");
+	 Inputmask({"mask": "(999) 999-9999", showMaskOnHover: false }).mask(selector);
+</script>
+
  <?php include 'js/ScriptsProfil.php'; ?>
 
 

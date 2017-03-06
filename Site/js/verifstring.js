@@ -18,7 +18,8 @@ function onlyCaracter(e){
 }
 
 function hasWhiteSpace(s) {
-  return /\s/g.test(s);
+ let re = new RegExp("\\s", "g")
+  return re.test(s);
 }
 
 function verif_caracter(s){
