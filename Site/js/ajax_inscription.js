@@ -55,7 +55,7 @@ function validateUsername(username){
 }
 
 function validatePassword(pass){
-    return (hasWhiteSpace(pass));
+    return (!hasWhiteSpace(pass));
 }
 
 
