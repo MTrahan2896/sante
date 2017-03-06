@@ -10,7 +10,7 @@
 				Prenom = '".formater($_POST['prenom'])."',
 				Nom = '".formater($_POST['nom'])."',
 				Courriel = '".formater($_POST['courriel'])."',
-				Telephone = ".$_POST['telephone'].",
+				Telephone = '".$_POST['telephone']."',
 				Sexe = '".$_POST['sexe']."'";
 
 		$query = "select * from utilisateurs where id_utilisateur =".$id;
