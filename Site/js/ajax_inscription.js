@@ -29,10 +29,10 @@ function valider(){
                        }
                     })
                 }else alert("le mot de passe ne peut contenir un espace");
-             }else alert("telephone non conforme ex: (819) 597-5423");
+             }else alert("Téléphone non conforme ex: (819) 597-5423");
             }else alert("Couriel non conforme ex: exemple@hotmail.com"); 
-        }else alert("votre nom d'utilisateur ne peut contenir des caractères spéciaux");
-    }else alert("votre nom et prénom ne peut contenir des caractères spéciaux");
+        }else alert("Votre nom d'utilisateur ne peut contenir des caractères spéciaux");
+    }else alert("Votre nom et prénom ne peut contenir des caractères spéciaux");
 }
 
 
@@ -43,7 +43,7 @@ function validateEmail(email) {
 
 function validateTelephone(tel){
     
-    if($("#telephone").val() == "")
+    if(tel == "")
     {
       return true;
     }  
@@ -53,13 +53,29 @@ function validateTelephone(tel){
     return re.test(tel);
     }
 }
-
+//192 252
 function validateNomPrenom(nom,prenom){
- return (hasWhiteSpace(nom) ||hasWhiteSpace(prenom)||verif_caracter_tiret(nom)||verif_caracter_tiret(prenom));
+ 
+ if(hasWhiteSpace(nom) ||hasWhiteSpace(prenom)||verif_caracter_tiret(nom)||verif_caracter_tiret(prenom))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
 }
 
 function validateUsername(username){
- return (hasWhiteSpace(username) || verif_caracter_underscore(username));
+    if(hasWhiteSpace(username) || verif_caracter_underscore(username))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+
 }
 
 function validatePassword(pass){

@@ -86,21 +86,21 @@
       <li>
           <div class="center" >
              <h4>Bienvenue</h4>
-             <h5 class="light black-text text-lighten-3">Les Inscriptions pour le grand défi Pierre Lavoie se termine bientot </h5>
+             <h5 class="light black-text text-lighten-3">Les Inscriptions pour le Grand défi Pierre Lavoie sont bientôt finies </h5>
              <img src="image/defi_pierre.png" style="height:192px;width:627px;" > 
         </div>
       </li>
       <li>
           <div class="center">
               <h4>Badminton</h4>
-          <h5 class="light black-text text-lighten-3">Inscrivez-vous à nos activités de badminton les mardi et jeudi midis</h5>
+          <h5 class="light black-text text-lighten-3">Inscrivez-vous à nos activités de badminton les mardis et jeudis</h5>
         <img src="image/badminton.jpg" style="height:400px;width:720px;" > 
 
         </div>
       </li>
       <li>
           <div class ="center">
-              <h4>volleyball</h4>
+              <h4>Volleyball</h4>
           <h5 class="light black-text text-lighten-3">Inscrivez-vous en grand nombre</h5>
         <img src="image/volleyball.jpg" style="height:400px;width:720px;"> 
 

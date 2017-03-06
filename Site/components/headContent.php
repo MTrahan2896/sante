@@ -15,6 +15,3 @@
   include_once 'php_scripts/connexion_bd.php';
   include_once 'php_scripts/formater_champ.php';
   ?>
-
-
-

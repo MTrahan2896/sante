@@ -27,7 +27,7 @@
 
 
           <?php 
-            include_once 'php_scripts/connexion_bd.php';
+    include_once 'php_scripts/connexion_bd.php';
      $mysqli = connexion();  
      $conn = connexion();
           include('components/carousel_accueil.php'); 
@@ -44,14 +44,14 @@
                               FROM activites a, activites_prevues ap 
                               left join utilisateur_activites ua on ua.ID_activite_prevue = ap.ID_activite_prevue
                               where a.ID_Activite = ap.ID_Activite
-                              and ID_Activite = ".$_POST['id_activite']."
+                              and ap.ID_Activite_prevue = ".$_POST['id_activite']."
                               group by ap.ID_activite_prevue";
                     $result = $mysqli->query($query);
                     if ($result->num_rows > 0) {
                         $i = 1;
                         
                         while($row = $result->fetch_assoc()) {
-                            if($row['participant_max'] != 0 and $row['participant']>=$row['participant_max']){
+                            if($row['Participants_Max'] != 0 and $row['participant']>=$row['Participants_Max']){
                                 $insert = false;
                                 break;
                             }
@@ -64,7 +64,7 @@
                   
                       if ($conn->query($sql) === TRUE) {
                           echo "<script>
-                              alert('Inscription à l\'activité complété');
+                              alert('Inscription à l\'activité réussie');
                           </script>";
                       } else {
                           echo "Error: " . $sql . "<br>" . $conn->error;
@@ -78,7 +78,7 @@
                   
                       if ($conn->query($sql) === TRUE) {
                           echo "<script>
-                              alert('Vous êtes Maintenant sur la liste d'attente);
+                              alert('Vous êtes inscrit sur la liste d'attente);
                           </script>";
                       } else {
                           echo "Error: " . $sql . "<br>" . $conn->error;
@@ -438,7 +438,7 @@
                     }
                     
                 }else {
-                    $('#divSub').html("Vous devez être connectée pour vous inscrire aux activitées");
+                    $('#divSub').html("Vous devez être connecté pour vous inscrire aux activités");
                 }
             }
             })

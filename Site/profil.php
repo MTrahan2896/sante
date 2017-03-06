@@ -10,7 +10,7 @@ session_start();
 </head>
 
 <?php include 'php_scripts/afficher_info_user.php'; ?>
-<body>
+<body class="ng-cloak">
   <header>
         <?php include 'components/nav.php';?>
   </header>
@@ -62,7 +62,7 @@ session_start();
             </div>
          
             <div class="input-field col s6 l3">
-              <input id="tel" name="tel" type="tel" class="validate" maxlength="10">
+              <input id="tel" name="tel" type="text" class="validate" maxlength="14">
               <label for="tel">Téléphone</label>
             </div>
           </div>
@@ -340,6 +340,14 @@ else
 <script type="text/javascript" src="js/gcal.js"></script>
 <script type="text/javascript" src="js/sc-date-time.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/inputmask/dist/inputmask/inputmask.js"></script>
+<script src="js/inputmask/dist/inputmask/jquery.inputmask.js"></script>
+<script src="js/inputmask/dist/inputmask/inputmask.???.Extensions.js"></script>
+<script>
+	 var selector = document.getElementById("tel");
+	 Inputmask({"mask": "(999) 999-9999", showMaskOnHover: false }).mask(selector);
+</script>
+
  <?php include 'js/ScriptsProfil.php'; ?>
 
 

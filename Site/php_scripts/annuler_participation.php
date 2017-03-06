@@ -1,5 +1,11 @@
 <?php
 include_once 'queryFunctions.php';
+if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+            
+if(isset($_SESSION['uid'])){
+}else{ header('Location: accueil.php');};
 
 date_default_timezone_set('America/Montreal');
 $temps_courrant = date("H:i",time()); 

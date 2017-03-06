@@ -3,6 +3,17 @@ include_once 'connexion_bd.php';
 include_once 'formater_champ.php';
 include_once 'queryFunctions.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            }
+
+	if(isset($_SESSION['admin'])){
+    if ($_SESSION['admin'] == '0'){
+     header('Location: accueil.php');
+    }
+
+	}else{ header('Location: accueil.php');};
+
 date_default_timezone_set('America/Montreal');
 
 function is_in_session($query){
