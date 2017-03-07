@@ -251,7 +251,7 @@
           <label for="qt_code">Nombre de codes</label>
           <input type="number" name="qt_code" id="codeGroupe" min="1" max="60" ng-min="1" ng-max="60" validate>
         </div>
-        <button type="button" class="btn" ng-click="genererCodePourGroupe(codeGroupe)">Générer</button>
+        <button type="button" class="btn green" ng-click="genererCodePourGroupe(codeGroupe)">Générer</button>
       </div>
     </div>
   </div>

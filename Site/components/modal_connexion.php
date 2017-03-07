@@ -51,10 +51,10 @@
               <label for="pwd">Mot de passe</label>
             </div>
             <div class="col s12 l12" style="margin-top:15px">
-              <button class="btn waves-effect waves-light col s12 l12" onclick="post_connexion()" name="connexion" id="connexion" type="button">Connexion</button>
+              <button class="btn green waves-effect waves-light col s12 l12" onclick="post_connexion()" name="connexion" id="connexion" type="button">Connexion</button>
             </div>
             <div class="col s12 l12" style="margin-top:15px">
-              <button class="btn waves-effect waves-light col s12 l12" type="button" onclick="Close_Open_Modal('#modal_login','#modal_code')">Inscription</button>
+              <button class="btn green waves-effect waves-light col s12 l12" type="button" onclick="Close_Open_Modal('#modal_login','#modal_code')">Inscription</button>
             </div>
           </div>
         </form>

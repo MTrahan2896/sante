@@ -14,7 +14,7 @@
             </div>
             
             <div class="col s12" style="margin-top:15px">
-              <button class="btn waves-effect waves-light col s12 l12" type="button" onclick="confirmerCode()" name="code_confirm">Confirmer le code</button>
+              <button class="btn green waves-effect waves-light col s12 l12" type="button" onclick="confirmerCode()" name="code_confirm">Confirmer le code</button>
             </div>
           </div>
         </form>
