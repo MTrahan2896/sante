@@ -93,15 +93,11 @@ include_once 'php_scripts/afficher_info_user.php';
         <label for="confpass">Confirmer le mot de passe*</label>
       </div>
     </div>
-    <div class="row">
-      <div class="col s12 l12">
-      <button type="button" class="btn green" href="" onclick="valider()" style="width:100%">Enregistrer</a>
+    <div class="center">
+      <button type="button" class="btn green" href="" onclick="valider()" >Enregistrer</button>
+      
+      <button type="button" class="btn red" href="" onclick="$('#modal_ins').modal('close')">Annuler</button>
     </div>
-    <div class="col s12 l12" style="height:15px"></div>
-    <div class="col s12 l12">
-      <button type="button" class="btn red" href="" onclick="" style="width:100%">Annuler</button>
-    </div>
-  </div>
 </div>
 
 </div>

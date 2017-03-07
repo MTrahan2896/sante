@@ -49,7 +49,7 @@ button{
     { 
       background-color: white !important;
       bottom: 35%;
-      width: 300px;
+      width: 360px;
     }
 
      #modal_code /* Modal de code d'accès */
@@ -68,7 +68,7 @@ button{
 
    #modal_login /* Modal de connexion */
     {
-      height: 525px;
+      height: 550px;
     }
 
     #modal_login .modal-content
@@ -212,12 +212,7 @@ height: 45px;
 #li_activite .collapsible-body .row label
 {
   color:black;
-}
-
-
- 
-  
-        
+}       
 
   @media screen and (max-width: 799px) {
     .slider .slides li img {
@@ -244,3 +239,6 @@ height: 45px;
 
 
 
+.btn{
+  width: 275px !important; height: 30px !important!; margin-top: 10px !important;
+}
