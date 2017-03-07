@@ -1,13 +1,13 @@
 
-        .fc-event{
-             cursor: pointer;
-        }           
-        .fc-day-grid-event > .fc-content {
-             white-space: normal;
-        }
-        .modalinsact{
+.fc-event{
+ cursor: pointer;
+}           
+.fc-day-grid-event > .fc-content {
+white-space: normal;
+}
+.modalinsact{
             bottom:20% !important;
-        }
+}
 
 nav{
 	background-color:#71C0E5 !important:;
@@ -47,35 +47,38 @@ button{
    
     .modal 
     { 
+      background-color: white !important;
       bottom: 35%;
-      
+      width: 300px;
     }
 
-     #modal_code /* Modal de connexion */
+     #modal_code /* Modal de code d'accès */
     {
-      height: 10px;
-      width: 20%;
-      padding-bottom: 0px;
+      height: 400px;    
     }
 
     #modal_ins /* Modal d'inscription */
     {
+      width: 400px;
       bottom: 20%;
       height: 100% !important;
       max-height: 92%;
-      width: 25%;
-     bottom: 10%;
+      bottom: 10%;
     }
 
    #modal_login /* Modal de connexion */
     {
-      width: 25%;
-      height: 52%;
+      height: 525px;
+    }
+
+    #modal_login .modal-content
+    {
+      padding-bottom: 0px;
+      height: 100%;
     }
 
     #modal_planif /* Modal de planification d'activité */
     {
-      width:25%;
       height: 60%;
     }
 
@@ -103,51 +106,21 @@ button{
     }
   }
 
- 
-  
-        
-
-  @media screen and (max-width: 480px) {
-    .slider .slides li img {
-                width:294px !important;
-                background-color: #fff;
-                height:200px !important;
-
-            background-size:100% auto;
-            background-repeat: no-repeat;
-
-   }
-        .slider .slides {
-             background-color: transparent;
-             margin: 0;
-             height:300px !important;
-
-            }
-  .slider{
-    height:360px !important;
-  }
-        
-
-}
-
-
-
-
-
-
 /* CSS sur petits écrans (mobiles) */
 @media screen and (max-width: 699px) 
 {
 
     .modal 
     { 
-      margin-left:0% !important;
-      margin-right:10%;
+    
+      width: 90% !important;
+      margin-left: 5% !important;
+      margin-right: 5% !important;
     }
 
     #modal_code /* Modal de connexion */
     {
-      height: 55%;
+      height: 350px;
       overflow-y: hidden !important ; /* Enlève la scroll bar */
     }
 
@@ -159,12 +132,19 @@ button{
 
     #modal_login
     {
-      height: 75%;
-      max-height: 90%;
+      height: 500px;
+      width:90%;
+      max-height: 80%;
       overflow-y: hidden !important ; /* Enlève la scroll bar */
 
     }
+  
+    #modal_login .modal-content
+    {
+      padding-bottom: 0px;
+      height: 100%;
 
+    }
 
     #modal_planif
     {
@@ -225,13 +205,6 @@ height: 45px;
 
 }
 
-.modal /* Modal de création d'activité */
-    {
-      width: 360px !important;
-      height: 90% !important;
-      background-color: white !important;      
-    }
-
 #li_activite .collapsible-body .row input
 {
   color:darkgrey;
@@ -240,3 +213,34 @@ height: 45px;
 {
   color:black;
 }
+
+
+ 
+  
+        
+
+  @media screen and (max-width: 799px) {
+    .slider .slides li img {
+                width:294px !important;
+                background-color: #fff;
+                height:200px !important;
+
+            background-size:100% auto;
+            background-repeat: no-repeat;
+
+   }
+        .slider .slides {
+             background-color: transparent;
+             margin: 0;
+             height:300px !important;
+
+            }
+  .slider{
+    height:360px !important;
+  }
+        
+
+}
+
+
+

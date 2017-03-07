@@ -227,7 +227,7 @@
       <script src="js/moment.js">moment.locale="fr"</script>
 	  
      
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="js/materialize.js"></script>
 		
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
          <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
@@ -469,7 +469,7 @@
 
 
 
-<script type="text/javascript" src="js/materialize.js"></script>
+
 <script src="js/empty_app.js"></script>
 
 

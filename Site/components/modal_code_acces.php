@@ -37,23 +37,20 @@
             data: {'code': $("#code_acces").val()}, 
             success: function (data) {
                   if(data != "fail"){
-                console.log("DATA: "+data);
-                     if (data=='Groupe'){
-                    $('#nePasAfficher').attr('hidden','true');
-                    $('#modal_code').modal('close');
-                    $('#modal_ins').modal('open');
-                  }else if (data == 'SansGroupe'){
-                    $('#nePasAfficher').removeAttr('hidden');
-                    $('#modal_code').modal('close');
-                    $('#modal_ins').modal('open');
-                  
-                  }else alert("Code Invalide");
-                  };
-
-               
-                 
-                 
-                
+                    if (data=='Groupe'){
+                      $('#nePasAfficher').attr('hidden','true');
+                      $('#modal_code').modal('close');
+                      $('#modal_ins').modal('open');
+                    }
+                    else if (data == 'SansGroupe'){
+                      $('#nePasAfficher').removeAttr('hidden');
+                      $('#modal_code').modal('close');
+                      $('#modal_ins').modal('open');
+                    }
+                    else{
+                      alert("Code d'accès invalide");
+                    }
+                  }else{alert("Code d'accès invalide")};   
         },
             error: function (req) {
                 alert("erreur");

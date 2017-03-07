@@ -29,5 +29,5 @@ else
 		$query = "delete from utilisateur_activites where ID_Eleve_Activite = {$_POST['id_act_utilisateur']}";
 		phpQuery($query);
 		echo "Vous avez quitté l'activité avec succès";
-}
+	}
 ?>
