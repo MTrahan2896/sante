@@ -203,7 +203,7 @@
                         }
                     }
                     echo "];
-                    
+
                     </script>";
 
                     
@@ -367,7 +367,7 @@
                     
                     var date = event.start.toISOString().substring(0,event.start.toISOString().indexOf("T")).replace(new RegExp('/', 'g'), '-');
                     
-                    var temps = event.start.toISOString().substring(event.start.toISOString().indexOf("T")+1,16);
+                    var temps = event.start.toISOString().substring(event.start.toISOString().indexOf("T")+1,19);
                    
                     
                     
@@ -413,7 +413,7 @@
                             
                             if(activite_inscrit[i][1] == date ){                               
                                 var debut = activite_inscrit[i][2];
-                                var fin = addMinutes(activite_inscrit[i][2],activite_inscrit[i][3]);                                
+                                var fin = addMinutes(activite_inscrit[i][2],activite_inscrit[i][3]);                             
                                 if(debut <= temps && fin >=temps ){
                                     conflit = true;
                                     break;
@@ -438,8 +438,8 @@
                     }else if(conflit){
                         $('#divSub').html("Vous êtes inscrit à une activitée ayant un conflit d'horaire avec celle-cì");
                     }else if(event.participant_max != 0 && event.participant >= event.participant_max){
-                        //$('#divSub').html("Le nombre de participant maximum est atteint");
-                        $('#divSub').html("<button class='btn green col l12' name='Sub_Liste_attente' id='Sub_liste_Attente' type='submit' form='inscAct'>Rejoindre la liste d'attente</button>");
+                        $('#divSub').html("Le nombre de participant maximum est atteint");
+                        //$('#divSub').html("<button class='btn green col l12' name='Sub_Liste_attente' id='Sub_liste_Attente' type='submit' form='inscAct'>Rejoindre la liste d'attente</button>");
 
                     }else{
                         $('#divSub').html("<button class='btn green col l12' name='SubInsAct' id='SubInsAct' type='submit' form='inscAct'>S'inscrire</button>");
