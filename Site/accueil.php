@@ -207,7 +207,7 @@
                         }
                     }
                     echo "];
-                    console.log(activite_inscrit);
+
                     </script>";
 
                     
