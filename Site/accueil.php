@@ -39,7 +39,20 @@
                       if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                       } 
+
                       $insert = true;
+                      $query = "SELECT ap.ID_Activite_prevue
+                              FROM  activites_prevues ap, utilisateur_activites ua 
+                              where ap.ID_activite_prevue = ua.ID_activite_prevue
+                              and ap.ID_Activite_prevue = ".$_POST['id_activite']." 
+                              and ua.id_utilisateur = ".$_SESSION['uid'];
+                    $result = $mysqli->query($query);
+                    if ($result->num_rows > 0) {
+                        $i = 1;
+                                $insert = false;
+                            }
+                            
+                        
                       $query = "SELECT ap.ID_Activite_prevue, count(ua.ID_Eleve_Activite) as participant, ap.Participants_Max
                               FROM activites a, activites_prevues ap 
                               left join utilisateur_activites ua on ua.ID_activite_prevue = ap.ID_activite_prevue
