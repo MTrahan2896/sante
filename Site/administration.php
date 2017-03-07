@@ -102,7 +102,7 @@ if(isset($_SESSION['admin'])){
                   <thead><tr><th>Nom </th><th class="center">Nombre de points</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
-                    <td class="center">{{eleve.nom}}, {{eleve.prenom}}</td><td class="center">{{pointsEnsemble2(eleve.id_utilisateur)}}/5</td>
+                    <td>{{eleve.nom}}, {{eleve.prenom}}</td><td class="center">{{pointsEnsemble2(eleve.id_utilisateur)}}/5</td>
                     
                   </div>
                 </tr>
@@ -111,7 +111,7 @@ if(isset($_SESSION['admin'])){
 
 
                 <table class="striped" align="center" ng-show="groupe.ensemble == 3"><!--Ensemble 3 -->
-                  <thead><tr><th>Nom </th><th class="center">Début</th><th>Fin</th><th class="center">Bonus</th><th class="center">Total</th></tr></thead>
+                  <thead><tr><th>Nom </th><th class="center">Début</th><th class="center">Fin</th><th class="center">Bonus</th><th class="center">Total</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
@@ -122,12 +122,12 @@ if(isset($_SESSION['admin'])){
               </table>
               </div>
               <div class="row" style="text-align: center">
-              <button data-target="modalGenGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class=" green btn" >Générer des codes d'accès</button></div>
+              <button data-target="modalGenGroupe" ng-click="setGroupe(groupe.id_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class=" green btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalGroupe{{groupe.id_groupe}}" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn  green modal-trigger">Afficher les codes d'accès</button>
+                <button ng-click="setGroupe(groupe.id_groupe)" data-target="modalGroupe" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn  green modal-trigger">Afficher les codes d'accès</button>
               </div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalPromotion" ng-click="setPromotionId(groupe.id_groupe)" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir un responsable</button>
+                <button data-target="modalPromotion" onclick="" ng-click="setPromotionId(groupe.id_groupe)" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir</button>
               </div>
               <div class="row"  style="text-align: center">
                 <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
@@ -147,8 +147,16 @@ if(isset($_SESSION['admin'])){
                 <span class="new badge blue right hide-on-small-only" data-badge-caption="">{{utilisateursSansGroupes.length}} Utilisateur<span ng-show="utilisateursSansGroupes.length>1">s</span></span>
               </div>
               <div class="collapsible-body collapsibleWithButton">
-  
-              <table class="striped" align="center">
+              
+                <div ng-show="elevesDansGroupe(groupe.id_groupe).length == 0"> 
+                <br>  
+                <div class="center">  
+                <b>Aucun élève sans groupe inscrit pour l'instant</b>
+                </div>
+                </div>
+
+
+              <table class="striped" align="center" ng-show="utilisateursSansGroupes.length > 0">
               <thead> <th>Utilisateurs</th></thead>
                     <tr ng-repeat="eleve in utilisateursSansGroupes"><td> {{eleve.Nom}}, {{eleve.Prenom}}</td></tr>
               </table>
@@ -159,7 +167,7 @@ if(isset($_SESSION['admin'])){
                 <button data-target="modalGroupe0" style="margin-bottom: 15px !important" class="btn green modal-trigger">Afficher les codes d'accès</button>
               </div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalPromotion" ng-click="setPromotionId()" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir un responsable</button>
+                <button data-target="modalPromotion" ng-click="setPromotionId()" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir</button>
               </div>
 
               </div>
@@ -195,7 +203,7 @@ if(isset($_SESSION['admin'])){
             <li ng-repeat="activite in activites_prevues" class="coll_act_prev" ng-show="!(activite.presences_prises > 0 && masquerPresence) && !(toDate(activite.Date_Activite) < now && masquerPasse) ">
             <!-- ANGULAR REPEAT -->
             <div class="collapsible-header">
-              <i class="material-icons">directions_bike</i>{{activiteFromId(activite.ID_Activite).Nom_Activite}} le {{activite.Date_Activite}} à {{activite.Heure_debut}}
+              <i class="material-icons">directions_bike</i>{{activiteFromId(activite.ID_Activite).Nom_Activite}} le {{activite.Date_Activite}} à {{formatHeure(activite.Heure_debut)}}
                 
               <span class=" hide-on-small-only new badge green right" data-badge-caption="">{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}</span>
               <i class=" hide-on-small-only material-icons right" ng-show="activite.presences_prises > 0">playlist_add_check</i>
@@ -203,13 +211,14 @@ if(isset($_SESSION['admin'])){
 
               
             </div>
-            <div class="collapsible-body collapsibleWithButton container">
+            <div class="collapsible-body collapsibleWithButton ">
               <div class="center" >
               
-              <i class=" hide-on-med-and-up material-icons " style="margin-right: 30px !important" ng-show="activite.presences_prises > 0" >playlist_add_check</i>
-              <i class=" hide-on-med-and-up material-icons " style="margin-left: 30px !important" ng-click="show_params(activite)">settings</i><br> <br>  
+              <i class=" hide-on-med-and-up material-icons " ng-show="activite.presences_prises > 0" >playlist_add_check</i><br>
+              <br> <br>  
               <br>
             </div>
+            <div class="container">
               <table>
                 <b>Responsable: </b>{{eleveFromId(activite.responsable).nom}}, {{eleveFromId(activite.responsable).prenom}}
                 <br>  
@@ -237,11 +246,13 @@ if(isset($_SESSION['admin'])){
                </table>   
               
             </table>
+</div>
             <div style="text-align: center">
-              <div class="row" style="margin-bottom: 0px">
-                <button type="button" data-target="modalPresence{{activite.ID_activite_prevue}}" class="btn l6 green s12 waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px"><span ng-show="activite.presences_prises > 0">Re</span>Prendre les présences</button>
-                <button ng-click="annulerActivite(activite.ID_activite_prevue)" type="button" class="btn l6 s12 red waves-effect waves-light " style="height: 30px; margin-top: 7px; margin-right: 7px">Annuler l'activité</button>
-              </div>
+              
+              <button type="button" class="btn green waves-effect waves-light" style="height: 30px !important" ng-click="show_params(activite)">Modifier</button><br>
+                <button type="button" ng-click="setActSelectionne(activite.ID_activite_prevue)" data-target="modalPresence" class="btn green waves-effect waves-light " style="height: 30px;"><span ng-show="activite.presences_prises > 0">Re</span>Prendre les présences</button><br>
+                <button ng-click="annulerActivite(activite.ID_activite_prevue)" type="button" class="btn red waves-effect waves-light " style="height: 30px;">Annuler l'activité</button>
+              
             </div>
           </div>
           
@@ -377,7 +388,7 @@ if(isset($_SESSION['admin'])){
          <div class="input-field col s12">
            <select required id="mod_nom_act" name="nom_act">
            <option value="">Choisir une activité *</option>
-           <option ng-repeat="activite in liste_activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
+           <option ng-repeat="activite in activites" value={{activite.ID_Activite}}>{{activite.Nom_Activite}}, {{activite.Duree}} minutes</option>
            </select>
            <label class="ACTIVER" for="mod_nom_act">Nom de l'activité *</label> 
          </div>

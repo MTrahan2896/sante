@@ -217,44 +217,45 @@
     </div>
   </div>
 </div>
-<div ng-repeat="groupe in groupes">
-  <div id="modalGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px !important">
+
+  <div id="modalGroupe" class="modal" style="height: 300px !important">
     <div class="modal-content" style="height: 100%; ">
       <div class="entete-modal" style="margin-bottom: 15px; text-align:center;">
-        Code d'accès du groupe "{{groupe.nom_groupe}}"
+        Code d'accès du groupe "{{groupeFromId(codeGroupe).nom_groupe}}"
       </div>
       <div class="contenu-modal">
         <div class="row" >
-          <div ng-repeat="compte in comptesAvecCodeDansGroupe(groupe.id_groupe)">
+          <div ng-repeat="compte in comptesAvecCodeDansGroupe(codeGroupe)">
             {{compte.code_acces}}
           </div>
           <div style="text-align:center;">
-            <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
+            <a class="waves-effect waves-light btn green" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
   
   
 </div>
 
-<div ng-repeat="groupe in groupes">
-  <div id="modalGenGroupe{{groupe.id_groupe}}" class="modal" style="height: 300px">
+
+  <div id="modalGenGroupe" class="modal" style="height: 300px">
     <div class="modal-content" style="text-align: center">
       <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-        Générer des codes d'accès pour le groupe "{{groupe.nom_groupe}}"
+        Générer des codes d'accès pour le groupe "{{groupeFromId(codeGroupe).nom_groupe}}"
       </div>
       <div class="contenu-modal">
+
         <div class="row">
           <label for="qt_code">Nombre de codes</label>
-          <input type="number" name="qt_code" id="codeGroupe{{groupe.id_groupe}}" min="1" max="60" ng-min="1" ng-max="60" validate>
+          <input type="number" name="qt_code" id="codeGroupe" min="1" max="60" ng-min="1" ng-max="60" validate>
         </div>
-        <button type="button" class="btn" ng-click="genererCodePourGroupe(groupe.id_groupe)">Générer</button>
+        <button type="button" class="btn" ng-click="genererCodePourGroupe(codeGroupe)">Générer</button>
       </div>
     </div>
   </div>
-</div>
+
 
 
 
@@ -292,24 +293,24 @@
     </div>
 
 
-<div ng-repeat="activite in activites_prevues">
-  <div id="modalPresence{{activite.ID_activite_prevue}}" class="modal" style="height: 400px; width: 400px" >
+
+  <div id="modalPresence" class="modal" style="height: 400px; width: 400px" >
     <div class="modal-content" style="text-align: center; height: 100%" >
-      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
-        <h5>Liste de présence </h1>
-      </div>
-      <div class="contenu-modal">
-        <div class="row ">
-          <div ng-repeat="eleve in getElevesForActivitePrevue(activite.ID_activite_prevue)" class="row presence">
-            <div class="col s8 field">{{eleve.nom}}, {{eleve.prenom}}</div><div class="field col s2"></div> <input class="field filled-in" checked="checked" type="checkbox" name="presenceActivite{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}"
-            id="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px"><label for="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
-          </div>
-          <button ng-click="enregistrerPresence(activite.ID_activite_prevue)" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Enregistrer</button>
-        </div>
-      </div>
+                                      <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
+                                        <h5>Liste de présence </h1>
+                                      </div>
+                <div class="contenu-modal">
+                  <div class="row ">
+                    <div ng-repeat="eleve in getElevesForActivitePrevue(activiteSelectionne)" class="row presence">
+                      <div class="col s8 field">{{eleve.nom}}, {{eleve.prenom}}</div><div class="field col s2"></div> <input class="field filled-in" checked="checked" type="checkbox" name="presenceActivite{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}"
+                      id="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px"><label for="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
+                    </div>
+                    <button ng-click="enregistrerPresence(activite.ID_activite_prevue)" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Enregistrer</button>
+                  </div>
+                </div>
     </div>
   </div>
-</div>
+
 
 
 
@@ -668,7 +669,7 @@
        <th>Nom</th><th></th>
      </thead>
      <tr ng-repeat="el in groupePromotion">
-      <td>{{el.nom}}, {{el.prenom}}</td><td><i ng-show="el.administrateur >= 1" style="color: green" class="material-icons prefix">verified_user</i><i ng-show="el.administrateur < 1" style="color: black" class="material-icons prefix" ng-click="promoteUser(el.id_utilisateur)">verified_user</i></td>    
+      <td>{{el.nom}}, {{el.prenom}}</td><td><i ng-show="el.administrateur >= 1" ng-click="demoteUser(el.id_utilisateur)" style="color: green" class="material-icons prefix">verified_user</i><i ng-show="el.administrateur < 1" style="color: black" class="material-icons prefix" ng-click="promoteUser(el.id_utilisateur)">verified_user</i></td>    
      </tr>
    </table>
    
@@ -676,7 +677,7 @@
     
     <div class="row">
       <div class="col s12 l12">
-        <a class="btn red" href="" style="width:100%"> Annuler</a>
+        <a class="btn red" href="" style="width:100%" onclick="$('#modalPromotion').modal('close')"> Annuler</a>
       </div>
     </div>
   </div>

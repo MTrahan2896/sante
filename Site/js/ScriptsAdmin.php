@@ -61,7 +61,27 @@
 
         $scope.groupePromotion;
 
+        $scope.codeGroupe = -1;
+
+        $scope.activiteSelectionne = -1;
+
+        $scope.formatHeure = function(heure){
+            return heure.slice(0, -3);
+        }
+
+        $scope.setActSelectionne = function(id){
+            
+            $scope.activiteSelectionne = id;
+            console.log($scope.activiteSelectionne);
+        }
+
+        $scope.setGroupe = function(id){
+                $scope.codeGroupe = id;            
+                console.log($scope.codeGroupe);
+        }
+
         $scope.show_params = function(activite) {
+            console.log(activite.ID_activite_prevue);
             $('#modal_mod_planif').modal('open');
             $('#ID_ACT_PLAN').val(activite.ID_activite_prevue);
             $('#mod_nom_act').val(activite.ID_Activite);
@@ -516,7 +536,7 @@
                 url: "php_scripts/prendrePresence.php",
                 data: {
                     'PRESENTS': values,
-                    'ACTIVITE': activite_prevue
+                    'ACTIVITE': $scope.activiteSelectionne
                 }, //TODO: CHANGE PROF ID
                 success: function(data) {
                     location.reload();
@@ -554,8 +574,8 @@
                 url: "php_scripts/generercode.php",
                 data: {
                     'admin': 0,
-                    'id_groupe': groupe,
-                    'nb_codes': $("#codeGroupe" + groupe).val()
+                    'id_groupe': $scope.codeGroupe,
+                    'nb_codes': $("#codeGroupe").val()
                 },
                 success: function(data) {
 
@@ -623,6 +643,32 @@
                 });
 
         }
+
+        $scope.demoteUser = function(id_user){
+                        if (confirm("Êtes-vous sûr de vouloir rétrograder cet utilisateur?"))
+                $.ajax({
+                    type: "POST",
+                    url: "php_scripts/updateAdmin.php",
+                    data: {
+
+                        'user': id_user,
+                        'admin': 0
+
+
+                    }, //TODO: CHANGE PROF ID
+                    success: function(data) {
+
+                        location.reload();
+
+                    },
+                    error: function(req) {
+                        alert("erreur");
+                    }
+                });
+
+        }
+
+
 
         $scope.creergroupe = function() {
 
