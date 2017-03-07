@@ -101,14 +101,15 @@
         }
 
         $scope.annuler_participation = function(activite) {
+            console.log(activite);
 
-            if (confirm("Voulez-vous réellement annuler votre participation à l'activité: ".concat(activite.nom_activite.concat(" à la date: ".concat(activite.date_activite))))) {
+            if (confirm("Voulez-vous réellement annuler votre participation à l'activité: ".concat(activite.Nom_Activite).concat(" le ").concat(activite.date_activite))) {
 
                 $.ajax({
                     type: "POST",
                     url: "php_scripts/annuler_participation.php",
                     data: {
-                        'id_act_utilisateur': $('#id_act_utilisateur').val(),
+                        'id_act_utilisateur': activite.ID_Eleve_Activite,
                         'date_activite': $('#date_act').val(),
                         'heure': $('#heure_deb').val()
                     },

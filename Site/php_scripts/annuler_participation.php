@@ -1,5 +1,6 @@
 <?php
 include_once 'queryFunctions.php';
+
 if (session_status() == PHP_SESSION_NONE) {
             session_start();
             }
@@ -23,5 +24,10 @@ if($_POST['date_activite'] == date('Y-m-d'))
 		echo "Vous avez quitté l'activité avec succès";
 	}
 }
-
+else
+{
+		$query = "delete from utilisateur_activites where ID_Eleve_Activite = {$_POST['id_act_utilisateur']}";
+		phpQuery($query);
+		echo "Vous avez quitté l'activité avec succès";
+}
 ?>

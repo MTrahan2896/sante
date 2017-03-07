@@ -7,7 +7,7 @@
 
 <html ng-app='empty_app' ng-controller="ctrl">
   <head>
-    <?php include 'components/headContent.php';?>
+    <?php include_once 'components/headContent.php';?>
     <style>
     .remove_margin_bottom{
         margin-bottom: 0px !important;
@@ -30,7 +30,7 @@
     include_once 'php_scripts/connexion_bd.php';
      $mysqli = connexion();  
      $conn = connexion();
-          include('components/carousel_accueil.php'); 
+          include_once('components/carousel_accueil.php'); 
           if(isset($_SESSION['uid']) && $_SESSION['uid'] !=0){
                 if(isset($_POST['SubInsAct'])){
                     // Create connection
@@ -131,17 +131,13 @@
     </select>
     <label>Activité</label>
  	</div>
-	<div id="calendar">
-		
-	</div>
+	<div id="calendar"></div>
 
 	</form>
 </div>
-<!-- Modal Structure -->
-  <div id="modalinsact" class="modal" >
-      <div class="container">
-          
-     
+
+
+ <div id="modalinsact" class="modal" >     
     <div class="modal-content">
         <form id="inscAct" method="POST" action="" hidden>
               <input type="text" class="remove_margin_bottom" id="id_act" name="id_activite" value="">
@@ -217,7 +213,6 @@
     </div>
     
      </div>
-  </div>
 </main>
 
         
@@ -464,7 +459,7 @@
                 var piece = time.split(':');
                 var mins = piece[0]*60 + +piece[1] + +minsToAdd;
                 return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);  
-} 
+                } 
 
             inicalendrier();
         </script>
