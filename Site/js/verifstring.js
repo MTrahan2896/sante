@@ -39,13 +39,13 @@ return x;
 function verif_caracter_underscore(s){
     //verif caracter sans "_"
     var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
-var x = true;
+var x = false;
 for (var i = 0; i < s.length; i++)
 {
   if (iChars.indexOf(s.charAt(i)) != -1)
   {
      
-     x =  false;
+     x =  true;
   }
 }
 return x;

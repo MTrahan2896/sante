@@ -1,5 +1,4 @@
  function transfert_coord_perso(){
-     if(validateNomPrenom($('#nom').val(),$("#prenom_user").val())){
        if(validateEmail($("#email").val())){
         if(validateTelephone($('#tel').val())){
           $.ajax({
@@ -26,7 +25,7 @@
           });
        }else alert("Téléphone non conforme ex: (819) 597-5423");
      }else alert("Couriel non conforme ex: exemple@hotmail.com"); 
-   }else alert("Votre prénom ne peut contenir des caractères spéciaux");
+  
  }
  
 
@@ -45,16 +44,5 @@ function validateTelephone(tel){
     {
     var re = /^\(\d{3}\)\s{0,1}\d{3}-\d{4}$/
     return re.test(tel);
-    }
-}
-function validateNomPrenom(nom,prenom){
- 
- if(hasWhiteSpace(nom) ||hasWhiteSpace(prenom)||verif_caracter_tiret(nom)||verif_caracter_tiret(prenom))
-    {
-      return false;
-    }
-    else
-    {
-      return true;
     }
 }
