@@ -7,7 +7,7 @@
 
 <html ng-app='empty_app' ng-controller="ctrl">
   <head>
-    <?php include 'components/headContent.php';?>
+    <?php include_once 'components/headContent.php';?>
     <style>
     .remove_margin_bottom{
         margin-bottom: 0px !important;
@@ -30,7 +30,7 @@
     include_once 'php_scripts/connexion_bd.php';
      $mysqli = connexion();  
      $conn = connexion();
-          include('components/carousel_accueil.php'); 
+          include_once('components/carousel_accueil.php'); 
           if(isset($_SESSION['uid']) && $_SESSION['uid'] !=0){
                 if(isset($_POST['SubInsAct'])){
                     // Create connection
@@ -131,17 +131,13 @@
     </select>
     <label>Activité</label>
  	</div>
-	<div id="calendar">
-		
-	</div>
+	<div id="calendar"></div>
 
 	</form>
 </div>
-<!-- Modal Structure -->
-  <div id="modalinsact" class="modal" >
-      <div class="container">
-          
-     
+
+
+ <div id="modalinsact" class="modal" >     
     <div class="modal-content">
         <form id="inscAct" method="POST" action="" hidden>
               <input type="text" class="remove_margin_bottom" id="id_act" name="id_activite" value="">
@@ -207,7 +203,7 @@
                         }
                     }
                     echo "];
-                    
+
                     </script>";
 
                     
@@ -217,7 +213,6 @@
     </div>
     
      </div>
-  </div>
 </main>
 
         
@@ -372,7 +367,7 @@
                     
                     var date = event.start.toISOString().substring(0,event.start.toISOString().indexOf("T")).replace(new RegExp('/', 'g'), '-');
                     
-                    var temps = event.start.toISOString().substring(event.start.toISOString().indexOf("T")+1,16);
+                    var temps = event.start.toISOString().substring(event.start.toISOString().indexOf("T")+1,19);
                    
                     
                     
@@ -418,7 +413,7 @@
                             
                             if(activite_inscrit[i][1] == date ){                               
                                 var debut = activite_inscrit[i][2];
-                                var fin = addMinutes(activite_inscrit[i][2],activite_inscrit[i][3]);                                
+                                var fin = addMinutes(activite_inscrit[i][2],activite_inscrit[i][3]);                             
                                 if(debut <= temps && fin >=temps ){
                                     conflit = true;
                                     break;
@@ -443,8 +438,8 @@
                     }else if(conflit){
                         $('#divSub').html("Vous êtes inscrit à une activitée ayant un conflit d'horaire avec celle-cì");
                     }else if(event.participant_max != 0 && event.participant >= event.participant_max){
-                        //$('#divSub').html("Le nombre de participant maximum est atteint");
-                        $('#divSub').html("<button class='btn green col l12' name='Sub_Liste_attente' id='Sub_liste_Attente' type='submit' form='inscAct'>Rejoindre la liste d'attente</button>");
+                        $('#divSub').html("Le nombre de participant maximum est atteint");
+                        //$('#divSub').html("<button class='btn green col l12' name='Sub_Liste_attente' id='Sub_liste_Attente' type='submit' form='inscAct'>Rejoindre la liste d'attente</button>");
 
                     }else{
                         $('#divSub').html("<button class='btn green col l12' name='SubInsAct' id='SubInsAct' type='submit' form='inscAct'>S'inscrire</button>");
@@ -464,7 +459,7 @@
                 var piece = time.split(':');
                 var mins = piece[0]*60 + +piece[1] + +minsToAdd;
                 return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);  
-} 
+                } 
 
             inicalendrier();
         </script>

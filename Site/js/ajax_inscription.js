@@ -1,6 +1,5 @@
 function valider(){
-    if( validateNomPrenom( $("#nom_t").val(), $("#prenom").val() )) {
-      if(validateUsername($("#username").val())){
+    if(validateUsername($("#username").val())){
          if(validateEmail($("#courriel").val())){
             if(validateTelephone($("#telephone").val())){
                 if(validatePassword($("#pass").val()) && validatePassword($("#confpass").val())){
@@ -19,7 +18,7 @@ function valider(){
                        'type_utilisateur':$("#type_utilisateur").val(),
                        'code' : $("#code_acces").val()}, 
                        success: function (data) {
-                           alert(data);
+                           console.log(data);
                            if(data == "Inscription réussie")
                            {
                                location.reload();
@@ -32,7 +31,6 @@ function valider(){
              }else alert("Téléphone non conforme ex: (819) 597-5423");
             }else alert("Couriel non conforme ex: exemple@hotmail.com"); 
         }else alert("Votre nom d'utilisateur ne peut contenir des caractères spéciaux");
-    }else alert("Votre nom et prénom ne peut contenir des caractères spéciaux");
 }
 
 
@@ -51,18 +49,6 @@ function validateTelephone(tel){
     {
     var re = /^\(\d{3}\)\s{0,1}\d{3}-\d{4}$/
     return re.test(tel);
-    }
-}
-//192 252
-function validateNomPrenom(nom,prenom){
- 
- if(hasWhiteSpace(nom) ||hasWhiteSpace(prenom)||verif_caracter_tiret(nom)||verif_caracter_tiret(prenom))
-    {
-      return false;
-    }
-    else
-    {
-      return true;
     }
 }
 

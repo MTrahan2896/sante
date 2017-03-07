@@ -73,12 +73,67 @@ button{
       height: 52%;
     }
 
-    #modal_planif
+    #modal_planif /* Modal de planification d'activité */
     {
       width:25%;
       height: 60%;
     }
+
+    .slider .slides li img {
+    background-color: #fff;
+    background-size:100% auto;
+    background-repeat: no-repeat;
+    }
+
+    .slider  .slides  {
+    background-color: transparent;
+    margin: 0;
+    }
+
+    .slider .slides li,{
+     height:520px !important;
+    }
+
+   .slider .slides,.slider{
+    height:540px  !important;
+    }
+
+    .indicators{
+     z-index:3 !important;
+    }
   }
+
+ 
+  
+        
+
+  @media screen and (max-width: 480px) {
+    .slider .slides li img {
+                width:294px !important;
+                background-color: #fff;
+                height:200px !important;
+
+            background-size:100% auto;
+            background-repeat: no-repeat;
+
+   }
+        .slider .slides {
+             background-color: transparent;
+             margin: 0;
+             height:300px !important;
+
+            }
+  .slider{
+    height:360px !important;
+  }
+        
+
+}
+
+
+
+
+
 
 /* CSS sur petits écrans (mobiles) */
 @media screen and (max-width: 699px) 

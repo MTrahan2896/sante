@@ -1,6 +1,5 @@
   
   <!--Import Google Icon Font-->
-  <link type="text/css" rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/css/materialize.clockpicker.css">
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection">
@@ -15,3 +14,4 @@
   include_once 'php_scripts/connexion_bd.php';
   include_once 'php_scripts/formater_champ.php';
   ?>
+    <link type="text/css" rel="stylesheet" href="css/style.css">

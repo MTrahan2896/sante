@@ -176,23 +176,10 @@ session_start();
                 </div>
               </div>
 
-
            </div>
-           </li>
-              
-           
+           </li>           
         </div>
       </li>
-
-
-      
-
-
-
-
-
-
-
 
 
       <li class="act" ng-show="activites_responsable.length >= 1">
@@ -276,30 +263,7 @@ session_start();
         </div>
       </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
-           
-        </div>
+  </div>
       </li>
 </ul>
 </div>
@@ -312,19 +276,7 @@ if(($_SESSION['uid'] != 0) and (isset($_SESSION['uid'])))
 obtenir_info($_SESSION['uid']);
 }
 ?>
-<script>
-/*
-if (($("#liste_activite").children.length) == 2)
-{
-    $("#liste_activite").hide();
-    $("#aucune_activite").html("Aucune activé, veuillez vous inscrire depuis la <a href=\"accueil.php\">Page d'accueil</a>");
-}
-else
-{
-   $("#liste_activite").show();
-    $("#aucune_activite").html(" ");
-}*/
-</script>
+
 </main>
 <footer class="page-footer" style="width: 100%!important">
 
@@ -448,11 +400,8 @@ else
    </div>
   </div>
  </div>
-
-
-
-
-</body></html>
+</body>
+</html>
 
 
 

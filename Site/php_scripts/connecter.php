@@ -1,5 +1,6 @@
 <?php
 include_once 'connexion_bd.php';
+include_once 'formater_champ.php';
 
 if(isset($_POST['nom_user']) and isset($_POST['password'])){
 $x = $_POST['nom_user'];
@@ -41,7 +42,7 @@ function verifier_password($id,$username,$pwd_input,$pwd)
     
     $_SESSION['admin'] = $getAdmin;
     $_SESSION['uid'] = $id;
-    $_SESSION['username'] = $username;
+    $_SESSION['username'] = formater($username);
 
     echo "Connexion réussie";
   }

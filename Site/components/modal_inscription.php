@@ -20,12 +20,12 @@ include_once 'php_scripts/afficher_info_user.php';
     <div class="row">
       <div class="input-field col s12 l6">
         <!--    <i class="material-icons prefix">person_pin</i> -->
-        <input name="prenom" id="prenom" onkeypress="return onlyCaracter(event)" type="text" class="validate" maxlength="50">
+        <input name="prenom" id="prenom" type="text" class="validate" maxlength="50">
         <label for="prenom">Prénom*</label>
       </div>
       
       <div class="input-field col s12 l6">
-        <input name="nom" id="nom_t" type="text" onkeypress="return onlyCaracter(event)" class="validate" maxlength="50">
+        <input name="nom" id="nom_t" type="text" class="validate" maxlength="50">
         <label for="nom">Nom*</label>
       </div>
     </div>
