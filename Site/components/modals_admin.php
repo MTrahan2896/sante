@@ -229,7 +229,7 @@
             {{compte.code_acces}}
           </div>
           <div style="text-align:center;">
-            <a class="waves-effect waves-light btn green" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
+            <a class="waves-effect waves-light btn green" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 40px !important"><i class="material-icons left">print</i>Imprimer</a>
           </div>
         </div>
       </div>
@@ -285,7 +285,7 @@
             <div ng-show="compte.administrateur <1">{{compte.code_acces}}</div>
           </div>
           <div style="text-align:center;">
-            <a class="waves-effect waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 30px"><i class="material-icons left">print</i>Imprimer</a>
+            <a class="waves-effect green waves-light btn" ng-click="print(groupe.id_groupe)" style="bottom: 15px; margin-top: 40px !important"><i class="material-icons left">print</i>Imprimer</a>
           </div>
         </div>
       </div>
@@ -376,7 +376,7 @@
         <div class="row ">
         <table class="striped">
         <thead><th class="center">Code</th><th class="center">Niveau d'accès</th></thead>
-        <tr ng-repeat="admin in codesAdmin | orderBy:'admin.administrateur'" ng-show="(afficherAdmins && admin.administrateur == 2) || (afficherResponsables && admin.administrateur == 1)">
+        <tr ng-repeat="admin in codesAdmin | orderBy:'admin.administrateur'" ng-show="(  && admin.administrateur == 2) || (afficherResponsables && admin.administrateur == 1)">
            <td class="center">{{admin.CODE_ACCES}}</td>
            <td class="center"><span ng-show="admin.administrateur == 1">Responsable</span><span ng-show="admin.administrateur == 2">Administrateur</span></td>
         </div>

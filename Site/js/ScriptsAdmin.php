@@ -24,7 +24,7 @@
         $scope.comptesAdministrateur = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>;
 
         $scope.points_debut = <?php echo phpSelectQuery('select sum(ponderation) as points_debut, utilisateurs.id_utilisateur
-    from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
+            from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
             where activites_prevues.id_activite = activites.id_activite 
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
@@ -47,9 +47,9 @@
             and utilisateur_activites.present = 1
             group by utilisateurs.id_utilisateur')?>
 
+        $scope.penalites = <?php echo phpSelectQuery('select sum(ponderation) as penalite, utilisateurs.id_utilisateur from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes where activites_prevues.id_activite = activites.id_activite and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur and utilisateurs.ID_Groupe = groupes.ID_Groupe and groupes.ID_Session = sessions.ID_Session and activites_prevues.date_activite > sessions.Debut_Session and activites_prevues.date_activite < sessions.fin_session and utilisateur_activites.present = 0 and activites_prevues.presences_prises = 1 group by utilisateurs.id_utilisateur')?>;
+
         $scope.responsableSelectionne;
-        console.log("GROUPES");
-        console.log($scope.groupes);
 
         $scope.SESSION = 0;
     
@@ -73,18 +73,14 @@
         }
 
         $scope.setActSelectionne = function(id){
-            
             $scope.activiteSelectionne = id;
-            console.log($scope.activiteSelectionne);
         }
 
         $scope.setGroupe = function(id){
                 $scope.codeGroupe = id;            
-                console.log($scope.codeGroupe);
         }
 
         $scope.show_params = function(activite) {
-            console.log(activite.ID_activite_prevue);
             $('#modal_mod_planif').modal('open');
             $('#ID_ACT_PLAN').val(activite.ID_activite_prevue);
             $('#mod_nom_act').val(activite.ID_Activite);
@@ -102,7 +98,6 @@
         $('#select_session').on('change', function() {
             let x = $('#select_session').val();
             $('#select_session').val(x);
-            console.log($('#select_session').val());
             $scope.SESSION = x;
             $scope.$apply();
             $('#select_session').material_select();
@@ -126,6 +121,13 @@
 
 
         }
+
+        $scope.penaliteForEleve = function(id){
+             pts = $scope.penalites.filter(function(el) {
+                    return el.id_utilisateur == id;
+                })[0].penalites;
+        }
+
 
         $scope.pointsFinForEleve = function(id) {
 
@@ -302,7 +304,7 @@
 
                 },
                 error: function(req) {
-                    alert("erreur");
+                    alert("Erreur");
                 }
             });
 
@@ -321,12 +323,10 @@
                         'ID_ACTIVITE': id,
                     }, //TODO: CHANGE PROF ID
                     success: function(data) {
-
                         location.reload();
-
                     },
                     error: function(req) {
-                        alert("erreur");
+                        alert("Erreur");
                     }
                 });
 
@@ -372,7 +372,7 @@
 
                 },
                 error: function(req) {
-                    alert("erreur");
+                    alert("Erreur");
                 }
             });
 
@@ -385,7 +385,6 @@
         }
 
         $scope.scopePrint = function(val) {
-            console.log(val);
         }
 
 
@@ -475,9 +474,6 @@
                     return ac.ID_Activite_Prevue == activite_prevue && ac.ID_Utilisateur == eleve;
                 }))[0].Present;
 
-
-
-
                 if (present == 1) {
                     return true;
                 } else return false;
@@ -502,7 +498,7 @@
 
                     },
                     error: function(req) {
-                        alert("erreur");
+                        alert("Erreur");
                     }
                 });
 
@@ -545,7 +541,7 @@
                     location.reload();
                 },
                 error: function(req) {
-                    alert("erreur");
+                    alert("Erreur");
                 }
             });
 
@@ -586,7 +582,7 @@
 
                 },
                 error: function(req) {
-                    alert("erreur");
+                    alert("Erreur");
                 }
             });
 
@@ -607,7 +603,7 @@
                     location.reload();
                 },
                 error: function(req) {
-                    alert("erreur");
+                    alert("Erreur");
                 }
             });
 
@@ -641,7 +637,7 @@
 
                     },
                     error: function(req) {
-                        alert("erreur");
+                        alert("Erreur");
                     }
                 });
 
@@ -665,7 +661,7 @@
 
                     },
                     error: function(req) {
-                        alert("erreur");
+                        alert("Erreur");
                     }
                 });
 
@@ -692,7 +688,7 @@
 
                 },
                 error: function(req) {
-                    alert("erreur");
+                    alert("Erreur");
                 }
             });
         }
@@ -735,7 +731,7 @@
                         location.reload();
                     },
                     error: function(req) {
-                        alert("erreur");
+                        alert("Erreur");
                     }
                 });
             }else alert("Le groupe saisi ne correspond pas au groupe que vous souhaitez supprimer. La suppression est annulée")
