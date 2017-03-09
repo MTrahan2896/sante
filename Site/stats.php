@@ -14,6 +14,7 @@ if(isset($_SESSION['admin'])){
 <html ng-app='app_stats' ng-controller="ctrl">
   <head>
     <?php include 'components/headContent.php';?>
+    <title>Défi Santé - Statistiques</title>
   </head>
   <body class="ng-cloak">
     
