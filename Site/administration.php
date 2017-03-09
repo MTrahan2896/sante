@@ -420,12 +420,12 @@ if(isset($_SESSION['admin'])){
        <div class="row">
          <div class="input-field col s6 l6">
            <label   class="ACTIVER" for="mod_participants_max">Nombre de participants maximum</label>
-           <input type="number" step="1" maximum="180" minimum="0" id="mod_participants_max" name="participants_max"/>
+           <input type="number" step="1"  min="0" max="180" id="mod_participants_max" name="participants_max"/>
          </div>
  
          <div class="input-field col s6 l6">
            <label class="ACTIVER"  for="mod_frais">Frais de l'activité</label>
-           <input type="number" step="5" minimum="0" id="mod_frais" name="frais"/>
+           <input type="number" step="5" min="0" id="mod_frais" name="frais"/>
          </div>
        </div>
  
