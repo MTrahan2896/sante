@@ -72,7 +72,7 @@
       </div>
     </nav>
     <div class="fixed-action-btn vertical click-to-toggle hide-on-large-only " style="margin-right: -20px" >
-    <a class="btn-floating btn-large blue darken-2">
+    <a class="btn-floating btn-large blue darken-2 waves-effect waves-light">
       <i class="material-icons">menu</i>
     </a>
     <ul id="nav_mobile_fab"> 
@@ -109,9 +109,9 @@
     }
 
 document.addEventListener('DOMContentLoaded', function() {
+
     $("#nav_mobile_fab").css("right", 30);
     $("#nav_mobile_fab a").css("margin-right", -30);
-
     $("#modal_login").on('keyup', function (e) {
     if (e.keyCode == 13) {
         post_connexion();

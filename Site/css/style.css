@@ -154,6 +154,10 @@ button{
 
     }
 
+    .btn{
+      width: 100% !important;
+    }
+
 
 }
 
@@ -240,5 +244,5 @@ height: 45px;
 
 
 .btn{
-  width: 275px !important; height: 30px !important!; margin-top: 10px !important;
+  width: 275px; height: 30px !important!; margin-top: 10px !important;
 }

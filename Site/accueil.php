@@ -2,7 +2,6 @@
        if (session_status() == PHP_SESSION_NONE) {
             session_start();
             }
-
 ?>
 
 <html ng-app='empty_app' ng-controller="ctrl">
@@ -12,10 +11,10 @@
     .remove_margin_bottom{
         margin-bottom: 0px !important;
     }
-
    .fc-content {display:flex;flex-flow:column-reverse nowrap;}
     </style>
     <title>Défi Santé - Accueil</title>
+    
   </head>
   <body>
     
@@ -40,7 +39,6 @@
                       if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                       } 
-
                       $insert = true;
                       $query = "SELECT ap.ID_Activite_prevue
                               FROM  activites_prevues ap, utilisateur_activites ua 
@@ -103,13 +101,13 @@
           }
           ?>
           <div class="container">
-	<div class="row">
+  <div class="row">
 
 
-	<div class="input-field col s12">
+  <div class="input-field col s12">
 
 <div class="row">
-	<div class="input-field col s12">
+  <div class="input-field col s12">
     <select onchange="TrieCalendrier(this.value)">
       <option value="" disabled selected>Choisissez une activité</option>
       <option value="n">Tout les sports</option>
@@ -120,21 +118,19 @@
                     }
                     $query = "SELECT distinct Nom_Activite FROM activites";
                     $result = $mysqli->query($query);
-
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             echo "<option value='".$row['Nom_Activite']."'>".$row['Nom_Activite']."</option>";
                         }
                     }
-
       ?>
       
     </select>
     <label>Activité</label>
- 	</div>
-	<div id="calendar"></div>
+  </div>
+  <div id="calendar"></div>
 
-	</form>
+  </form>
 </div>
 
 
@@ -204,9 +200,7 @@
                         }
                     }
                     echo "];
-
                     </script>";
-
                     
            
             ?>
@@ -221,19 +215,25 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
-	
+  
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 
       <script src="js/moment.js">moment.locale="fr"</script>
-	  
+    
+
+
+
+
+
      
-      <script type="text/javascript" src="js/materialize.js"></script>
-		
+      
+    
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
          <script type="text/javascript" src="js/fullcalendar-fr.js"></script>
-		<script type="text/javascript" src="js/gcal.js"></script>
-		<script type="text/javascript" src="js/sc-date-time.js"></script>
+    <script type="text/javascript" src="js/gcal.js"></script>
+    <script type="text/javascript" src="js/sc-date-time.js"></script>
         
 <script>
         function daysInMonth(month,year) {
@@ -292,7 +292,6 @@
             date = y+"/"+pad(m)+"/"+pad(d)/*+"T"+pad(h)+":"+pad(min)+":"+pad(s)*/
             return date;
         }
-
         //initialisation du tableau de base des evenements du calendrier
     var view;
         eventbase = [
@@ -307,12 +306,10 @@
                               where a.ID_Activite = ap.ID_Activite
                               group by ap.ID_activite_prevue";
                     $result = $mysqli->query($query);
-
                     if ($result->num_rows > 0) {
                         $i = 1;
     
                         while($row = $result->fetch_assoc()) {
-
                             $timestamp = strtotime($row['Heure_Debut']) + $row['Duree']*60;
                             $time = date('H:i:i', $timestamp);
                             
@@ -343,16 +340,15 @@
         $('#calendar').fullCalendar('destroy');
         inicalendrier();
         }
-
         //initialisation du calendrier
         function inicalendrier() {
             
             $('#calendar').fullCalendar({
                 header: {
-				    left: 'prev,next today',
-				    center: 'title',
-				    right: 'month,agendaWeek,agendaDay'
-			    },
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+          },
                 slotEventOverlap: false,
                 allDaySlot: false,
                 events: evenements,
@@ -390,7 +386,6 @@
                     $('#fin').attr({
                         value:event.end.toISOString().substring(event.start.toISOString().indexOf("T")+1,16)
                     });
-
                     $('#endroit').attr({
                         value:event.Endroit
                     });
@@ -403,10 +398,8 @@
                     if(ajout_jour_date_string(event.start.toISOString(),0) > ajout_jour_Ajd(14)){
                         trop_tot = true;
                     }
-
                     for(i=0;i<activite_inscrit.length;i++){
                             
-
                             if(event.id == activite_inscrit[i][0]){
                                 inscrit = true;
                                 break;
@@ -427,7 +420,6 @@
                     $x = ($_SESSION['uid'] != 0) ? 'true' : 'false';
                     echo $x;
                     ?>;
-
                     if(con){
         
                     if(trop_tot){
@@ -441,7 +433,6 @@
                     }else if(event.participant_max != 0 && event.participant >= event.participant_max){
                         $('#divSub').html("Le nombre de participant maximum est atteint");
                         //$('#divSub').html("<button class='btn green col l12' name='Sub_Liste_attente' id='Sub_liste_Attente' type='submit' form='inscAct'>Rejoindre la liste d'attente</button>");
-
                     }else{
                         $('#divSub').html("<button class='btn green col l12' name='SubInsAct' id='SubInsAct' type='submit' form='inscAct'>S'inscrire</button>");
                     }
@@ -461,7 +452,6 @@
                 var mins = piece[0]*60 + +piece[1] + +minsToAdd;
                 return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);  
                 } 
-
             inicalendrier();
         </script>
 
@@ -473,7 +463,22 @@
 
 <script src="js/empty_app.js"></script>
 
+<script>
+  
 
+  $('.modal').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .3, // Opacity of modal background
+    inDuration: 300, // Transition in duration
+    outDuration: 200, // Transition out duration
+    startingTop: '4%', // Starting top style attribute
+    endingTop: '10%', // Ending top style attribute
+    
+    }
+    );
+
+  $(".slider").slider();
+</script>
         
     </body>
 </html>

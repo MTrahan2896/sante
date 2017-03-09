@@ -100,13 +100,15 @@ include_once 'php_scripts/afficher_info_user.php';
     </div>
 </div>
 
-</div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+</div><script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+<script  src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 <script src="js/inputmask/dist/inputmask/inputmask.js"></script>
 <script src="js/inputmask/dist/inputmask/jquery.inputmask.js"></script>
 <script src="js/inputmask/dist/inputmask/inputmask.???.Extensions.js"></script>
 <script src="js/verifstring.js"></script>
+
+
 <script>
 	 
 	 var selector = document.getElementById("telephone");

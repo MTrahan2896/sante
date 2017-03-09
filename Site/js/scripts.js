@@ -1,11 +1,30 @@
 
 
-$('.datepicker').pickadate({selectYears: 20});
 
 
-  $(document).ready(function() {
-    $('select').material_select();
-  });
+
+
+
+
+  document.onreadystatechange = function () {
+     if (document.readyState == "complete") {
+     // document is ready. Do your stuff here
+$('.modal').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .3, // Opacity of modal background
+    inDuration: 300, // Transition in duration
+    outDuration: 200, // Transition out duration
+    startingTop: '4%', // Starting top style attribute
+    endingTop: '10%', // Ending top style attribute
+    
+    }
+    );
+
+
+
+
+
+
 
  $('#calendar').fullCalendar({
         googleCalendarApiKey: 'AIzaSyCOz5Z77z9O4gDAvCmmC2ya1y-NUETMQ4w',
@@ -17,8 +36,6 @@ $('.datepicker').pickadate({selectYears: 20});
 
 
 
-
-
 $("#calendar").fullCalendar({
 
 viewRender: function(view, element){
@@ -27,17 +44,18 @@ viewRender: function(view, element){
 
     });
     
-    $('.modal').modal({
-    dismissible: true, // Modal can be dismissed by clicking outside of the modal
-    opacity: .3, // Opacity of modal background
-    inDuration: 300, // Transition in duration
-    outDuration: 200, // Transition out duration
-    startingTop: '4%', // Starting top style attribute
-    endingTop: '10%', // Ending top style attribute
     
-    }
-    );
 
+
+
+
+    $('select').material_select();
+
+
+
+
+   }
+ }
 
 
 

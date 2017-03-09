@@ -89,21 +89,21 @@ if(isset($_SESSION['admin'])){
               <div ng-show="elevesDansGroupe(groupe.id_groupe).length > 0"> 
               <br>  <br>  
               <table class="striped" align="center" ng-show="groupe.ensemble == 1"><!--Ensemble 1 -->
-                  <thead><tr><th>Nom </th><th class="center">Points réguliers</th><th class="center">Points Bonus</th><th class="center">Total</th></tr></thead>
+                  <thead><tr><th>Nom </th><th class="center"><span class="hide-on-med-and-up">Pts reg.</span><span class="hide-on-small-only">Points Réguliers</span></th><th class="center"><span class="hide-on-med-and-up">Pts bon.</span><span class="hide-on-small-only">Points Bonus</span></th><th class="center"><span class="hide-on-med-and-up">Pen.</span><span class="hide-on-small-only">Pénalité</span></th><th class="center">Total</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                    <td style="text-align: center" class="center">{{pointsReguliersForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)}}/5</td><td class="center">{{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)+pointsReguliersForEleve(eleve.id_utilisateur)}}/10</td>
+                    <td style="text-align: center" class="center">{{pointsReguliersForEleve(eleve.id_utilisateur)}}/5</td><td class="center">{{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)}}/5</td><td class="center"><span ng-show="penaliteForEleve(eleve.id_utilisateur) > 0" style="color: red">{{penaliteForEleve(eleve.id_utilisateur)}}</span>   </td><td class="center">{{pointsBonusEnsemble1ForEleve(eleve.id_utilisateur)+pointsReguliersForEleve(eleve.id_utilisateur) - penaliteForEleve(eleve.id_utilisateur)}}/10</td>
                     
                   </div>
                 </tr>
               </table>
 
                 <table class="striped" align="center" ng-show="groupe.ensemble == 2"><!--Ensemble 2 -->
-                  <thead><tr><th>Nom </th><th class="center">Nombre de points</th></tr></thead>
+                  <thead><tr><th>Nom </th><th class="center">Nombre de points</th><th class="center">Pénalité</th><th class="center">Total</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
-                    <td>{{eleve.nom}}, {{eleve.prenom}}</td><td class="center">{{pointsEnsemble2(eleve.id_utilisateur)}}/5</td>
+                    <td>{{eleve.nom}}, {{eleve.prenom}}</td><td class="center">{{pointsEnsemble2(eleve.id_utilisateur)}}/5</td><td class="center"><span ng-show="penaliteForEleve(eleve.id_utilisateur) > 0" style="color: red">{{penaliteForEleve(eleve.id_utilisateur)}}</span>  </td><td class="center">{{pointsEnsemble2(eleve.id_utilisateur)-penaliteForEleve(eleve.id_utilisateur)}}</td>
                     
                   </div>
                 </tr>
@@ -112,17 +112,21 @@ if(isset($_SESSION['admin'])){
 
 
                 <table class="striped" align="center" ng-show="groupe.ensemble == 3"><!--Ensemble 3 -->
-                  <thead><tr><th>Nom </th><th class="center">Début</th><th class="center">Fin</th><th class="center">Bonus</th><th class="center">Total</th></tr></thead>
+                  <thead><tr><th>Nom </th><th class="center">Début</th><th class="center">Fin</th><th class="center">Bonus</th><th class="center"><span class="hide-on-med-and-up">Pen.</span><span class="hide-on-small-only">Pénalité</span></th><th class="center">Total</th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
-                    <td style="text-align: center" class="center">{{pointsDebutForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsFinForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsBonusForEleve(eleve.id_utilisateur)}}/5</td><td class="center">{{pointsDebutForEleve(eleve.id_utilisateur)+pointsFinForEleve(eleve.id_utilisateur)+pointsBonusForEleve(eleve.id_utilisateur)}}/15</td>
+                    <td style="text-align: center" class="center">{{pointsDebutForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsFinForEleve(eleve.id_utilisateur)}}/5</td><td class="center"> {{pointsBonusForEleve(eleve.id_utilisateur)}}/5</td>
+                    <td class="center"><span ng-show="penaliteForEleve(eleve.id_utilisateur) > 0" style="color: red">{{penaliteForEleve(eleve.id_utilisateur)}}</span>  </td>
+                    <td class="center">{{pointsDebutForEleve(eleve.id_utilisateur)+pointsFinForEleve(eleve.id_utilisateur)+pointsBonusForEleve(eleve.id_utilisateur)}}/15</td>
                     
                   </div>
                 </tr>
               </table>
               </div>
+              <div class="container">
               <div class="row" style="text-align: center">
+              
               <button data-target="modalGenGroupe" ng-click="setGroupe(groupe.id_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important; margin-top: 30px !important" class=" green btn" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
                 <button ng-click="setGroupe(groupe.id_groupe)" data-target="modalGroupe" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn  green modal-trigger">Afficher les codes d'accès</button>
@@ -133,12 +137,16 @@ if(isset($_SESSION['admin'])){
               <div class="row"  style="text-align: center">
                 <button ng-click="supprimerGroupe(groupe.id_groupe, groupe.nom_groupe)" ng-show="(groupe.id_prof == <?=$_SESSION['uid']?>)" style="margin-bottom: 15px !important" class="btn red modal-trigger">Supprimer le groupe</button>
               </div>
-
+          </div>
             </div>
             
           </li>
         </ul>
-
+        <br>
+        <div class="center">
+        <button data-target="modalNouveauGroupe" style="margin-bottom: 0px !important" class="btn green">Nouveau Groupe</button>
+        </div>
+        <br>
 
           <ul class="collapsible" data-collapsible="expandable" >
               
@@ -161,6 +169,7 @@ if(isset($_SESSION['admin'])){
               <thead> <th>Utilisateurs</th></thead>
                     <tr ng-repeat="eleve in utilisateursSansGroupes"><td> {{eleve.Nom}}, {{eleve.Prenom}}</td></tr>
               </table>
+              <div class="container">
 
                                  <div class="row" style="text-align: center">
               <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn green" >Générer des codes d'accès</button></div>
@@ -172,14 +181,12 @@ if(isset($_SESSION['admin'])){
               </div>
 
               </div>
-
+</div>
             
                </li>
           </ul>
           <br>
-      <div class="center">
-        <button data-target="modalNouveauGroupe" style="margin-bottom: 0px !important" class="btn green">Nouveau Groupe</button>
-        </div>
+      
       </div>
       
       <li>
@@ -510,6 +517,11 @@ $('.timepicker').pickatime({
   autoclose: false,
   vibrate: true // vibrate the device when dragging clock hand
 });
+ 
+
+  $(document).ready(function(){
+  $('.slider').slider();
+ });
  
 $('#date_act').pickadate();
 $('#mod_date_act').pickadate();

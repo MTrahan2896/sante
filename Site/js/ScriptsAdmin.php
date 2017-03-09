@@ -26,6 +26,7 @@
         $scope.points_debut = <?php echo phpSelectQuery('select sum(ponderation) as points_debut, utilisateurs.id_utilisateur
             from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
             where activites_prevues.id_activite = activites.id_activite 
+            and activites_prevues.presences_prises = 1
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
             and utilisateurs.ID_Groupe = groupes.ID_Groupe
@@ -38,6 +39,7 @@
         $scope.points_fin = <?php echo phpSelectQuery('select sum(ponderation) as points_fin, utilisateurs.id_utilisateur
          from utilisateurs, activites, activites_prevues, utilisateur_activites, sessions, groupes 
             where activites_prevues.id_activite = activites.id_activite 
+            and activites_prevues.presences_prises = 1
             and utilisateur_activites.id_activite_prevue = activites_prevues.ID_activite_prevue 
             and utilisateur_activites.id_utilisateur = utilisateurs.id_utilisateur
             and utilisateurs.ID_Groupe = groupes.ID_Groupe
@@ -123,9 +125,18 @@
         }
 
         $scope.penaliteForEleve = function(id){
-             pts = $scope.penalites.filter(function(el) {
+            try{
+
+            let pts = parseInt($scope.penalites.filter(function(el) {
                     return el.id_utilisateur == id;
-                })[0].penalites;
+                })[0].penalite);
+            return pts;
+        }
+            catch(err){
+        
+                return 0;
+            }
+
         }
 
 
@@ -200,10 +211,10 @@
 
             let pts_reg = 0;
 
-            if (pts_debut + pts_fin > 5) {
+            if (parseInt(pts_debut) + parseInt(pts_fin)  > 5) {
                 pts_reg = 5;
-            } else pts_reg = pts_debut + pts_fin;
-
+            } else pts_reg = parseInt(pts_debut) + parseInt(pts_fin);
+            console.log("REGULIER "+id+" VAL: "+ pts_reg+ " DEB: " + pts_debut + " FIN: "+pts_fin)
             return parseInt(pts_reg);
         }
 
@@ -212,7 +223,7 @@
 
         $scope.pointsBonusEnsemble1ForEleve = function(id) {
 
-                     let pts_fin = 0;
+            let pts_fin = 0;
             let pts_debut = 0;
             try {
                 pts_fin = $scope.points_fin.filter(function(el) {
@@ -229,13 +240,14 @@
             } catch (err) {}
 
 
-            let pts_reg = 0;
+            let pts_reg = (parseInt((parseInt(pts_debut) + parseInt(pts_fin))));
 
-            if (pts_debut + pts_fin > 5) {
-                if((parseInt((parseInt(pts_debut) + parseInt(pts_fin))) - 5) > 5){
-                    return 5;
-                }else return (parseInt((parseInt(pts_debut) + parseInt(pts_fin))) - 5);
-                
+            console.log(pts_reg+" "+id)
+
+            if (pts_reg > 5) {
+
+                    return pts_reg - 5;
+             
             }
             else return 0;
 
@@ -255,6 +267,7 @@
                 })[0].points_fin;
                 pts_fin = parseInt(pts_fin);
             } catch (err) {}
+            pts_fin = parseInt(pts_fin);
 
             try {
                 pts_debut = $scope.points_debut.filter(function(el) {
@@ -262,7 +275,7 @@
                 })[0].points_debut;
                 pts_debut = parseInt(pts_debut);
             } catch (err) {}
-
+            pts_debut= parseInt(pts_debut);
             let pts_totaux = parseInt(pts_fin) + parseInt(pts_debut);
 
             if (pts_totaux > 5) {
@@ -676,14 +689,13 @@
                 url: "php_scripts/creergroupe.php",
                 data: {
                     'nomgroupe': $("#nomgroupe").val(),
-                    'id_prof': 1,
+                    'id_prof': 0,
                     'nb_codes': $("#rangeEleves").val(),
                     'ensemble': $("#ensemble").val(),
                     'session': $("#session").val()
 
                 }, //TODO: CHANGE PROF ID
                 success: function(data) {
-
                     location.reload();
 
                 },

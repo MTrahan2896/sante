@@ -21,16 +21,16 @@ session_start();
 
     <h5>Bonjour <?php echo $_SESSION['username'] ?></h5><br>
 
-  <div id="spEnsemble1" ng-show="ensemble == 1"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px"> {{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>)}} points  <br>
-  {{pointsBonusEnsemble1ForEleve(<?php echo $_SESSION['uid'] ?>)}} points bonus </p>
+  <div id="spEnsemble1" ng-show="ensemble == 1"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px"> {{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s0  <br>
+  {{pointsBonusEnsemble1ForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s) bonus </p>
    Votre note: <b style="color: green">{{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>) + pointsBonusEnsemble1ForEleve(<?php echo $_SESSION['uid'] ?>)}}/5</b><br></div>
 
-  <span id="spEnsemble2" ng-show="ensemble == 2"><b>Vous avez accumulé</b>  <p style="margin-left: 20px; margin-top: 0px">{{pointsEnsemble2(<?php echo $_SESSION['uid'] ?>)}} points</p>
+  <span id="spEnsemble2" ng-show="ensemble == 2"><b>Vous avez accumulé</b>  <p style="margin-left: 20px; margin-top: 0px">{{pointsEnsemble2(<?php echo $_SESSION['uid'] ?>)}} point(s)</p>
   Votre note: <b style="color: green">{{pointsEnsemble2(<?php echo $_SESSION['uid'] ?>)}}/5</b><br>
  
   </span>
 
-  <span id="spEnsemble3" ng-show="ensemble == 3"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px">{{pointsDebutForEleve(<?php echo $_SESSION['uid'] ?>)}} points au début de la session <br> {{pointsFinForEleve(<?php echo $_SESSION['uid'] ?>)}} points entre la mi-session et la fin de la session <br> {{pointsBonusForEleve(<?php echo $_SESSION['uid'] ?>)}} points bonus <br>
+  <span id="spEnsemble3" ng-show="ensemble == 3"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px">{{pointsDebutForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s) au début de la session <br> {{pointsFinForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s) entre la mi-session et la fin de la session <br> {{pointsBonusForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s) bonus <br>
  
 
   </p>

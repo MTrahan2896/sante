@@ -376,7 +376,7 @@
         <div class="row ">
         <table class="striped">
         <thead><th class="center">Code</th><th class="center">Niveau d'accès</th></thead>
-        <tr ng-repeat="admin in codesAdmin | orderBy:'admin.administrateur'" ng-show="(  && admin.administrateur == 2) || (afficherResponsables && admin.administrateur == 1)">
+        <tr ng-repeat="admin in codesAdmin | orderBy:'admin.administrateur'" ng-show="(afficherAdmins  && admin.administrateur == 2) || (afficherResponsables && admin.administrateur == 1)">
            <td class="center">{{admin.CODE_ACCES}}</td>
            <td class="center"><span ng-show="admin.administrateur == 1">Responsable</span><span ng-show="admin.administrateur == 2">Administrateur</span></td>
         </div>
