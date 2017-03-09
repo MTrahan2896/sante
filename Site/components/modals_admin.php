@@ -13,11 +13,11 @@
     <div class="row">
       <div class="input-field col s6 l4">
         <label  for="duree">Durée (Minutes)</label>
-        <input type="number" step="1" maximum="180" minimum="0" id="duree" name="duree" value="60"/>
+        <input type="number" step="1" max="180" min="0" id="duree" name="duree" value="60"/>
       </div>
       <div class="input-field col s6 l4">
         <label  for="point">Nombre de points</label>
-        <input type="number" step="0.5" maximum="3" minimum="0" value="1" id="point" name="point"/>
+        <input type="number" step="0.5" max="3" min="0" value="1" id="point" name="point"/>
       </div>
     </div>
     Couleur de l'activité
@@ -108,11 +108,11 @@
     <div class="row">
       <div class="input-field col s6 l4">
         <label  for="duree_mod" class="ACTIVER">Durée (Minutes)</label>
-        <input type="number" step="1" maximum="180" minimum="0" id="duree_mod" name="duree"/>
+        <input type="number" step="1" max="180" min="0" id="duree_mod" name="duree"/>
       </div>
       <div class="input-field col s6 l4">
         <label  for="point_mod" class="ACTIVER">Nombre de points</label>
-        <input type="number" step="0.5" maximum="3" minimum="0" id="point_mod" name="point"/>
+        <input type="number" step="0.5" max="3" min="0" id="point_mod" name="point"/>
       </div>
     </div>
    
@@ -565,19 +565,19 @@
            </div>
           <div class="input-field col s12 l6">
              <label  for="occuence">Répéter l'activité *</label>
-             <input type="number" step="1" maximum="15" minimum="1" id="occurence" name="occurence" value="0"/>
+             <input type="number" step="1" max="15" min="1" id="occurence" name="occurence" value="1"/>
            </div>
          </div>
  
        <div class="row">
          <div class="input-field col s6 l6">
            <label  for="participants_max">Nombre de participants maximum</label>
-           <input type="number" step="1" maximum="180" minimum="0" id="participants_max" name="participants_max"/>
+           <input type="number" step="1" max="180" min="5" id="participants_max" name="participants_max"/>
          </div>
  
          <div class="input-field col s6 l6">
            <label  for="frais">Frais de l'activité</label>
-           <input type="number" step="5" minimum="0" id="frais" name="frais"/>
+           <input type="number" step="5" min="0" id="frais" name="frais"/>
          </div>
        </div>
  
@@ -613,7 +613,10 @@
 <!-- Fonction AJAX pour  Modal Planifier-->
 <script>
   function planifier_act(){
+    if($('#frais').val() >= 0){
+      if($('#participants_max').val() >= 5){
     $.ajax({
+      
       type: "POST",
       url: "php_scripts/planifier_activite.php",
       data: {
@@ -639,6 +642,8 @@
         alert("erreur");
       }
     });
+  }else alert("Le nombre de participant maximum doit être supérieur ou égal à 5");
+  }else alert("Les frais d'activités doivent être supérieur ou égal à 0");
   }
 </script>
 
