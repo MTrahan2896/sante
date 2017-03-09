@@ -339,7 +339,7 @@
     </p>
     <p>
       <input name="niveauAdmin" type="radio" id="adminNiveauPlanif" value="1"/>
-      <label for="adminNiveauPlanif">Planificateur</label>
+      <label for="adminNiveauPlanif">Responsable</label>
     </p>
 
  </div>
@@ -565,7 +565,7 @@
            </div>
           <div class="input-field col s12 l6">
              <label  for="occuence">Répéter l'activité *</label>
-             <input type="number" step="1" max="15" min="1" id="occurence" name="occurence" value="1"/>
+             <input type="number" step="1" max="15" min="0" id="occurence" name="occurence" value="0"/>
            </div>
          </div>
  

@@ -73,7 +73,7 @@ function verifier_date_activite()
 			phpQuery($req);
 		}
 		
-		if($_POST['occurence'] > 1)
+		if($_POST['occurence'] > 0)
 		{
 			echo "Les activités ont été planifiées avec succès";
 		}
@@ -101,13 +101,13 @@ function verif_champs_obligatoires()
 	}
 	else
 	{
-		if( ($_POST['occurence'] >= 1) && ($_POST['occurence'] <= 15))
+		if( ($_POST['occurence'] >= 0) && ($_POST['occurence'] <= 14))
 		{
 		verifier_date_activite();
 		}
 		else
 		{
-			echo "Veuillez saisir une occurence entre 1 et 15";
+			echo "Veuillez saisir une répétition entre 0 et 14";
 		}
 	}
 }

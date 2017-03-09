@@ -214,7 +214,7 @@
             if (parseInt(pts_debut) + parseInt(pts_fin)  > 5) {
                 pts_reg = 5;
             } else pts_reg = parseInt(pts_debut) + parseInt(pts_fin);
-            console.log("REGULIER "+id+" VAL: "+ pts_reg+ " DEB: " + pts_debut + " FIN: "+pts_fin)
+            
             return parseInt(pts_reg);
         }
 

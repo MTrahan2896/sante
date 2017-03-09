@@ -112,7 +112,7 @@ if(isset($_SESSION['admin'])){
 
 
                 <table class="striped" align="center" ng-show="groupe.ensemble == 3"><!--Ensemble 3 -->
-                  <thead><tr><th>Nom </th><th class="center">Début</th><th class="center">Fin</th><th class="center">Bonus</th><th class="center"><span class="hide-on-med-and-up">Pen.</span><span class="hide-on-small-only">Pénalité</span></th><th class="center">Total</th></tr></thead>
+                  <thead><tr><th>Nom </th><th class="center"><span class="hide-on-med-and-up">Deb.</span><span class="hide-on-small-only">Début</span></th><th class="center">Fin</th><th class="center"><span class="hide-on-med-and-up">Bon.</span><span class="hide-on-small-only">Bonus</span></th><th class="center"><span class="hide-on-med-and-up">Pen.</span><span class="hide-on-small-only">Pénalité</span></th><th class="center"><span class="hide-on-med-and-up">Total</span><span class="hide-on-small-only">Total</span></th></tr></thead>
                   <tr  ng-repeat="eleve in elevesDansGroupe(groupe.id_groupe)">
                     
                     <td class="">{{eleve.nom}}, {{eleve.prenom}}</td>
