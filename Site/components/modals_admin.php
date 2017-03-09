@@ -355,23 +355,42 @@
 
 
 
-  <div id="modalAfficherCodeAdmin" class="modal" style="height: 400px; width: 400px" >
-    <div class="modal-content" style="text-align: center; height: 100%" >
+  <div id="modalAfficherCodeAdmin" class="modal" style="width: 400px;" >
+    <div class="modal-content" style="text-align:center;" >
       <div class="entete-modal" style="text-align:center;margin-bottom: 15px;">
         <h5>Codes administrateurs</h1>
       </div>
       <div class="contenu-modal">
-        <div class="row ">
-
-        <div class="row" ng-repeat="admin in codesAdmin">
-           <span ng-show="admin.administrateur >= 1">{{admin.CODE_ACCES}}</span>
-        </div>
-
-       
-          <button ng-click="genererCodeAdmin()" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Générer</button>
-        </div>
+      <div class="input-field">
+        <input type="checkbox" class="filled-in field" id="chkResponsable" ng-model="afficherResponsables">
+         <label for="chkResponsable">Afficher les codes responsables</label>
+        
       </div>
+      <div class="input-field">
+        <input type="checkbox" class="filled-in field" id="chkAdmin" name="chkAdmin" ng-model="afficherAdmins">
+        <label for="chkAdmin">Afficher les codes administrateurs</label>
+      </div>
+
+        <br><br>
+        
+        <div class="row ">
+        <table class="striped">
+        <thead><th class="center">Code</th><th class="center">Niveau d'accès</th></thead>
+        <tr ng-repeat="admin in codesAdmin | orderBy:'admin.administrateur'" ng-show="(afficherAdmins && admin.administrateur == 2) || (afficherResponsables && admin.administrateur == 1)">
+           <td class="center">{{admin.CODE_ACCES}}</td>
+           <td class="center"><span ng-show="admin.administrateur == 1">Responsable</span><span ng-show="admin.administrateur == 2">Administrateur</span></td>
+        </div>
+        </table>
+       
+         
+        </div>
+
+      </div>
+
     </div>
+    <div class="center">
+                   <button onclick="$('.modal').modal('close')" type="button" class="btn red" style="margin-bottom: 45px">Fermer</button>
+                   </div>
   </div>
 
 

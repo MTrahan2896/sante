@@ -13,6 +13,7 @@ session_start();
 <body class="ng-cloak">
   <header>
         <?php include 'components/nav.php';?>
+        <title>Défi Santé - Profil</title>
   </header>
   <main>
 

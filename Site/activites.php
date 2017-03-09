@@ -2,6 +2,7 @@
   <head>
     <?php include 'components/headContent.php';?>
       <meta charset="UTF-8">
+      <title>Défi Santé - Activités</title>
   </head>
   <body>
     
@@ -155,7 +156,7 @@
             <div class="collapsible-body collapsibleWithButton container">
               
               
-                <table>
+                <table class="">
                 <thead>
                   <th class="center">Activité</th><th class="center">Durée (Minutes)</th><th class="center">Pondération</th>
                 </thead>                

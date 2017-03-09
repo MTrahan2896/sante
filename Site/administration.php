@@ -14,6 +14,7 @@ if(isset($_SESSION['admin'])){
 <html ng-app='app_angular' ng-controller="ctrl">
   <head>
     <?php include 'components/headContent.php';?>
+    <title>Défi Santé - Administration</title>
   </head>
   <body class="ng-cloak">
     
@@ -312,7 +313,7 @@ if(isset($_SESSION['admin'])){
             <div class="collapsible-body collapsibleWithButton container">
               
               
-                <table>
+                <table class="striped">
                 <thead>
                   <th class="center">Activités Disponibles</th><th class="center hide-on-med-and-down">Durée (Minutes)</th><th class="center hide-on-med-and-down">Pondération</th><th></th>
                 </thead>                
@@ -351,7 +352,7 @@ if(isset($_SESSION['admin'])){
             </div>
             <div class="collapsible-body collapsibleWithButton container">
               
-              <table><thead><th>Nom de la session</th><th class="hide-on-med-and-down">Début</th>
+              <table class="striped"><thead><th>Nom de la session</th><th class="hide-on-med-and-down">Début</th>
               <th class="hide-on-med-and-down">Mi-Session</th>
               <th class="hide-on-med-and-down">Fin</th><th></th></thead>
               <tr ng-repeat="session in sessions"><td>{{session.Nom_Session}}</td><td class="hide-on-med-and-down">{{session.Debut_Session}}</td><td class="hide-on-med-and-down">{{session.Mi_Session}}</td><td class="hide-on-med-and-down">{{session.Fin_Session}}</td><td><a class="btn-floating waves-effect waves-light green " ng-click="modifierSession(session)"><i class="material-icons">edit</i></a></td><td><a class="btn-floating waves-effect waves-light blue " ng-click="afficherStats(session.ID_Session)"><i class="material-icons">assessment</i></a></td>

@@ -15,7 +15,7 @@
 
         $scope.sessions = <?php echo phpSelectQuery('select * from sessions order by debut_session ASC')?>;
 
-        $scope.codesAdmin = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and not CODE_ACCES=""')?>;
+        $scope.codesAdmin = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and not CODE_ACCES="" order by administrateur')?>;
 
         $scope.ensembles = [1, 2, 3];
 
@@ -64,6 +64,9 @@
         $scope.codeGroupe = -1;
 
         $scope.activiteSelectionne = -1;
+
+        $scope.afficherAdmins = true;
+        $scope.afficherResponsables = true;
 
         $scope.formatHeure = function(heure){
             return heure.slice(0, -3);

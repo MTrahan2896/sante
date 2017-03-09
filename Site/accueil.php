@@ -15,6 +15,7 @@
 
    .fc-content {display:flex;flex-flow:column-reverse nowrap;}
     </style>
+    <title>Défi Santé - Accueil</title>
   </head>
   <body>
     
