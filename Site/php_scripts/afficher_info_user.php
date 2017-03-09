@@ -9,10 +9,10 @@ function obtenir_info($id)
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       //Set Prenom
-      echo "<script>$('#prenom_user').val('".$row['Prenom']."');</script>";
+      echo "<script>$('#prenom_user').val('".str_replace("'","\'",$row['Prenom'])."');</script>";
 
       //Set Nom
-      echo "<script>$('#nom').val('".$row['Nom']."');</script>";
+      echo "<script>$('#nom').val('".str_replace("'","\'",$row['Nom'])."');</script>";
 
       //Set Courriel
       echo "<script>$('#email').val('".$row['Courriel']."');</script>";
