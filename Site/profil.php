@@ -21,7 +21,7 @@ session_start();
 
     <h5>Bonjour <?php echo $_SESSION['username'] ?></h5><br>
 
-  <div id="spEnsemble1" ng-show="ensemble == 1"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px"> {{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s0  <br>
+  <div id="spEnsemble1" ng-show="ensemble == 1"><b>Vous avez accumulé</b> <p style="margin-left: 20px; margin-top: 0px"> {{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s) <br>
   {{pointsBonusEnsemble1ForEleve(<?php echo $_SESSION['uid'] ?>)}} point(s) bonus </p>
    Votre note: <b style="color: green">{{pointsReguliersForEleve(<?php echo $_SESSION['uid'] ?>) + pointsBonusEnsemble1ForEleve(<?php echo $_SESSION['uid'] ?>)}}/5</b><br></div>
 
@@ -34,7 +34,7 @@ session_start();
  
 
   </p>
-   Votre note: <b style="color: green">{{pointsDebutForEleve(<?php echo $_SESSION['uid'] ?>) + pointsFinForEleve(<?php echo $_SESSION['uid'] ?>) + pointsBonusForEleve(<?php echo $_SESSION['uid'] ?>)}}/10</b></span>
+   Votre note: <b style="color: green">{{pts3(<?php echo $_SESSION['uid'] ?>)}}/10</b></span>
 
     <ul class="collapsible" data-collapsible="expandable">
       <!-- Coordonées personnelle -->

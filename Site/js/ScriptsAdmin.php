@@ -19,7 +19,7 @@
 
         $scope.ensembles = [1, 2, 3];
 
-        $scope.utilisateursSansGroupes = <?php echo phpSelectQuery('select * from utilisateurs where id_groupe is null and CODE_ACCES="" order by nom ASC')?>;
+        $scope.utilisateursSansGroupes = <?php echo phpSelectQuery('select * from utilisateurs where (id_groupe is null or id_groupe = 0) and  CODE_ACCES="" order by nom ASC')?>;
 
         $scope.comptesAdministrateur = <?php echo phpSelectQuery('select * from utilisateurs where administrateur >= 1 and CODE_ACCES="" order by nom ASC')?>;
 
@@ -104,6 +104,9 @@
             $scope.$apply();
             $('#select_session').material_select();
         });
+
+
+
 
         $scope.pointsDebutForEleve = function(id) {
 
@@ -246,7 +249,7 @@
 
             if (pts_reg > 5) {
 
-                    return pts_reg - 5;
+                    return parseInt(pts_reg - 5);
              
             }
             else return 0;
@@ -538,10 +541,11 @@
 
         $scope.enregistrerPresence = function(activite_prevue) {
             var values = new Array();
-            $.each($("input[name='presenceActivite" + activite_prevue + "']:checked"), function() {
+            $.each($("input[name='presenceActivite']:checked"), function() {
                 values.push($(this).val());
             });
 
+            alert(values);  
 
             $.ajax({
                 type: "POST",
@@ -591,6 +595,29 @@
                 },
                 success: function(data) {
 
+                    location.reload();
+
+                },
+                error: function(req) {
+                    alert("Erreur");
+                }
+            });
+
+        }
+
+
+        $scope.genererCodePourGroupe0 = function(){
+
+             $.ajax({
+                type: "POST",
+                url: "php_scripts/generercode.php",
+                data: {
+                    'admin': 0,
+                    'id_groupe': $scope.codeGroupe,
+                    'nb_codes': $("#codeGroupe0").val()
+                },
+                success: function(data) {
+                    alert(data);
                     location.reload();
 
                 },

@@ -269,7 +269,7 @@
           <label for="qt_code">Nombre de codes</label>
           <input type="number" name="qt_code" id="codeGroupe0" min="1" max="60" ng-min="1" ng-max="60" validate>
         </div>
-        <button type="button" class="btn" ng-click="genererCodePourGroupe(0)">Générer</button>
+        <button type="button" class="btn" ng-click="genererCodePourGroupe0()">Générer</button>
       </div>
     </div>
   </div>
@@ -281,6 +281,7 @@
       </div>
       <div class="contenu-modal">
         <div class="row" >
+
           <div ng-repeat="compte in comptesAvecCodeDansGroupe(0)" >
             <div ng-show="compte.administrateur <1">{{compte.code_acces}}</div>
           </div>
@@ -302,10 +303,10 @@
                 <div class="contenu-modal">
                   <div class="row ">
                     <div ng-repeat="eleve in getElevesForActivitePrevue(activiteSelectionne)" class="row presence">
-                      <div class="col s8 field">{{eleve.nom}}, {{eleve.prenom}}</div><div class="field col s2"></div> <input class="field filled-in" checked="checked" type="checkbox" name="presenceActivite{{activite.ID_activite_prevue}}" value="{{eleve.id_utilisateur}}"
-                      id="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px"><label for="checkboxid{{activite.ID_activite_prevue}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
+                      <div class="col s8 field">{{eleve.nom}}, {{eleve.prenom}}</div><div class="field col s2"></div> <input class="field filled-in" checked="checked" type="checkbox" name="presenceActivite" value="{{eleve.id_utilisateur}}"
+                      id="checkboxid{{activiteSelectionne}}-{{eleve.id_utilisateur}}" style="margin-right: 15px; margin-top: 15px"><label for="checkboxid{{activiteSelectionne}}-{{eleve.id_utilisateur}}" style="margin-top: 10px" ></label>
                     </div>
-                    <button ng-click="enregistrerPresence(activite.ID_activite_prevue)" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Enregistrer</button>
+                    <button ng-click="enregistrerPresence(activiteSelectionne)" type="button" class="btn" style="position: relative; margin-bottom: 45px; margin-top: 15px">Enregistrer</button>
                   </div>
                 </div>
     </div>
@@ -388,7 +389,7 @@
       </div>
 
     </div>
-    <div class="center">
+    <div class="center container">
                    <button onclick="$('.modal').modal('close')" type="button" class="btn red" style="margin-bottom: 45px">Fermer</button>
                    </div>
   </div>

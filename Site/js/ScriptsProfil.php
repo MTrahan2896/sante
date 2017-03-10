@@ -60,6 +60,13 @@
             alert($scope.SESSION);
         }
 
+      $scope.pts3 = function(id){
+            console.log($scope.pointsDebutForEleve(id) + "xxx")
+            let x = $scope.pointsFinForEleve(id)+ $scope.pointsBonusForEleve(id)+ parseInt($scope.pointsDebutForEleve(id));
+            console.log(x);
+            return x;
+        }
+
         $scope.now = new Date();
 
         $scope.activites_prevues = <?php echo phpSelectQuery('select * from activites_prevues where responsable = '.$_SESSION['uid'].' and hidden=false or hidden is null order by presences_prises, date_activite ')?>;
@@ -283,7 +290,6 @@
 
 
 
-
         $scope.pointsDebutForEleve = function(id) {
 
             let pts = 0;
@@ -297,11 +303,27 @@
                     return 5;
                 }
             } catch (err) {}
-            return pts;
+            return parseInt(pts);
 
 
 
         }
+
+        $scope.penaliteForEleve = function(id){
+            try{
+
+            let pts = parseInt($scope.penalites.filter(function(el) {
+                    return el.id_utilisateur == id;
+                })[0].penalite);
+            return pts;
+        }
+            catch(err){
+        
+                return 0;
+            }
+
+        }
+
 
         $scope.pointsFinForEleve = function(id) {
 
@@ -316,8 +338,9 @@
                     return 5;
                 }
             } catch (err) {}
-            return pts;
+            return parseInt(pts);
         }
+
 
 
         $scope.pointsBonusForEleve = function(id) {
@@ -347,7 +370,10 @@
             if (pts_debut > 5) {
                 pts_bonus += pts_debut - 5;
             }
-            return pts_bonus;
+
+            if(pts_bonus > 5){
+                return parseInt(5);
+            }else return parseInt(pts_bonus);
         }
 
         $scope.pointsReguliersForEleve = function(id) {
@@ -370,17 +396,18 @@
 
             let pts_reg = 0;
 
-            if (pts_debut + pts_fin > 5) {
+            if (parseInt(pts_debut) + parseInt(pts_fin)  > 5) {
                 pts_reg = 5;
-            } else pts_reg = pts_debut + pts_fin;
-
-            return pts_reg;
+            } else pts_reg = parseInt(pts_debut) + parseInt(pts_fin);
+            
+            return parseInt(pts_reg);
         }
 
 
 
 
         $scope.pointsBonusEnsemble1ForEleve = function(id) {
+
             let pts_fin = 0;
             let pts_debut = 0;
             try {
@@ -388,6 +415,8 @@
                     return el.id_utilisateur == id;
                 })[0].points_fin;
             } catch (err) {}
+
+
             try {
                 pts_debut = $scope.points_debut.filter(function(el) {
 
@@ -395,18 +424,18 @@
                 })[0].points_debut;
             } catch (err) {}
 
-            let pts_bonus = 0;
 
+            let pts_reg = (parseInt((parseInt(pts_debut) + parseInt(pts_fin))));
 
-            if (pts_debut + pts_fin > 5) {
-                pts_bonus += parseInt(pts_debut) + parseInt(pts_fin) - 5;
-            } else pts_bonus += parseInt(pts_debut) + parseInt(pts_fin);
+            console.log(pts_reg+" "+id)
 
+            if (pts_reg > 5) {
 
-            if (pts_bonus > 5) {
-                pts_bonus = 5;
+                    return parseInt(pts_reg - 5);
+             
             }
-            return pts_bonus;
+            else return 0;
+
 
 
         }
@@ -421,14 +450,17 @@
                 pts_fin = $scope.points_fin.filter(function(el) {
                     return el.id_utilisateur == id;
                 })[0].points_fin;
+                pts_fin = parseInt(pts_fin);
             } catch (err) {}
+            pts_fin = parseInt(pts_fin);
 
             try {
                 pts_debut = $scope.points_debut.filter(function(el) {
                     return el.id_utilisateur == id;
                 })[0].points_debut;
+                pts_debut = parseInt(pts_debut);
             } catch (err) {}
-
+            pts_debut= parseInt(pts_debut);
             let pts_totaux = parseInt(pts_fin) + parseInt(pts_debut);
 
             if (pts_totaux > 5) {

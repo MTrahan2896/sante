@@ -157,7 +157,7 @@ if(isset($_SESSION['admin'])){
               </div>
               <div class="collapsible-body collapsibleWithButton">
               
-                <div ng-show="elevesDansGroupe(groupe.id_groupe).length == 0"> 
+                <div ng-show="utilisateursSansGroupes.length == 0"> 
                 <br>  
                 <div class="center">  
                 <b>Aucun élève sans groupe inscrit pour l'instant</b>
@@ -172,12 +172,12 @@ if(isset($_SESSION['admin'])){
               <div class="container">
 
                                  <div class="row" style="text-align: center">
-              <button data-target="modalGenGroupe0" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn green" >Générer des codes d'accès</button></div>
+              <button data-target="modalGenGroupe0" ng-click="setGroupe(0)" style="margin-bottom: 15px !important; margin-top: 30px !important" class="btn green" >Générer des codes d'accès</button></div>
               <div class="row"  style="text-align: center">
                 <button data-target="modalGroupe0" style="margin-bottom: 15px !important" class="btn green modal-trigger">Afficher les codes d'accès</button>
               </div>
               <div class="row"  style="text-align: center">
-                <button data-target="modalPromotion" ng-click="setPromotionId()" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir</button>
+                <button data-target="modalPromotion" ng-click="setPromotionId(0)" style="margin-bottom: 15px !important" class="btn green modal-trigger">Promouvoir</button>
               </div>
 
               </div>
@@ -231,6 +231,7 @@ if(isset($_SESSION['admin'])){
                 <b>Responsable: </b>{{eleveFromId(activite.responsable).nom}}, {{eleveFromId(activite.responsable).prenom}}
                 <br>  
                 <b>Frais: </b> {{activite.Frais}}$ <br>  
+                <b>Pondération: </b> {{activiteFromId(activite.ID_Activite).Ponderation}} point<span ng-show="activiteFromId(activite.ID_Activite).Ponderation > 1">s</span><br> 
                 <b>Endroit: </b> {{activite.Endroit}} <br>  
                 <b>Commentaire: </b>{{activiteFromId(activite.ID_Activite).Commentaire}} <br> 
                 <b>Nombre de participants inscrits: </b>{{getElevesForActivitePrevue(activite.ID_activite_prevue).length}}/{{activite.Participants_Max}}
@@ -296,7 +297,7 @@ if(isset($_SESSION['admin'])){
               <table class="striped">
               <thead><th class="center">Compte</th><th class="center">Niveau</th></thead>
             
-              <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td class="center">{{adminLevelFromID(admin.administrateur)}}</td><td><button type="button" class="hide-on-small-only btn green small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)"><span class="">Permissions</span></button><i ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)" class="hide-on-med-and-up material-icons">settings</i></td></tr>
+              <tr ng-repeat="admin in comptesAdmin()"><td>{{admin.nom}}, {{admin.prenom}}</td><td class="center">{{adminLevelFromID(admin.administrateur)}}</td><td class="center"><button type="button" class="hide-on-small-only btn green small" ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)" style="margin-top: 0px !important"><span class="">Permissions</span></button><i ng-click="ouvrirModalModifierPermission(admin.id_utilisateur, admin.administrateur)" class="hide-on-med-and-up material-icons">settings</i></td></tr>
                 </table>
                 <div class="center">
               <div class="row center">
